@@ -1,0 +1,68 @@
+<!-- <div class="container">
+  <h6>You will receive an OTP to your email for verification </h6>
+  <form #otpform="ngForm">
+    <div *ngIf="data.errorMsg" class="text-danger">{{data.errorMsg}}</div>
+    <label>Enter OTP</label>
+    <mat-form-field appearance="outline" class="otp-popup">
+      <input matInput type="text" [(ngModel)]="otp" #otpnumber="ngModel" name="otp" pattern="[0-9]{6}" [class.has-error]="otpnumber.invalid && otpnumber.touched"
+        [class.has-success]="otpnumber.valid" required style="margin: 0;padding: 0;">
+    </mat-form-field>
+
+    <div *ngIf="otpnumber.invalid && (otpnumber.dirty || otpnumber.touched)|| formSubmitted&&otpnumber.errors">
+      <div class="text-danger text-center" *ngIf="otpnumber.errors.required"> OTP is Required </div>
+      <div *ngIf="(otpnumber.errors.pattern)" class="text-center text-danger">Enter OTP of 6 Digits</div>
+    </div>
+
+
+    <div style="text-align: center">
+      <button mat-stroked-button (click)="formSubmitted=true; dataSubmit(otpform)" cdkFocusInitial class="btn btn-primary button_border">Submit</button> &nbsp;&nbsp;
+      <button mat-stroked-button class="btn btn-danger button_border" [mat-dialog-close]="true" (click)="onNoClick()">Cancel</button>
+    </div>
+  </form>
+</div> -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+    <div _ngcontent-c24="" class="outercircle">
+      <div class="halfcircle">
+        <img _ngcontent-c24="" class="imgtrash" src="./assets/images/Group8321.png">
+      </div>
+    </div>
+  <h6 class="data-title text-center">{{data.title}}</h6>
+  <div *ngIf='data.otpflag  && !data.Docflag' class="data-title1 text-center">
+  <form #Passwordform="ngForm">
+    <div *ngIf="data.errorMsg" class="text-danger">{{data.errorMsg}}</div>
+    <div>
+    <label class="pr-2">Enter Password:</label>
+    <mat-form-field appearance="outline" class="otp-popup">
+      <input matInput type="password" [(ngModel)]="Password" #Password1="ngModel" name="Password"  [class.has-error]="Password1.invalid && Password1.touched"
+        [class.has-success]="Password1.valid" required style="margin: 0;padding: 0;">
+    </mat-form-field>
+    <div style="height: 30px;margin-left: 15%" class="txtalgn">
+    <div *ngIf="(Password1.invalid && (Password1.dirty || Password1.touched)|| formSubmitted&&Password1.errors) && !errores">
+      <div class="text-danger text-center m0btxtcs" *ngIf="Password1.errors.required"> Password is Required </div>
+    </div>
+    <div *ngIf="error" class="text-danger">{{errores}}</div>
+  </div>
+  </div>
+
+    <div style="text-align: center">
+     
+      <button mat-stroked-button class="btn btn-danger button_border1 btnhov" [mat-dialog-close]="false">Cancel</button>
+      <button mat-stroked-button (click)="formSubmitted=true; Passwordsubmit(Passwordform)" cdkFocusInitial class="btn btn-primary button_border btnhov">Submit</button>
+    </div>
+  </form>
+</div>
+<div *ngIf='!data.otpflag && !data.Docflag'>
+    <div style="text-align: center">
+        <button mat-stroked-button  cdkFocusInitial class="btn btn-danger button_border"[mat-dialog-close]="true">Yes</button> &nbsp;&nbsp;
+        <button mat-stroked-button class="btn btn-primary button_border" [mat-dialog-close]='false' (click)="onNoClick()">NO</button>
+      </div>
+</div>
+<div *ngIf='data.Docflag'>
+  <button mat-stroked-button  cdkFocusInitial class="btn btn-danger button_border"[mat-dialog-close]="true">Ok</button> &nbsp;&nbsp;
+</div>
+</div>
+</div>
+</div>

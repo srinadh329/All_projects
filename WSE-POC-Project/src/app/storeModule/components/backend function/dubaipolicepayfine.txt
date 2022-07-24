@@ -1,0 +1,44 @@
+-- FUNCTION: store.dp_payfine(character varying, character varying, character varying, numeric, numeric, character varying, numeric, character varying, character varying, character varying, numeric)
+
+-- DROP FUNCTION store.dp_payfine(character varying, character varying, character varying, numeric, numeric, character varying, numeric, character varying, character varying, character varying, numeric);
+
+CREATE OR REPLACE FUNCTION store.dp_payfine(
+	applicantname character varying,
+	fineid character varying,
+	applicantmobile character varying,
+	principalamount numeric,
+	knowledgefee numeric,
+	productid character varying,
+	branchid numeric,
+	userid character varying,
+	recorddate character varying,
+	recordtime character varying,
+	productvat numeric)
+    RETURNS character varying
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+AS $BODY$
+DECLARE
+			        applicationnumber numeric;
+					vouchernumber character varying = '#DP';
+                    vouchercount numeric;
+		            transactionnumber character varying;
+					productgroup character varying;
+	BEGIN
+		  select count(*) + 1 into vouchercount from store.prdtxn 
+							  where trnno ilike '#DP%';
+							  
+							  transactionnumber = concat(vouchernumber,vouchercount);
+							  SELECT prdgrp into productgroup FROM admin.brnmas where brnid=branchid;
+		INSERT INTO store.prdtxn(appname,appdtl2,appmobno,amount,vat,charges,prdid,status,crtusr,crttim,modusr,trnno,brnid,crtdat,prdgrp)
+		VALUES (applicantname,fineid,applicantmobile,principalamount,productvat,knowledgefee,productid,'A',userid,recordtime,userid,transactionnumber,branchid,recorddate,productgroup) returning appno into applicationnumber ;		
+        UPDATE store.dp_sampledata SET  paid=true,txn_id=applicationnumber where id = fineid::numeric ;
+		RETURN applicationnumber;
+
+	END;
+$BODY$;
+
+ALTER FUNCTION store.dp_payfine(character varying, character varying, character varying, numeric, numeric, character varying, numeric, character varying, character varying, character varying, numeric)
+    OWNER TO postgres;

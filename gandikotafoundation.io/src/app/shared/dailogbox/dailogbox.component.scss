@@ -1,0 +1,14 @@
+.header-title{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.btn-action{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    button{
+        padding: 8px 38px 8px 38px;
+    }
+}

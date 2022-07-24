@@ -1,0 +1,61 @@
+.card {
+    background-color: #f8f8f8;
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-top: 20px;
+}
+
+.refund {
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-top: 20px;
+}
+
+.btn-primary {
+    background-color: #10a428;
+    border: 0;
+    border-radius: 5px;
+    font-size: 18px;
+    width: 60%;
+}
+
+.btn:focus {
+    outline: none !important;
+    box-shadow: none;
+}
+
+.img-container {
+    background: #ffffff;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+
+}
+
+.card-body {
+    padding: 50px;
+
+}
+
+.content {
+    margin-left: 20px;
+}
+
+.included-set {
+    margin-left: 90px;
+}
+
+img {
+    height: 150px;
+    width: 150px;
+    padding: 10px;
+}
+
+.badge {
+    font-size: 1rem !important;
+    padding: 0.5em 0.65em !important;
+}
+
+.margin-refund {
+    margin-top: 30px;
+    margin-bottom: 25px;
+}

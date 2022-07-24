@@ -1,0 +1,29 @@
+https://github.com/mathisGarberg/angular-folder-structure/tree/master/src/app
+
+
+ng update @angular/cli @angular/material
+npm update
+
+"angularCompilerOptions": {
+    "enableIvy": false
+  }
+
+test reslove first run command
+
+ng test
+ng submit use after complete form field to press enter form submit
+
+button click use it's calling function when click the button
+karma jasmin
+
+karama is test case runner
+jasmin is write test cases
+
+desciebe  is used to add test suite name 
+in descibe e have no of test case
+
+
+first httpclient import first in appmodule ts
+
+ng g c foldername/componentname --module=shared.module
+

@@ -1,0 +1,141 @@
+.table {
+ 
+    width: 100%;
+     
+ }
+ 
+
+ .bg-f5{
+   background-color: #f5f5f5;
+ }
+ 
+  
+   .mainrow{ 
+    background: transparent linear-gradient(174deg, #6966E9 0%, #69B1E3 100%) 0% 0% no-repeat padding-box; 
+     padding:16px; 
+  } 
+ 
+ 
+   @media(min-width:1024px){ 
+   .mainrow{
+      position: sticky;
+      top: 0rem;
+      overflow: hidden;
+      /* z-index: 1000; */
+      /* height: 100vh; */
+    }
+ } 
+ 
+ .sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    /* overflow-x: hidden; */
+    margin-top: 55px;
+  }
+  
+  .sidenav li {
+    padding: 8px 10px 8px 18px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+  }
+  
+  .sidenav li:hover {
+    color: #f1f1f1;
+  }
+  
+  .main {
+    margin-left: 160px; /* Same as the width of the sidenav */
+    font-size: 28px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+ 
+  .example-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-container > * {
+    width: 80%;
+    padding-top: 30px;
+  }
+ 
+ 
+  .tabrow{
+    text-align: center;
+    padding-top: 30px;
+  }
+
+  .navelements li {
+    clear:both;
+    list-style: none;
+    margin-bottom: 20px;
+    color:#fff;
+    text-align: center;
+    cursor: pointer;
+
+  }
+
+  @media (min-width: 768px){
+
+
+  .mainrow{
+    max-width: 100px !important;
+  }
+  }
+
+  .clip-rect{
+
+    border-radius: 7px;
+  }
+
+
+  .navelements li i{
+    font-size: 16px;
+  }
+
+
+/* Styles for wrapping the search box */
+
+.main {
+  width: 50%;
+  margin: 50px auto;
+}
+
+/* Bootstrap 4 text input with search icon */
+
+.has-search .form-control {
+  padding-left: 2.375rem;
+  background-color: transparent;
+    border: none;
+    font-size: 12px;
+}
+
+.has-search .form-control-feedback {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #aaa;
+  font-size: 12px;
+}
+
+.profileul{
+  list-style: none;
+  justify-content: flex-end;
+}

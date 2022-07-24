@@ -1,0 +1,37 @@
+// $primer-color:#f89d36;
+$primer-color: #2f55d4;
+$second-color: #082871;
+$overlay-color:rgba(60,72,88,0.7);
+$white-color:#ffffff; 
+$box-shadow: 0 0 3px rgb(60 72 88 / 15%); 
+$list-color:#2f3c4e;
+$footer-color:#202942;
+$footer-font-color:#adb5bd;
+$donate-color:#343a40;
+$p-color:#8492a6;
+$transparent:#00000000;
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Nunito",sans-serif;
+    line-height: 1.5;
+    font-weight: 600;
+}
+
+h2{
+    font-size: 36px;
+}
+h5{
+    font-size: 20px !important;
+    font-family: "Nunito",sans-serif;
+    line-height: 1.5;
+    font-weight: 600;
+}
+h4{
+    font-size: 24px !important;
+}
+small{
+    font-size: 90%;
+}
+h6{
+        font-size: 16px;
+        font-weight: 600;
+}

@@ -1,0 +1,97 @@
+<div class="common-transform">
+  <mat-card class="common-header">
+    <div class="row">
+      <div class="col-6 d-flex">
+        <div class="d-flex flex-column justify-content-center">
+          <h6 class="pt-2 no-space">Reports</h6>
+        </div>
+        <mat-form-field appearance="outline"
+          class="custom-branch-select-outline reprot col-lg-4 col-md-12 col-sm-12 col-12 w-100">
+          <mat-select matInput [(value)]="selected" placeholder="Select Report Type" (selectionChange)="reportchange()">
+            <mat-option value="daily">Daily Transaction Report</mat-option>
+            <mat-option value="user">User Based Report</mat-option>
+            <mat-option value="product">Product Based Report</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-6">
+        <div class="text-center common-search">
+          <input type="text" placeholder="search" [(ngModel)]="name" (keyup)="search(name)">
+          <span class="material-icons search-icon">search</span>
+        </div>
+      </div>
+
+    </div>
+
+  </mat-card>
+  <mat-card class="creation-form mt-4">
+    <div class="row">
+      <div class="col-lg-9">
+        <form [formGroup]="reportForm" #formDirective="ngForm" (ngSubmit)="reportchange();">
+          <div class="row">
+            <div class="col-lg-3 p-0">
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-12"
+                *ngIf="selected==='product'">
+                <mat-select matInput formControlName="product" placeholder="Select Product">
+                  <mat-option *ngFor="let pro of products" [value]="pro.prdid">{{pro.prdlnm}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="reportForm.get('product').hasError('required')">
+                  Select Product
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field *ngIf="selected==='user'" appearance="outline"
+                class="custom-branch-select-outline  col-sm-12">
+                <input matInput formControlName="gcnumber" placeholder="Enter Gold Card Number" maxlength="16"
+                  pattern="\d{16}" #goldcardnumber (keyup)="goldcardDetails(goldcardnumber.value)">
+                <mat-error *ngIf="reportForm.get('gcnumber').hasError('required')">
+                  Enter Gold Card Number
+                </mat-error>
+                <mat-error *ngIf="reportForm.get('gcnumber').hasError('pattern')">
+                  Enter valid GoldCard Number
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-5 p-0">
+              <div *ngIf="selected==='user' || selected==='product'">
+                <!-- <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6 w-100">
+                   <input matInput [matDatepicker]="picker1"  formControlName="fromdate" placeholder="From Date" [max]="date"
+                (click)="picker1.open();" (dateChange)="datechange($event)" readonly>
+                <mat-datepicker-toggle matSuffix [for]="picker1" class="custom-date"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6 w-100">
+                <input matInput [matDatepicker]="picker2"  formControlName="todate" placeholder="To Date"
+                (click)="picker2.open()" readonly [max]="date" [min]="reportForm.get('fromdate').value">
+                <mat-datepicker-toggle matSuffix [for]="picker2" [disabled] ="disabletodate" class="custom-date"></mat-datepicker-toggle>
+                <mat-datepicker #picker2 ></mat-datepicker>
+              </mat-form-field>      -->
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-8 w-100">
+                <input matInput [satDatepicker]="resultPicker" formControlName="fromdate" placeholder="Choose Date" 
+                (click)="resultPicker.open();"  readonly>
+                <sat-datepicker #resultPicker [rangeMode]="true" [selectFirstDateOnClose]="true"></sat-datepicker>                    <!-- [closeAfterSelection]="false" [rangeHoverEffect]="false"> -->
+                <sat-datepicker-toggle matSuffix [for]="resultPicker"></sat-datepicker-toggle>
+              </mat-form-field>
+              </div>
+            </div>
+            <div *ngIf="selected==='user' || selected==='product'" class="reports-button">
+              <button type="submit" class="label-button mr-3">Submit</button>
+              <button type="button" class="cancel-button" (click)="reset(formDirective)">Reset</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-lg-3 d-flex flex-column align-items-end">
+        <div *ngIf="reportdata?.length>0">
+          <img src="././assets/images/excel.png" class="pr-4 file" (click)="downloadExcel()" width="50%">
+          <img src="././assets/images/pdf.png" class="file" (click)="downloadPDF()" width="30%">
+        </div>
+      </div>
+    </div>
+  </mat-card>
+  <app-storetable *ngIf="selected==='daily'" [Header]="reportHeader" [dailyreportList]="reportdata"></app-storetable>
+  <app-storetable *ngIf="selected==='user'" [Header]="userHeader" [userreportdata]="reportdata"></app-storetable>
+  <app-storetable *ngIf="selected==='product'" [Header]="productHeader" [productreportdata]="reportdata">
+  </app-storetable>
+
+</div>

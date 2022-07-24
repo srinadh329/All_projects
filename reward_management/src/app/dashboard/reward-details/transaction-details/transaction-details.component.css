@@ -1,0 +1,49 @@
+.body {
+    height: 100%;
+    overflow-x: hidden;
+    padding: 50px 50px;
+}
+
+.box {
+    background-color: #f3f3f3;
+    padding: 30px;
+    border-radius: 3%;
+}
+
+table.transaction tr th {
+    padding: 30px;
+}
+
+td {
+    padding:15px;
+    font-size: 18px;
+}
+
+.btn:focus {
+    outline: none !important;
+    box-shadow: none;
+   
+}
+
+.btn {
+    font-size: 12px !important;
+}
+
+.font10 {
+    font-size: 16px !important;
+}
+
+.btn-dark {
+    font-size: 8px !important;
+}
+
+.btn-primary {
+    background-color: #EE5D2F !important;
+    width: 100%;
+    border:none;
+}
+
+tr {
+    vertical-align: middle !important;
+    text-align: center !important;
+}

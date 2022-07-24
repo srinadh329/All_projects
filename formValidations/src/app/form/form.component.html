@@ -1,0 +1,41 @@
+<form [formGroup]="formValidation" (ngSubmit)="userData()">
+  <p>
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name" formControlName="name" />
+      <mat-error *ngIf="formValidation.get('name')?.hasError('required')">Please Enter Name</mat-error>
+      <mat-error *ngIf="formValidation.get('name')?.hasError('maxlength')">Only 20 Character Acceptable</mat-error>
+      <mat-error *ngIf="formValidation.get('name')?.hasError('pattern')">Invalid Entered</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="outline">
+      <mat-label>Age</mat-label>
+      <input matInput placeholder="age" formControlName="age" />
+      <mat-error *ngIf="formValidation.get('age')?.hasError('required')">Please Enter Age</mat-error>
+      <mat-error *ngIf="formValidation.get('age')?.hasError('pattern')">Only Numbers</mat-error>
+      <mat-error *ngIf="formValidation.get('age')?.hasError('aboveAge')">Above 18</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="outline">
+      <mat-label>Choose State</mat-label>
+      <mat-select formControlName="state"  (selectionChange)="stateSelection($event)">
+        <mat-option *ngFor="let state of states" value="{{state.name}}">{{state.name}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="formValidation.get('state')?.hasError('required')">Please Enter State</mat-error>
+    </mat-form-field>
+  </p>
+  <p >
+    <mat-form-field appearance="outline">
+      <mat-label>Choose City</mat-label>
+      <mat-select formControlName="city">
+        <mat-option *ngFor="let citye of city" value="{{citye.name}}">{{citye.name}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="formValidation.get('city')?.hasError('required')">Please Enter City</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+      <button type="submit">submit</button>
+  </p>
+</form>

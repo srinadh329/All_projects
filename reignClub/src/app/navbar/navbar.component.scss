@@ -1,0 +1,42 @@
+.navbar-header{
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    color: #fff;
+    padding: 18px 0 18px 0;
+    position: absolute;
+    z-index: 9;
+    top: 0;
+    width: 100%;
+.navbar-list{
+    a{
+        text-decoration: none;
+        color: #fff;
+    }
+}
+
+}
+
+// footer start
+.first-footer{
+    background-image: url('/assets/images/homebanner.jpg');
+    height: 260px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fff;
+}
+.second-footer{
+    background-color: black;
+    padding: 40px 0 40px 0;
+}
+.links{
+    color: #fff;
+    a{
+        padding: 8px 0 8px 0;
+        
+    }
+}
+// footer end

@@ -1,0 +1,88 @@
+-- FUNCTION: store.create_tt_transaction(character varying, character varying, character varying, numeric, character varying, numeric, character varying, character varying, character varying, numeric, numeric, numeric, numeric, numeric, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying)
+
+-- DROP FUNCTION store.create_tt_transaction(character varying, character varying, character varying, numeric, character varying, numeric, character varying, character varying, character varying, numeric, numeric, numeric, numeric, numeric, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying);
+
+CREATE OR REPLACE FUNCTION store.create_tt_transaction(
+	applicantname character varying,
+	applicantmobno character varying,
+	applicantadrress character varying,
+	country numeric,
+	productid character varying,
+	branchid numeric,
+	bankname character varying,
+	benfname character varying,
+	benfaddr character varying,
+	fcamount numeric,
+	rate numeric,
+	totalamount numeric,
+	charges numeric,
+	vat numeric,
+	createdstatus character varying,
+	currencyid character varying,
+	createddate character varying,
+	createdtime character varying,
+	accountno character varying,
+	createduser character varying,
+	goldcardnumber character varying,
+	benfmobileno character varying,
+	productgrp character varying)
+    RETURNS character varying
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+AS $BODY$
+
+ Declare vouchernumber character varying = '#TT';
+         vouchercount numeric;
+		 transactionnumber character varying;
+		 branchlimit numeric;
+         begin
+
+		 
+		        if exists(select a.loginid,a.brnid,a.usrole,c.prdid from admin.usrmas a
+						  inner join admin.brnmas b on a.brnid = b.brnid
+						  inner join admin.prdmas c on b.prdgrp = c.prdgrp
+						  inner join admin.ccymas d on c.ccygrp = d.ccygid
+						  where a.loginid = createduser and a.brnid = branchid
+						  and c.prdid = productid and d.ccyid= currencyid) then
+						  
+					if exists(select b.roltyp from admin.usrmas a
+							  inner join admin.roles b on a.usrole = b.roleid
+							  where a.loginid = createduser and b.roltyp = 'CASHIER' )then
+							  
+							  select brnlmt into branchlimit from admin.brnmas where brnid = branchid;
+								
+							  if(totalamount <= branchlimit) then
+							  
+							  --Generate temporary voucher				
+							  select count(*) + 1 into vouchercount from store.prdtxn 
+							  where trnno ilike '#TT%';
+							  
+							  transactionnumber = concat(vouchernumber,vouchercount);
+							  
+							  insert into store.prdtxn(appname,appmobno,appadr,actr,prdid,brnid,bnknm,
+													   bnfname,baddr,fca,rate,amount,charges,vat,status,curid,
+													   crtdat,crttim,accno,crtusr,gcmnumber,bmobno,trnno,prdgrp)
+							   values(applicantname,applicantmobno,applicantadrress,country,productid,branchid,
+									  bankname,benfname,benfaddr,fcamount,rate,totalamount,charges,vat,createdstatus,
+									  currencyid,createddate,createdtime,accountno,createduser,goldcardnumber,
+									  benfmobileno,transactionnumber,productgrp);
+									  
+							   return transactionnumber;
+							   
+							   else raise exception 'Transaction Amount Exceeds Branch Limit';
+							   
+							 end if;
+							  
+						  else raise exception 'This User cannot perform this action';
+						  
+					 end if;
+					 
+				    raise exception 'Invalid USer';
+				 end if;
+		 end
+$BODY$;
+
+ALTER FUNCTION store.create_tt_transaction(character varying, character varying, character varying, numeric, character varying, numeric, character varying, character varying, character varying, numeric, numeric, numeric, numeric, numeric, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying)
+    OWNER TO postgres;

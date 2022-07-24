@@ -1,0 +1,19 @@
+<table class="table">
+    <thead>
+      <tr>           
+        <th *ngFor="let head of homeTable[0] | keys">{{head}}</th>
+        <th>Action</th>
+      </tr>  
+    </thead>
+    <tbody>
+        <ng-container >
+          <tr *ngFor="let item of homeTable">           
+            <td *ngFor="let list of item | keys">{{item[list]}}</td>
+            <td>
+              <i class="fa fa-edit" aria-hidden="true" (click)="edit(item._id)"></i>
+              <i class="fa fa-trash-o" aria-hidden="true" (click)="delete(item)"></i>
+            </td>
+          </tr>      
+        </ng-container>
+    </tbody>
+  </table>

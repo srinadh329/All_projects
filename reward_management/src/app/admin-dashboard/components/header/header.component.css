@@ -1,0 +1,18 @@
+/* .header-container { */
+    .header {
+        height: 74px;
+        padding: 4px 0px 0px 0px;
+        border-bottom: 3px solid #ff6f3d;
+    }
+    .tabImage {
+        height:42px;
+        width:42px;
+    }
+    .userTab {
+        float: right;
+        padding:15px;
+    }
+    .login-name {
+        margin-left: 5px;
+    }
+/* } */

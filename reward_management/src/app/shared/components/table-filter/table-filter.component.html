@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col-lg-7">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-search"></i></span>
+            </div>
+            <!-- <input type="text" class="form-control" [(ngModel)]='valueIn' (keyup.enter)="searchData(valueIn)"   placeholder="Search by Resident Name , Building Name"> -->
+            <input type="text" class="form-control" [formControl]="searchText"    placeholder="Search by Resident Name , Building Name">
+        </div>
+    </div>
+</div>

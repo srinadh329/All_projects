@@ -1,0 +1,93 @@
+.service-information{
+	padding-top: 80px;
+	padding-bottom: 80px;
+	background-color: #f6f6f6;
+}
+.services-list{
+	list-style: none;
+}
+.services-list li{
+	  padding-top: 15px;
+    padding-bottom: 15px;
+}
+.services-list li a{
+	color: #000;
+}
+.services-list li a:hover{
+	text-decoration: none;
+}
+.service-flex{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+    line-height: 34px;
+}
+.service-line{
+	background: linear-gradient(to right, #082871 , #00A9EC);
+    height: 3px;
+    width: 25%;
+    /*transform: translate(-77%, 0px);*/
+    margin: 0;
+}
+.banking-section{
+	    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #ffffff;
+}
+.service-line1{
+	background: linear-gradient(to right, #082871 , #00A9EC);
+    height: 3px;
+    width: 16%;
+    /*transform: translate(-77%, 0px);*/
+    margin: 0;
+}
+
+    .service-add-sticky{
+position: fixed;
+    background-color: #f6f6f6;
+    top: 9%;
+    left: 1%;
+    right: 0;
+    width: 100%;
+    z-index: 99;
+    /*box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);*/
+}
+.service-add-sticky .desktop-responsive{
+        display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: flex-end;
+}
+.service-add-sticky .desktop-responsive1{
+display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+.service-add-sticky .desktop-responsive2{
+
+display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: flex-start;
+    }
+.test
+{
+        padding-top: 230px;
+}
+.services-list li a {
+    cursor: pointer;
+}
+.service_active{
+color: #0375a7 !important;
+    font-size: 16px;
+    font-weight: 500;
+    }
+    .service_active1{
+color: #0375a7 !important;
+    font-size: 16px;
+    font-weight: 500;
+    }

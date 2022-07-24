@@ -1,0 +1,1028 @@
+<!-- <button class="btn btn-link bd-search-docs-toggle d-md-none p-0 ml-3" type="button" data-toggle="collapse" data-target="#bd-docs-nav" aria-controls="bd-docs-nav" aria-expanded="false" aria-label="Toggle docs navigation"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="img" focusable="false"><title>Menu</title><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button>
+ 
+<nav class="collapse bd-links " id="bd-docs-nav" aria-label="Main navigation"> -->
+  <div class="container-fluid">
+    <div class="row"  >
+    <div class="col-lg-12 pl-0 pr-0" >
+    <div class="d-flex">
+    <div class="mainrow" [style.z-index]="zindex ? '16' : '2'" [ngStyle]="{'height.px': divheight}">
+    <ul class="navelements pl-0">
+    <li (click)="toggleMenu()" class="mt-2 col-12" [ngClass]="{'activeClass':menu}"  *ngIf="userprofiledata?.userid.path ">
+   
+    <img src="{{userprofiledata?.userid?.path}}" alt="User pic" class="clip-rect p-2" width="100%">
+    </li>
+
+    <li (click)="toggleMenu()" class="mt-2 pl-1" [ngClass]="{'activeClass':menu}" *ngIf="(!profileresponse && !userprofiledata?.userid.path )">
+      <img src="assets/images/proimg.png"  alt="User pic" class="clip-rect p-2" width="100%">
+      </li>
+      <li (click)="toggleMenu()" class="mt-2 col-12" [ngClass]="{'activeClass':menu}" *ngIf="profileresponse && !userprofiledata?.userid.path">
+        <img src="{{profileresponse?.path}}" alt="User pic" class="clip-rect p-2" width="100%" >
+      </li>
+      <!-- <li (click)="toggleMenu()" class="mt-2 col-12" [ngClass]="{'activeClass':menu}" *ngIf="profileresponse?.data && !profileresponse?.result && !userprofiledata?.userid.path">
+        <img src="{{profileresponse?.data[0]?.path}}" alt="User pic" class="clip-rect p-2" width="100%" >
+      </li> -->
+
+
+    <li (click)="dashboard()" [ngClass]="{'activeClass':dashboardactive}">
+    <img src="assets/images/menuicon.svg" *ngIf="!dashboardactive">
+    <img src="assets/images/menuactive.svg" *ngIf="dashboardactive"> 
+    </li>
+    
+- 
+    <li *ngIf="newcount>0" (click)="Notifications()" [ngClass]="{'activeClass':notificationactive}" class="bordernav position-relative">
+
+    <img src="assets/images/bellicon.svg" *ngIf="!notificationactive">
+    <img src="assets/images/notifyactive.svg" *ngIf="notificationactive">
+    <span class="badge">{{newcount}}</span>
+    </li>
+    <li  *ngIf="newcount==0" (click)="Notifications()" [ngClass]="{'activeClass':notificationactive}" class="bordernav">
+    <img src="assets/images/bellicon.svg" *ngIf="!notificationactive">
+    <img src="assets/images/notifyactive.svg" *ngIf="notificationactive">
+  
+    </li>
+    
+
+    <li [ngClass]="{'activeClass':contactactive}" (click)="opencontact()">
+    <img src="assets/images/contacticon.svg" *ngIf="!contactactive">
+    <img src="assets/images/contactactive.svg" *ngIf="contactactive">
+    </li>
+    
+    <li>
+    <img src="assets/images/callicon.svg">
+    </li>
+    <li class="bordernav">
+    <img src="assets/images/videoicon.svg" (click)="GroupVideoCall()">
+    </li>
+ 
+    <li (click)="navigate()" [ngClass]="{'activeClass':chatactive}">
+    <img src="assets/images/chaticon.png" *ngIf ="!chatactive">
+    <img src="assets/images/chatactive.svg" *ngIf="chatactive">
+    
+    </li>
+    <li  (click) = "blog()" [ngClass] = "{'activeClass':adduseractive}">
+    <img src="assets/images/addusericon.svg" *ngIf ="!adduseractive">
+    <img src="assets/images/addpactive.svg"  *ngIf ="adduseractive">
+    </li>
+    
+    <li>
+    <img src="assets/images/incognitoicon.svg">
+    
+    </li>
+    <li (click)="navigateToGroup()" [ngClass]="{'activeClass':groupactive}">
+    <img src="assets/images/groupsicon.svg" *ngIf="!groupactive">
+    <img src="assets/images/groupactive.svg" *ngIf="groupactive">
+    </li>
+    <li>
+    <img src="assets/images/mailsenticon.svg">
+    
+    </li>
+    <span  *ngIf="roleid.roleid.role_id==3">
+    <li (click)="getemployes(roleid.organization_id._id)" >
+      <img src="assets/images/groupsicon.svg" title="Employes">
+    </li>
+  </span>
+  <span  *ngIf="roleid.roleid.role_id==3">
+    <li (click)="getempdetails(roleid.organization_id._id)" *ngIf="roleid.roleid.role_id==3" >
+      <img src="assets/images/mailsenticon.svg" title="Employe friends and groups">
+    </li>
+      </span>
+
+
+    </ul>
+    
+    <ul class="navelements  pl-0">
+    <li class="br-top" (click)="openchangepassword()" >
+    <img src="assets/images/settings.svg" class="pt-3">
+    </li>
+    
+    <li (click)="logOut()" class="br-top">
+    <img src="assets/images/signout.svg" class="pt-3">
+    </li>
+    </ul>
+    </div>
+    <div style="flex-grow: 1;">
+    <router-outlet></router-outlet>
+    </div>
+    </div> 
+    </div>
+    </div>
+    
+    
+    
+    <!-- Profile -->
+    <div class="bgfade" *ngIf="isShown" (click)="closemodalbox()">
+    </div>
+    <!-- <div class="btmbgcolor">
+    </div> -->
+    <div class="container-fluid">
+    
+    <div class="row">
+    <div class="col-md-12">
+    <!-- userprofile right sidenav -->
+    <div class="col-md-4 pull-right" *ngIf='userprofiledata'>
+      <div class="bgcolor" id="divshow" [@slideInOut]="menuState">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- *Close button* -->
+            <img class="closebtn" src="assets/images/close1.png" width="4%" (click)="close()">
+            <img class="leftbutn" src="assets/images/leftarrow.png" width="5%" (click)="back()" *ngIf="isShown1">
+          </div>
+          <div class="col-md-12">
+            <!-- *Profile image* -->
+            <div class="profpic" *ngIf="((userprofiledata?.userid.path) && isShown2)">
+              <img class="rounded-circle" src="{{userprofiledata?.userid.path}}" alt="User pic"
+              width="100%" height="100%">
+            </div>
+
+            <div class="profpic" *ngIf="!userprofiledata?.userid.path && isShown2">
+         
+              <img src="assets/images/proimg.png" width="100%" height="100%" class="rounded-circle">
+             </div>
+
+            <div class="text-center" *ngIf="userprofiledata?.userid.path && isShown1">
+              <span *ngIf="(! imagePreview && butnclick == true) ">
+              <div class="fileUpload filebtn">
+                <label class="upload" style="cursor:pointer;">
+                  <input type="file" accept=".png, .jpeg , .jpg" placeholder="Photo"
+                    (change)="onFileSelected($event, null)" />
+                    <div class="profpic">
+                      <img src="{{userprofiledata?.userid.path}}" alt="User pic"width="100%" height="100%" class="rounded-circle" >
+                      <i  class="fa fa-camera cameraicon"></i>
+                    </div>                  
+                </label>
+              
+              </div>
+            </span>
+              <div *ngIf="imagePreview " class="profpic">
+         
+            <img class="rounded-circle" width="100%" height="100%" class="image-preview" [src]="imagePreview"><span style="cursor: pointer;" (click)="closeimagePreview()">close</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div  *ngIf="!userprofiledata?.userid.path && isShown1">
+
+              <div class="fileUpload filebtn text-center">
+                <label *ngIf="!imagePreview" class="upload" style="cursor:pointer; ">
+                  <input type="file" accept=".png, .jpeg , .jpg" placeholder="Photo"
+                    (change)="onFileSelected($event, null)" />
+                    <div class="profpic">
+                      <img src="assets/images/proimg.png"  width="100%" height="100%" class="rounded-circle">
+                  <i class="fa fa-camera cameraicon"></i> 
+                </div>   
+              </label>  
+              <div *ngIf=" imagePreview" class="profpic">
+              
+                <img class="rounded-circle" width="100%" height="100%" class="image-preview" [src]="imagePreview"><span style="cursor: pointer;" (click)="closeimagePreview()">close</span>
+                  </div>
+                    <div class="profpic" *ngIf="userprofiledata?.userid.path && isShown2">
+                    <img  src="{{userprofiledata?.userid.path}}" alt="User pic"width="100%" height="100%" >
+            </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- when user updated his profile -->
+        <div *ngIf="userprofiledata && uprofile">
+          <h2 class="col-md-12 profname mt-4">
+            <input style="width:100%;text-align: center;" type="text" placeholder={{userprofiledata?.FullName}}
+              class="txted1t">
+          </h2>
+          <!-- *Description* -->
+          <!-- [ngClass]="butnclick?'txted1t1':''" -->
+          <!-- <p class="col-md-12 mt-3 descrip">
+
+            <textarea type="text" class="txted1t txtarea text-center" [(ngModel)]="userprofiledata.Bio"
+              [ngClass]="butnclick?'txted1t1':''"> </textarea>
+
+          </p> -->
+
+
+
+
+
+          <!-- name and mail mobile no full name tag div-->
+          <form #userform="ngForm">
+            <div class="row mt-5">
+              <div class="col-md-3 p-0">
+                <!-- *Username* -->
+                <div class="usrnm">User Name</div>
+              </div>
+              <div class="col-md-1 p-0">
+                <div class="d0ts">:</div>
+              </div>
+              <div class="col-md-8 p-0">
+                <!-- *Username* -->
+                <div class="fulnm gggh">
+                  <input type="text" name="UserName" [(ngModel)]="userprofiledata.UserName"
+                    [ngClass]="butnclick?'editmode':''" #profileusername="ngModel" required>
+                  
+                </div>
+                <div *ngIf="butnclick">
+                <small *ngIf="profileusername.invalid && ((profileusername.touched || profileusername.dirty) || click) && profileusername.errors?.required" class="text-danger">Username is required</small>
+                </div>
+              </div>
+            </div>
+            <hr class="horizline">
+            <div class="row mt-2">
+              <div class="col-md-3 p-0">
+                <div class="usrnm">Full Name</div>
+              </div>
+              <div class="col-md-1 p-0">
+                <div class="d0ts">:</div>
+              </div>
+              <div class="col-md-8 p-0">
+                <!-- *User fullname* -->
+                <div class="fulnm">
+                  <input  type="text" [ngClass]="butnclick?'editmode':''"
+                    [(ngModel)]="userprofiledata.FullName" name="FullName" #profilefullname="ngModel" required></div>
+                    <div *ngIf="butnclick">
+                    <small *ngIf="profilefullname.invalid && ((profilefullname.touched || profilefullname.dirty) || click) && profilefullname.errors?.required"  class="text-danger">Fullname is required</small>
+                    </div>
+              </div>
+            </div>
+
+               
+          <hr class="horizline">
+          <div class="row mt-2">
+            <div class="col-md-3 p-0">
+              <div class="usrnm">Email</div>
+            </div>
+            <div class="col-md-1 p-0">
+              <div class="d0ts">:</div>
+            </div>
+            <div class="col-md-8 p-0">
+              <!-- *Email Id* -->
+              <div class="fulnm"><input type="text" [(ngModel)]="userprofiledata.EmailId"
+                  [ngClass]="butnclick?'editmode':''" name="EmailId"  #profileuseremail="ngModel" required email></div>
+                  <div *ngIf="butnclick">
+                  <small *ngIf="profileuseremail.invalid && ((profileuseremail.touched || profileuseremail.dirty) || click) && profileuseremail.errors?.required" class="text-danger">Email is required</small>
+                  <small *ngIf="profileuseremail.errors?.email" class="text-danger">Email must be a valid email address</small>
+                  </div>
+            </div>
+          </div>
+
+          <hr class="horizline">
+          <div class="row mt-2">
+            <div class="col-md-3 p-0">
+              <div class="usrnm">Mobile</div>
+            </div>
+            <div class="col-md-1 p-0">
+              <div class="d0ts">:</div>
+            </div>
+            <div class="col-md-8 p-0">
+              <!-- *Mobile number* -->
+              <div class="fulnm"><input type="text" [maxLength]="10" [(ngModel)]="userprofiledata.mobileno" name="mobileno"
+                  [ngClass]="butnclick?'editmode':''"  #profileusermobile="ngModel"  required [pattern]="mobNumberPattern" (keydown)="validateNumber($event)">
+              </div>
+              <div *ngIf="butnclick">
+                <small *ngIf="profileusermobile.invalid && ((profileusermobile.touched || profileusermobile.dirty) || click) && profileusermobile.errors?.required" class="text-danger">Mobile number is required</small>
+                <small *ngIf="profileusermobile.errors?.pattern"  class="text-danger">  
+                  Mobile number not valid.  
+                </small> 
+              </div>
+           
+            </div>
+          </div>
+          <hr class="horizline">
+          <div class="row mt-2">
+            <div class="col-md-3 p-0">
+              <!-- *Bio* -->
+              <div class="usrnm">Bio</div>
+            </div>
+            <div class="col-md-1 p-0">
+              <div class="d0ts">:</div>
+            </div>
+            <div class="col-md-8 p-0">
+              <!-- *Bio* -->
+              <div class="descrip">
+                <textarea type="text" class="txted1t txtarea" [(ngModel)]="userprofiledata.Bio" name="Bio"
+                [ngClass]="butnclick?'txted1t1':''"  #profileuserdata="ngModel" required> </textarea>
+              </div>
+              <div *ngIf="butnclick">
+              <small *ngIf="profileuserdata.invalid && ((profileuserdata.touched || profileuserdata.dirty) || click) && profileuserdata.errors?.required" class="text-danger">Description is required</small>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-5">
+            <button class="updtprof" (click)="edit()" *ngIf="isShown2">Update Profile</button>
+            <button class="updtprof" (click)="updateProfile(userprofiledata,userform)" *ngIf="isShown1">Save Details</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 pull-right" *ngIf='!userprofiledata'>
+      <div class="bgcolor" id="divshow" [@slideInOut]="menuState">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- *Close button* -->
+            <img class="closebtn" src="assets/images/close1.png" width="4%" (click)="close()">
+            <img class="leftbutn" src="assets/images/leftarrow.png" width="5%" (click)="back()" *ngIf="isShown1">
+          </div>
+          <div class="col-md-12 mt-4">
+            <!-- *Profile image* -->
+
+            <div class="profpic" *ngIf="!userprofiledata?.userid.path && isShown2 && !profileresponse">
+              <img src="assets/images/proimg.png"   width="100%" height="100%" class="rounded-circle">
+              <!-- <img src="assets/images/emptyprof.png" width="100%"> -->
+      </div>    
+          </div>
+
+          <div class="col-md-12 mt-4">       
+            <div class="text-center" *ngIf="!userprofiledata?.userid.path && isShown1 && !profileresponse">
+              <span *ngIf="!imagePreview && butnclick == true">
+        
+                <div class="fileUpload filebtn">
+                <label class="upload" style="cursor:pointer; ">
+                  <input type="file" accept=".png, .jpeg , .jpg" placeholder="Photo"
+                    (change)="onFileSelected($event, null)" />
+                    <div class="profpic">
+                      <img src="assets/images/proimg.png" width="100%" height="100%" class="rounded-circle">
+                    <i  class="fa fa-camera cameraicon"></i>
+                    </div>
+                    
+                  </label>
+              </div>
+            </span>
+          
+            <div *ngIf=" imagePreview" class="profpic">
+              <img class="rounded-circle" width="100%" height="100%" class="image-preview" [src]="imagePreview"><span style="cursor: pointer;" (click)="closeimagePreview()">close</span>
+                </div>
+            </div>
+          
+
+
+            <div class="text-center" *ngIf="profileresponse && isShown1">
+              {{profileresponse?.path}}
+                <span  *ngIf="!imagePreview">
+                <div class="fileUpload filebtn">
+                <label  class="upload" style="cursor:pointer; ">
+                  <input type="file" accept=".png, .jpeg , .jpg" placeholder="Photo"
+                    (change)="onFileSelected($event, null)" />
+                    <div class="profpic">
+                     <img class="rounded-circle" src="{{profileresponse?.path}}" alt="User pic" width="100%" height="100%" >
+                      <i  class="fa fa-camera cameraicon"></i>
+                    </div>
+                </label>
+                </div>
+              </span>
+                <div *ngIf=" imagePreview" class="profpic">
+                  <img class="rounded-circle" width="100%" height="100%" class="image-preview" [src]="imagePreview"><span style="cursor: pointer;" (click)="closeimagePreview()">close</span>
+                    </div>             
+            </div>
+
+            <div *ngIf="profileresponse && isShown2"  class="profpic">
+              {{profileresponse?.path}}
+              <img class="rounded-circle" src="{{profileresponse?.path}}" alt="User pic" width="100%" height="100%" >
+            </div>
+
+     
+
+            <!-- <div class="text-center" *ngIf="profileresponse?.data && !profileresponse?.result && isShown1">
+              <span  *ngIf="!imagePreview">
+              <div class="fileUpload filebtn">
+             
+                <label class="upload" style="cursor:pointer; ">
+                  <input type="file" accept=".png, .jpeg , .jpg" placeholder="Photo"
+                    (change)="onFileSelected($event, null)" />
+                    <div  class="profpic">
+                     <img class="rounded-circle" src="{{profileresponse?.data[0]?.path}}" alt="User pic"width="100%" height="100%" >
+                      <i  class="fa fa-camera cameraicon"></i>
+                    </div>
+                </label>
+              </div>
+            </span>
+
+                 <div *ngIf=" imagePreview" class="profpic">
+                  <img class="rounded-circle" width="100%" height="100%" class="image-preview" [src]="imagePreview"><span style="cursor: pointer;" (click)="closeimagePreview()">close</span>
+                    </div>
+                    </div> -->
+
+            <!-- <div *ngIf="profileresponse?.data && !profileresponse?.result  && isShown2" class="profpic">
+              <img class="rounded-circle" src="{{profileresponse?.data[0]?.path}}" alt="User pic" width="100%" height="100%" >
+            </div> -->
+          </div>
+
+        </div> <!-- image and Bio description end-->
+
+      
+        <div *ngIf="uprofile && !userprofiledata">
+          <h2 class="col-md-12 profname mt-4">
+            <input style="width:100%;text-align: center;" type="text" placeholder={{uprofile?.FullName}}
+              class="txted1t">
+          </h2>
+          <!-- *Description* -->
+          <!-- [ngClass]="butnclick?'txted1t1':''" -->
+ 
+
+          <!-- name and mail mobile no full name tag div-->
+          <form #userform="ngForm">
+          <div class="row mt-5">
+            <div class="col-md-3 p-0">
+              <!-- *Username* -->
+              <div class="usrnm">User Name</div>
+            </div>
+            <div class="col-md-1 p-0">
+              <div class="d0ts">:</div>
+            </div>
+            <div class="col-md-8 p-0">
+              <!-- *Username* -->
+              <div class="fulnm"><input type="text"  [(ngModel)]="uprofile.Name" name="UserName" [ngClass]="butnclick?'editmode':''" #name="ngModel" required>
+                <small *ngIf="name.invalid && ((name.touched || name.dirty) || click) && name.errors?.required" class="text-danger">Username is required</small>
+              </div>
+            </div>
+          </div>
+
+          <hr class="horizline">
+          <div class="row mt-2">
+            <div class="col-md-3 p-0">
+              <div class="usrnm">Full Name</div>
+            </div>
+            <div class="col-md-1 p-0">
+              <div class="d0ts">:</div>
+            </div>
+            <div class="col-md-8 p-0">
+              <!-- *User fullname* -->
+              <div class="fulnm"><input type="text" [ngClass]="butnclick?'editmode':''" name="FullName"
+                  [(ngModel)]="uprofile.FullName" #fname="ngModel" required></div>
+                  <small *ngIf="fname.invalid && ((fname.touched || fname.dirty) || click) && fname.errors?.required" class="text-danger">FullName is required</small>
+            </div>
+          </div>
+          <hr class="horizline">
+          <div class="row mt-2">
+            <div class="col-md-3 p-0">
+              <div class="usrnm">Email</div>
+            </div>
+            <div class="col-md-1 p-0">
+              <div class="d0ts">:</div>
+            </div>
+            <div class="col-md-8 p-0">
+              <!-- *Email Id* -->
+              <div class="fulnm"><input type="text" [(ngModel)]="uprofile.EmailId" name="EmailId"
+                  [ngClass]="butnclick?'editmode':''" #emailid="ngModel" required></div>
+                  <small *ngIf="emailid.invalid && ((emailid.touched || emailid.dirty) || click) && emailid.errors?.required" class="text-danger">Email is required</small>
+                  <small *ngIf="emailid.errors?.email" class="text-danger">Email must be a valid email address</small>
+            </div>
+          </div>
+          <hr class="horizline">
+          <div class="row mt-2">
+            <div class="col-md-3 p-0">
+              <div class="usrnm">Mobile</div>
+            </div>
+            <div class="col-md-1 p-0">
+              <div class="d0ts">:</div>
+            </div>
+            <div class="col-md-8 p-0">
+              <!-- *Mobile number* -->
+              <div class="fulnm"><input type="text"  [maxLength]="10" [(ngModel)]="uprofile.mobile" name="mobile"
+                  [ngClass]="butnclick?'editmode':''" #mobileno="ngModel" required [pattern]="mobNumberPattern" (keydown)="validateNumber($event)">
+              </div>
+              <small *ngIf="mobileno.invalid && ((mobileno.touched || mobileno.dirty) || click) && mobileno.errors?.required" class="text-danger">Mobile number is required</small>
+              <small *ngIf="mobileno.errors?.pattern"  class="text-danger">  
+                Mobile number not valid.  
+              </small> 
+            </div>
+          </div>
+          <hr class="horizline">
+          <div class="row mt-2">
+            <div class="col-md-3 p-0">
+              <!-- *Bio* -->
+              <div class="usrnm">Bio</div>
+            </div>
+            <div class="col-md-1 p-0">
+              <div class="d0ts">:</div>
+            </div>
+            <div class="col-md-8 p-0">
+              <!-- *Bio* -->
+              <div class="descrip">
+                <textarea type="text" class="txted1t txtarea" [(ngModel)]="uprofile.bio" name="bio"
+                [ngClass]="butnclick?'txted1t1':''" #Bio="ngModel" required> </textarea>
+                <small *ngIf="Bio.invalid && ((Bio.touched || Bio.dirty) || click) && Bio.errors?.required" class="text-danger">Bio is required</small>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-5">
+            <button class="updtprof" (click)="edit()" *ngIf="isShown2">Update Profile</button>
+            <button class="updtprof" (click)="createProfile(uprofile,userform)" *ngIf="isShown1">Save Details</button>
+          </div>
+        </form>
+        </div>
+
+      </div>
+    </div>
+<!-- notifications left sidenav -->
+ 
+<div class="col-md-4">
+ <div>
+  <div class="bgcolor1" [@slideInOut1]="notificationState">
+    <div class="divbagrnd">
+      <div class="row">
+
+        <div class="col-md-6">
+          
+          <p class="notifications">Notifications</p>
+      </div>
+        <div class="col-md-6">
+           <img class="closebtn1" src="assets/images/close.svg" width="14px" (click)="close1()">
+
+        </div>
+
+      </div>
+
+    </div>
+    
+    <div class="rowdiv">
+      <div class="col-md-6">
+        <p class="day">All</p>
+      </div>
+      <div class="col-md-6">
+        <p class="clear">Clear all</p>
+      </div>
+      </div>
+  
+    <div class="rowdiv pdng">
+      <div class="col-md-12 " >
+        <div *ngFor="let receive of sentInvitations; let i = index" class="row  mb-2">
+          <div class="col-md-2">
+          <div class="imgdiv" *ngIf="receive.invitationStatus =='Pending' && receive.receiverid?._id ==_id">
+            <img src="assets/images/profimg.png" class="profimg" width="100%">
+          </div>
+          </div>
+          <div class="col-md-10 pl-1">
+            <p *ngIf="receive.invitationStatus =='Pending' && receive.receiverid?._id ==_id" class="content">
+              {{receive.senderId?.Name}} Sent you Friend request</p>
+            <div *ngIf="receive.invitationStatus =='Pending' && receive.receiverid?._id ==_id" class="butns">
+              <span>
+              <button class="btn axptbtn" (click)="update(receive,'Accepted', i)">Accept</button>
+              <button class="btn rejectbtn" (click)="update(receive,'Rejected', i)">Decline</button>
+            </span>
+            </div>
+          </div>
+         
+      
+        </div>
+      </div>
+      
+    
+  
+    </div>
+   
+   
+
+
+
+
+
+  <!-- group notifications -->
+
+
+  <div class="rowdiv pdng"> 
+    <div class="col-md-12">
+      <div *ngFor="let receive of groupInvitations;  let i = index" class="row  mb-2">
+        <div class="col-md-2">
+        <div class="imgdiv" *ngIf="receive.isJoin =='Pending' && receive.memberId?._id ==_id">
+          <img src="assets/images/profimg.png" class="profimg" width="100%">
+        </div>
+        </div>
+        <div class="col-md-10 pl-1">
+        <p *ngIf="receive.isJoin =='Pending' && receive.memberId?._id ==_id" class="content">
+          {{receive.gSenderId?.Name}} Sent you Group request to join Group '{{receive.GroupId.GroupName}}'</p>
+        <div *ngIf="receive.isJoin =='Pending' && receive.memberId?._id ==_id" class="butns">
+          <span>
+          <button class="btn axptbtn" (click)="updateGroup(receive,'Accepted', i)">Accept</button>
+          <button class="btn rejectbtn" (click)="updateGroup(receive,'Rejected', i)">Decline</button>
+        </span>
+        </div>
+        </div>
+      </div>
+      </div>
+     
+    </div>
+
+
+    
+    
+ </div>
+</div>  
+
+
+    
+   
+
+    
+
+   
+    </div>
+    <div class="col-md-6 col-lg-5 col-xl-3">
+ 
+      <div class="contactpagediv" [@slideInOut2]="contactpage">
+    
+      <div class="row m-0">
+      <div class="col-md-6 mt-3 mb-3">
+      <h4 class="poppins-font chatmsg">Contacts</h4>
+      </div>
+      <div class="col-md-6">
+      <img class="closebtn1" src="assets/images/close.svg" width="12%" (click)="closecontact()" style="padding:6px">
+      </div> 
+      </div>
+      
+   
+    
+      <div class="row m-0">
+      <div   [ngClass]="{'col-12':personadd,'col-10':!personadd}">
+      <form>
+      <div class="form-group">
+      <i class="material-icons searchicon iconscolor">
+      search
+      </i>
+      
+      <!-- placed focus to show and hide the add button while we focus -->
+      <input type="text" autocomplete="off" placeholder="Search" class="form-control searchinput"
+      [matAutocomplete]="auto" name="searchterm" (focus)="personadd=true" (focusout)="personadd=false"
+      [(ngModel)]="searchterm" (keydown)="SearchMail21($event)" (keyup)="SearchMail(searchterm)" />
+      <mat-autocomplete #auto="matAutocomplete" class="contactslist">
+      <mat-option *ngIf='response?.length && email'>
+      
+     
+        <div class="row mr-0 ml-0 mb-2 poppins-font listtop" *ngFor="let searchedUser of response">
+          <div class="col-8 p-0">
+            <div class="d-flex">
+              <div>
+                <ngx-avatar value="28%" size="35" [round]="false" [cornerRadius]="8" *ngIf=!(searchedUser.Grname)
+                  [name]="searchedUser.Name"></ngx-avatar>
+
+                  <ngx-avatar value="28%" size="35" [round]="false" [cornerRadius]="8" *ngIf=searchedUser.Grname
+                  [name]="searchedUser.Grname"></ngx-avatar>
+              </div>
+              <div class="ml-3 min-width-0">
+                <div class="font-color fw-600 text-search lh-15">
+                  {{searchedUser.Name}}
+                  <p class="font-mail text-search"> {{searchedUser.EmailId}}</p>
+                </div>
+                <div *ngIf="searchedUser.Grname" class="text-search">
+                 
+                  <p>Group Name : 
+                 
+                    {{searchedUser.Grname}}
+                 
+                </p>
+                </div>
+              </div>
+              <!-- <div class=" ml-3">
+          <div class="font-color fw-600">
+            {{searchedUser.EmailId}}
+            </div>
+          </div> -->
+            </div>
+          </div>
+          <div class="col-4 text-right">
+            <a class="contactname" *ngIf="searchedUser.status == false"
+              (click)="InviteFriend(searchedUser);personadd=true">Invite</a>
+            <a class="contactname" *ngIf="searchedUser.status == true"
+              (click)="userdetails(searchedUser.user)">Start Chat</a>
+          </div>
+        </div>
+      </mat-option>
+      <mat-option *ngIf="(!response?.length || !response || !email)">
+      <div class="m013 text-center">
+      <img src="assets/images/nosearch.png">
+      <div class="mt-2">
+      <h3 class="mb-0 color36">No results Found</h3>
+      <p class="font-color">Lorem ipsum dummy text editor lorem ipaum</p>
+      </div>
+      </div>
+      </mat-option>
+      </mat-autocomplete>
+      </div>
+      </form>
+      
+      
+      </div>
+      <div class="col-2 p-0">
+      <button class="butt" matTooltip="Invitation Link For New User" mat-raised-button data-toggle="modal"
+      data-target="#modelId">
+      <mat-icon class="iconscolor">person_add</mat-icon>
+      </button>
+      </div>
+      </div>
+      
+      
+      <div class="row m-0">
+      
+      <!-- Modal -->
+      
+      <div class="modal fade bd-example-modal-xl poppins-font" tabindex="-1" id="modelId" role="dialog"
+      aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+      <div class="modal-header border-none">
+      
+      <button type="button" class="close" id="closeModal" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      <div class="modal-body invitemodal">
+      <div>
+      
+      
+      <form #InviteForm="ngForm" (ngSubmit)="onInvite(InviteForm)">
+      <div *ngIf="!invitationview">
+      <div class="text-center">
+      <img src="assets/images/invite.svg">
+      
+      <h5 class="modal-title mt-2">Invite Your Friends by Email</h5>
+      </div>
+      
+      <div class="form-group mt-3 mb-0">
+      <input class="form-control emailinput" autocomplete="off" placeholder="Enter email to send invitation..." type="email" [(ngModel)]="EmailId"
+      name="EmailId" (keyup)="checkInvitationMail(EmailId)"
+      pattern="([A-Za-z]|[0-9])[A-Za-z0-9.]+[A-Za-z0-9]@((?:[-a-z0-9]+\.)+[a-z]{2,})" required
+      #email1="ngModel">
+      
+      </div>
+      
+      <div *ngIf="email1.invalid&&(email1.dirty||email1.touched)|| nodata && email1.errors">
+      <div class="text-danger" *ngIf="email1.errors.required">Email is requried </div>
+      <div class="text-danger" *ngIf="email1.errors.pattern">Email is invalid </div>
+      </div>
+      <!-- New message info for existing user -->
+      <div class="text-info"
+      *ngIf="!(email1.invalid && (email1.dirty||email1.touched)|| nodata && email1.errors) && regresponse?.length">
+      User is already registered you invited him/her as a friend</div>
+      
+      <div class="footerbtn mt-4">
+      <button type="button" *ngIf="!regresponse?.length" class="btn btn-labeled" (click)="showgmail()">
+      <span class="btn-label pr-2"><img src="assets/images/gmail.svg"></span>Import Contacts</button>
+      <!-- <button type="submit" >Import Contacts</button> -->
+      <button type="submit" class="btn btn-invite" *ngIf="!regresponse?.length">Send Invitation</button>
+      </div>
+      </div>
+      
+      
+      
+      <div style="padding: 0rem 6rem;" *ngIf="invitationview">
+      <div class="text-center">
+      <img src="assets/images/successinv.svg">
+      <h5 class="modal-title mt-2">Invitation has been sent Sucessfully</h5>
+      </div>
+      
+      <p class="font-14 mt-3 color6">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s book.</p>
+      <div class="text-center">
+      <button type="submit" class="btn btn-invite font-14 pd218" (click)="closeModal()">OK</button>
+      </div>
+      
+      </div>
+      </form>
+      
+      <!-- ......gmail... -->
+      <div class="mt-3" *ngIf="viewcontact">
+      <table class="table tablebg">
+      <thead>
+      <tr>
+      <th scope="col" class="color6 fw-400">Gmail Contacts</th>
+      <th scope="col" style="text-align: right;">Invite All</th>
+      
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <th scope="row" class="p-0">
+      <div class="d-flex">
+      <div class="circleimg">
+      <img src="assets/images/sample.jpg" width="70px">
+      </div>
+      <div class="mt-4">
+      <p class="color6 fw-400">Mark</p> 
+      </div>
+      <div>
+      <mat-menu #appMenu="matMenu" backdropClass="custommenu" panelClass="x" class="custom" >
+      <button mat-menu-item>Settings</button>
+      <button mat-menu-item>Help</button>
+      </mat-menu>
+      
+      <button mat-icon-button [matMenuTriggerFor]="appMenu" class="mt-3 pointer">
+      <mat-icon class="color5">more_vert</mat-icon>
+      </button>
+      </div>
+      
+      </div>
+      
+      
+      </th>
+      <td class="text-right">
+      
+      <button type="submit" class="btn btn-invite font-14 pd217" >Invite</button>
+      
+      </td>
+      
+      </tr>
+      
+      
+      </tbody>
+      </table>
+      
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      
+      
+      <div class="scrollable1 col-lg-12">
+              <div *ngFor="let user of listusers">
+     
+      <!-- sender name -->
+      <mat-card id="custom" class="col-lg-12 users border-mat matcardhover poppins-font pointer" *ngIf="(loginuserdata.id == user.receiverid._id)">
+      <div>
+      <div class="row m-0">
+      
+      <div class="col-lg-7 col-md-6 col-sm-12 p-2" >
+      
+      <div class="d-flex align-items-center">
+      <!-- <div>
+      <ngx-avatar *ngIf="user.senderId.EmailId" [name]="user.senderId.EmailId" value="28%" size="35"
+      [round]="true">
+      </ngx-avatar>
+      </div> -->
+
+      <ngx-avatar *ngIf="user.senderId.EmailId && !(user.senderId.path)" [name]="user.senderId.EmailId" value="28%"
+      size="35" [round]="false" [cornerRadius]="12">
+    </ngx-avatar>
+                       <div *ngIf="user.senderId.EmailId && (user.senderId.path)">
+    
+                 <img src="{{user.senderId.path}}" width="35px" height="35px"  style="border-radius: 12px;">
+                 </div>
+
+      <div class=" ml-3 p-0" style="min-width: 0;">
+     
+      <div class="list_name pointer texthide">
+      {{user.senderId.Name}}
+      </div>
+      
+  
+      </div>
+      </div>
+      </div>
+      <div class="col-lg-5 col-md-6 col-sm-12 options-mat p-0">
+      <ul class="mat-opticons pl-3  pt-2 float-right mb-0 pb-0">
+      <li (click)="userdetails(user)" class="displayhover">
+      <i class="material-icons">
+      chat
+      </i>
+      </li>
+      <li class="ml-2 displayhover">
+      <i class="material-icons">
+      call
+      </i>
+      </li>
+      <li class="ml-2 displayhover">
+      <i class="material-icons">
+      videocam
+      </i>
+      </li>
+      
+      <li>
+      
+      <mat-icon class="menu-mat pointer" aria-hidden="false" aria-label="Example home icon"
+      [matMenuTriggerFor]="menu" style="padding: 8px 6px;">more_vert
+      </mat-icon>
+      
+      </li>
+      </ul>
+      <!-- <mat-icon *ngIf="user.count>0" class="pointer matcssbadge" [matBadge]="user.count">
+      </mat-icon> -->
+      <!-- <mat-icon *ngIf="user.count==0" class="pointer menu-mat">
+      message</mat-icon> -->
+      </div>
+      </div>
+      </div>
+      </mat-card>
+      
+      <!-- receiver name -->
+      
+      <mat-card id="custom" class="col-lg-12 users border-mat matcardhover poppins-font pointer" *ngIf="(loginuserdata.id == user.senderId._id)">
+      <div>
+      <div class="row m-0">
+      <!-- <div class="col-sm-2 col-md-2 col-lg-2" (click)="userdetails(user)">
+      <ngx-avatar *ngIf="user.senderId.EmailId" [name]="user.senderId.EmailId" value="28%" size="35"
+      [round]="true">
+      </ngx-avatar>
+      </div> -->
+      <div class="col-lg-7 col-md-6 col-sm-12 p-2" >
+      
+      <div class="d-flex align-items-center">
+      <!-- <div>
+      <ngx-avatar *ngIf="user.receiverid.EmailId" [name]="user.receiverid.EmailId" value="28%" size="35"
+      [round]="true">
+      </ngx-avatar>
+      </div> -->
+
+      <ngx-avatar *ngIf="user.receiverid.EmailId  && !(user.receiverid.path)" [name]="user.receiverid.EmailId" value="28%"
+                                  size="35" [round]="false" [cornerRadius]="12"></ngx-avatar>
+                          
+                                  <div *ngIf="user.receiverid.EmailId  && (user.receiverid.path)">
+                                
+                                    <img src="{{user.receiverid.path}}" width="50px" height="50px">
+                       </div>
+      <div class=" ml-3  p-0" style="min-width: 0;">
+    
+      <div class="list_name pointer texthide">
+      {{user.receiverid.Name}}
+      </div>
+      
+      
+      </div>
+      </div>
+      </div>
+      <div class="col-lg-5 col-md-6 col-sm-12 options-mat p-0">
+      <ul class="mat-opticons pl-3  pt-2 float-right mb-0 pb-0">
+      <li (click)="userdetails(user)" class="displayhover">
+      <i class="material-icons">
+      chat
+      </i>
+      </li>
+      <li class="ml-2 displayhover">
+      <i class="material-icons">
+      call
+      </i>
+      </li>
+      <li class="ml-2 displayhover">
+      <i class="material-icons">
+      videocam
+      </i>
+      </li>
+      
+      <li>
+      
+      <mat-icon class="menu-mat pointer" aria-hidden="false" aria-label="Example home icon"
+      [matMenuTriggerFor]="menu" style="padding: 8px 6px;">more_vert
+      </mat-icon>
+      
+      </li>
+      </ul>
+      <!-- <mat-icon *ngIf="user.count>0" class="pointer matcssbadge" [matBadge]="user.count">
+      </mat-icon> -->
+      <!-- <mat-icon *ngIf="user.count==0" class="pointer menu-mat">
+      message</mat-icon> -->
+      </div>
+      </div>
+      </div>
+      </mat-card>
+      
+      <mat-menu #menu="matMenu" class="poppins-font chatpopup">
+      <button mat-menu-item>Call</button>
+      <button mat-menu-item (click)="userdetails(user)">Chat</button>
+      <button mat-menu-item>Delete Contact</button> 
+      <!-- Notification Button -->
+      <button mat-menu-item class="menubtn">
+      <mat-label >Turn Off Notifications</mat-label>
+      </button>
+      
+      </mat-menu>
+    </div>
+      </div>
+   
+      </div>
+  
+      </div>
+      </div>
+
+      <!-- Change password -->
+
+      <div class="col-md-5 col-lg-3 col-xl-3">
+    
+        <div class="passwordpagediv" [@slideInOut2]="changepasswordState">
+      
+       <h6  class=" p-2 pointer hovercolor" (click)="settings('changepassword')">Change Password</h6>
+        <h6 *ngIf="UserData?.roleid.role_id == 3" class=" p-2 pointer hovercolor" (click)="settings('Organisation')">Organisation</h6>
+       </div>
+        </div>
+
+      
+    
+    <!--------------------------------------- contacts page ------------------------------------------------------------>
+  
+    <!-- ----------------------------------------------contact page ends----------------------------------------------------------- -->
+    
+    </div>
+    </div>
+     <!-- INCOGNITO CHAT ACCEPTttttt  -->
+     <button data-toggle="modal" id="incognito" data-target="#incognitoaccept" hidden> </button>
+     <div  class="modal incognitomodal" id="incognitoaccept">
+       <div class="modal-dialog">
+         <div class="modal-content">
+           <div class="modal-body">
+             User Sent the request
+             <button type="button" (click)="incognitoreject1(incognitores)" class="btn btn-danger"
+               data-dismiss="modal">REJECT</button>&nbsp;
+             <button type="button" (click)="incognitoACCEPT1(incognitores)" class="btn btn-info" data-dismiss="modal">ACCEPT</button>
+           </div>
+         </div>
+       </div>
+     </div>
+
+

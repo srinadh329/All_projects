@@ -1,0 +1,24 @@
+.mb-0 > a {
+  display: block;
+  position: relative;
+}
+.mb-0 > a:after {
+  content: "\f070"; /* fa-chevron-down */
+  font-family: 'FontAwesome';
+  position: absolute;
+  right: 0;
+      font-size: 20px;
+    top: 0px;
+    font-weight: 500;
+}
+.mb-0 > a[aria-expanded="true"]:after {
+  content: "\f06e"; /* fa-chevron-up */
+}
+.card-header a{
+  color: #1A1818;
+  text-decoration: none;
+}
+
+.card-body p{
+ color: #1A1818;
+}

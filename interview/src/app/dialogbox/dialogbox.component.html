@@ -1,0 +1,153 @@
+<!-- <mat-dialog-content class="m-0" *ngIf="data?.datalogType == 'loginDetails'">
+    <div class="col-lg-12">
+        <h2 class="text-center">Sign In</h2>
+        <form [formGroup]='myform'>
+            <div>
+              <label class="pt-2 pb-2">Email Id:</label>
+              <mat-form-field appearance="outline"  class="custom-mat-form w-100">
+                <mat-label>Email id</mat-label>
+                <input matInput placeholder="Enter Emaial ID" formControlName="emailid">
+                <mat-error *ngIf="myform.get('emailid').hasError('required')">
+                    Please Enter Email ID
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <label class="pt-2 pb-2">Password:</label>
+              <mat-form-field appearance="outline"  class="custom-mat-form w-100">
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Enter Password" formControlName="password">
+                <mat-error *ngIf="myform.get('password').hasError('required')">
+                    Please Enter Password
+                </mat-error>
+              </mat-form-field>
+            </div>  
+            <div class="check-forget-box d-flex mt-3">
+              <div class="checkbox w-50">
+                <mat-checkbox class="custom-mat-check">Remember Me</mat-checkbox>
+              </div>
+              <div class="w-50 text-right"><i>Forgot password ?</i></div>
+            </div>
+            <div class="text-center pt-4 pb-4">
+              <button class="login-button btn" type="submit" (click)="btnClick()"  mat-dialog-close>Sign In</button>
+            </div>
+            </form>
+    </div>    
+</mat-dialog-content> -->
+<!-- 
+<mat-dialog-content class="m-0" *ngIf="data?.datalogType == 'SignupDetails'">
+    <div class="col-lg-12">
+        <h2 class="text-center">Sign Up</h2>
+        <form [formGroup]='signform'>
+            <div>
+              <label class="pt-2 pb-2">Email:</label>
+              <mat-form-field appearance="outline"  class="custom-mat-form w-100">
+                <mat-label>Email id</mat-label>
+                <input matInput placeholder="Enter Emaial ID" formControlName="emailid">
+                <mat-error *ngIf="signform.get('emailid').hasError('required')">
+                    Please Enter Email ID
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+                <label class="pt-2 pb-2">Name:</label>
+                <mat-form-field appearance="outline"  class="custom-mat-form w-100">
+                  <mat-label>Name</mat-label>
+                  <input matInput placeholder="Enter Password" formControlName="name">
+                  <mat-error *ngIf="signform.get('name').hasError('required')">
+                      Please Enter Password
+                  </mat-error>
+                </mat-form-field>
+              </div>  
+            <div>
+              <label class="pt-2 pb-2">Password:</label>
+              <mat-form-field appearance="outline"  class="custom-mat-form w-100">
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Enter Password" formControlName="password">
+                <mat-error *ngIf="signform.get('password').hasError('required')">
+                    Please Enter Password
+                </mat-error>
+              </mat-form-field>
+            </div>  
+            <div class="text-center pt-4 pb-4">
+              <button class="login-button btn" type="submit" (click)="btnClick()"  mat-dialog-close>Sign In</button>
+            </div>
+            </form>
+    </div>    
+</mat-dialog-content> -->
+
+<mat-dialog-content class="m-0" *ngIf="data?.datalogType == 'loginDetails'">
+    <div class="col-lg-12">
+        <h2 class="text-center">Sign In</h2>
+        <form #loginform='ngForm'>
+            <div>
+              <label class="pt-2 pb-2">User Name</label>
+              <mat-form-field appearance="outline"  class="custom-mat-form w-100">
+                <mat-label>User Name</mat-label>
+                <input matInput placeholder="Enter Emaial ID" name='username'[(ngModel)]='username' #usererror='ngModel' required>
+                <mat-error *ngIf="usererror?.errors?.required">
+                    Please enter user name
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <label class="pt-2 pb-2">Password:</label>
+              <mat-form-field appearance="outline"  class="custom-mat-form w-100">
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Enter Password" name='password' [(ngModel)]='password' #userpassword='ngModel' required>
+                <mat-error *ngIf="userpassword?.errors?.required">
+                    Please enter password
+                </mat-error>
+              </mat-form-field>
+            </div>  
+            <div class="text-center pt-4 pb-4">
+              <button class="login-button btn" type="submit" (click)="login(loginform)"  >Sign In</button>
+            </div>
+            </form>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-content class="m-0" *ngIf="data?.datalogType == 'SignupDetails'">
+    <div class="col-lg-12">
+        <h2 class="text-center">Sign Up</h2>
+        <form #registrationForm="ngForm">
+            <div>
+              <label class="pt-2 pb-2">Email:</label>
+              <mat-form-field appearance="outline"  class="custom-mat-form w-100">
+                <mat-label>Email id</mat-label>
+                <input matInput placeholder="Enter Emaial ID" name='email' [(ngModel)]="email" required    #name1="ngModel">
+                <mat-error *ngIf="name1?.errors?.required">
+                     Enter Email
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+                <label class="pt-2 pb-2">Name:</label>
+                <mat-form-field appearance="outline"  class="custom-mat-form w-100">
+                  <mat-label>Name</mat-label>
+                  <input matInput placeholder="Enter Password" name='name' [(ngModel)]="name" required>
+                
+                </mat-form-field>
+              </div>  
+            <div>
+              <label class="pt-2 pb-2">referalid:</label>
+              <mat-form-field appearance="outline"  class="custom-mat-form w-100">
+                <mat-label>referalid</mat-label>
+                <input matInput placeholder="Enter Password"  name='referalid' [(ngModel)]="referalid" required>
+               
+              </mat-form-field>
+            </div> 
+            <div>
+                <label class="pt-2 pb-2">Password:</label>
+                <mat-form-field appearance="outline"  class="custom-mat-form w-100">
+                  <mat-label>Password</mat-label>
+                  <input matInput placeholder="Enter Password" type='password'  name='password' [(ngModel)]="password" required>
+                 
+                </mat-form-field>
+              </div> 
+            <div class="text-center pt-4 pb-4">
+              <button class="login-button btn" type="submit" (click)="btnClick(registrationForm)"  >Sign In</button>
+            </div>
+            </form>
+    </div>    
+</mat-dialog-content>

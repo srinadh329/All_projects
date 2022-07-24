@@ -1,0 +1,89 @@
+-- FUNCTION: store.create_trans(character varying, character varying, character varying, numeric, character varying, numeric, character varying, character varying, character varying, numeric, numeric, numeric, numeric, numeric, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying)
+
+-- DROP FUNCTION store.create_trans(character varying, character varying, character varying, numeric, character varying, numeric, character varying, character varying, character varying, numeric, numeric, numeric, numeric, numeric, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying);
+
+CREATE OR REPLACE FUNCTION store.create_trans(
+	applicantname character varying,
+	applicantmobileno character varying,
+	applicationaddress character varying,
+	applicantcountry numeric,
+	productid character varying,
+	branchid numeric,
+	bankname character varying,
+	benefname character varying,
+	benfaddress character varying,
+	amount numeric,
+	rate numeric,
+	totalamount numeric,
+	charges numeric,
+	vat numeric,
+	status character varying,
+	currencyid character varying,
+	accountno character varying,
+	createduser character varying,
+	createddate character varying,
+	createdtime character varying,
+	gcnumber character varying,
+	benfmobileno character varying,
+	productgrp character varying)
+    RETURNS character varying
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+AS $BODY$
+           Declare
+		          transactioncount  numeric;
+				  applicationcount numeric;
+				  productgroup character varying;
+				  currencygroup character varying;
+				  branchlimit numeric;
+				  
+		          begin
+				       -- check whelther login user is available or not 
+			             if exists(select a.brnid,a.usrnam,a.loginid,b.brnnam,c.roleid from admin.usrmas a
+								   inner join admin.brnmas b on a.brnid = b.brnid
+								   inner join admin.roles c on a.usrole = c.roleid
+								   where a.loginid = createduser and a.brnid = branchid and c.roltyp = 'CASHIER') then
+								   
+								   select prdgrp into productgroup from admin.brnmas where brnid = branchid;
+								   select ccygrp into currencygroup from admin.prdmas where prdgrp = productgroup
+								   and prdid = productid;
+							 
+							 if exists(select a.prdid,a.ccygrp,b.prdgrp from "admin".prdmas a
+								inner join admin.brnmas b on a.prdgrp = b.prdgrp
+								inner join admin.ccymas c on a.ccygrp = c.ccygid
+								where a.prdid = productid and c.ccygid = currencygroup
+								and c.ccyid = currencyid) then
+								
+								select brnlmt into branchlimit from admin.brnmas where brnid = branchid;
+								
+								if(totalamount <= branchlimit) then
+							 
+							      select count(*)+1 into applicationcount from store.prdtxn;
+				             
+							      insert into store.prdtxn(appno,appname,appmobno,appadr,actr,
+								  prdid,brnid,bnknm,bnfname,baddr,fca,rate,amount,charges,vat,
+								  status,curid,accno,crtusr,crtdat,crttim,gcmnumber,bmobno,prdgrp)
+							      values(applicationcount,applicantname,applicantmobileno,applicationaddress,
+										 applicantcountry,productid,branchid,bankname,benefname,benfaddress,
+										 amount,rate,totalamount,charges,vat,status,currencyid,accountno,
+										 createduser,createddate,createdtime,gcnumber,benfmobileno,
+									     productgrp);
+									 
+								return '1st level completed waiting for 2nd level Authorization...';
+							 else raise exception 'Transaction amount exceeds the Branch Limit';
+						end if; 
+									 
+				      else raise exception 'This Product/Currency is not assigned to this user';
+					end if;	
+									 			 
+				else raise exception 'Invalid user';
+					 
+			end if;
+				  
+		  end
+  $BODY$;
+
+ALTER FUNCTION store.create_trans(character varying, character varying, character varying, numeric, character varying, numeric, character varying, character varying, character varying, numeric, numeric, numeric, numeric, numeric, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying)
+    OWNER TO postgres;

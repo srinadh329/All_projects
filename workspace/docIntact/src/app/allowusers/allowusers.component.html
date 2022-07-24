@@ -1,0 +1,90 @@
+
+<div *ngIf='show && !expired'>
+
+<div class="row">
+  <div class="col-6 ">
+     
+    <!-- <img src="assets/images/img_558691.png"> -->
+
+  </div>
+  <div class="col-6" class="tex-rit">
+    Sign In to continue..
+    <a class="nav-link waves-effect waves-light">
+      <button type="button" class="sign-in-but"  (click)=signInPage()>Sign in</button>
+  </a>
+</div>
+</div>
+
+
+</div>
+
+<div *ngIf="sharedocument && sharedocument.validity == 'expired'" class="center">
+    <div class="container">
+      <div class="row mt-4">
+        <img src="../../assets/images/errorimage.png" class="errorimage">
+      </div>
+      <div class="row mt-4">
+        <div class="error_button">
+          <a class="error_border">ERROR</a>
+        </div>
+      </div>
+        <div class="row mt-3">
+        <p class="mb-0 error-text">Sorry, This Session has Expired</p>
+      </div>
+    </div>
+  
+  </div>
+
+  <button hidden id="basicExampleModal" mat-raised-button data-toggle="modal" data-target="#basicExampleModal1"></button>
+
+  <div class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" id="basicExampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modalhegt modal-dialog-centered" role="document">
+      <div class="modal-content side_bg">
+        <div class="pad-1rem p-2">
+  
+          <button type="button" id="basicExampleModalclose" class="close shareview-close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-12  m-auto white-colr">
+              <div class="row">
+                <div class="col-lg-5 col-md-12 col-sm-12">
+                  <img src="assets/images/b-lock.png" width="100%">
+                </div>
+  
+                <div class="col-lg-7 col-md-12 col-sm-12 m-auto">
+                    <h4>Welcome !</h4>
+                    <p>Please Review & Act on This Document</p>
+                  <div *ngIf="sharefromid && sharefromid.name && sharefromid.email" class="pb-2">
+                    <p class="mb-0">Shared By : {{sharefromid.name}}</p>
+                     <p>({{sharefromid.email}})</p>
+                  </div>
+  
+                  <div class="pb-2 shareview-message scroll-style" *ngIf="sharedocument && sharedocument.message"><span>Message :</span>
+                    <span class="ml-2 word-brk" style="white-space: pre-line;">{{sharedocument.message}}</span></div>
+                  <!-- <div class="mt-2"><span>Message </span> <span class="ml-2">:
+                      Please Review & Act on These Document</span></div> -->
+                  <div class="shared-checkbox pb-3 pt-3"><input type="checkbox" name="agree" [(ngModel)]="agree" width="10px" height="10px"> Agree to our <i class="pl-point"><u (click)="termsandpol()" >Terms and
+                    Conditions,</u> <u (click)="privacypolicy()">Privacy Policy</u></i></div>
+                  <div class="pb-2"><span><button class="btn btn-md sharereivew-button fon-18" (click)="agreeToSign(sharedocument,agree)">Agree
+                        to sign</button></span>
+                  </div>
+  
+                </div>
+  
+  
+              </div>
+  
+  
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+

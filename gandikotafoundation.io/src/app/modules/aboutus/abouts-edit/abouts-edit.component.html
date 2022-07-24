@@ -1,0 +1,71 @@
+
+
+
+
+
+<div class="row">
+    <div class="col-md-12 d-flex align-items-center">
+        <span class="pointer" (click)="navigateBack()"><i class="fa fa-arrow-left" aria-hidden="true"></i></span>
+        <h1 class="mb-0 ml-2">About Info</h1>
+    </div>
+    <hr />
+</div>
+
+
+<form [formGroup]="aboutForm" class="normal-form " (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col-md-12">
+            <div  class="accordion-pad">
+                <mat-accordion>
+                    <mat-expansion-panel class="panel-border" [expanded]="true">
+                        <mat-expansion-panel-header class="panel-hearder">
+                            <mat-panel-title>
+                               About info
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                            <div class="row">
+                                <mat-form-field class="w-100 col-md-6" appearance="outline">
+                                    <mat-label>Established</mat-label>
+                                    <input formControlName="experience" autocomplete="Off" matInput />
+                                </mat-form-field>
+                                <mat-form-field class="w-100 col-md-12" appearance="outline">
+                                    <mat-label>Description</mat-label>
+                                    <textarea formControlName="description" autocomplete="Off" matInput rows="4"></textarea>
+                                </mat-form-field>
+                                <mat-form-field class="w-100 col-md-12" appearance="outline">
+                                    <mat-label>Mission</mat-label>
+                                    <textarea formControlName="mission" autocomplete="Off" matInput rows="4"></textarea>
+                                </mat-form-field>
+                                <mat-form-field class="w-100 col-md-12" appearance="outline">
+                                    <mat-label>Vision</mat-label>
+                                    <textarea formControlName="vision" autocomplete="Off" matInput rows="4"></textarea>
+                                </mat-form-field>
+                                <mat-form-field class="w-100 col-md-12" appearance="outline">
+                                    <mat-label>Values</mat-label>
+                                    <textarea formControlName="values" autocomplete="Off" matInput rows="4"></textarea>
+                                </mat-form-field>
+                                <div class="d-flex w-100 justify-content-between">
+                                    <div class="w-100 col-md-6">
+                                        <div class="border-upload" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
+                                            <img *ngIf="aboutForm?.value?.image" [src]="aboutForm?.value?.image" width="8%" />
+                                            <input type="file" accept="image/*" #image class="custom-file-input"
+                                                (change)="uploadImage(image.files)" class="custom-control-input d-none" id="image">
+                                            <span class="list-browse"> Drag Your Images Here or</span>
+                                            <span (click)="openimage();$event.stopPropagation()" class="blue pointer pl-2">Browse</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </div>
+    </div>
+
+<div class="row submit-row" >
+    <div class="col-md-12  text-center">
+        <button type="submit" 
+         class="submit-button  col-sm-12 col-md-4 mr-3" >Submit this details</button>
+    </div>
+</div>
+</form>

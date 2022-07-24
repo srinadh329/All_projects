@@ -1,0 +1,25 @@
+<ul style="list-style: none; display: flex; justify-content: space-evenly;">
+    <li><a routerLink="">Home</a></li>
+    <li><a routerLink="new">News</a></li>
+    <li><a routerLink="contact">Contact</a></li>
+    <li><a routerLink="about">About</a></li>
+  </ul>
+
+  <input type="text" (keyup.enter)="search($event)">
+  
+
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+      </tr>
+    </thead>
+    <thead>
+      <tr *ngFor="let student_detail of student_details">
+        <td>{{student_detail?.id}}</td>
+      </tr>
+    </thead>
+  </table>
+
+
+<router-outlet></router-outlet>

@@ -1,0 +1,27 @@
+
+  <mat-table #table [dataSource]="dataSource">
+    <ng-container *ngFor="let column of columns" [cdkColumnDef]="column.columnDef">
+      <mat-header-cell *cdkHeaderCellDef>{{ column.header | titlecase}}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row">
+        {{ column.header === 'date_at' ? ( column.cell(row) | date: 'medium') : column.cell(row)   }}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *cdkHeaderCellDef>Action</mat-header-cell>
+      <mat-cell *cdkCellDef="let row">
+        <div class="d-flex  actions">
+          <span (click)="edit(row)"><i class="fa fa-edit icon" aria-hidden="true"></i> </span>
+          <span (click)="delete(row)"><i class="fa fa-trash-o icon" aria-hidden="true"></i> </span>
+        </div>
+      </mat-cell>
+    </ng-container>
+    
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [length]="homeTable?.length" (page)="onPageChange($event)"
+  [pageSize]="10"
+ [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+  
+  

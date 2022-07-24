@@ -1,0 +1,55 @@
+<form [formGroup]="create_Form" (ngSubmit)="creat()">
+
+    <p>
+        <mat-form-field appearance="outline">
+          <mat-label>First Name</mat-label>
+          <input matInput placeholder="First Name" formControlName="first" type="text">
+            <mat-error *ngIf="create_Form.get('first').hasError('required')">
+              Please Enter Name
+            </mat-error>
+               
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Last Name</mat-label>
+          <input matInput placeholder="Last Name" formControlName="last" type="text">
+          <mat-error *ngIf="create_Form.get('last').hasError('required')">Please Enter Password</mat-error>
+       
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Subj1 Marks</mat-label>
+          <input matInput placeholder="Subj1 Marks" formControlName="subj1_marks" type="number">
+          <mat-error *ngIf="create_Form.get('subj1_marks').hasError('required')">Please Enter Password</mat-error>
+       
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Subj2 Marks</mat-label>
+          <input matInput placeholder="Subj1 Marks" formControlName="subj2_marks" type="number">
+          <mat-error *ngIf="create_Form.get('subj2_marks').hasError('required')">Please Enter Password</mat-error>
+       
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Subj3 Marks</mat-label>
+          <input matInput placeholder="Subj1 Marks" formControlName="subj3_marks" type="number">
+          <mat-error *ngIf="create_Form.get('subj3_marks').hasError('required')">Please Enter Password</mat-error>
+       
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Subj3 Marks</mat-label>
+          <input matInput placeholder="Subj3 Marks" formControlName="subj4_marks" type="number">
+          <mat-error *ngIf="create_Form.get('subj4_marks').hasError('required')">Please Enter Password</mat-error>
+       
+        </mat-form-field>
+      </p>
+      <p> <button type="submit">Submit</button></p>
+    
+    </form>

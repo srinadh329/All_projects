@@ -1,0 +1,50 @@
+-- FUNCTION: store.wu_transaction(character varying, character varying, character varying, numeric, numeric, character varying, numeric, character varying, character varying, character varying, character varying, character varying, character varying, character varying, numeric)
+
+-- DROP FUNCTION store.wu_transaction(character varying, character varying, character varying, numeric, numeric, character varying, numeric, character varying, character varying, character varying, character varying, character varying, character varying, character varying, numeric);
+
+CREATE OR REPLACE FUNCTION store.wu_transaction(
+	sendername character varying,
+	mtcnnumber character varying,
+	sendermobile character varying,
+	principalamount numeric,
+	commission numeric,
+	productid character varying,
+	branchid numeric,
+	userid character varying,
+	recorddate character varying,
+	recordtime character varying,
+	receivingcountry character varying,
+	sendingcountry character varying,
+	receivermobile character varying,
+	receivername character varying,
+	vatcharges numeric)
+    RETURNS character varying
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+AS $BODY$
+DECLARE
+			        applicationnumber numeric;
+                	vouchernumber character varying = '#WU';
+                    vouchercount numeric;
+		            transactionnumber character varying;
+					productgroup character varying;
+
+	BEGIN
+	  select count(*) + 1 into vouchercount from store.prdtxn 
+							  where trnno ilike '#WU%';
+							  
+							  transactionnumber = concat(vouchernumber,vouchercount);
+         SELECT prdgrp into productgroup FROM admin.brnmas where brnid=branchid;
+
+		INSERT INTO store.prdtxn(appname,appdtl2,appmobno,amount,vat,charges,prdid,status,crtusr,crttim,bnfname,bmobno,brnid,trnno,crtdat,prdgrp)
+		VALUES (sendername,mtcnnumber,sendermobile,principalamount,vatcharges,commission,productid,'A',userid,recordtime,receivername,receivermobile,branchid,transactionnumber,recorddate,productgroup) returning appno into applicationnumber ;		
+        UPDATE store.wu_sampledata SET  paid=true,txnid=applicationnumber where mtcnno = mtcnnumber ;
+		RETURN applicationnumber;
+
+	END;
+$BODY$;
+
+ALTER FUNCTION store.wu_transaction(character varying, character varying, character varying, numeric, numeric, character varying, numeric, character varying, character varying, character varying, character varying, character varying, character varying, character varying, numeric)
+    OWNER TO postgres;

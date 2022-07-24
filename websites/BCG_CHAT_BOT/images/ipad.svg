@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="945" height="541" viewBox="0 0 945 541">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.016" y1="1" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#414141"/>
+      <stop offset="1" stop-color="#292929"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.993" y1="0.984" x2="0" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#1f1f1f"/>
+      <stop offset="1" stop-color="#2c2c2c"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-opacity="0.161"/>
+      <stop offset="0.958" stop-opacity="0.008"/>
+      <stop offset="1" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <g id="ipad" transform="translate(-3829 -942.283)">
+    <g id="Group_12472" data-name="Group 12472" transform="translate(274 -94)">
+      <rect id="Rectangle_3211" data-name="Rectangle 3211" width="942" height="538" rx="13" transform="translate(3555 1039.283)" fill="url(#linear-gradient)"/>
+      <rect id="Rectangle_3210" data-name="Rectangle 3210" width="942" height="538" rx="13" transform="translate(3558 1036.283)" fill="url(#linear-gradient-2)"/>
+      <g id="Group_12469" data-name="Group 12469" transform="translate(3320 574.283)">
+        <rect id="Rectangle_3197" data-name="Rectangle 3197" width="24.375" height="3.56" rx="1.78" transform="translate(254.885 743.831) rotate(-90)" opacity="0.24"/>
+        <g id="Group_12405" data-name="Group 12405" transform="translate(253.105 755.308) rotate(-90)">
+          <ellipse id="Ellipse_1096" data-name="Ellipse 1096" cx="3.56" cy="3.56" rx="3.56" ry="3.56" transform="translate(41.497 0)" fill="url(#linear-gradient-3)"/>
+          <ellipse id="Ellipse_1098" data-name="Ellipse 1098" cx="2.359" cy="2.359" rx="2.359" ry="2.359" transform="translate(0 1.201)" fill="#f0f0f0" opacity="0.22"/>
+          <ellipse id="Ellipse_1097" data-name="Ellipse 1097" cx="1.526" cy="1.526" rx="1.526" ry="1.526" transform="translate(43.531 2.035)" fill="#b9b9b9" opacity="0.19"/>
+        </g>
+      </g>
+      <g id="Group_12470" data-name="Group 12470" transform="translate(40.225 574.616)">
+        <rect id="pexels-fauxels-3184465" width="878" height="510" rx="13" transform="translate(3556 478.667)" fill="#484848"/>
+      </g>
+    </g>
+  </g>
+</svg>

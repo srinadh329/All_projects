@@ -1,0 +1,54 @@
+<div class="dialog-header pb-4">
+  <h4 mat-dialog-title>
+    <mat-toolbar role="toolbar" class="task-header">
+      <span>{{data?.title}}</span>
+      <span class="fx-spacer"></span>
+      <span class="material-icons cursor" (click)="onNoClick()">close</span>
+    </mat-toolbar>
+  </h4>
+
+
+<mat-dialog-content class="m-0" *ngIf="data?.datalogType == 'loginDetails'">
+  <div class="row">
+    <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center">
+      <img src="/assets/images/login.png">
+    </div>
+    <div class="col-lg-6">
+      <h2 class="text-center">Sign In</h2>
+      <form [formGroup]='myform()'>
+        <div>
+          <label class="pt-2 pb-2">Email Id:</label>
+          <mat-form-field appearance="outline"  class="custom-mat-form w-100">
+            <mat-label>Email id</mat-label>
+            <input matInput placeholder="Enter Emaial ID">
+            <!-- <mat-icon matPrefix>perm_identity</mat-icon> -->
+          </mat-form-field>
+        </div>
+        <div>
+          <label class="pt-2 pb-2">Password:</label>
+          <mat-form-field appearance="outline"  class="custom-mat-form w-100">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Enter Password">
+          </mat-form-field>
+        </div>  
+        <div class="check-forget-box d-flex mt-3">
+          <div class="checkbox w-50">
+            <mat-checkbox class="custom-mat-check">Remember Me</mat-checkbox>
+          </div>
+          <div class="w-50 text-right"><i>Forgot password ?</i></div>
+        </div>
+        <div class="text-center pt-4 pb-4">
+          <button class="login-button btn" type="submit" (click)="btnClick()"  mat-dialog-close>Sign In</button>
+        </div>
+        </form>
+    </div>
+  </div>
+  
+</mat-dialog-content>
+
+
+    <mat-dialog-content *ngIf="data?.datalogType == 'signupRegister'">
+     <p>hihhihihihi</p> 
+        
+    </mat-dialog-content>
+  </div>    

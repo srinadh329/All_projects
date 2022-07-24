@@ -1,0 +1,45 @@
+<ng-container *ngIf = "!isReconciliation">
+    <div class="row">
+        <div class="col-5">
+            <select [(ngModel)]="propertyId" (change)="onCategoryChange(propertyId)" name="category" placeholder="Select a Building Name">
+                <option value="" >Select a Building Name</option>
+                <option [value]="property?.id" *ngFor="let property of buildingList">{{property?.name}}</option>
+            </select>
+        </div>
+        <div class="col-6" >
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                </div>
+                <input type="text" [formControl]="searchText" class="form-control" placeholder="Search by Property Manager or Email">
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf = "isReconciliation">
+    <div class="row align-items-center">
+       
+        <div class="col-3">
+            <select [(ngModel)]="propertyId" (change)="onCategoryChange(propertyId)" name="category" placeholder="Select a Building Name">
+                <option value="" >Select a Building Name</option>
+                <option [value]="property.id" *ngFor="let property of buildingList">{{property?.name}}</option>
+            </select>
+        </div>
+        <div class="col-4" data-html2canvas-ignore>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                </div>
+                <input type="text" [formControl]="searchText" class="form-control" placeholder="Search by Property Manager or Email">
+            </div>
+        </div>
+        <div class="col-3">
+            <input type="text" [maxDate]="maxDate" [autoApply]="true" [closeOnAutoApply]="true" class="date-range pointer" [locale]="{applyLabel: 'ok', format: 'YYYY-MM-DD'}" ngxDaterangepickerMd [(ngModel)]="selected" placeholder="Select a Reward Date Range"
+                (change)="change($event)" />
+        </div>
+        <div class="col-2" data-html2canvas-ignore>
+            <button class="btn btn-primary" (click)="exportPdf()">DOWNLOAD REPORT</button>
+        </div>
+    </div>
+</ng-container>

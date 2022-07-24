@@ -1,0 +1,87 @@
+<div class="network-header">
+<h4 mat-dialog-title>
+  <mat-toolbar role="toolbar" class="task-header">
+    <span></span>
+    <span class="fx-spacer"></span>
+    <span class="material-icons cursor" (click)="onNoClick()">close</span>
+</mat-toolbar>
+</h4>
+<mat-dialog-content class="m-0 customheight" *ngIf="data.dialogType == 'instantdraft'">
+  <div class="text-center">
+    <p class="pt-3">Branch Added Successfully.</p>
+    <div class="pt-4">
+    <button class="login-button" type="submit" mat-dialog-close>Close</button>
+  </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-content class="m-0 customheight" *ngIf="data.dialogType == 'success'">
+  <div class="text-center">
+    <p class="pt-3">Application No : {{data.res}} Created Successfully.</p>
+    <div class="pt-4">
+    <button class="login-button" type="submit" mat-dialog-close>Close</button>
+  </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-content class="m-0 customheight" *ngIf="data.dialogType == 'authorize'">
+  <div class="text-center">
+    <p class="pt-3">Application No : {{data.res}} Authorized Successfully.</p>
+    <div class="pt-4">
+    <button class="login-button" type="submit" mat-dialog-close>Close</button>
+  </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-content class="m-0 customheight" *ngIf="data.dialogType == 'reject'">
+  <div class="text-center">
+    <p class="pt-3">Application No : {{data.res}} Rejected Successfully.</p>
+    <div class="pt-4">
+    <button class="login-button" type="submit" mat-dialog-close>Close</button>
+  </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-content class="m-0 customheight" *ngIf="data.dialogType == 'sessionexpired'">
+  <div class="text-center">
+    <p class="pt-3">Your session is Expired Login Again to continue</p>
+    <div class="pt-4">
+    <button class="login-button" type="submit" mat-dialog-close>Close</button>
+  </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-content class="m-0 customheight" *ngIf="data.dialogType == 'update'">
+  <div class="text-center">
+    <p class="pt-3">Updated Successfully.</p>
+    <div class="pt-4">
+    <button class="login-button" type="submit" mat-dialog-close>Close</button>
+  </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-content class="m-0 customheight" *ngIf="data.dialogType == 'nofine'">
+  <div class="text-center">
+    <p class="pt-3">No fines Present With Searched Data.</p>
+    <div class="pt-4">
+    <button class="login-button" type="submit" mat-dialog-close>Close</button>
+  </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-content class="m-0 customheight" *ngIf="data.dialogType == 'miscauthorize'">
+  <div class="text-center">
+    <p class="pt-3">Application is  {{data.res}}  Successfully.</p>
+    <div class="pt-4">
+    <button class="login-button" type="submit" mat-dialog-close>Close</button>
+  </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-content class="m-0 customheight" *ngIf="data.dialogType == 'blocked'">
+  <div class="text-center">
+    <p class="pt-3">Application is Deactivated  Please Contact Administrator .</p>
+    <div class="pt-4">
+    <button class="login-button" type="submit" mat-dialog-close>Close</button>
+  </div>
+  </div>
+</mat-dialog-content>
+</div>
+

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Invoice</title>
+	<style type="text/css">
+		.pdf-view {
+			max-width: 800px;
+			margin: 0 auto;
+			background-color: #fff;
+			box-shadow: 0 4px 8px 0 rgb(0 0 0 / 10%), 0 6px 20px 0 rgb(0 0 0 / 10%);
+			/* padding: 20px 30px 10px 30px; */
+			text-align: justify;
+			line-height: 28px;
+		}
+
+		.column-flex {
+			display: -webkit-flex;
+			display: -webkit-box;
+			display: -moz-box;
+			display: -ms-flexbox;
+			display: flex;
+			padding: 0 26px 0 26px;
+		}
+
+		.column-option1 {
+			width: 100%;
+		}
+
+		.column-option2 {
+			width: 100%;
+			display: -webkit-flex;
+			display: -webkit-box;
+			display: -moz-box;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-align-items: end;
+			-webkit-flex-direction: column;
+			flex-direction: column;
+			align-items: end;
+			justify-content: center;
+			-webkit-justify-content: center;
+		}
+
+		.scube-list h1 {
+			font-size: 16px;
+			margin: 0;
+		}
+
+		.scube-list ul {
+			list-style: none;
+			padding: 10px 0 0 0;
+			margin: 0;
+			font-size: 14px;
+		}
+		.scube-list ul li{
+			line-height: 20px;
+		}
+
+		.tax {
+			text-align: -webkit-center;
+			text-align: center;
+			border-bottom: 1px solid #e2e2e2;
+		}
+
+		.tax h4 {
+			margin: 0;
+			padding: 40px 0 6px 0;
+		}
+
+		.unlist {
+			list-style: none;
+			padding: 0;
+		}
+
+		.second-column-option1 {
+			width: 100%;
+		}
+
+		.second-column-option2 {
+			width: 100%;
+		}
+
+		table {
+			width: 100%;
+			border-spacing: 0;
+			border-collapse: collapse;
+		}
+
+		table th,
+		td {
+			/* padding: 6px 19px 6px 31px; */
+			border: 1px solid #e2e2e2;
+			text-align: center;
+		}
+
+		.amount_details {
+			margin: 25px 0 0 0;
+		}
+
+		.bank_details {
+			background-color: #f4f4f4;
+		}
+
+		.contact_details {
+			list-style: none;
+			padding: 10px 0;
+			display: flex;
+			justify-content: space-around;
+			margin: 0;
+		}
+	</style>
+</head>
+
+<body>
+
+	<section class="pdf-view">
+		<table>
+			<tr>
+				<td style="width:59%;border:none;text-align: left;padding: 16px 0 0 20px;"><img src="https://lh5.googleusercontent.com/p/AF1QipO0NSVYUGh7kIHJVtuurGCUoFDOGuqxzZ-faKxa=s599-k-no"
+					width="60%"></td>
+				<td style="border: none;text-align: left;padding: 16px 0 0 0;">
+					<div class="scube-list">
+						<h1>SCUBEELATE TECHNOLOGIES PVT LTD</h1>
+						<ul>
+							<li>#222, The Arcade, Brigade Metropolis Enclave,</li>
+							<li>Garudacharpalya, Whitefield Main Road,</li>
+							<li>Bangalore - 560048,</li>
+							<li>Karnataka.</li>
+							<li>GST: 29ABDCS0560Q1ZT</li>
+						</ul>
+					</div>
+				</td>
+			</tr>
+		</table>
+		<div class="tax">
+			<h4>TAX INVOICE</h4>
+		</div>
+		<table>
+			<tr>
+				<td style="border: none; text-align: left;padding: 0 0 0 20px;width: 68%;">
+					<div>
+						<ul class="unlist">
+							<li>For</li>
+							<li><b>SAVAGEHUMANS LLP</b></li>
+							<li>SCHEME NUMBER 114, 1373, PART 01, </li>
+							<li>INDORE, Indore, Madhya Pradesh, 452016.</li>
+						</ul>
+					</div>
+					<div>
+						<ul class="unlist">
+							<li>GST: 23ADZFS8040G1ZN</li>
+						</ul>
+					</div>
+					<div>
+						<ul class="unlist">
+							<li>Attention: Mr Palash</li>
+							<li>Phone: +91 7976265861</li>
+						</ul>
+					</div>
+				</td>
+				<td style="border: none;text-align: left;">
+					<ul class="unlist">
+						<li><b>Raised on: JULY 16,</b> 2022</li>
+						<li>Invoice Number: SCQ20-P210</li>
+						<li><b>Due Date: JULY 19,2022</b></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+		<div>
+			<table>
+				<thead>
+					<th colspan="8">INVOICE DETAILS</th>
+				</thead>
+				<thead>
+					<th>S.No</th>
+					<th>Product Description</th>
+					<th>HSN Code</th>
+					<th>UOM</th>
+					<th>QTY</th>
+					<th>Rate</th>
+					<th>Amount</th>
+					<th>Total Value</th>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>Scube Smart Business Cards</td>
+						<td>8523</td>
+						<td>Nos</td>
+						<td>7</td>
+						<td>678</td>
+						<td>4,746</td>
+						<td>4,746</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Scube POPS </td>
+						<td>8523</td>
+						<td>Nos</td>
+						<td>74</td>
+						<td>170</td>
+						<td>12,580</td>
+						<td>12,580</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>Scube POPS </td>
+						<td>8523</td>
+						<td>Nos</td>
+						<td>105</td>
+						<td>212</td>
+						<td>22,260</td>
+						<td>22,260</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div>
+			<table class="amount_details">
+				<tr>
+					<td style="text-align: left;padding: 0 0 0 20px;"><b>Total Amount Before Tax</b></td>
+					<td style="text-align: left;padding: 0 0 0 20px;" colspan="3">39,586</td>
+				</tr>
+				<tr>
+					<td style="text-align: left;padding: 0 0 0 20px;"><b>IGST</b></td>
+					<td style="text-align: left;padding: 0 0 0 20px;" colspan="3">7,125</td>
+				</tr>
+				<tr>
+					<td style="text-align: left;padding: 0 0 0 20px;"><b>Shipping Charges</b></td>
+					<td style="text-align: left;padding: 0 0 0 20px;" colspan="3">00</td>
+				</tr>
+				<tr>
+					<td style="text-align: left;padding: 0 0 0 20px;"><b>Total Amount After Tax</b></td>
+					<td style="text-align: left;padding: 0 0 0 20px;" colspan="3">46,711</td>
+				</tr>
+				<tr>
+					<td style="text-align: left;padding: 0 0 0 20px;"><b>Total Amount in Words</b></td>
+					<td style="text-align: left;padding: 0 0 0 20px;" colspan="3">FOURTY SIX THOUSAND SEVEN HUNDRED ELEVEN RUPEES</td>
+				</tr>
+			</table>
+		</div>
+		<div>
+			<table class="bank_details">
+				<thead>
+					<th colspan="3">BANK ACCOUNT DETAILS</th>
+				</thead>
+				<tr>
+					<td
+						style="text-align: left;padding: 0 0 0 20px; border-top: 1px solid #e2e2e2 !important;border-bottom: 1px solid #e2e2e2 !important;border-left: 1px solid transparent !important;border-right: 1px solid transparent !important;">
+						<b>Bank Name: </b>
+					</td>
+					<td
+						style="text-align: left;padding: 0 0 0 20px; border-top: 1px solid #e2e2e2 !important;border-bottom: 1px solid #e2e2e2 !important;border-left: 1px solid transparent !important;border-right: 1px solid transparent !important;" colspan="3">
+						ICICI BANK</td>
+				</tr>
+				<tr>
+					<td
+						style="text-align: left;padding: 0 0 0 20px; border-top: 1px solid #e2e2e2 !important;border-bottom: 1px solid #e2e2e2 !important;border-left: 1px solid transparent !important;border-right: 1px solid transparent !important;" >
+						<b>A/c Name:</b>
+					</td>
+					<td
+						style="text-align: left;padding: 0 0 0 20px; border-top: 1px solid #e2e2e2 !important;border-bottom: 1px solid #e2e2e2 !important;border-left: 1px solid transparent !important;border-right: 1px solid transparent !important;" colspan="3">
+						SCUBEELATE TECHNOLOGIES PVT LTD</td>
+				</tr>
+				<tr>
+					<td
+						style="text-align: left;padding: 0 0 0 20px; border-top: 1px solid #e2e2e2 !important;border-bottom: 1px solid #e2e2e2 !important;border-left: 1px solid transparent !important;border-right: 1px solid transparent !important;">
+						<b>A/c Number:</b>
+					</td>
+					<td
+						style="text-align: left;padding: 0 0 0 20px; border-top: 1px solid #e2e2e2 !important;border-bottom: 1px solid #e2e2e2 !important;border-left: 1px solid transparent !important;border-right: 1px solid transparent !important;" colspan="3">
+						000405569751</td>
+				</tr>
+				<tr>
+					<td
+						style="text-align: left;padding: 0 0 0 20px; border-top: 1px solid #e2e2e2 !important;border-bottom: 1px solid #e2e2e2 !important;border-left: 1px solid transparent !important;border-right: 1px solid transparent !important;">
+						<b>IFSC Code:</b>
+					</td>
+					<td
+						style="text-align: left;padding: 0 0 0 20px; border-top: 1px solid #e2e2e2 !important;border-bottom: 1px solid #e2e2e2 !important;border-left: 1px solid transparent !important;border-right: 1px solid transparent !important;">
+						ICIC0004413</td>
+						<td></td>
+				</tr>
+				<table class="bank_details">
+					<tr>
+						<td style="text-align: left;padding: 0 0 0 20px;width: 43%;">
+							<b>PAYMENT TERMS</b>
+							<h6>100 % advance payment.</h6>
+						</td>
+						<td style="text-align: left;padding: 0 0 0 20px;">
+							<b>FOR SCUBEELATE TECHNOLOGIES PVT LTD</b>
+							<h6>*Digital file no signature required</h6>
+						</td>
+					</tr>
+				</table>
+			</table>
+		</div>
+
+		<div style="background-color: #f4f4f4;padding: 10px 0 10px 0;">
+			<table style="background-color: #f4f4f4;">
+				<tr>
+					<td style="border: none;text-align: center;">
+						<b>PHONE:</b><a href="tel:+916364267799">+916364267799</a>
+					</td>
+					<td style="border: none;text-align: center;">
+						<b>EMAIL -</b><a href="mailto:pr@scube.me"> pr@scube.me</a>
+					</td>
+					<td style="border: none;text-align: center;">
+						<b>WEBSITE -</b><a href="https://www.scube.me/">www.scube.me</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</section>
+
+
+</body>
+
+</html>

@@ -1,0 +1,227 @@
+<app-sidebar></app-sidebar>
+
+<div class="main">
+    <app-header></app-header>
+    <div class="body payment-paading">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="row">
+                        <div class="col-6 card-body border-right">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="col-4 float-start">
+                                        <div>
+                                            <div class="circle">
+                                                <div class="bubble"><span>2</span></div>
+                                                <img class="img-style-note" src="assets/invoice.png" alt="invoice">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-8 float-start mt-4 ml-unpaid">
+                                        <h2>Payment Details</h2>
+
+                                        <div
+                                            class="unpaid-invoices d-flex ml-unpaid align-items-center justify-content-center mt-4">
+                                            You currently have 2 Unpaid Invoices
+                                        </div>
+
+                                        <select class="mt-3 ml-unpaid" placeholder="Select a Payment Option">
+                                            <option value="">Credit Card/Debit Card</option>
+                                            <option value="">Bank Account</option>
+                                        </select>
+
+                                        <div class="d-flex flex-row justify-content-between mt-3 ml-unpaid">
+                                            <button class="btn btn-success m-2" (click)="payAll()">PAY INVOICES</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 card-body d-flex align-items-center p-4 ">
+                            <ng-container *ngIf = "addPayment">
+                               <div class="row">
+                                   <div class="col-12 d-flex align-items-center pointer p-4" (click)="addPayment=!addPayment">
+                                       <img src="assets/addPayment.png" alt="addpayment">
+                                       <h5 class="ml-2" style="margin-left: 10px;">ADD A PAYMENT</h5>
+                                   </div>
+                               </div>
+                            </ng-container>
+                            <ng-container *ngIf = "!addPayment">
+                                <div class="mt-5 w-100">
+                                    <section>
+                                        <h4>YOUR CARDS & BANK</h4>
+                                        <div class="d-flex flex-row align-items-center">
+                                            <div class="mr-2">VISA</div>
+                                            <p class="m-0" style="margin-left:10px !important"><span class="badge badge-light">Default</span></p>
+                                        </div>
+                                        <p>Card Number: 00000-0000-0000-0000</p>
+                                        <p>Expiration Date: 00/0000</p>
+                                    </section>
+                                    <div class="d-flex flex-row">
+                                        <button class="btn btn_theme add-card font10" data-bs-toggle="modal" data-bs-target="#addCard">ADD A NEW
+                                            CARD OR BANK</button>
+                                        <button class="btn btn-dark font10" data-bs-toggle="modal" data-bs-target="#savedCards">VIEW ALL SAVED
+                                            ACCOUNTS</button>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-lg-12">
+                <hr>
+                <h2 class="recent-payment">RECENT PAYMENTS</h2>
+                <hr>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-lg-12">
+                <table class="table  table-borderless">
+                    <thead class="tableHeader w-100">
+                        <tr class=" text-center">
+                            <th>Date Paid</th>
+                            <th>Invoice No.</th>
+                            <th>Resident ID</th>
+                            <th>Resident Name</th>
+                            <th>Building Name</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>12/11/2021</td>
+                            <td>#000000</td>
+                            <td>#000000</td>
+                            <td>Mathews, Dave</td>
+                            <td>The Link Minneapolis
+                                Low-Rise</td>
+                            <td>$300</td>
+                        </tr>
+                        <tr>
+                            <td>12/11/2021</td>
+                            <td>#000000</td>
+                            <td>#000000</td>
+                            <td>Mathews, Dave</td>
+                            <td>The Link Minneapolis
+                                Low-Rise</td>
+                            <td>$300</td>
+                        </tr>
+                        <tr>
+                            <td>12/11/2021</td>
+                            <td>#000000</td>
+                            <td>#000000</td>
+                            <td>Mathews, Dave</td>
+                            <td>The Link Minneapolis
+                                Low-Rise</td>
+                            <td>$300</td>
+                        </tr>
+                        <tr>
+                            <td>12/11/2021</td>
+                            <td>#000000</td>
+                            <td>#000000</td>
+                            <td>Mathews, Dave</td>
+                            <td>The Link Minneapolis
+                                Low-Rise</td>
+                            <td>$300</td>
+                        </tr>
+                        <tr>
+                            <td>12/11/2021</td>
+                            <td>#000000</td>
+                            <td>#000000</td>
+                            <td>Mathews, Dave</td>
+                            <td>The Link Minneapolis
+                                Low-Rise</td>
+                            <td>$300</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addCard" tabindex="-1" aria-labelledby="addCardLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content p-3 header-style">
+            <div class="modal-header border-0 ">
+                <!-- <h5 class="modal-title" id="addCardLabel">ADD A NEW CARD OR BANK</h5> -->
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body text-center">
+                <h5 class=" pb-2">ADD A NEW CARD OR BANK</h5>
+                <p>Choose a payment method to add:</p>
+                <div class="form-check w-50 m-auto mb-2">
+                    <input class="form-check-input" type="radio" name="payMode" id="creditCard" checked>
+                    <label class="form-check-label" for="creditCard">
+                        Credit or Debit Card
+                    </label>
+                </div>
+                <div class="form-check w-50 m-auto">
+                    <input class="form-check-input" type="radio" name="payMode" id="bank">
+                    <label class="form-check-label" for="bank">
+                        Bank Account
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center border-0 payment">
+                <button type="button" class="btn  btn_theme">ADD PAYMENT</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="savedCards" tabindex="-1" aria-labelledby="savedCardsLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width:650px !important">
+        <div class="modal-content p-3 header-style">
+            <div class="modal-header border-0 ">
+                <h5 class="modal-title" id="savedCardsLabel"><i class="fas fa-arrow-left theme-color pointer"></i>YOUR
+                    CARDS & BANKS</h5>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+            </div>
+
+            <div class="modal-body text-center">
+                <table class="table  table-borderless">
+                    <thead class="tableHeader w-100">
+                        <tr class="text-center">
+                            <th class="padding"></th>
+                            <th class="padding">BRAND</th>
+                            <th class="padding">NUMBER</th>
+                            <th class="padding">EXPIRES</th>
+                            <th class="padding">ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="padding"><input class="form-check-input mt-0" type="checkbox" id="checkboxNoLabel" value="" aria-label="..."></td>
+                            <td class="padding"> <span class="card-align">VISA</span></td>
+                            <td class="padding">XXXX XXXXX XXXX 0000</td>
+                            <td class="padding">00/0000</td>
+                            <td class="padding">DEFAULT</td>
+                        </tr>
+                        <tr>
+                            <td class="padding"><input class="form-check-input mt-0" type="checkbox" id="checkboxNoLabel" value="" aria-label="..."></td>
+                            <td class="padding"> <span class="card-align">VISA</span></td>
+                            <td class="padding">XXXX XXXXX XXXX 0000</td>
+                            <td class="padding">00/0000</td>
+                            <td class="padding">DEFAULT</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer justify-content-center border-0 payment">
+                <button type="button" class="btn  btn_theme">SELECT/REPLACE PAYMENT</button>
+            </div>
+
+        </div>
+    </div>
+</div>

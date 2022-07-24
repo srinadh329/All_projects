@@ -1,0 +1,161 @@
+<div class="row m-0 bgf5"  >
+  
+  <div class="col-lg-12 p-3">
+    <!-- <h6 class="mt-04 poppins-font font-color">Create Blog</h6> -->
+    <!-- <form #blog="ngForm" (ngSubmit)="onBlog(blog)" class="poppins-font groupform mt-3"> -->
+      <div class="row m-0">
+      <div *ngIf="Blog == 'Create Blog'" class="col-lg-8 bg-fff">
+        <h6 class="mt-04 poppins-font font-color">Create Blog</h6>
+             <div class="row m-0 ">
+             
+             <div class="col-lg-6 mt-3">
+              <form #ref1="ngForm" (ngSubmit)="blogDescriptionData(ref1)">
+              <div class="form-group">
+
+                <input ngModel  type="text" name="blogtitle"  class="form-control" #blog1="ngModel"
+                  placeholder="Enter Blog title" required>
+                <small *ngIf="blog1.invalid && ((blog1.touched || blog1.dirty) || ref1.submitted) && blog1.errors?.required"
+                  class="text-danger">Blog title required</small>
+        
+        
+              </div>
+              <!-- <button class="btn btn-invite" type="submit" style="font-size: 12px;" >Next</button> -->
+        
+        
+               <div class="form-group">
+                <input ngModel type="text" name="blogdescription"  class="form-control" #blog5="ngModel"
+                placeholder="Enter Blog description" required>
+              <small *ngIf="blog5.invalid && ((blog5.touched || blog5.dirty) || ref1.submitted) && blog5.errors?.required"
+                class="text-danger">Blog description required</small>
+               </div>
+               <div>
+                <mat-form-field apperance="outlook" class="width-100 ">
+                  <mat-label>From</mat-label>
+                  <input matInput name="from_date" autocomplete="off"  #blog2="ngModel"  [(ngModel)]="ref1.from_date" required [matDatepicker]="picker1"
+                  (click)="picker1.open()" placeholder="dd / mm / yyyy" [min]="date">
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+               
+                </mat-form-field>
+                <small *ngIf="blog2.invalid && ((blog2.touched || blog2.dirty) || ref1.submitted) && blog2.errors?.required"
+                class="text-danger">From_Date required</small>
+               </div>
+               <div>
+                <mat-form-field class="width-100">
+                  <mat-label>To</mat-label>
+                  <input matInput name="to_date" ngModel autocomplete="off"  placeholder="dd / mm / yyyy"
+                  [min]="ref1.from_date"  #blog3="ngModel" required [matDatepicker]="picker">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                 
+                </mat-form-field>
+            
+                <small *ngIf="blog3.invalid && ((blog3.touched || blog3.dirty) || ref1.submitted) && blog3.errors?.required"
+                class="text-danger">To_Date required</small>
+               </div>
+               <div class="row m-0 jus-end p-3">
+                <button class="btn btn-invite" type="submit">Next</button>
+              </div>
+            </form>
+             </div>
+        
+             <div class="col-lg-6 position-relative">
+              <div *ngIf="(imagePreview)" class="profpic max-height-400">
+                <img class="rounded-circle" width="100%" height="100%" class="image-preview" [src]="imagePreview">
+                <!-- <span style="cursor: pointer;" (click)="closePreview()">close</span> -->
+                  </div>
+                  <div *ngIf="!(imagePreview)" class="profpic max-height-400">
+                    <img class="rounded-circle" width="100%" height="100%" class="image-preview" src="assets/images/blogimage.PNG">
+                    <!-- <span style="cursor: pointer;" (click)="closePreview()">close</span> -->
+                      </div>
+                  <div class="selct-img">
+                    <input type="file" accept=".png, .jpeg , .jpg" hidden placeholder="Photo"
+                    (change)="blogProfile($event)" #profile/>
+                    <button (click)="profile.click()" class="btn btn-invite font-12 poppins-font">Select Image For Blog</button>
+                  </div>
+         
+             </div>
+          
+            </div>
+      </div>
+      
+</div>
+
+      
+
+      
+ 
+
+
+
+ 
+  <div class="row m-0 poppins-font">
+    <div *ngIf="Blog == 'Blog Content'" class="col-lg-8" >
+      <h5 class="font-color">{{blogvalues?.blogtitle}}</h5>
+      <p class="color70 mb-1">{{blogvalues?.blogdescription}}</p>
+      <div class="row">
+      <div class="col-lg-6 font-color">
+        <span>From:</span>
+        <span class="ml-2">{{blogvalues?.from_date | date: 'fullDate'}}</span>
+      </div>
+      <div class="col-lg-6 font-color">
+        <span>To:</span>
+        <span class="ml-2">{{blogvalues?.to_date | date: 'fullDate'}}</span>
+      </div>
+      </div>
+    
+
+      <div *ngIf="blogprofile?.path" class="profpic mt-2">
+        <img class="rounded-circle" width="300px" height="300px" class="image-preview" [src]="blogprofile?.path">
+        <!-- <span style="cursor: pointer;" (click)="closePreview()">close</span> -->
+          </div>
+
+          <div *ngIf="blogprofile==null || !blogprofile?.path " class="profpic mt-2">
+            <img class="rounded-circle" width="300px" height="300px" class="image-preview" src="assets/images/blogimage.PNG">
+            <!-- <span style="cursor: pointer;" (click)="closePreview()">close</span> -->
+              </div>
+      <form #content="ngForm" (ngSubmit)="onBlog(content)" class="mt-3">
+      <quill-editor   [styles]="{height: '200px', 'background-color': '#fff'}" #blog4="ngModel"  name="blogcontent" required ngModel></quill-editor>
+       <small *ngIf="blog4.invalid && ((blog4.touched || blog4.dirty) || content.submitted) && blog4.errors?.required"
+        class="text-danger">Blog Conent required</small> 
+      
+       
+        <button class="btn btn-invite mt-3" type="submit">Create Blog</button>
+      </form>
+
+      <ng-template #blogSuccess>
+        <p class="text-center">Blog Added Successfully</p>
+        <button class="btn btn-primary text-center" (click)="blogSuccesspopup()">ok</button>
+      </ng-template>
+
+      
+      </div>
+      </div>
+      
+    <!-- </form> -->
+        <!-- </div> -->
+
+<!-- </div> -->
+<div *ngIf="Blog == 'list of Blog'" class="row m-0">
+  <div *ngFor="let blog of showblog" class="col-lg-4 mt-4">
+    <div class="position-relative p-0" style="height:100%">
+      <img src="assets/images/blogimage.PNG" (click)="selectBlog(blog._id)" width="100%" height="100%" class="img-br pointer" *ngIf="!(blog.photo?.path)">
+      <img src="{{blog.photo?.path}}" (click)="selectBlog(blog._id)" width="100%" height="100%" class="img-br pointer" *ngIf="(blog.photo?.path)">
+      <div class="blogcontent poppins-font">{{blog.description}}</div>
+    </div>
+
+  </div>
+</div>
+<div *ngIf="Blog == 'Show Blog'" class="row m-0 poppins-font">
+<div *ngFor="let blog of showblog" class="col-lg-12 mt-4">
+  <div *ngIf="blog._id == blogId"> 
+     <h4 class="text-center font-color">{{blog?.title}}</h4>
+  <p class=" blog" [innerHtml]='blog.content | safeHtml'></p>
+  
+</div>
+
+</div>
+</div>
+
+</div>
+</div>

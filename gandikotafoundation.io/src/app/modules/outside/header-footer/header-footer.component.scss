@@ -1,0 +1,168 @@
+@import 'common';
+.nav-header{
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    background-color:$transparent;
+    border: 0;
+    -webkit-transition: all .5s ease;
+    transition: all .5s ease;
+    padding: 10px 0 10px 0;
+    box-shadow: $box-shadow;
+}
+.sticky{
+    position: fixed;
+    background-color: $white-color;
+}
+.custom-list{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+.custom-list li{
+    display: block;
+    font-size: 12px;
+    background-color: transparent !important;
+    font-weight: 700;
+    letter-spacing: 0px;
+    line-height: 24px;
+    text-transform: uppercase;
+    transition: all 0.5s;
+    font-family: "Nunito", sans-serif;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.custom-list li a{
+    color: $white-color !important;
+}
+.sticky li a{
+    color: $donate-color !important;
+}
+.custom-list .active a  {
+    color: $primer-color !important;
+}
+.search{
+    @include button();
+    cursor: pointer;
+}
+
+// footer css start
+.custom-footer{
+background: $footer-color;
+padding: 60px 0;
+position: relative;
+color: $footer-font-color;
+
+}
+.footer-list li {
+    margin-bottom: 10px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.footer-list li a{
+    color: $footer-font-color;
+}
+.footer-column{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.social-icon li a {
+    color: $footer-font-color;
+    border: 1px solid #3c4858;
+    display: inline-block;
+    height: 32px;
+    width: 32px;
+    line-height: 28px;
+    text-align: center;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    overflow: hidden;
+    position: relative;
+}
+.social-icon li a:hover {
+    background-color: $primer-color;
+    border-color: $primer-color !important;
+    color: $white-color !important;
+}
+.footer-content{
+    text-align: justify;
+    line-height: 1.5;
+    font-size: 16px;
+}
+.email-logo{
+    position: relative;
+    top: -6px;
+    padding: 0 10px 0 3px;
+}
+// footer css end
+.btn .btn-icon{
+height: 36px;
+width: 36px;
+line-height: 34px;
+padding: 0;
+box-shadow: 0 3px 5px 0 rgb(47 85 212 / 30%);
+background-color: $primer-color !important;
+}
+.back-to-top {
+    z-index: 99;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: $primer-color;
+    border: none;
+    // display: none;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    outline: none;
+    text-decoration: none;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    font-weight: 600;
+    border-radius: 6px;
+}
+.btn.btn-icon .icons {
+     height: 16px; 
+    width: 16px;
+    font-size: 16px;
+    transition: all 0.5s ease;
+}
+.back-to-top:hover {
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.back-to-top:hover .icons {
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+.back-to-top .icons {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+
+ul.pattern li a {
+    cursor: pointer;
+    display: block;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    margin: 3px;
+}
+ul.pattern .color1 {
+    background-color: #2f55d4;
+}
+ul.pattern .color2 {
+    background-color: #6dc77a;
+}
+ul.pattern .color3 {
+    background-color: #7952B3;
+}
+ul.pattern .color4 {
+    background-color: #ff5b69;
+}

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Template 7</title>
+	<style type="text/css">
+		@font-face {
+		  font-family: "Signatra";
+		  src: url("https://scube-assets.s3.ap-south-1.amazonaws.com/Signatra.ttf") format("truetype");
+		  font-weight: normal;
+		  font-style: normal;
+		  font-display: swap;
+		}
+		@font-face {
+		  font-family: "HermanoAlto Round";
+		  src: url("https://scube-assets.s3.ap-south-1.amazonaws.com/HermanoAlto+Round.ttf") format("truetype");
+		  font-weight: normal;
+		  font-style: normal;
+		  font-display: swap;
+		}
+		@font-face {
+		  font-family: "DINPro-Medium";
+		  src: url("https://scube-assets.s3.ap-south-1.amazonaws.com/DINPro-Bold.otf") format("truetype");
+		  font-weight: normal;
+		  font-style: normal;
+		  font-display: swap;
+		}
+		@font-face {
+		  font-family: "BalooTamma-Regular";
+		  src: url("https://scube-assets.s3.ap-south-1.amazonaws.com/BalooTamma-Regular.ttf") format("truetype");
+		  font-weight: normal;
+		  font-style: normal;
+		  font-display: swap;
+		}
+
+		.templateView {
+			max-width: 600px;
+			margin: 0 auto;
+			background-color: #fff;
+			box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+			max-height: 100vh;
+			position: relative;
+		}
+
+		.templateView:before {
+			content: '';
+			background-image: url(leftside.png);
+			height: 100%;
+			z-index: 9;
+			position: absolute;
+			top: 0;
+			width: 200px;
+			background-repeat: no-repeat;
+		}
+
+		.logo {
+			text-align: right;
+		}
+
+		.email-heading h1,
+		p {
+			color: #502C1E;
+			margin: 0;
+			font-family: 'HermanoAlto Round';
+		}
+
+		.email-heading h1 {
+			font-size: 40px;
+		}
+
+		.email-heading p {
+			font-size: 24px;
+			font-weight: 600;
+		}
+
+		.email-heading {
+			padding: 0 0 0 75px;
+		}
+		.email-content{
+			padding: 20px 0 0 170px;
+		}
+		.email-content h1 {
+			margin: 0;
+			padding: 10px 0 16px 0;
+			color: #502C1E;
+			font-family: "BalooTamma-Regular";
+		}
+
+		.email-content p {
+			text-align: justify;
+			font-size: 15px;
+			/*font-weight: 600;*/
+			line-height: 23px;
+			color: #502C1E;
+			    padding: 0px 0 10px 0;
+			    font-family: "BalooTamma-Regular";
+		}
+		.email-content a {
+			  font-family: "BalooTamma-Regular";
+		}
+		.order-details h3 {
+
+			color: #502C1E;
+		}
+
+		.order-details-view {
+			background-color: #F4EFDB;
+			min-height: 174px;
+			border-radius: 12px;
+		}
+		.regards{
+			padding: 43px 0 0 78px;
+		}
+
+		.regards p:nth-child(1) {
+			padding: 0px 0 14px 0;
+			font-family: "BalooTamma-Regular";
+		}
+		.regards p:nth-child(2) {
+			font-family: "Signatra Demo";;
+		}
+		.regards p:nth-child(3) {
+			font-family: "BalooTamma-Regular";
+		}
+		.regards p:nth-child(4) {
+			font-family: "Signatra Demo";;
+		}
+
+		.footer-image {
+		background-image: url("https://scube-assets.s3.ap-south-1.amazonaws.com/footer.png");
+			min-height: 275px;
+			background-repeat: no-repeat;
+			position: relative;
+			z-index: 99;
+			top: -67px;
+		}
+
+		.footer-image p {
+			position: absolute;
+			top: 39%;
+			left: 23px;
+			font-size: 13px;
+			color: #fff;
+			font-family: "DINPro-Medium";
+		}
+
+		.padding-view {
+			padding: 0 30px 0 30px;
+		}
+		a {
+			color: #502C1E;
+		}
+		@media screen and (max-width: 540px) {
+			.templateView {
+				max-height: 881px;
+			}
+
+			.email-heading {
+				height: 124px;
+			}
+
+			.email-heading h1 {
+				font-size: 31px;
+			}
+
+			.email-heading p {
+				font-size: 12px;
+				font-weight: 600;
+			}
+		}
+
+		@media only screen and (device-aspect-ratio: 360/640) {
+			.templateView {
+				max-height: 881px;
+			}
+
+			.email-heading {
+				height: 124px;
+			}
+
+			.email-heading h1 {
+				font-size: 31px;
+			}
+
+			.email-heading p {
+				font-size: 12px;
+				font-weight: 600;
+			}
+		}
+
+		@media only screen and (device-aspect-ratio: 360/640) {
+			.templateView {
+				max-height: 881px;
+			}
+
+			.email-heading {
+				height: 124px;
+			}
+
+			.email-heading h1 {
+				font-size: 31px;
+			}
+
+			.email-heading p {
+				font-size: 12px;
+				font-weight: 600;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<section class="templateView">
+		<div class="padding-view">
+			<header class="logo">
+				<img src="https://scube-assets.s3.ap-south-1.amazonaws.com/logo.png">
+			</header>
+			<div class="email-heading">
+				<h1>Hello!</h1>
+				<p> They say third time’s</p>
+				<p> the charm.</p>
+			</div>
+			<div class="email-content">
+				<h1>Hey (First Name),</h1>
+				<p>
+					They say third time’s the charm. Why don’t we try that with your order of Gumazing Gummies? An amazing discount awaits you. Get 15% off with coupon code 
+				</p>
+				<p>THIRDTIME15 when you place the order.</p>
+				<p> Hurry! Place your order now!</p>
+				<a href="#">Click here to order</a>
+			</div>
+			<div class="regards">
+				<p>
+					We hope that you successfully place the order this time.
+				</p>
+				<p><i>Don’t just be amazing, #BeGumazing.</i></p>
+				<p><b> Thanks and Regards,</b></p>
+				<p><i> Mr. Gumazing</i></p>
+			</div>
+		</div>
+		<footer class="footer-image">
+			<p>For any queries regarding your order, please contact us at <br>&lt;email ID&gt; or, <br>call us on
+				&lt;phone no.&gt;</p>
+		</footer>
+	</section>
+
+</body>
+
+</html>

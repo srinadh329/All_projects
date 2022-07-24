@@ -1,0 +1,38 @@
+<p (click)="logout()">Logout</p>
+
+<mat-form-field appearance="fill">
+    <mat-select (OnChange)="someMethod($event)">
+        <mat-option value="hight">Hight to Low </mat-option>
+        <mat-option value="low">Low to Hight</mat-option>
+    </mat-select>
+</mat-form-field>
+
+
+<input type="text" [(ngModel)]='valueIn' placeholder="Search" (keyup)="search(valueIn)">
+
+<p>total count: {{total_count}}</p>
+<a (click)="create()">
+    <mat-icon>add</mat-icon>
+</a>
+<table>
+    <thead>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Marks</th>
+        <th>Status</th>
+        <th>Delete</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let student_detail of student_details">
+            <td>{{student_detail?.id}}</td>
+            <td>{{student_detail?.name}}</td>
+            <td>{{student_detail?.age}}</td>
+            <td>{{student_detail?.total}}</td>
+            <td>{{student_detail?.status}}</td>
+            <td (click)="detele_item(student_detail)">
+                <mat-icon>delete</mat-icon>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,46 @@
+-- FUNCTION: store.misc_insert(character varying, character varying, character varying, numeric, numeric, character varying, numeric, character varying, character varying, character varying, numeric)
+
+-- DROP FUNCTION store.misc_insert(character varying, character varying, character varying, numeric, numeric, character varying, numeric, character varying, character varying, character varying, numeric);
+
+CREATE OR REPLACE FUNCTION store.misc_insert(
+	applicantname character varying,
+	applicationdetail character varying,
+	applicantmobno character varying,
+	ticketamount numeric,
+	productcharges numeric,
+	productid character varying,
+	branchid numeric,
+	userid character varying,
+	recorddate character varying,
+	recordtime character varying,
+	productvat numeric)
+    RETURNS character varying
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+AS $BODY$
+DECLARE
+			        applicationnumber numeric;
+					productgroup character varying;
+	BEGIN
+	SELECT prdgrp into productgroup FROM admin.brnmas where brnid=branchid;
+	IF (productid='AA') then
+		if exists(select * from store.prdtxn where applicantname = appname and applicationdetail=appdtl2 ) THEN
+		raise exception 'PNR Already Existed.';
+		ELSE
+		INSERT INTO store.prdtxn(appname,appdtl2,appmobno,amount,vat,charges,prdid,status,crtusr,crttim,brnid,crtdat,prdgrp)
+		VALUES (applicantname,applicationdetail,applicantmobno,ticketamount,productvat,productcharges,productid,'C',userid,recordtime,branchid,recorddate,productgroup) returning appno into applicationnumber ;		
+		RETURN applicationnumber;
+		end if;
+	end if;
+	IF (productid='NB') then
+		INSERT INTO store.prdtxn(appname,appdtl1,appmobno,amount,vat,charges,prdid,status,crtusr,crttim,brnid,crtdat,prdgrp)
+		VALUES (applicantname,applicationdetail,applicantmobno,ticketamount,productvat,productcharges,productid,'C',userid,recordtime,branchid,recorddate,productgroup) returning appno into applicationnumber ;		
+		RETURN applicationnumber;
+	end if;
+	END;
+$BODY$;
+
+ALTER FUNCTION store.misc_insert(character varying, character varying, character varying, numeric, numeric, character varying, numeric, character varying, character varying, character varying, numeric)
+    OWNER TO postgres;

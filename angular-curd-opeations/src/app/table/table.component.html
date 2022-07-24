@@ -1,0 +1,52 @@
+<mat-form-field appearance="fill">
+    <mat-select (selectionChange)="getSelected($event)">
+        <mat-option value='high'>High to Low </mat-option>
+        <mat-option value='low'>Low to High</mat-option>
+    </mat-select>
+</mat-form-field>
+<p>total count:{{student_details?.length}}</p> 
+<input type="text" [(ngModel)]='valueIn' placeholder="Search" (keyup)="search(valueIn)">
+
+<p (click)="create_new()">create</p>
+
+
+<table>
+    <thead>
+        <th>Id 
+          <mat-icon (click)="asyn('id')">keyboard_arrow_up</mat-icon>
+          <mat-icon (click)="desyn('id')">keyboard_arrow_down</mat-icon>
+        </th>
+        <th>Name
+          <mat-icon (click)="asyn('name')">keyboard_arrow_up</mat-icon>
+          <mat-icon (click)="desyn('name')">keyboard_arrow_down</mat-icon>
+        </th>
+        <th>Age
+          <mat-icon (click)="asyn('age')">keyboard_arrow_up</mat-icon>
+          <mat-icon (click)="desyn('age')">keyboard_arrow_down</mat-icon>
+        </th>
+        <th>subj1_marks</th>
+        <th>subj2_marks</th>
+        <th>subj3_marks</th>
+        <th>subj4_marks</th>
+        <th>Marks</th>
+        <th>Status</th>
+        <th>Delete</th>
+        <th>Update</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let student_detail of student_details">
+            <td>{{student_detail.id}}</td>
+            <td>{{student_detail?.name}}</td>
+            <td>{{student_detail?.age}}</td>
+            <td>{{student_detail?.subj1_marks}}</td>
+            <td>{{student_detail?.subj2_marks}}</td>
+            <td>{{student_detail?.subj3_marks}}</td>
+            <td>{{student_detail?.subj4_marks}}</td>
+            <td>{{student_detail?.total}}</td>
+            <td>{{student_detail?.status}}</td>
+            <td (click)="delete(student_detail)"><mat-icon>delete</mat-icon></td>
+            <td (click)="edit(student_detail)"><mat-icon>edit</mat-icon></td>
+
+        </tr>
+    </tbody>
+</table>

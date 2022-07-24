@@ -1,0 +1,458 @@
+<div class="table-responsive" #TABLE>
+  <table class="table table-fixed mt-4" id="table-data">
+    <thead class="common-table-head">
+      <tr>
+        <th *ngFor="let t of  tableHeaders ;let i = index"> {{t.h}}
+          <span class="material-icons custom-filter" (click)="sortasc(t.k);t.icon=!t.icon"
+            *ngIf="t.h !='Status' && t.h!='Action' && t.h!='S.No' && !t.icon">
+            arrow_drop_down
+          </span>
+          <span class="material-icons custom-filter" *ngIf="t.h !='Status' && t.h!='Action' && t.h!='S.No' &&t.icon "
+            (click)="sortdsc(t.k);t.icon= !t.icon">
+            arrow_drop_up
+          </span>
+        </th>
+      </tr>
+    </thead>
+    <tbody class="pt-2 scrollbar" [style.height.px]="scrollHeight" id="style-4">
+      <ng-container *ngIf="allbranches">
+        <div *ngIf="!allbranches?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <!-- | filter:adminService.text -->
+        <tr *ngFor="let branch of allbranches | paginate: { itemsPerPage: 5, currentPage: p }  " (dblclick)="navigteToBranch(branch)">
+          <td>{{branch?.brnid}}</td>
+          <td><span matTooltip={{branch?.brnnam}}    matTooltipClass="example-tooltip-red">{{branch?.brnnam}}</span></td>
+          <td ><span  matTooltip={{branch?.cntnam}}  matTooltipClass="example-tooltip-red">{{branch?.cntnam}}</span></td>
+          <td ><span  matTooltip={{branch?.brnlmt}}  matTooltipClass="example-tooltip-red">{{branch?.brnlmt}}</span></td>
+          <td ><span  matTooltip={{branch?.braddr}} matTooltipPosition="below"  aria-label="Button that displays a red tooltip when focused or hovered over" matTooltipClass="example-tooltip-red">{{branch?.braddr}}</span></td>
+          <td ><span matTooltip={{branch?.grpnam}}  matTooltipClass="example-tooltip-red">{{branch?.grpnam}}</span></td>
+          <td>
+            <ul class="list-unstyled d-flex m-0">
+              <li class="table-active btn-success" *ngIf="branch?.status=='A'">Active</li>
+              <li class="table-active btn-warning" *ngIf="branch?.status=='D'">De-Active</li>
+            </ul>
+          </td>
+          <td>
+            <ul class="list-unstyled d-flex m-0">
+              <li class="list-icon" (click)="editBranch(branch)" ><span class="material-icons">create</span></li>
+            </ul>
+          </td>
+        </tr>
+        <pagination-controls autoHide="true" (pageChange)="p = $event" class="custom-pagination"></pagination-controls>
+
+      </ng-container>
+
+      <ng-container *ngIf="allbranchusers">
+        <div *ngIf="!allbranchusers?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <tr *ngFor="let branchuser of allbranchusers | paginate: { itemsPerPage: 5, currentPage: p } ">
+          <td ><span  matTooltip={{branchuser?.usrnam}} matTooltipClass="example-tooltip-red">{{branchuser?.usrnam}}</span></td>
+          <td ><span matTooltip={{branchuser?.loginid}} matTooltipClass="example-tooltip-red">{{branchuser?.loginid}}</span></td>
+          <td><span  matTooltip={{branchuser?.roltyp}} matTooltipClass="example-tooltip-red">{{branchuser?.roltyp}}</span></td>
+          <td>
+            <ul class="list-unstyled d-flex m-0">
+              <li class="table-active btn-success" *ngIf="branchuser?.status=='A'">Active</li>
+              <li class="table-active btn-warning" *ngIf="branchuser?.status=='D'">De-Active</li>
+            </ul>
+          </td>
+          <td>
+            <ul class="list-unstyled d-flex m-0">
+              <li class="list-icon"><span class="material-icons" (click)="branchusersetting(branchuser)">settings</span>
+              <li class="list-icon"><span class="material-icons" (click)="editBranchusers(branchuser)">create</span>
+              </li>
+            </ul>
+          </td>
+        </tr>
+        <pagination-controls autoHide="true" (pageChange)="p = $event" class="custom-pagination"></pagination-controls>
+      </ng-container>
+
+      <ng-container *ngIf="countrylist">
+        <div *ngIf="!countrylist?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <tr *ngFor="let country of countrylist | paginate: { itemsPerPage: 5, currentPage: p }">
+          <td ><span  matTooltip={{country?.cntcod}} matTooltipClass="example-tooltip-red">{{country?.cntcod}}</span></td>
+          <td ><span matTooltip={{country?.cntnam}} matTooltipClass="example-tooltip-red">{{country?.cntnam}}</span></td>
+          <td ><span matTooltip={{country?.cntccy}} matTooltipClass="example-tooltip-red">{{country?.cntccy}}</span></td>
+          <td ><span matTooltip={{country?.cnswft}} matTooltipClass="example-tooltip-red">{{country?.cnswft}}</span></td>
+          <td ><span matTooltip={{country?.cntlmt}} matTooltipClass="example-tooltip-red">{{country?.cntlmt}}</span></td>
+          <td>
+            <ul class="list-unstyled d-flex m-0">
+              <li  class="table-active btn-success"  *ngIf="country?.status=='A'"> Active</li>
+              <li class="table-active btn-warning" *ngIf="country?.status=='D'">De-Active</li>
+            </ul>
+          </td>
+          <td>
+            <ul class="list-unstyled d-flex m-0">
+              <li class="list-icon" (click)="editCountry(country)"><span class="material-icons">create</span></li>
+            </ul>
+          </td>
+        </tr>
+
+          <pagination-controls autoHide="true" (pageChange)="p = $event" class="custom-pagination"></pagination-controls>
+
+
+      </ng-container>
+
+      <!--==================Cuntry Currency======================-->
+
+      <ng-container *ngIf="countryproductlist">
+        <div *ngIf="!countryproductlist?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <tr *ngFor="let countryprd of countryproductlist | paginate: { itemsPerPage: 5, currentPage: p } | filter:adminService.text">
+          <td ><span matTooltip={{countryprd?.cntnam}} matTooltipClass="example-tooltip-red">{{countryprd?.cntnam}}</span></td>
+          <td ><span matTooltip={{countryprd?.grpnam}} matTooltipClass="example-tooltip-red">{{countryprd?.grpnam}}</span></td>
+          <td ><span matTooltip={{countryprd?.prdlnm}} matTooltipClass="example-tooltip-red">{{countryprd?.prdlnm}}</span></td>
+          <td>
+            <ul class="list-unstyled d-flex m-0">
+              <li class="table-active btn-success" *ngIf="countryprd?.status=='A'">Active</li>
+              <li class="table-active btn-warning" *ngIf="countryprd?.status=='D'">De-Active</li>
+            </ul>
+          </td>
+          <td>
+            <ul class="list-unstyled d-flex m-0">
+              <li class="list-icon" (click)="editCountryProduct(countryprd)"><span class="material-icons">create</span>
+              </li>
+            </ul>
+          </td>
+        </tr>
+        <pagination-controls autoHide="true" (pageChange)="p = $event" class="custom-pagination"></pagination-controls>
+      </ng-container>
+
+      <!--===============Currency group ===========-->
+      <ng-container *ngIf="currencydata">
+        <div *ngIf="!currencydata?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <tr *ngFor="let currency of currencydata | paginate: { itemsPerPage: 5, currentPage: p } | filter:adminService.text" (dblclick)="CurrencyGroup(currency)">
+          <td ><span matTooltip={{currency?.ccygid}} matTooltipClass="example-tooltip-red">{{currency?.ccygid}}</span></td>
+          <td ><span matTooltip={{currency?.grpnam}} matTooltipClass="example-tooltip-red">{{currency?.grpnam}}</span></td>
+          <td>
+            <ul class="list-unstyled d-flex m-0">
+              <li class="table-active btn-success" *ngIf="currency?.status=='A'">Active</li>
+              <li class="table-active btn-warning" *ngIf="currency?.status=='D'">De-Active</li>
+            </ul>
+          </td>
+          <td>
+            <ul class="list-unstyled d-flex m-0">
+              <li class="list-icon"><span class="material-icons" (click)="editCurrencyGroup(currency)">create</span>
+              </li>
+            </ul>
+          </td>
+        </tr>
+        <pagination-controls autoHide="true" (pageChange)="p = $event" class="custom-pagination"></pagination-controls>
+      </ng-container>
+
+      <ng-container *ngIf="allcurrencygroup">
+        <div *ngIf="!allcurrencygroup?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <tr *ngFor="let currencygroup of allcurrencygroup | paginate: { itemsPerPage: 5, currentPage: p } | filter:adminService.text">
+          <td ><span matTooltip={{currencygroup?.ccyid}} matTooltipClass="example-tooltip-red">{{currencygroup?.ccyid}}</span></td>
+          <td><span matTooltip={{currencygroup?.ccylnm}} matTooltipClass="example-tooltip-red">{{currencygroup?.ccylnm}}</span></td>
+          <td>
+            <ul class="list-unstyled d-flex m-0">
+              <li class="table-active btn btn-success" *ngIf="currencygroup?.status == 'A'">Active</li>
+              <li class="table-active btn-warning" *ngIf="currencygroup?.status == 'D'">De-Active</li>
+            </ul>
+          </td>
+          <td>
+            <ul class="list-unstyled d-flex m-0">
+              <li class="list-icon"><span class="material-icons" (click)="editCurrency(currencygroup)">create</span>
+              </li>
+            </ul>
+          </td>
+        </tr>
+        <pagination-controls autoHide="true" (pageChange)="p = $event" class="custom-pagination"></pagination-controls>
+      </ng-container>
+
+
+      <ng-container *ngIf="goldcarddata">
+        <div *ngIf="!goldcarddata?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <tr *ngFor="let goldcard of goldcarddata | paginate: { itemsPerPage: 5, currentPage: p } ">
+          <td ><span matTooltip={{goldcard?.gcmnumber}} matTooltipClass="example-tooltip-red">{{goldcard?.gcmnumber}}</span></td>
+          <td ><span matTooltip={{goldcard?.gcmcrdtyp}} matTooltipClass="example-tooltip-red">{{goldcard?.gcmcrdtyp}}</span></td>
+          <td ><span matTooltip={{goldcard?.gcmidnumb}} matTooltipClass="example-tooltip-red">{{goldcard?.gcmidnumb}}</span></td>
+          <td><span  matTooltip={{goldcard?.gcmcname}} matTooltipClass="example-tooltip-red">{{goldcard?.gcmcname}}</span></td>
+          <td ><span matTooltip={{goldcard?.gcmgcexpd}} matTooltipClass="example-tooltip-red">{{goldcard?.gcmgcexpd | date: 'dd/MM/yyyy'}}</span></td>
+          <td>
+            <ul class="list-unstyled d-flex m-0">
+              <li class="table-active btn-success" *ngIf="goldcard?.gcmgcstat=='A'">Active</li>
+              <li class="table-active btn-warning " *ngIf="goldcard?.gcmgcstat=='D'">De-Active</li>
+            </ul>
+          </td>
+          <td>
+            <ul class="list-unstyled d-flex m-0">
+              <li class="list-icon" (click)="editGoldcard(goldcard)"><span class="material-icons">create</span></li>
+            </ul>
+          </td>
+        </tr>
+        <pagination-controls autoHide="true" (pageChange)="p = $event" class="custom-pagination"></pagination-controls>
+      </ng-container>
+
+      <ng-container *ngIf="ratesdata">
+        <div *ngIf="!ratesdata?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <tr *ngFor="let ratesdata of ratesdata | paginate: { itemsPerPage: 5, currentPage: p } ">
+          <td ><span matTooltip={{ratesdata?.grpnam}} matTooltipClass="example-tooltip-red">{{ratesdata?.grpnam}}</span></td>
+          <td ><span matTooltip={{ratesdata?.ccylnm}} matTooltipClass="example-tooltip-red">{{ratesdata?.ccylnm}}</span></td>
+          <td ><span matTooltip={{ratesdata?.lowrat}} matTooltipClass="example-tooltip-red">{{ratesdata?.lowrat}}</span></td>
+          <td ><span matTooltip={{ratesdata?.higrat}} matTooltipClass="example-tooltip-red">{{ratesdata?.higrat}}</span></td>
+          <td ><span matTooltip={{ratesdata?.ccyrat}} matTooltipClass="example-tooltip-red">{{ratesdata?.ccyrat}}</span></td>
+          <td>
+            <ul class="list-unstyled d-flex m-0">
+              <li *ngIf="ratesdata?.status == 'A'" class="table-active  btn-success">Active</li>
+              <li *ngIf="ratesdata?.status == 'U'" class="table-active  btn-warning">De-Active</li>
+            </ul>
+          </td>
+          <td>
+            <ul class="list-unstyled d-flex m-0">
+              <li class="list-icon" (click)="editRate(ratesdata)"><span class="material-icons">create</span></li>
+            </ul>
+          </td>
+        </tr>
+        <pagination-controls autoHide="true" (pageChange)="p = $event" class="custom-pagination"></pagination-controls>
+      </ng-container>
+      <ng-container *ngIf="chargesdata">
+        <div *ngIf="!chargesdata?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <tr *ngFor="let charges of chargesdata | paginate: { itemsPerPage: 5, currentPage: p }">
+          <td ><span matTooltip={{charges?.prdgnm}} matTooltipClass="example-tooltip-red">{{charges?.prdgnm}}</span></td>
+          <td><span  matTooltip={{charges?.prdlnm}} matTooltipClass="example-tooltip-red">{{charges?.prdlnm}}</span></td>
+          <td><span  matTooltip={{charges?.ccygnm}} matTooltipClass="example-tooltip-red">{{charges?.ccygnm}}</span></td>
+          <td><span  matTooltip={{charges?.ccylnm}} matTooltipClass="example-tooltip-red">{{charges?.ccylnm}}</span></td>
+          <td><span  matTooltip={{charges?.amtifg}} matTooltipClass="example-tooltip-red">{{charges?.amtifg}}</span></td>
+          <td><span matTooltip={{charges?.chgamt}} matTooltipClass="example-tooltip-red">{{charges?.chgamt}}</span></td>
+          <td>
+            <ul class="list-unstyled d-flex m-0">
+              <li *ngIf="charges?.status == 'A'" class="table-active  btn-success">Active</li>
+              <li *ngIf="charges?.status == 'U'" class="table-active  btn-warning">De-Active</li>
+            </ul>
+          </td>
+          <td>
+            <ul class="list-unstyled d-flex m-0">
+              <li class="list-icon"><span class="material-icons" (click)="editCharges(charges)">create</span></li>
+            </ul>
+          </td>
+        </tr>
+        <pagination-controls autoHide="true" (pageChange)="p = $event" class="custom-pagination"></pagination-controls>
+      </ng-container>
+      <ng-container *ngIf="userroles">
+        <div *ngIf="!userroles?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <tr *ngFor="let userroles of userroles | paginate: { itemsPerPage: 5, currentPage: p }">
+          <td ><span matTooltip={{userroles?.roleid}}  matTooltipClass="example-tooltip-red">{{userroles?.roleid}}</span></td>
+          <td ><span matTooltip={{userroles?.roltyp}}  matTooltipClass="example-tooltip-red">{{userroles?.roltyp}}</span></td>
+          <td>
+            <ul class="list-unstyled d-flex m-0">
+              <li *ngIf="userroles?.status == 'A'" class="table-active  btn-success">Active</li>
+              <li *ngIf="userroles?.status == 'D'" class="table-active  btn-warning">De-Active</li>
+            </ul>
+          </td>
+          <td>
+            <ul class="list-unstyled d-flex m-0">
+              <li class="list-icon"><span class="material-icons" (click)="editRoles(userroles)">create</span></li>
+            </ul>
+          </td>
+        </tr>
+        <pagination-controls autoHide="true" (pageChange)="p = $event" class="custom-pagination"></pagination-controls>
+      </ng-container>
+      <ng-container *ngIf="onlineusersdata">
+        <div *ngIf="!onlineusersdata?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <tr  *ngFor="let user of onlineusersdata | paginate: { itemsPerPage: 5, currentPage: p } | filter:adminService.text">
+          <td><span matTooltip={{user?.id}} matTooltipPosition="below"  aria-label="Button that displays a red tooltip when focused or hovered over" matTooltipClass="example-tooltip-red">{{user?.id}}</span></td>
+          <td><span matTooltip={{user?.email}} matTooltipPosition="below"  aria-label="Button that displays a red tooltip when focused or hovered over" matTooltipClass="example-tooltip-red">{{user?.email}}</span></td>
+          <td ><span matTooltip={{user?.emiratesid}} matTooltipClass="example-tooltip-red">{{user?.emiratesid}}</span></td>
+          <td ><span matTooltip={{user?.gcnumber}} matTooltipClass="example-tooltip-red">{{user?.gcnumber}}</span></td>
+          <!-- <td>
+            <ul class="list-unstyled d-flex m-0">
+              <li *ngIf="user?.status == 'A'" class="table-active  btn-success">Active</li>
+              <li *ngIf="user?.status == 'D'" class="table-active  btn-warning">De-Active</li>
+            </ul>
+          </td> -->
+          <!-- <td>
+            <ul class="list-unstyled d-flex m-0">
+              <li class="list-icon"><span class="material-icons">create</span></li>
+            </ul>
+          </td> -->
+        </tr>
+        <pagination-controls autoHide="true" (pageChange)="p = $event" class="custom-pagination"></pagination-controls>
+      </ng-container>
+
+      <ng-container *ngIf="productdata">
+        <div *ngIf="!productdata?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <tr *ngFor="let product of productdata | paginate: { itemsPerPage: 5, currentPage: p } " (dblclick)="navigateToProductGp(product)">
+          <td ><span matTooltip={{product?.grpcod}} matTooltipClass="example-tooltip-red">{{product?.grpcod}}</span></td>
+          <td ><span matTooltip={{product?.grpnam}} matTooltipClass="example-tooltip-red">{{product?.grpnam}}</span></td>
+          <td>
+            <ul class="list-unstyled d-flex m-0">
+              <li class="table-active btn-success" *ngIf="product?.status =='A'">Active</li>
+              <li class="table-active btn-warning" *ngIf="product?.status =='D'">De-Active</li>
+            </ul>
+          </td>
+          <td>
+            <ul class="list-unstyled d-flex m-0">
+              <li class="list-icon"><span class="material-icons" (click)="editProductGroup(product)">create</span></li>
+            </ul>
+          </td>
+        </tr>
+        <pagination-controls autoHide="true" (pageChange)="p = $event" class="custom-pagination"></pagination-controls>
+      </ng-container>
+
+      <ng-container *ngIf="allproductgroup">
+        <div *ngIf="!allproductgroup?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <tr
+          *ngFor="let productgroup of allproductgroup | paginate: { itemsPerPage: 5, currentPage: p } ">
+          <td><span  matTooltip={{productgroup?.prdid}} matTooltipClass="example-tooltip-red">{{productgroup?.prdid}}</span></td>
+          <td ><span matTooltip={{productgroup?.prdsnm}} matTooltipClass="example-tooltip-red">{{productgroup?.prdsnm}}</span></td>
+          <td ><span matTooltip={{productgroup?.prdlnm}} matTooltipClass="example-tooltip-red">{{productgroup?.prdlnm}}</span></td>
+          <td ><span matTooltip={{productgroup?.ccygrp}} matTooltipClass="example-tooltip-red">{{productgroup?.ccygrp}}</span></td>
+          <td>
+            <ul class="list-unstyled d-flex m-0">
+              <li class="table-active btn-success" *ngIf="productgroup?.status =='A'">Active</li>
+              <li class="table-active btn-warning" *ngIf="productgroup?.status =='D'">De-Active</li>
+            </ul>
+          </td>
+          <td>
+            <ul class="list-unstyled d-flex m-0">
+              <li class="list-icon"><span class="material-icons" (click)="editproduct(productgroup)">create</span></li>
+            </ul>
+          </td>
+        </tr>
+        <pagination-controls autoHide="true" (pageChange)="p = $event" class="custom-pagination"></pagination-controls>
+      </ng-container>
+
+      <ng-container *ngIf="reportList">
+        <div *ngIf="!reportList?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <div *ngIf="reportList?.length">
+          <tr *ngFor="let report of reportList | paginate: { itemsPerPage: 5, currentPage: p } | filter:adminService.text; let i=index">
+            <td>{{i+1}}</td>
+            <td ><span matTooltip={{report?.usrname}} matTooltipClass="example-tooltip-red">{{report?.usrname}}</span></td>
+            <td ><span matTooltip={{report?.country}} matTooltipClass="example-tooltip-red">{{report?.country}}</span></td>
+            <td ><span matTooltip={{report?.email}} matTooltipClass="example-tooltip-red">{{report?.email}}</span></td>
+            <td *ngIf="report?.isactive">Active</td>
+            <td *ngIf="!report?.isactive">IN-Active</td>
+            <td>{{report?.phonenumber}}</td>
+            <td>{{report?.crtdate | date: 'dd/MM/yyyy'}}</td>
+          </tr>
+          <pagination-controls autoHide="true" (pageChange)="p = $event" class="custom-pagination"></pagination-controls>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="userwiselist">
+        <div *ngIf="!userwiselist?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <tr *ngFor="let product of userwiselist | paginate: { itemsPerPage: 5, currentPage: p } | filter:adminService.text; let i=index">
+          <td>{{i+1}}</td>
+          <td ><span matTooltip={{product?.usrnam}} matTooltipClass="example-tooltip-red">{{product?.usrnam}}</span></td>
+          <td ><span matTooltip={{product?.loginid}} matTooltipClass="example-tooltip-red">{{product?.loginid}}</span></td>
+          <td ><span matTooltip={{product?.roltyp}} matTooltipClass="example-tooltip-red">{{product?.roltyp}}</span></td>
+          <td ><span matTooltip={{product?.status}} matTooltipClass="example-tooltip-red">{{product?.status}}</span></td>
+          <td ><span matTooltip={{product?.crtdat}} matTooltipClass="example-tooltip-red">{{product?.crtdat}}</span></td>
+        </tr>
+        <pagination-controls autoHide="true" (pageChange)="p = $event" class="custom-pagination"></pagination-controls>
+      </ng-container>
+
+      <ng-container *ngIf="branchwisetransactionreportdata">
+        <div *ngIf="!branchwisetransactionreportdata?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <tr *ngFor="let branch of branchwisetransactionreportdata | paginate: { itemsPerPage: 5, currentPage: p } | filter:adminService.text; let i=index">
+          <td>{{i+1}}</td>
+          <td ><span matTooltip={{branch?.appno}} matTooltipClass="example-tooltip-red">{{branch?.appno}}</span></td>
+          <td ><span matTooltip={{branch?.brnid}} matTooltipClass="example-tooltip-red">{{branch?.brnid}}</span></td>
+          <td ><span matTooltip={{branch?.prdid}} matTooltipClass="example-tooltip-red">{{branch?.prdid}}</span></td>
+          <td ><span matTooltip={{branch?.appname}} matTooltipClass="example-tooltip-red">{{branch?.appname}}</span></td>
+          <td ><span matTooltip={{branch?.amount}} matTooltipClass="example-tooltip-red">{{branch?.amount}}</span></td>
+          <td ><span matTooltip={{branch?.crtdat}} matTooltipClass="example-tooltip-red">{{branch?.crtdat}}</span></td>
+        </tr>
+        <pagination-controls autoHide="true" (pageChange)="p = $event" class="custom-pagination"></pagination-controls>
+      </ng-container>
+
+
+      <ng-container *ngIf="reportsProductList">
+        <div *ngIf="!reportsProductList?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <tr *ngFor="let user of reportsProductList | paginate: { itemsPerPage: 5, currentPage: p } | filter:adminService.text; let i=index">
+          <td>{{i+1}}</td>
+          <td ><span matTooltip={{user?.appno}} matTooltipClass="example-tooltip-red">{{user?.appno}}</span></td>
+          <td ><span matTooltip={{user?.brnid}} matTooltipClass="example-tooltip-red">{{user?.brnid}}</span></td>
+          <td ><span matTooltip={{user?.prdlnm}} matTooltipClass="example-tooltip-red">{{user?.prdlnm}}</span></td>
+          <td><span  matTooltip={{user?.appname}} matTooltipClass="example-tooltip-red">{{user?.appname}}</span></td>
+          <td ><span matTooltip={{user?.amount}} matTooltipClass="example-tooltip-red">{{user?.amount}}</span></td>
+          <td ><span matTooltip={{user?.crtdat}} matTooltipClass="example-tooltip-red">{{user?.crtdat}}</span></td>
+        </tr>
+        <pagination-controls autoHide="true" (pageChange)="p = $event" class="custom-pagination"></pagination-controls>
+      </ng-container>
+
+      <ng-container *ngIf="branchwiseuserdata">
+        <div *ngIf="!branchwiseuserdata?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <tr *ngFor="let user of branchwiseuserdata | paginate: { itemsPerPage: 5, currentPage: p } | filter:adminService.text; let i=index">
+          <td>{{i +1}}</td>
+          <td ><span matTooltip={{user?.appno}}  matTooltipClass="example-tooltip-red">{{user?.appno}}</span></td>
+          <td ><span matTooltip={{user?.prdid}}  matTooltipClass="example-tooltip-red">{{user?.prdid}}</span></td>
+          <td ><span matTooltip={{user?.appname}}  matTooltipClass="example-tooltip-red">{{user?.appname}}</span></td>
+          <td ><span matTooltip={{user?.amount}}  matTooltipClass="example-tooltip-red">{{user?.amount}}</span></td>
+          <td ><span matTooltip={{user?.crtdat}}  matTooltipClass="example-tooltip-red">{{user?.crtdat}}</span></td>
+        </tr>
+        <pagination-controls autoHide="true" (pageChange)="p = $event"></pagination-controls>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

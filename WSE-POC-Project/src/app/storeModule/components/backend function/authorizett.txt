@@ -1,0 +1,69 @@
+-- FUNCTION: store.authorize_tt(numeric, character varying, character varying, character varying, character varying, numeric)
+
+-- DROP FUNCTION store.authorize_tt(numeric, character varying, character varying, character varying, character varying, numeric);
+
+CREATE OR REPLACE FUNCTION store.authorize_tt(
+	applicationnumber numeric,
+	authuser character varying,
+	authdate character varying,
+	authtime character varying,
+	authstatus character varying,
+	branchid numeric)
+    RETURNS character varying
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+AS $BODY$
+     Declare productid character varying;
+	         transactioncount numeric;
+			 permananentvoucher character varying;
+          begin
+		        if exists(select appno from store.prdtxn where appno = applicationnumber
+						  and brnid = branchid and status = 'C') then
+						  
+					if exists(select a.loginid,a.usrole,a.brnid,b.roltyp from admin.usrmas a 
+				              inner join admin.roles b on a.usrole = b.roleid 
+					           where b.roltyp = 'SUPERVISOR' and a.brnid = branchid
+					           and a.loginid = authuser) then
+							   
+							   if(authstatus = 'A') then
+							   
+							      select prdid into productid from store.prdtxn
+					              where appno = applicationnumber;
+							   
+							      select count(*)+1 into transactioncount from store.prdtxn
+							      where trnno ilike 'TT%' and status = authstatus;
+							   
+							      --Generate permanent voucher
+							      permananentvoucher = concat('TT',transactioncount);
+							   							   
+							      update store.prdtxn set modusr = authuser,moddat = authdate,
+							      modtim = authtime,status = authstatus,trnno = permananentvoucher
+							      where appno = applicationnumber and brnid = branchid;
+							   
+						        return permananentvoucher;
+								end if;
+								
+								if(authstatus = 'R') then
+								       update store.prdtxn set modusr = authuser,moddat = authdate,
+							           modtim = authtime,status = authstatus
+							           where appno = applicationnumber 
+									   and brnid = branchid;
+								
+								return 'Application is Cancelled money will be refunded by Cashier';
+								
+						     end if;		
+							   
+						else raise exception 'Invalid User to Authorize';	   
+							   
+					end if;		   
+						  
+					 else raise exception 'Invalid Transaction Number';  
+				end if;
+		  end
+ 
+   $BODY$;
+
+ALTER FUNCTION store.authorize_tt(numeric, character varying, character varying, character varying, character varying, numeric)
+    OWNER TO postgres;

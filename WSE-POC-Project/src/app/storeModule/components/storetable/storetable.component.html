@@ -1,0 +1,253 @@
+<div class="table-responsive">
+  <table class="table table-fixed  mt-4">
+    <thead class="common-table-head">
+      <tr>
+        <th *ngFor="let foreignexchange of Header">{{foreignexchange}}
+          <span (click)="setOrder(foreignexchange,'desc')" *ngIf="ordertype==='asc'" class="material-icons custom-filter"> arrow_drop_down </span>
+          <span class="material-icons custom-filter" *ngIf="ordertype==='desc'" (click)="setOrder(foreignexchange,'asc');">arrow_drop_up</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody class="pt-2" [style.height.px]="scrollHeight" id="style-4">
+      <!--------------------------------------------- Foreign Exchange Data ------------------------------------------------------------>
+      <ng-container *ngIf="foreignlist">
+        <div *ngIf="!foreignlist?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <div *ngIf="foreignlist?.length">
+          <tr *ngFor="let foreign of foreignlist | paginate: { itemsPerPage: 5, currentPage: p } ; let i = index">
+            <!-- <td>{{i + 1}}</td> -->
+            <td><span matTooltip={{foreign?.appno}}    matTooltipClass="example-tooltip-red">{{foreign?.appno}}</span></td>
+            <td><span matTooltip={{foreign?.bnfname}}    matTooltipClass="example-tooltip-red">{{foreign?.bnfname}}</span></td>
+            <td><span matTooltip={{foreign?.crtdat}}    matTooltipClass="example-tooltip-red">{{foreign?.crtdat}}</span></td>
+            <td><span matTooltip={{foreign?.crtusr}}    matTooltipClass="example-tooltip-red">{{foreign?.crtusr}}</span></td>
+            <td>
+              <span *ngIf="foreign?.status=='C'">Created</span>
+              <span *ngIf="foreign?.status=='A'">Authorized</span>
+              <span *ngIf="foreign?.status=='R'">Rejected</span>
+            </td>
+            <td>
+              <ul class="list-unstyled d-flex m-0">
+                <li matTooltip="View Application" *ngIf="userrole==='CASHIER'" (click)="foreignform(foreign)"
+                  class="list-icon"><span class="material-icons">visibility</span></li>
+                <li matTooltip="Authorize Application" *ngIf="userrole!=='CASHIER'" (click)="foreignform(foreign)"
+                  class="list-icon"><span class="material-icons">check_box</span></li>
+              </ul>
+            </td>
+          </tr>
+          <pagination-controls autoHide="true" (pageChange)="p = $event" class="custom-pagination">
+          </pagination-controls>
+        </div>
+      </ng-container>
+
+      <!------------------------------------------- Remittance (IC,ID,TT) Data  -------------------------------------------------------->
+      <ng-container *ngIf="remittancelist">
+        <div *ngIf="!remittancelist?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <div *ngIf="remittancelist?.length">
+          <tr *ngFor="let remittance of remittancelist | paginate: { itemsPerPage: 5, currentPage: p } | filter:storeservice.text  ; let i = index">
+            <td><span matTooltip={{remittance?.appno}}    matTooltipClass="example-tooltip-red">{{remittance?.appno}}</span></td>
+            <td><span matTooltip={{remittance?.prdid}}    matTooltipClass="example-tooltip-red">{{remittance?.prdid}}</span></td>
+            <td><span matTooltip={{remittance?.bnfname}}    matTooltipClass="example-tooltip-red">{{remittance?.bnfname}}</span></td>
+            <td><span matTooltip={{remittance?.crtusr}}    matTooltipClass="example-tooltip-red">{{remittance?.crtusr}}</span></td>
+            <td><span matTooltip={{remittance?.crtdat}}    matTooltipClass="example-tooltip-red">{{remittance?.crtdat}}</span></td>
+            <td>
+              <span *ngIf="remittance?.status==='C'"> Created </span>
+              <span *ngIf="remittance?.status==='A'"> Authorized </span>
+              <span *ngIf="remittance?.status==='R'"> Rejected </span>
+              <span *ngIf="remittance?.status==='S'"> Success </span>
+            </td>
+            <td>
+              <ul class="list-unstyled d-flex m-0">
+                <li matTooltip="View Application" *ngIf="userrole==='CASHIER'" (click)="remittanceform(remittance)"
+                  class="list-icon"><span class="material-icons">visibility</span></li>
+                <li matTooltip="Authorize Application" *ngIf="userrole!=='CASHIER'" (click)="remittanceform(remittance)"
+                  class="list-icon"><span class="material-icons">check_box</span></li>
+              </ul>
+            </td>
+          </tr>
+          <pagination-controls autoHide="true" (pageChange)="p = $event" class="custom-pagination">
+          </pagination-controls>
+        </div>
+      </ng-container>
+      <!---------------------------------------------------- Dubai Police Data --------------------------------------------------------->
+      <ng-container *ngIf="dubailist">
+        <div *ngIf="!dubailist?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <div *ngIf="dubailist?.length">
+          <tr *ngFor="let dubai of dubailist | paginate: { itemsPerPage: 5, currentPage: p }  | filter:storeservice.text ; let i = index ">
+            <td><span matTooltip="{{i + 1}}"    matTooltipClass="example-tooltip-red">{{i + 1}}</span></td>
+            <td><span matTooltip={{dubai?.appno}}    matTooltipClass="example-tooltip-red">{{dubai?.appno}}</span></td>
+            <td><span matTooltip={{dubai?.appname}}    matTooltipClass="example-tooltip-red">{{dubai?.appname}}</span></td>
+            <td><span matTooltip={{dubai?.crtdat}}    matTooltipClass="example-tooltip-red">{{dubai?.crtdat}}</span></td>
+            <td>
+              <ul class="list-unstyled d-flex m-0" (click)="dubaiform(dubai)">
+                <li class="list-icon"><span class="material-icons">visibility</span></li>
+              </ul>
+            </td>
+          </tr>
+          <pagination-controls autoHide="true" (pageChange)="p = $event" class="custom-pagination"></pagination-controls>
+        </div>
+      </ng-container>
+      <!----------------------------------------------------- Western Union Data ------------------------------------------------------->
+      <ng-container *ngIf="westernlist">
+        <div *ngIf="!westernlist?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <div *ngIf="westernlist?.length">
+          <tr *ngFor="let western of westernlist | paginate: { itemsPerPage: 5, currentPage: p } | filter:storeservice.text  ; let i = index">
+            <td><span matTooltip="{{i + 1}}"   matTooltipClass="example-tooltip-red">{{i + 1}}</span></td>
+            <td><span matTooltip={{western?.appno}}    matTooltipClass="example-tooltip-red">{{western?.appno}}</span></td>
+            <td><span matTooltip={{western?.appname}}    matTooltipClass="example-tooltip-red">{{western?.appname}}</span></td>
+            <td><span matTooltip={{western?.crtusr}}   matTooltipClass="example-tooltip-red">{{western?.crtusr}}</span></td>
+            <td><span matTooltip={{western?.crtdat}}    matTooltipClass="example-tooltip-red">{{western?.crtdat}}</span></td>
+            <td><span matTooltip={{western?.appdtl2}}    matTooltipClass="example-tooltip-red">{{western?.appdtl2}}</span></td>
+            <td>
+              <ul class="list-unstyled d-flex m-0">
+                <li matTooltip="View Application" (click)="westernform(western)" class="list-icon"><span
+                    class="material-icons">visibility</span></li>
+              </ul>
+            </td>
+          </tr>
+          <pagination-controls autoHide="true" (pageChange)="p = $event" class="custom-pagination"></pagination-controls>
+        </div>
+      </ng-container>
+      <!---------------------------------------------------- Air arabia Data  ---------------------------------------------------------->
+      <ng-container *ngIf="arabialist">
+        <div *ngIf="!arabialist?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <div *ngIf="arabialist?.length">
+          <tr *ngFor="let arabia of arabialist | paginate: { itemsPerPage: 5, currentPage: p } | filter:storeservice.text ; let i = index">
+            <td><span matTooltip="{{i + 1}}"    matTooltipClass="example-tooltip-red">{{i + 1}}</span></td>
+            <td><span matTooltip={{arabia?.appno}}    matTooltipClass="example-tooltip-red">{{arabia?.appno}}</span></td>
+            <td><span matTooltip={{arabia?.appname}}    matTooltipClass="example-tooltip-red">{{arabia?.appname}}</span></td>
+            <td><span matTooltip={{arabia?.crtusr}}    matTooltipClass="example-tooltip-red">{{arabia?.crtusr}}</span></td>
+            <td><span matTooltip={{arabia?.crtdat}}    matTooltipClass="example-tooltip-red">{{arabia?.crtdat}}</span></td>
+            <td>
+              <span *ngIf="arabia?.status==='C'"> Created </span>
+              <span *ngIf="arabia?.status==='A'"> Authorized </span>
+              <span *ngIf="arabia?.status==='R'"> Rejected </span>
+            </td>
+            <td>
+              <ul class="list-unstyled d-flex m-0">
+                <li matTooltip="View Application" *ngIf="userrole==='CASHIER'" (click)="arabiaform(arabia)"
+                  class="list-icon"><span class="material-icons">visibility</span></li>
+                <li matTooltip="Authorize Application" *ngIf="userrole!=='CASHIER'" (click)="arabiaform(arabia)"
+                  class="list-icon"><span class="material-icons">check_box</span></li>
+              </ul>
+            </td>
+          </tr>
+          <pagination-controls autoHide="true" (pageChange)="p = $event" class="custom-pagination"></pagination-controls>
+        </div>
+      </ng-container>
+      <!---------------------------------------------------- National Bond Data -------------------------------------------------------->
+      <ng-container *ngIf="nationallist">
+        <div *ngIf="!nationallist?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <div *ngIf="nationallist?.length">
+          <tr *ngFor="let national of nationallist | paginate: { itemsPerPage: 5, currentPage: p } ;let i = index ">
+            <td>{{i + 1}}</td>
+            <td><span matTooltip={{national?.appno}}    matTooltipClass="example-tooltip-red">{{national?.appno}}</span></td>
+            <td><span matTooltip={{national?.appname}}    matTooltipClass="example-tooltip-red">{{national?.appname}}</span></td>
+            <td><span matTooltip={{national?.crtusr}}    matTooltipClass="example-tooltip-red">{{national?.crtusr}}</span></td>
+            <td><span matTooltip={{national?.crtdat}}    matTooltipClass="example-tooltip-red">{{national?.crtdat}}</span></td>
+            <td>
+              <span *ngIf="national?.status==='C'"> Created </span>
+              <span *ngIf="national?.status==='A'"> Authorized </span>
+              <span *ngIf="national?.status==='R'"> Rejected </span>
+            </td>
+            <td>
+              <ul class="list-unstyled d-flex m-0">
+                <li matTooltip="View Application" *ngIf="userrole==='CASHIER'" (click)="nationalform(national)"
+                  class="list-icon"><span class="material-icons">visibility</span></li>
+                <li matTooltip="Authorize Application" *ngIf="userrole!=='CASHIER'" (click)="nationalform(national)"
+                  class="list-icon"><span class="material-icons">check_box</span></li>
+              </ul>
+            </td>
+          </tr>
+          <pagination-controls autoHide="true" (pageChange)="p = $event" class="custom-pagination"></pagination-controls>
+        </div>
+      </ng-container>
+      <!------------------------------------------------------ Fine Details  ----------------------------------------------------------->
+      <ng-container *ngIf="finelist">
+          <tr *ngFor="let fine of finelist ;let i = index ">
+            <td>{{i + 1}}</td>
+            <td>{{fine?.finenumber}}</td>
+            <td>{{fine?.finedate}}</td>
+            <td>{{fine?.fineamount}}</td>
+            <td>{{fine?.violation}}</td>
+          </tr>
+      </ng-container>
+      <!------------------------------------------------------- Daily Reports ---------------------------------------------------------->
+      <ng-container *ngIf="dailyreportList">
+        <div *ngIf="!dailyreportList?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <div *ngIf="dailyreportList?.length">
+          <tr *ngFor="let report of dailyreportList | paginate: { itemsPerPage: 5, currentPage: p } | filter:storeservice.text ; let i = index">
+            <td>{{i + 1}}</td>
+            <td>{{report?.trnno}}</td>
+            <td>{{report?.appname}}</td>
+            <td>{{report?.prdid}}</td>
+            <td>{{report?.total}}</td>
+          </tr>
+          <pagination-controls autoHide="true" (pageChange)="p = $event" class="custom-pagination"></pagination-controls>
+        </div>
+      </ng-container>
+      <!--------------------------------------------------- Product wise Reports ------------------------------------------------------>
+      <ng-container *ngIf="productreportdata">
+        <div *ngIf="!productreportdata?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <div *ngIf="productreportdata?.length">
+          <tr *ngFor="let report of productreportdata | paginate: { itemsPerPage: 5, currentPage: p } | filter:storeservice.text; let i = index">
+            <td>{{i + 1}}</td>
+            <td>{{report?.trnno}}</td>
+            <td>{{report?.appname}}</td>
+            <td>{{report?.crtdat}}</td>
+            <td>{{report?.total}}</td>
+          </tr>
+          <pagination-controls autoHide="true" (pageChange)="p = $event" class="custom-pagination"></pagination-controls>
+        </div>
+      </ng-container>
+      <!----------------------------------------------------- User Reports ------------------------------------------------------------>
+      <ng-container *ngIf="userreportdata">
+        <div *ngIf="!userreportdata?.length">
+          <div class="no-data text-center">
+            <img src='assets/images/nodata.png' class="img-fluid">
+          </div>
+        </div>
+        <div *ngIf="userreportdata?.length">
+          <tr *ngFor="let report of userreportdata | paginate: { itemsPerPage: 5, currentPage: p } | filter:storeservice.text; let i = index">
+            <td>{{i + 1}}</td>
+            <td>{{report?.trnno}}</td>
+            <td>{{report?.prdid}}</td>
+            <td>{{report?.crtdat}}</td>
+            <td>{{report?.total}}</td>
+          </tr>
+          <pagination-controls autoHide="true" (pageChange)="p = $event" class="custom-pagination"></pagination-controls>
+        </div>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

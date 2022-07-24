@@ -1,0 +1,39 @@
+<form [formGroup]="user" (ngSubmit)="submit()">
+    <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Name" formControlName="name" />
+          <mat-error *ngIf="user.get('name').hasError('required')">Please Enter Name</mat-error>
+          <mat-error *ngIf="user.get('name').hasError('maxlength')">Please Enter Only 20 Characters</mat-error>
+          <mat-error *ngIf="user.get('name').hasError('pattern')">Only Enter Name</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Age</mat-label>
+          <input matInput placeholder="Name" formControlName="age" />
+          <mat-error *ngIf="user.get('age').hasError('required')">Please Enter Age</mat-error>
+          <mat-error *ngIf="user.get('age').hasError('pattern')">Please Enter Number</mat-error>
+          <mat-error *ngIf="user.get('age').hasError('AgeValidator')">Age should not be less than 18 years</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>States</mat-label>
+          <mat-select (selectionChange)="stateSelecte($event)" formControlName="state">
+            <mat-option *ngFor="let states of state" value="{{states.name}}">{{states.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Cities</mat-label>
+          <mat-select formControlName="city">
+            <mat-option *ngFor="let citie of cities" value="{{citie}}">{{citie}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </p>
+      <p>
+        <button type="submit">submit</button>
+      </p>
+</form>

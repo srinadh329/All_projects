@@ -1,0 +1,205 @@
+.service-section{
+        background: #f7f7f7;
+        padding-top: 100px;
+    padding-bottom: 100px;
+}
+.service-section h4{
+    color: #009CDC;
+}
+.service-section p{
+       font-size: 15px;
+    margin: 0;
+    padding: 0 0 11px 0;
+}
+.single-cat {
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+   padding: 30px 14px 30px 14px;
+    background-color: #ffffff;
+    box-shadow: 0px 10px 30px rgba(0,0,0,0.10);
+}
+.single-cat:before{
+position: absolute;
+    content: '';
+    left: 75px;
+    top: 0px;
+    width: 100%;
+    height: 280%;
+    background-color: #f8faff;
+    transform: translateX(50%) rotate(-45deg);
+    transform: translateY(-50%) rotate(-45deg);
+    transition: all 900ms ease;
+    -moz-transition: all 900ms ease;
+    -webkit-transition: all 900ms ease;
+    -ms-transition: all 900ms ease;
+    -o-transition: all 900ms ease;
+}
+.single-cat:hover::before{
+    left: -90px;
+    right: auto;
+    transform: translateX(0%) rotate(-45deg);
+    transform: translateY(0%) rotate(-45deg);
+}
+/*.service-image{
+    padding: 0 30px;
+}*/
+.side-lines {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 70px;
+    height: 70px;}
+ .side-lines:before {
+    position: absolute;
+    content: '';
+    right: 0px;
+    top: 0px;
+    height: 2px;
+    width: 0px;
+    background-color: #009CDC;
+    transition: all 900ms ease;
+    -moz-transition: all 900ms ease;
+    -webkit-transition: all 900ms ease;
+    -ms-transition: all 900ms ease;
+    -o-transition: all 900ms ease;
+}
+.side-lines:after {
+    position: absolute;
+    content: '';
+    right: 0px;
+    top: 0px;
+    width: 2px;
+    height: 0px;
+    background-color: #009CDC;
+    transition: all 900ms ease;
+    -moz-transition: all 900ms ease;
+    -webkit-transition: all 900ms ease;
+    -ms-transition: all 900ms ease;
+    -o-transition: all 900ms ease;
+}   
+.single-cat:hover .side-lines:before {
+    width: 100%;
+}
+.single-cat:hover .side-lines:after {
+        height: 100%;
+}
+.cat-cap{
+    position: relative;
+}
+.cat-cap h5{
+color: #009CDC;
+}
+.service-icon{
+    position: relative;
+    font-size: 40px;
+    color: #1A1818;
+}
+.single-cat:hover .service-icon{
+    color: #009CDC;
+}
+
+
+.services {
+    border: 1px solid #009CDC;
+    margin-bottom: 40px;
+    width: 100%;
+    border-radius: 4px;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+.services:hover{
+    background: #009CDC;
+    color: #fff;
+}
+.services .icon {
+    line-height: 1.3;
+    position: relative;
+    z-index: 0;
+    margin: 0 auto;
+    width: 100px;
+    height: 50px;
+    background: #009CDC;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    top: -1px;
+}
+.services .icon:before {
+   bottom: -40px;
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 30px 50px 0 50px;
+    border-color: #009CDC transparent transparent transparent;
+    position: relative;
+    left: 85px;
+}
+.services .icon:after {
+    top: -40px;
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 50px 30px 50px;
+    border-color: transparent transparent #009CDC transparent;
+    position: relative;
+    right: 85px;
+}
+.services .media-body {
+    width: 100%;
+    margin-top: 10px;
+    padding: 20px;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    color: rgba(0, 0, 0, 0.8);
+}
+.services:hover .media-body {
+    color: #fff;
+}
+.services:hover .icon {
+   background: #fff;
+}
+.services:hover .icon:before{
+   bottom: -40px;
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 30px 50px 0 50px;
+    border-color: #fff transparent transparent transparent;
+    position: relative;
+    left: 85px;
+}
+.services:hover .icon:after {
+    top: -40px;
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 50px 30px 50px;
+    border-color: transparent transparent #fff transparent;
+    position: relative;
+    right: 85px;
+}
+.flaticon-family:before {
+    content: "\f100";
+}
+.image2{
+    display: none;
+}
+.services:hover .image2{
+     display: block;
+}
+.services:hover .image1{
+     display: none;
+}

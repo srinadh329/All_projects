@@ -1,0 +1,23 @@
+.body {
+    height: 100%;
+    overflow-x: hidden;
+    padding: 50px 40px;
+}
+
+:host ::ng-deep .card {
+    margin-left: 30px !important;
+    margin-right:30px !important;
+    margin-top: 20px;
+}
+
+:host ::ng-deep .refund {
+    margin-left: 30px !important;
+    margin-right: 30px !important;
+    /* margin-top: 20px; */
+}
+
+
+
+.main {
+    margin-left: 300px; /* Same as the width of the sidenav */
+}

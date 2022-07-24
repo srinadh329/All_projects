@@ -1,0 +1,116 @@
+.tabImage{
+    float: left;
+    background-color: white;
+    margin: -8px 14px 0px 26px;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 10%), 4px 0px 4px rgb(0 0 0 / 10%), -4px 0px 4px rgb(0 0 0 / 10%);
+    border-radius: 5px;
+    width: 44px;
+    height: 41px;
+  }
+  .twin{
+    font-style: normal;
+    font-weight: 500 !important;
+    font-size: 20px !important;
+    line-height: 23px !important;
+    letter-spacing: 0.03em;
+    color: #000000;
+  }
+  .property-building{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px !important;
+    line-height: 23px;
+    letter-spacing: 0.02em;  
+    color: #000000;
+    margin-left: 70px;
+  }
+  .main {
+    margin-left: 300px; /* Same as the width of the sidenav */
+  }
+  .mainLayout{
+    padding: 100px 10px 10px 10px;
+  }
+  .body{
+    height: 100%;
+    overflow-x: scroll;
+    padding: 50px 40px;
+  }
+  .header{
+    height: 66px;
+    padding: 4px 0px 0px 0px;
+    border: 1px solid black;
+  }
+
+  
+  th, td {
+    padding: 17px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  h2{
+    font-style: normal;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 17px;
+    letter-spacing: 0.05em;
+  }
+
+  .buildingName{
+    width: 309px;
+    height: 36px;
+    left: 917px;
+    top: 170px;
+    background: #FFFFFF;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1), 1px 0px 4px rgba(0, 0, 0, 0.1), 0px -1px 4px rgba(0, 0, 0, 0.1), -1px 0px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+  }
+  select {
+    width: 268px !important;
+    padding: 5px;
+    font-size: 16px;
+    line-height: 1;
+    border: 0;
+    border-radius: 5px !important;
+    height: 34px !important;
+    /* background: url(../../../assets/orange-dropdown-icon.png) no-repeat right !important; */
+    -webkit-appearance: none;
+    background-position-x: 229px !important;
+    background-size: 37px 29px !important;
+}
+
+.create-promo-code {
+  height: 80px;
+}
+
+.create-reward {
+  cursor: pointer;
+}
+
+.border-right {
+  border-right: 1px solid rgba(72, 68, 68, 0.5);
+}
+
+.promo-code-text {
+  font-style: normal !important;
+  font-weight: 300 !important;
+  font-size: 17px !important;
+  line-height: 17px !important;
+  letter-spacing: 0.05em !important;
+  color: #000000 !important;
+}
+
+.create-container {
+  cursor: pointer;
+}
+
+tr {
+  vertical-align: middle !important;
+  text-align: center !important;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 14px;    cursor: pointer;}
+}

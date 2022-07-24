@@ -1,0 +1,60 @@
+The Schematic workflow failed
+npm cache clean --force
+
+ng new my-app(new project)
+ng g c my-app(new component)
+https://angular.io/cli/generate
+npm install --save bootstrap
+npm install --save jquery
+ng add @angular/material
+npm add @angular/cdk
+git config --local user.name "srinadhkaile"
+ng build --prod
+ng serve --port:4300
+npm install --save-dev webpack
+npm install grunt --save-dev
+  "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/scss"
+              ]
+            },
+encapsulation:ViewEncapsulation.None
+import {ViewEncapsulation} from '@angular/core';
+
+
+dialong component
+*****************************************
+include app module ts
+import {MatDialogModule} from '@angular/material/dialog';
+entryComponents: [
+    ExampleDialogComponent
+  ],
+-------------------------------
+dialog component
+ public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    @Inject(MAT_DIALOG_DATA) public data
+import {Component, Inject} from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
+-----------------------
+dialog box apperance
+--------------------------
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { DialogboxComponent }from'../dialogbox/dialogbox.component';
+constructor(public dialog: MatDialog)
+ const dialogRef = this.dialog.open(DialogboxComponent, {
+      width: '250px'
+    });
+data:{title:'Sign In', datalogType:'loginDetails'}
+--------------------------
+*****************************************
+
+*****************************************
+when create component More than one module matches. Use skip-import option to skip importing the component into the closest module.
+
+ng generate component some-name --skip-import
+
+
+*****************************************
+https://getbootstrap.com/docs/4.1/migration/
+https://venkiupdates.blogspot.com/2020/11/the-javascript-cheatsheet-you-need-in.html

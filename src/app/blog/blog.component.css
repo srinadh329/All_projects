@@ -1,0 +1,74 @@
+.formcss .form-control:focus{
+    box-shadow: 0 0 0 0.2rem rgba(105, 112, 232, 0.3);
+  }
+  .formcss .form-control::placeholder{
+  
+  color:#BFBCBC;
+  }
+
+  
+  .formcss .form-control{
+    padding: 1.3rem 2.5rem;
+    background-color: #F7F8FC;
+    border-radius: 2.25rem;
+    border:none;
+    color:#000;
+    font-size: 14px;
+  }
+
+  .bgf5{
+    background-color: #f5f5f5;
+}
+
+mat-form-field {
+  margin-right: 12px;
+}
+
+.blogcontent{
+  position: absolute;
+  bottom:0;
+  color:#fff;
+  background-color: #a5a5a5;
+  padding:11px;
+  width:100%;
+}
+
+.img-br{
+  border:1px solid #a5a5a5;
+  border-radius: 4px;
+}
+
+.width-100{
+  width:100%
+}
+
+.jus-end{
+  justify-content: flex-end;
+}
+
+.font-12{
+  font-size: 12px;
+}
+
+
+.max-height-400{
+height: 300px;
+}
+
+.bg-fff{
+  background-color: #fff;
+}
+
+.selct-img
+{
+position: absolute;
+left:50%;
+top:50%;
+transform: translate(-50%,-50%);
+}
+
+.blog
+{
+  line-height: 40px;
+  font-size: 21px;
+}

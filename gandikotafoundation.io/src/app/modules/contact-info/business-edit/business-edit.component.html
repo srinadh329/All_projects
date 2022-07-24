@@ -1,0 +1,99 @@
+<div class="row">
+    <div class="col-md-12 d-flex align-items-center">
+        <span class="pointer" (click)="navigateBack()"><i class="fa fa-arrow-left" aria-hidden="true"></i></span>
+        <h1 class="mb-0 ml-2">Contact Info</h1>
+    </div>
+    <hr />
+</div>
+
+
+<form [formGroup]="contactusForm" class="normal-form " (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="accordion-pad">
+                <mat-accordion>
+                    <mat-expansion-panel class="panel-border" [expanded]="true">
+                        <mat-expansion-panel-header class="panel-hearder">
+                            <mat-panel-title>
+                                Contact info
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="row">
+                            <mat-form-field class="w-100 col-md-6" appearance="outline"  formArrayName="phone"
+                                *ngFor="let p of getItemFormControls('phone'); let i = index">
+                                <mat-label>Phone</mat-label>
+                                <input [formControl]="p" autocomplete="Off" matInput />
+                                <button type="button" class="icon-mat" mat-button matSuffix mat-icon-button
+                                    (click)="addItem('phone',null);$event.stopPropagation();" *ngIf="i == 0">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                                <button type="button" class="icon-mat" mat-button matSuffix mat-icon-button aria-label="Clear"
+                                    (click)="removeItem(i,'phone');$event.stopPropagation();" *ngIf="i > 0">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </mat-form-field>
+                            <mat-form-field class="w-100 col-md-6" appearance="outline" formArrayName="email"
+                                *ngFor="let e of getItemFormControls('email'); let i = index">
+                                <mat-label>Email</mat-label>
+                                <input [formControl]="e" autocomplete="Off" matInput />
+                                <button type="button" class="icon-mat" mat-button matSuffix mat-icon-button
+                                    (click)="addItem('email',null);$event.stopPropagation();" *ngIf="i == 0">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                                <button type="button " class="icon-mat" mat-button matSuffix mat-icon-button aria-label="Clear"
+                                    (click)="removeItem(i,'email');$event.stopPropagation();" *ngIf="i > 0">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </mat-form-field>
+
+                            <div formGroupName="address">
+                                <mat-form-field class="w-100 col-md-6" appearance="outline">
+                                    <mat-label>Address line 1</mat-label>
+                                    <input formControlName="line_1" autocomplete="Off" matInput />
+                                </mat-form-field>
+
+                                <mat-form-field class="w-100 col-md-6" appearance="outline">
+                                    <mat-label>Address line 2</mat-label>
+                                    <input formControlName="line_2" autocomplete="Off" matInput />
+                                </mat-form-field>
+
+
+
+                                <mat-form-field class="w-100 col-md-3" appearance="outline">
+                                    <mat-label>City</mat-label>
+                                    <input formControlName="city" autocomplete="Off" matInput />
+                                </mat-form-field>
+
+                                <mat-form-field class="w-100 col-md-3" appearance="outline">
+                                    <mat-label>State</mat-label>
+                                    <input formControlName="state" autocomplete="Off" matInput />
+                                </mat-form-field>
+
+                                <mat-form-field class="w-100 col-md-3" appearance="outline">
+                                    <mat-label>Country</mat-label>
+                                    <input formControlName="country" autocomplete="Off" matInput />
+                                </mat-form-field>
+                                <mat-form-field class="w-100 col-md-3" appearance="outline">
+                                    <mat-label>Pincode</mat-label>
+                                    <input formControlName="pincode" autocomplete="Off" (keypress)="keyPress($event)"
+                                        matInput />
+                                </mat-form-field>
+                                <mat-form-field class="w-100 col-md-6" appearance="outline">
+                                    <mat-label>Location</mat-label>
+                                    <input formControlName="location" autocomplete="Off"
+                                        matInput />
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </div>
+    </div>
+
+    <div class="row submit-row">
+        <div class="col-md-12  text-center">
+            <button type="submit" class="submit-button  col-sm-12 col-md-4 mr-3">Update this details</button>
+        </div>
+    </div>
+</form>

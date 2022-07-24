@@ -1,0 +1,25 @@
+<p appHighlight>first works!</p>
+
+<p>ng for examples</p>
+<div *ngFor="let listview of list">
+{{listview | uppercase}}
+</div>
+<p>ng for example jsonformat</p>
+<div *ngFor="let jslist of jsonlist">
+{{jslist?.name}}
+</div>
+<p>ng for example remove data using splice</p>
+<div *ngFor="let dataview of data">
+{{dataview?.name}}
+<span (click)='remove()'>Delete</span>
+</div>
+
+<p>ng for example remove data id based</p>
+<div *ngFor="let item of iddata">
+    <span [ngClass]="{'active':item.id=='3'}">{{item?.id}}</span>.
+    <span>{{item?.name}}</span>
+    <span (click)="delete(item)">delete</span>
+</div>
+<p *ngIf="childdata">{{childdata}}</p>
+<app-second [data]=view (parent)="test($event)"></app-second>
+<router-outlet></router-outlet>

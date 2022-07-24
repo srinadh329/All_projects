@@ -1,0 +1,208 @@
+-- FUNCTION: store.fx_transaction(character varying, character varying, character varying, character varying, numeric, character varying, character varying, character varying, character varying, character varying, numeric, numeric, numeric, json[], character varying, numeric, character varying, character varying, character varying, character varying)
+
+-- DROP FUNCTION store.fx_transaction(character varying, character varying, character varying, character varying, numeric, character varying, character varying, character varying, character varying, character varying, numeric, numeric, numeric, json[], character varying, numeric, character varying, character varying, character varying, character varying);
+
+CREATE OR REPLACE FUNCTION store.fx_transaction(
+	goldcardnumber character varying,
+	applicantname character varying,
+	applicantmobno character varying,
+	applicantadrress character varying,
+	country numeric,
+	accountno character varying,
+	bankname character varying,
+	benfname character varying,
+	benfmobileno character varying,
+	benfaddr character varying,
+	vat numeric,
+	charges numeric,
+	totalamount numeric,
+	fx json[],
+	createdstatus character varying,
+	branchid numeric,
+	productid character varying,
+	createduser character varying,
+	createddate character varying,
+	createdtime character varying)
+    RETURNS character varying
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+AS $BODY$
+     Declare vouchercount numeric;
+	         transactionnumber character varying;
+			 vouchernumber character varying = '#FX';
+			 rowcount numeric = 0;
+			 applicationnumber numeric;
+			 voucher character varying;
+			 incrementno numeric;
+			 branchlimit numeric;
+			 
+           begin
+		         if exists(select a.loginid,a.brnid,a.usrole,c.prdid from admin.usrmas a
+						  inner join admin.brnmas b on a.brnid = b.brnid
+						  inner join admin.prdmas c on b.prdgrp = c.prdgrp
+						  inner join admin.ccymas d on c.ccygrp = d.ccygid
+						  where a.loginid = createduser and a.brnid = branchid
+						  and c.prdid = productid) then
+						  
+					  if exists(select b.roltyp from admin.usrmas a
+							    inner join admin.roles b on a.usrole = b.roleid
+							    where a.loginid = createduser and b.roltyp = 'CASHIER' )then
+							  
+                                select brnlmt into branchlimit from admin.brnmas where brnid = branchid;
+								
+								if(totalamount <= branchlimit) then
+							  
+							  --Generate Application Number
+			                  select count(*) + 1 into applicationnumber from store.fxdtl;
+							  
+							  --Generate Temporary Voucher
+                              select trnno into transactionnumber from store.fxdtl
+							  where trnno ilike '#FX%' and brnid = branchid
+							  order by trnno desc limit 1;
+							  
+							  if(transactionnumber <> '') then
+							     incrementno = (RIGHT(transactionnumber,1)::numeric)+1;
+								 transactionnumber = concat(LEFT(transactionnumber,3),incrementno);
+								 
+								else transactionnumber = '#FX1';	
+							  end if;	
+							  
+							  loop
+							      exit when rowcount = array_length(fx,1);
+								  rowcount = rowcount + 1;
+								  
+								  raise notice '%',rowcount;
+							  
+							  insert into store.fxdtl(appno,appname,appmobno,appadr,actr,prdid,brnid,bnknm,bnfname,
+													  baddr,bmobno,ccyid,modes,fca,rate,lca,vat,totamt,chgrat,
+													  crtusr,crtdat,crttim,status,accno,trnno,gcmnumber) 
+							   values(applicationnumber,applicantname,applicantmobno,applicantadrress,country,productid,branchid,
+									  bankname,benfname,benfaddr,benfmobileno,fx[rowcount]->>'currencyid',
+									  fx[rowcount]->>'modes',(fx[rowcount]->>'fcamount')::numeric,
+									  (fx[rowcount]->>'rate')::numeric,(fx[rowcount]->>'lcamount')::numeric,
+									  vat,totalamount,charges,createduser,createddate,
+									  createdtime,createdstatus,accountno,transactionnumber,goldcardnumber);
+							  end loop;
+							  
+							  return transactionnumber;
+							  
+							  else raise exception 'Transaction Amount Exceeds the Branch limit';
+							  end if;
+							  
+						 else raise exception 'This User cannot perform this action';	  
+					   end if;		  
+					else raise exception 'Invalid User';	  
+				 end if;		  
+		   end 
+  $BODY$;
+
+ALTER FUNCTION store.fx_transaction(character varying, character varying, character varying, character varying, numeric, character varying, character varying, character varying, character varying, character varying, numeric, numeric, numeric, json[], character varying, numeric, character varying, character varying, character varying, character varying)
+    OWNER TO postgres;
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+-- FUNCTION: store.fx_transaction(character varying, character varying, character varying, character varying, numeric, character varying, character varying, character varying, character varying, character varying, numeric, numeric, numeric, json[], character varying, numeric, character varying, character varying, character varying, character varying)
+
+-- DROP FUNCTION store.fx_transaction(character varying, character varying, character varying, character varying, numeric, character varying, character varying, character varying, character varying, character varying, numeric, numeric, numeric, json[], character varying, numeric, character varying, character varying, character varying, character varying);
+
+CREATE OR REPLACE FUNCTION store.fx_transaction(
+	goldcardnumber character varying,
+	applicantname character varying,
+	applicantmobno character varying,
+	applicantadrress character varying,
+	country numeric,
+	accountno character varying,
+	bankname character varying,
+	benfname character varying,
+	benfmobileno character varying,
+	benfaddr character varying,
+	vat numeric,
+	charges numeric,
+	totalamount numeric,
+	fx json[],
+	createdstatus character varying,
+	branchid numeric,
+	productid character varying,
+	createduser character varying,
+	createddate character varying,
+	createdtime character varying)
+    RETURNS character varying
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+AS $BODY$
+     Declare vouchercount numeric;
+	         transactionnumber character varying;
+			 vouchernumber character varying = '#FX';
+			 rowcount numeric = 0;
+			 applicationnumber numeric;
+			 voucher character varying;
+			 incrementno character varying;
+			 branchlimit numeric;
+			 
+           begin
+		         if exists(select distinct a.loginid,a.brnid,a.usrole,c.prdid from admin.usrmas a
+						  inner join admin.brnmas b on a.brnid = b.brnid
+						  inner join admin.prdmas c on b.prdgrp = c.prdgrp
+						  inner join admin.ccymas d on c.ccygrp = d.ccygid
+						  where a.loginid = createduser and a.brnid = branchid
+						  and c.prdid = productid) then
+						  
+					  if exists(select b.roltyp from admin.usrmas a
+							    inner join admin.roles b on a.usrole = b.roleid
+							    where a.loginid = createduser and b.roltyp = 'CASHIER' )then
+							  
+                                select brnlmt into branchlimit from admin.brnmas where brnid = branchid;
+								
+								if( totalamount <= branchlimit) then
+							  
+							     --Generate Application Number
+			                     select count(*) + 1 into applicationnumber from store.fxdtl;
+								 
+							  
+							     --Generate Temporary Voucher
+                                 select trnno into transactionnumber from store.fxdtl
+							     where trnno ilike '#FX%' order by trnno desc limit 1;
+							  
+							     if(transactionnumber <> '') then
+							        incrementno = (RIGHT(transactionnumber,3)::numeric)+1;
+								  select lpad(incrementno::character varying, 3, '0') into incrementno;	
+								    transactionnumber = concat(LEFT(transactionnumber,3),incrementno);
+								 
+								  else transactionnumber = '#FX001';	
+							  end if;	
+							  
+							  loop
+							      exit when rowcount = array_length(fx,1);
+								  rowcount = rowcount + 1;
+								  
+								  raise notice '%',rowcount;
+							  
+							  insert into store.fxdtl(appno,appname,appmobno,appadr,actr,prdid,brnid,bnknm,bnfname,
+													  baddr,bmobno,ccyid,modes,fca,rate,lca,vat,totamt,chgrat,
+													  crtusr,crtdat,crttim,status,accno,trnno,gcmnumber) 
+							   values(applicationnumber,applicantname,applicantmobno,applicantadrress,country,productid,branchid,
+									  bankname,benfname,benfaddr,benfmobileno,fx[rowcount]->>'currencyid',
+									  fx[rowcount]->>'modes',(fx[rowcount]->>'fcamount')::numeric,
+									  (fx[rowcount]->>'rate')::numeric,(fx[rowcount]->>'lcamount')::numeric,
+									  vat,totalamount,charges,createduser,createddate,
+									  createdtime,createdstatus,accountno,transactionnumber,goldcardnumber);
+							  end loop;
+							  
+							  return transactionnumber;
+							  
+							  else raise exception 'Transaction Amount Exceeds the Branch limit';
+							  end if;
+							  
+						 else raise exception 'This User cannot perform this action';	  
+					   end if;		  
+					else raise exception 'Invalid User';	  
+				 end if;		  
+		   end 
+  $BODY$;
+
+ALTER FUNCTION store.fx_transaction(character varying, character varying, character varying, character varying, numeric, character varying, character varying, character varying, character varying, character varying, numeric, numeric, numeric, json[], character varying, numeric, character varying, character varying, character varying, character varying)
+    OWNER TO postgres;

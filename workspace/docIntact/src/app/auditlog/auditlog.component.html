@@ -1,0 +1,638 @@
+<div class="backbutton stick-bar" *ngIf="auditdata"> <a routerLink="/home/myfiles/"> My Files</a> <i
+    class="fas fa-angle-double-right mx-2 i_col fon-12" aria-hidden="true"></i> {{auditdata.name}}
+</div>
+
+<div class="container-fluid">
+  <h2 class="audit-pageheader" *ngIf="auditdata">Audit Log Of "{{auditdata.name}}"</h2>
+  <div class="loader" *ngIf="isloading"></div>
+  <div class="row">
+    <div class="col-md-2 cntraln" *ngIf="auditdata">
+      <img *ngIf="type=='File' && !auditdata.completedDocPreview" src="{{auditdata.thumbnail}}"
+        onerror="this.src='assets/images/Group7378.png' " class="document-image">
+      <img *ngIf="type=='File' && auditdata.completedDocPreview" src="{{auditdata.completedDocPreview}}"
+        onerror="this.src='assets/images/Group7378.png' " class="document-image">
+      <i *ngIf="type=='Folder'" class="fa fa-folder folder11"></i>
+    </div>
+    <div class="col-md-10 pad-l-5">
+      <div class="document-completed-page" *ngIf="docStatus=='Completed' && type=='File'">
+        This document has <span class="document-completed-page-color">{{docStatus}}</span> all the Signatures
+      </div>
+      <!-- <div class="document-completed-page" *ngIf="sharingPeoples && sharingPeoples.sharingpeoples.length && SingleData && SingleData.documentid.status=='upload'">
+        This document has <span class="document-completed-page-color">{{SingleData.documentid.status}}</span> all Signatures
+      </div> -->
+      <div class="document-completed-page" *ngIf="docStatus=='Waiting' && type=='File'">
+        This document is <span class="document-completed-page-color">{{docStatus}} </span> for Signatures to complete
+      </div>
+      <div class="document-completed-page" *ngIf="docStatus=='In Progress' && type=='File'">
+        This document is <span class="document-completed-page-color">{{docStatus}} </span>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <!-- <ul class="row document-detials list12" *ngIf="SingleData">
+          <li>From:</li>
+          <li *ngIf="SingleData.uid">{{SingleData.uid.name}} ({{SingleData.uid.email}})</li>
+        </ul> -->
+
+          <ul class="row document-detials list12" *ngIf="userEmail && userName">
+            <li>{{type}} Owner</li>
+            <li>:</li>
+            <li style="word-break:break-word;">{{userName}} ({{userEmail}})</li>
+          </ul>
+          <ul class="row document-detials list12">
+            <li *ngIf="sharingPeoples && sharingPeoples.sharingpeoples.length">Shared with</li>
+            <li *ngIf="sharingPeoples && sharingPeoples.sharingpeoples.length">:</li>
+            <li *ngIf="sharingPeoples && sharingPeoples.sharingpeoples" style="display: grid;">
+              <span class="signing-list space12" *ngFor="let userinfo of sharingPeoples.sharingpeoples;let i = index">
+                <span *ngIf="userinfo.toid"  style="word-break:break-word;">{{userinfo.toid.email}}<span
+                    *ngIf="i!=(sharingPeoples.sharingpeoples.length-1)">,</span></span>
+                <span *ngIf="!userinfo.toid" class="lft12">{{userinfo.toemail}}<span
+                    *ngIf="i!=(sharingPeoples.sharingpeoples.length-1)">,</span></span>
+              </span>
+            </li>
+          </ul>
+          <ul class="row document-detials list12" *ngIf="auditdata">
+            <li>Document Uploaded</li>
+            <li>:</li>
+            <li>
+              <span class="signing-list">{{auditdata.createdAt |date:'MMM d, y, h:mm a'}}</span>
+
+              <span *ngIf="type=='File'">
+                <img src="../../assets/images/pdf-download.png"><a data-toggle="modal" class="txt12"
+                  data-target=".download-pdf" (click)="setDownload(auditdata)">Download</a>
+
+              </span>
+            </li>
+          </ul>
+
+
+
+
+          <ul class="row document-detials list12" *ngIf="auditdata && type=='File'">
+            <li><span>No. Of. Pages</span></li>
+            <li>:</li>
+            <li>{{auditdata.pagesInfo.length}}</li>
+          </ul>
+          <ul class="row document-detials list12" *ngIf="auditdata && type=='File'">
+            <li><span>Size </span></li>
+            <li>:</li>
+            <li>{{auditdata.size | filesize}}</li>
+          </ul>
+          <ul class="row" style="list-style: none;cursor: pointer;" *ngIf='documentviewtimebtn && documentviewtimebtn.length > 0'>
+            <li (click)="pageviewtime()" data-toggle="modal" class="txt12"
+            data-target=".download-pdf1"><button class="btn btn-primary but0nstyle">Document View Time</button></li>
+            <li   *ngIf="documentviewtimebtn[0] && documentviewtimebtn[0].VideoRecord" data-toggle="modal"   data-target=".show-videos" class="txt12 space01" ><button class="btn btn-primary but0nstyle">Video Record</button></li>
+          </ul>
+        
+
+        </div>
+      </div>
+      <button hidden  data-toggle="modal" 
+      data-target=".show-videos" id="hidevideo"> </button>
+      <!-- <div class="row document-detials" *ngIf="SingleData">
+        <div class="col-md-2 document-details"><span>From:</span></div>
+        <div class="col-md-10" *ngIf="SingleData.uid">{{SingleData.uid.name}} ({{SingleData.uid.email}})</div>
+      </div> -->
+      <!-- <div class="row document-detials" *ngIf="userEmail&&userName">
+        <div class="col-md-2 document-details"><span>File Owner:</span></div>
+        <div class="col-md-10" >{{userName}} ({{userEmail}})</div>
+      </div> -->
+      <!-- <div class="row document-detials" *ngIf="SingleData" >
+        <div class="col-md-2 document-details"><span>Shared with:</span></div>
+        <div class="col-md-10" *ngIf="sharingPeoples && sharingPeoples.sharingpeoples">
+          <span class="signing-list" *ngFor="let userinfo of sharingPeoples.sharingpeoples;let i = index"> <p *ngIf="userinfo.toid">{{userinfo.toid.email}},</p> <p *ngIf="!userinfo.toid">{{userinfo.toemail}},</p></span>
+        </div>
+      </div> -->
+      <!-- <div class="row document-detials" *ngIf="auditdata">
+        <div class="col-md-2 document-details"><span>Document Uploaded:</span></div>
+        <div class="col-md-10">
+          <span class="signing-list">{{auditdata.updated_at |date:'MMM d, y, h:mm a'}}</span>
+
+          <span>
+            <img src="../../assets/images/pdf-download.png" ><a data-toggle="modal" class="txt12" data-target=".download-pdf" (click)="setDownload(auditdata)">Download</a>
+            
+          </span>
+        </div>
+      </div> -->
+      <!--<div class="row document-detials" *ngIf=" SingleData &&SingleData.documentid.status=='Completed'">
+          <div class="col-md-2 document-details"><span>Signs Completed:</span></div>
+          <div class="col-md-10">
+            <span class="signing-list">{{auditdata.updated_at |date:'MMM d, y, h:mm a'}}</span>
+
+            <span>
+              <img src="../../assets/images/pdf-download.png"><a (click)="pdfDownloadSigned()">Download</a>
+            
+            </span>
+          </div>
+        </div> -->
+      <!-- <div class="row document-detials" *ngIf="auditdata">
+            <div class="col-md-2 document-details"><span>No. Of. Pages:</span></div>
+            <div class="col-md-10">{{auditdata.pagesInfo.length}}</div>
+          </div>
+          <div class="row document-detials" *ngIf="auditdata">
+              <div class="col-md-2 document-details"><span>Size :</span></div>
+              <div class="col-md-10">{{auditdata.size | filesize}}</div>
+            </div> -->
+    </div>
+  </div>
+  <h2 *ngIf="displaySigners && displaySigners.length">Signers</h2>
+  <div *ngIf="sharingPeoples">
+
+    <div *ngFor="let f of displaySigners;let j = index">
+      <div class="row signer-details">
+        <div class="col-md-2 text-center">
+          <ngx-avatar [name]="f.toemail" value="userName" size="40" [round]="true" class="activity-column1"
+            *ngIf="!f.toid">
+          </ngx-avatar>
+          <ngx-avatar [name]="f.toid.name" value="userName" size="40" [round]="true" *ngIf="f.toid && f.toid.name"
+            class="activity-column1">
+          </ngx-avatar>
+          <ngx-avatar [name]="f.toid.fname" value="userName" size="40" [round]="true" *ngIf="f.toid && f.toid.fname && !f.toid.name"
+            class="activity-column1">
+          </ngx-avatar>
+          <ngx-avatar [name]="f.toid.companyname" value="userName" size="40" [round]="true"
+            *ngIf="f.toid && !f.toid.name && f.toid.companyname" class="activity-column1">
+          </ngx-avatar>
+          <div>
+            <span *ngIf="f.status=='Submitted'" class="signer signer-success">Status : {{f.status}}</span>
+            <span *ngIf="f.status=='Waiting'" class="signer signer-warning">Status : {{f.status}}</span>
+          </div>
+
+        </div>
+        <div class="col-md-10">
+          <div class="row" *ngIf="f.toid">
+            <h5 style="word-break:break-all;">{{f.toid.email}}</h5>
+          </div>
+          <div class="row" *ngIf="!f.toid">
+            <h5 style="word-break:break-all;">{{f.toemail}}</h5>
+          </div>
+          <div class="signature-required">
+            <div class="row">
+            </div>
+            <!-- <div class="row signature-required-left" *ngIf="f.toid">
+            <span>
+              <img src="../../assets/images/tickmark.png"> Verified IP: {{f.toid.IP}}
+            </span>
+          </div> -->
+            <div class="row signature-required-left">
+              <span>
+                <img src="../../assets/images/tickmark.png"> Verified Email
+                <img src="../../assets/images/tickmark.png"> Verified Consent to Esign
+                <span *ngIf="f.status=='Submitted' && f.IP"> <img src="../../assets/images/tickmark.png"> IP
+                  Address:{{f.IP}}</span>
+              </span>
+            </div>
+          </div>
+
+          <div>
+            <table class="table table-striped w-100  d-md-table paddingtab">
+              <thead>
+                <tr>
+                  <th scope="col">Value</th>
+                  <th scope="col">Requested For</th>
+                  <th scope="col">Page</th>
+                  <th scope="col">Required</th>
+                  <th scope="col">Location</th>
+                  <th scope="col">Date</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let options of f.fieldsValues;let i = index ">
+                <tr>
+                  <td class="width12">
+                    <div class="brdr"
+                      *ngIf="((options.type=='Stamp' || options.type=='Photo') && options.path) || ((options.type=='signature' || options.type=='initial') && options.signatureType)">
+                    </div>
+                    <div>
+                      <div class="txtdec"
+                        *ngIf="((options.type=='signature' || options.type=='initial') && options.signatureType)">
+                        Signed By</div>
+                      <div class="txtdec" *ngIf="((options.type=='Stamp' || options.type=='Photo') && options.path)">
+                        Submitted By</div>
+                      <img *ngIf="(options.type=='signature' || options.type=='initial') && options.signatureType=='signaturepad' &&
+                          options.signaturebaseData" src='{{options.signaturebaseData}}' width="100"
+                        class="pad-14-tb imgsize12" height="100">
+
+                      <span *ngIf="(options.type=='signature' || options.type=='initial') && options.signatureType=='font' &&
+                         (options.fontText || options.fontStyle)"
+                        style="color:black;word-break: break-all;padding-left: 10px;"
+                        [style.font-family]="options.fontStyle">
+                        {{options.fontText}}</span>
+
+                      <img *ngIf="(options.type=='Stamp' || options.type=='Photo' || ((options.type=='signature' || options.type=='initial')
+                         && options.signatureType!='signaturepad'))  && options.path" src="{{options.path}}"
+                        width="100" class="pad-14-tb imgsize12" height="100">
+
+                      <div class="txtdec"
+                        *ngIf="((options.type=='Stamp' || options.type=='Photo') && options.path) || ((options.type=='signature' || options.type=='initial') && options.signatureType)">
+                        <div (click)="validateValue(options)" class="bor-none hover121" data-toggle="tooltip" title={{options.id}}>
+                          {{options.id}}
+                        </div>
+                      </div>
+                    </div>
+                    <span *ngIf="options.value && options.type != 'date'">{{options.value}}</span>
+                    <span
+                      *ngIf="options.value && options.type == 'date'">{{options.value | date:options.pickerT=='both'?(options.dateTimeformats):options.pickerT=='timer'?(options.timeformats):options.dateformats}}</span>
+
+                  </td>
+                  <td>{{options.type  | titlecase}}</td>
+                  <td style="width:15%;">{{options.pageNo}}</td>
+                  <td style="width:15%;">
+                    <span *ngIf="options.restrict=='required'">Yes</span>
+                    <span *ngIf="options.restrict!='required'">No</span>
+                  </td>
+                  <td style="width:10%;" *ngIf="options.latitude && options.longitude"
+                    (click)="options.loc=!options.loc;"><i class="fa fa-map-marker-alt pos" aria-hidden="true"></i></td>
+                  <td
+                    *ngIf="!options.latitude && !options.longitude">
+                    <span style="padding-left: 13px;" *ngIf="options.value || options.photoId || options.stampId || options.signatureId">N/A</span>
+                    <span *ngIf="!options.value || !options.photoId || !options.stampId || !options.signatureId"></span>
+                  </td>
+                  <td style="width:25%;">
+                    <span>{{options.created_at |date:'MMM d, y, h:mm a'}}</span>
+                    <span *ngIf="options.people && f.toemail!=options.insertedemail"></span>
+                  </td>
+                </tr>
+
+                <tr *ngIf="options.loc">
+                  <td colspan="6">
+                    <div #auditmap class="container-fluid">
+                      <div class="signature-required pad-tb-8 col-md-12" style="padding-left: 0px;">
+                        <div class="row">
+                          <span>
+                            <img src="../../assets/images/tickmark.png"> Verified Location:
+                          </span>
+                        </div>
+                        <div class="row signature-required-left"> <span class="pad-tl-6">{{options.latitude}}N
+                            {{options.longitude}}E</span></div>
+                        <div class="row signature-required-left" style="display:none">
+                          <span>
+                            <img src="../../assets/images/tickmark.png">
+                          </span>
+                        </div>
+                        <div class="row signature-required-left" (click)="options.loc=false">
+                          <span class="Toggle-map-clr">Toggle Map</span>
+                        </div>
+                      </div>
+                      <div *ngIf="options">
+                        <mat-card-content>
+                          <app-near-maps-popup #map [style.width]="200" style="height: 200px" [mapsdata]="options">
+                          </app-near-maps-popup>
+                        </mat-card-content>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+              <tbody *ngIf="f.fieldsValues && !f.fieldsValues.length">
+                <tr>
+                  <td colspan="6" style="text-align: center">No Feilds Sumbitted</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div>
+
+    <div class="row activity-details">
+
+      <h2>Activity Log</h2>
+    </div>
+
+    <table class="table table-striped w-100 d-block d-md-table padding121 table-responsive" style="display:table;width:100%;">
+      <thead>
+        <tr>
+          <th>Activity</th>
+          <th>Email</th>
+          <th>Location</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+        <tbody *ngFor="let log of documentLogs">
+        <tr *ngIf="log.message=='Submited' || log.message=='Shared' || log.message=='Photo' ||  log.message=='Initial' || log.message=='initial' || log.message=='signature' || log.message=='Signature' ||log.message=='Stamp' || log.message=='Viewed' || log.message=='photo' ||  log.message=='stamp'">
+          <td *ngIf="log.message=='Photo' || log.message=='Initial' || log.message=='initial' || log.message=='signature' || log.message=='Signature' || log.message=='Stamp' || log.message=='photo' ||  log.message=='stamp'" class="tablecol"> {{log.message  | titlecase}} Submitted By</td>
+          <td *ngIf="log.message=='Submited'" style="color:#0a4ab2">Document {{log.message | titlecase}}  By</td>
+          <td *ngIf="log.message!='Submited' && log.message!='Photo' && log.message!='Initial' && log.message!='Signature' && log.message!='Stamp' && log.message!='initial' && log.message!='signature' && (log.message=='Shared' ||log.message=='shared' ) && (log.message!='Viewed' ||log.message!='Viewed' )">Document {{log.message  | titlecase}} To </td>
+          <td *ngIf="log.message!='Submited' && log.message!='Photo' && log.message!='Initial' && log.message!='Signature' && log.message!='Stamp' && log.message!='initial' && log.message!='signature' && (log.message=='Viewed' ||log.message=='Viewed' ) &&  (log.message!='Shared' ||log.message!='shared' )">Document {{log.message  | titlecase}} By </td>
+
+          <td *ngIf="log.message=='Shared' && log.toid"> {{log.toid.name}} ({{log.toid.email}}) </td>
+          <td *ngIf="log.message=='Shared' && !log.toid"> {{log.toemail}} </td>
+          <td *ngIf="log.uid && log.uid.email && log.message!='Shared'">{{log.uid.name}} ({{log.uid.email}}) </td>
+          <td *ngIf="!log.uid && log.email && log.message!='Shared'">{{log.email}} </td>
+          <td *ngIf="!log.uid && !log.email && log.message!='Shared'"></td>
+          <!-- <td *ngIf="log.email " (click)="mapsdata(log)" class="crsr">Location</td> -->
+          <td *ngIf="log.latitude && log.longitude" (click)="log.locs=!log.locs;"><i class="fa fa-map-marker-alt pos"
+              aria-hidden="true"></i></td>
+          <td *ngIf="!log.latitude || !log.longitude" style="padding-left: 26px">N/A</td>
+          <td>{{log.created_at |date:'MMM d, y'}} &nbsp; {{log.created_at |date:'h:mm a'}}</td>
+        </tr>
+        <tr *ngIf="log.locs">
+          <td colspan="5">
+            <div #auditmap class="container-fluid">
+              <div class="signature-required pad-tb-8 col-md-12" style="padding-left: 0px;">
+                <div class="row">
+                  <span>
+                    <img src="../../assets/images/tickmark.png"> Verified Location:
+                  </span>
+                </div>
+                <div class="row signature-required-left"> <span class="pad-tl-6">{{log.latitude}}N
+                    {{log.longitude}}E</span></div>
+                <div class="row signature-required-left" style="display:none">
+                  <span>
+                    <img src="../../assets/images/tickmark.png">
+                  </span>
+                </div>
+                <div class="row signature-required-left" (click)="log.locs=false">
+                  <span class="Toggle-map-clr">Toggle Map</span>
+                </div>
+              </div>
+              <div *ngIf="log">
+                <mat-card-content>
+                  <app-near-maps-popup #map [style.width]="200" style="height: 200px" [mapsdata]="log">
+                  </app-near-maps-popup>
+                </mat-card-content>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="!documentLogs || !documentLogs.length">
+        <tr>
+          <td colspan="4" style="text-align: center"> No Activity Found </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+
+  <div class="modal fade download-pdf" id="savetemp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header mod-head-bg">
+          <h4 class="modal-title w-100 add-new-emp-pop" id="myModalLabel">Download PDF</h4>
+          <button type="button" class="close " id="savetempclose" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" class="white-colr">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- ===================field-----starts========================== -->
+          <div class="dwnload-form">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-5 col-xs-12">
+                  <label class="col-form-label" for="inputPassword">Download To</label>
+                </div>
+                <div class="col-md-7 col-sm-7 col-xs-12">
+                  <select name="downloadType" class="form-control" [(ngModel)]="downloadType">
+                    <option selected value="computer">Computer</option>
+                    <option value="attachment" id="">Send Email Attachemnt</option>
+                    <option value="drive">Google Drive</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-5 col-xs-12"> </div>
+                <div class="col-md-7 col-sm-7 col-xs-12">
+                  <input type="text" class="form-control input-box" *ngIf="downloadType == 'attachment'"
+                    [(ngModel)]="email" #emailcheck="ngModel" placeholder="Enter Email"
+                    pattern="([A-Za-z]|[0-9])[A-Za-z0-9.-]+[A-Za-z0-9]@((?:[-a-z0-9]+\.)+[a-z]{2,})">
+                  <!-- <div ><p class="text-danger sml-danger-txt nunito-font" *ngIf=" emailcheck.errors.pattern">Invalid
+            Email </p></div> -->
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-5 col-xs-12">
+                  <label class="col-form-label" for="inputPassword">Version</label>
+                </div>
+                <div class="col-md-7 col-sm-7 col-xs-12">
+                  <select name="downloadFile" class="form-control" [(ngModel)]="downloadFile">
+                    <option selected value="current">Current Version</option>
+                    <option value="withoutchanges">Orginal File with out changes</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngIf="downloadFile=='current'">
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-5 col-xs-12">
+                  <label class="col-form-label" for="inputPassword">Attach with Log</label>
+                </div>
+                <div class="col-md-7 col-sm-7 col-xs-12">
+                  <input type="checkbox" class="checkmark" id="inputPassword" name="withlog" [(ngModel)]="withlog">
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-5 col-xs-12">
+                  <label class="col-form-label" for="inputPassword">Set PDF Password</label>
+                </div>
+                <div class="col-md-7 col-sm-7 col-xs-12">
+
+                  <div class="row">
+
+                    <div class="col-md-2"> <input type="checkbox" class="checkmark" id="inputPassword" name="pdfPinSet"
+                        [(ngModel)]="pdfPinSet"></div>
+
+
+                    <div class="col-md-10"> <input type="text" *ngIf="pdfPinSet"
+                        class="form-control input-box t-pad txtbx" id="inputPassword" name="pdfPin" [(ngModel)]="pdfPin"
+                        placeholder="Set Password"></div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div> -->
+          </div>
+
+<div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+            <button class="sav-but-in-new-temp b0utnstyle" *ngIf="downloadType == 'computer'"
+              (click)="pdfDownload()">Download</button>
+            <button class="sav-but-in-new-temp b0utnstyle" *ngIf="downloadType == 'attachment'" (click)="pdfDownload(email)">Send
+              Attachment</button>
+            <button class="sav-but-in-new-temp b0utnstyle" *ngIf="downloadType == 'drive'" (click)="exporttodrive()">Export
+              To Drive</button>
+
+          </div>
+
+</div>
+
+        </div>
+        <!-- ===================field-----ends========================== -->
+      </div>
+
+    </div>
+  </div>
+
+  <div class="modal fade download-pdf1" id="pageviewtime" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
+    aria-hidden="true" data-backdrop="static" data-keyboard="false" >
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header mod-head-bg">
+          <h4  class="modal-title w-100 add-new-emp-pop" id="myModalLabel1" >Document View Time</h4>
+          <button type="button" class="close " id="pageviewtime" data-dismiss="modal" aria-label="Close" >
+            <span aria-hidden="true" class="white-colr">&times;</span>
+          </button>
+        </div>
+        <div class="row modal-body pop-height">
+          <!-- ===================field-----starts========================== -->
+        <div class='col-11'>
+
+          <mat-accordion>
+            <mat-expansion-panel *ngFor="let people of sharingPeoples?.sharingpeoples;let i = index"  (opened)="selectpeople(people.toemail,i)">
+               
+              <mat-expansion-panel-header class="matexphdr">
+                <mat-panel-title >
+                  {{people?.toemail}}
+                </mat-panel-title>
+
+
+                <mat-panel-description *ngIf="people.endTime" class="dashboard-panel-header">
+                 Document View Time: {{people.endTime}} 
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <table class="table text-center" *ngIf=" myPageInfo ">
+                <thead class="audit-table-header">
+                  <tr *ngIf='filteredata && filteredata.length > 0'>
+                    <th>Page Number</th>
+                    <th>Viewing Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let people of myPageInfo">
+                    <td *ngIf='filteredata && filteredata.length > 0'> {{people?.pageNo}}</td>
+                    <td *ngIf='filteredata && filteredata.length > 0'>{{people?.time}}</td>
+                  </tr>
+                  <tr *ngIf=' logs.length == 0 && filteredata.length == 0'><td class="document-table-border text-danger">Note: Still the document is not opened !</td></tr>
+                  <tr *ngIf=' logs.length > 0 && filteredata.length == 0'><td class="document-table-border text-danger">Note: The document is Viewed but not closed/updated !</td></tr>
+                 
+                </tbody>
+              </table>
+            </mat-expansion-panel>
+            
+          </mat-accordion>
+        </div>
+        <div class='col-1'>
+          <img *ngIf="viewTimeLoader" 
+          src='assets/images/viewtimeloader.gif'  >
+          </div>
+        </div>
+        <!-- ===================field-----ends========================== -->
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <div class="modal fade show-videos" id="recordvideo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
+  aria-hidden="true" data-backdrop="static" data-keyboard="false" >
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header " [ngClass]="{ 'mod-head-bg': !videourl}" *ngIf="!videourl">
+        <h4  class="modal-title w-100 add-new-emp-pop" id="myModalLabel1" >Video Records List </h4>
+        <button type="button" class="close " id="recordvideo" data-dismiss="modal" aria-label="Close" (click)="clearprevious()" >
+          <span aria-hidden="true" class="white-colr">&times;</span>
+        </button>
+      </div>
+      <div class="row modal-body pop-height">
+        <!-- ===================field-----starts========================== -->
+        <div class="col-md-12" *ngIf="videourl">
+          <!-- <button (click)="clearprevious()"  class="btn btn-primary but0nstyle"> back </button> -->
+          <i class="fa fa-angle-double-left backic0n" (click)="clearprevious()"></i>
+            <div class="video">
+                <video controls   width="100%" autoplay='true'>
+                    <source [src]="videourl.path" type="video/webm"  />
+                </video>
+            </div>
+        </div>
+      <div class='col-11' *ngIf="!videourl">
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let people of sharingPeoples?.sharingpeoples;let i = index"  (opened)="selectpeople(people.toemail,i)">
+             
+            <mat-expansion-panel-header >
+              <mat-panel-title >
+                {{people?.toemail}}
+              </mat-panel-title>
+
+
+              <mat-panel-description  class="dashboard-panel-header">
+              
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <table class="table text-center table_space table-fixed cntraln w-100 d-block d-md-table table-responsive " *ngIf=" videorecord ">
+              <thead class="audit-table-header ">
+                <tr *ngIf='videorecord && videorecord.length > 0'>
+                  <th>Date </th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let people of videorecord">
+                  <td *ngIf='videorecord && videorecord.length > 0'>{{people.created_at |date:'MMM d, y, h:mm a'}} </td>
+                  <td *ngIf='videorecord && videorecord.length > 0' (click)="showvideo(people)">show </td>
+                </tr>
+                <tr *ngIf=' filteredata.length == 0'><td class="document-table-border text-danger">Note: No Videos Found !</td></tr>
+               
+              </tbody>
+            </table>
+          </mat-expansion-panel>
+          
+        </mat-accordion>
+      </div>
+      <div class='col-1'>
+        <img *ngIf="viewTimeLoader" 
+        src='assets/images/viewtimeloader.gif'  >
+        </div>
+      </div>
+      <!-- ===================field-----ends========================== -->
+    </div>
+
+  </div>
+</div>
+
+
+ <button hidden  data-toggle="modal" 
+ data-target=".display-video" id="showvideo"> </button>
+
+<div class="modal fade display-video" id="displayvideo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
+aria-hidden="true" data-backdrop="static" data-keyboard="false" >
+<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+  <div class="modal-content">
+    <div class="modal-header mod-head-bg">
+      <h4  class="modal-title w-100 add-new-emp-pop" id="myModalLabel1" >Video Records List   </h4>
+      <button type="button" class="close " id="displayvideo" data-dismiss="modal" aria-label="Close"  (click)="clearprevious()">
+        <span aria-hidden="true" class="white-colr">&times;</span>
+      </button>
+    </div>
+    <div class="row modal-body pop-height">
+      <!-- ===================field-----starts========================== -->
+    <div class='col-11'>
+      <div class="video" *ngIf='videourl' >
+        <video controls   width="250px" autoplay='true'>
+            <source [src]="videourl.path" type="video/webm"  />
+        </video>
+    </div>
+    </div>
+
+    </div>
+    <!-- ===================field-----ends========================== -->
+  </div>
+
+</div>
+</div>

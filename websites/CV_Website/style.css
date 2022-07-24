@@ -1,0 +1,767 @@
+body{
+	line-height: 26px;
+    font-size: 15px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    color: #777777;
+        background: url(images/body-bg.png) no-repeat center;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+/*navbar section start*/
+.header_section{
+	    position: absolute;
+    width: 100%;
+    z-index: 9999;
+    background: #ffffff;
+    /*padding: 20px 0 10px 0;*/
+}
+.header_section .navbar-nav .nav-item{
+	margin-right: 45px;
+}
+.Sticky-nav{
+	  position: fixed;
+    width: 100%;
+    top: -70px;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    transform: translateY(70px);
+    transition: transform 500ms ease, background 500ms ease;
+    -webkit-transition: transform 500ms ease, background 500ms ease;
+    box-shadow: 0px 3px 16px 0px rgba(0, 0, 0, 0.1); 
+}
+.active{
+	color: #4458dc !important;
+}
+.header_section .navbar .nav .nav-item .nav-link {
+    font: 500 14px/60px "Rubik", sans-serif;
+    text-transform: uppercase;
+    color: #000000;
+    padding: 0px;
+    display: inline-block;
+}
+
+/*navbar section end*/
+
+
+/*<!--================ Start Home Banner css =================-->*/
+.home_banner{
+	    position: relative;
+    /* top: 50px; */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.home_banner .banner_inner h3{
+	font-size: 40px;
+    margin-bottom: 20px;
+    position: relative;
+    font-family: "Rubik", sans-serif;
+    font-weight: 500;
+    color: #000000;
+}
+.home_banner .banner_inner h3:after{
+content: '';
+    width: 338px;
+    height: 2px;
+    position: absolute;
+    top: 50%;
+    left: 23%;
+    background: #000000;
+}
+.home_banner .banner_inner h1{
+margin-top: 20px;
+    font-size: 47px;
+    line-height: 60px;
+    margin-bottom: 25px;
+        font-weight: 500;
+    color: #000000;
+    }
+    .home_banner .banner_inner h5{
+    font-size: 24px;
+    margin-bottom: 35px;
+      font-weight: 500; 
+      color: #000000;
+}
+   .home_banner .banner_inner .primary_btn{
+   	    margin-right: 20px;
+   	    text-decoration: none;
+   }
+   .home_banner .banner_inner .secondary_btn{
+   	    margin-right: 20px;
+   	    text-decoration: none;
+   }
+   .primary_btn{
+   display: inline-block;
+    color: #fff;
+    letter-spacing: 0px;
+    font-family: "Rubik", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 46px;
+    outline: none !important;
+    text-align: center;
+    cursor: pointer;
+    text-transform: uppercase;
+    border-radius: 5px;
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    background-image: linear-gradient(to right, #4458dc 0%, #854fee 100%), radial-gradient(circle at top left, #4458dc, #854fee);
+    border: double 2px transparent;
+    box-shadow: 0px 10px 30px rgba(118, 85, 225, 0.3);
+    padding: 0 42px;
+    text-decoration: none;
+}
+   .primary_btn:hover{
+background-image: linear-gradient(#ffffff, #ffffff), radial-gradient(circle at top left, #4458dc, #854fee);
+    border: 2px solid #854fee;
+    color: #222222;
+    box-shadow: none;
+    background-clip: border-box;
+}
+.secondary_btn{
+	background-image: linear-gradient(#ffffff, #ffffff), radial-gradient(circle at top left, #4458dc, #854fee);
+    border: 2px solid #854fee;
+    color: #222222;
+    box-shadow: none;
+    background-clip: border-box;
+    letter-spacing: 0px;
+    font-family: "Rubik", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 46px;
+    outline: none !important;
+    text-align: center;
+    cursor: pointer;
+    text-transform: uppercase;
+    border-radius: 5px;
+     padding: 0 42px;
+}
+.secondary_btn:hover{
+	background-image: linear-gradient(to right, #4458dc 0%, #854fee 100%), radial-gradient(circle at top left, #4458dc, #854fee);
+    border: double 2px transparent;
+    color: #ffffff;
+    box-shadow: 0px 10px 30px rgba(118, 85, 225, 0.3);
+}
+
+/*<!--================ End Home Banner css =================-->*/
+
+	/*<!--================ Start About Us CSS =================-->*/
+.section_gap {
+    padding: 100px 0;
+}
+/*.abouts_text{
+	    padding: 0px 80px 0 0px;
+}*/
+.abouts_text h2{
+font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    line-height: 50px;
+    text-transform: uppercase;
+    color: #000000;
+    font-family: "Rubik", sans-serif;
+    }
+	/*<!--================ End About Us CSS =================-->*/
+
+/*<!--================ Start Brand CSS =================-->*/
+.section_gap_bottom{
+	    padding-bottom: 170px;
+}
+.experience-list{
+width: 110px;
+    height: 100px;
+    cursor: pointer;
+    margin-bottom: 30px;
+    border: 1px solid #eeeeee;
+    box-shadow: none;
+    -webkit-transition: all 0.4s ease 0s;
+    -moz-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+.experience-list img{
+    max-width: 160px;
+    margin: 0 auto;
+    -webkit-transition: all 0.4s ease 0s;
+    -moz-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+.experience-list:hover{
+border: 1px solid transparent;
+    box-shadow: 0px 8px 30px rgba(118, 85, 225, 0.15);
+    }
+    .experience-list:hover img{
+    filter: brightness(0%);
+    -o-filter: brightness(0%);
+    -ms-filter: brightness(0%);
+    -moz-filter: brightness(0%);
+     -webkit-filter: brightness(0%);
+     }
+     .information{
+     	    padding: 25px 30px;
+    background: #faf8ff;
+    text-align: center;
+    position: relative;
+    margin-top: 25px;
+     }
+     .information:before{
+     	content: '';
+    position: absolute;
+    top: -25px;
+    left: -50px;
+    background: url(images/client-info-bg.png) no-repeat;
+    height: 175px;
+    width: 175px;
+     }
+     .mb-50{
+     	margin-bottom: 50px;
+     }
+      .information .lage{
+     color: #854fee;
+    font-family: "Rubik", sans-serif;
+    font-size: 100px;
+    font-weight: 700;
+    line-height: 85px;
+    position: relative;
+    z-index: 9;
+    }
+    .information .smll{
+    text-align: left;
+    color: #000000;
+    font-family: "Rubik", sans-serif;
+    font-size: 20px;
+    margin-left: 20px;
+    }
+    .contact {
+    padding-top: 50px;
+    text-align: left;
+    margin-bottom: 40px;
+}
+.contact span{
+font-size: 60px;
+    font-weight: 700;
+    color: #000000;
+    }
+    .ml-15 {
+    margin-left: 15px;
+}
+.contact p{
+color: #854fee;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+.contact h3{
+font-family: "Rubik", sans-serif;
+    font-weight: 500;
+   
+    font-size: 23px;
+}
+.contact h3 a{
+     color: #000000 !important;
+}
+/*<!--================ End Brand CSS =================-->*/
+
+/*<!--================ Start Services =================-->*/
+.service{
+	padding-bottom: 170px;
+}
+.service_title{
+	margin-bottom: 100px;
+}
+.service_title h2{
+  font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    line-height: 50px;
+    text-transform: uppercase;
+        color: #000000;
+            font-family: "Rubik", sans-serif;
+}
+.service_items {
+    padding: 45px 25px;
+    text-align: center;
+    background: #f9f9fd;
+    cursor: pointer;
+    margin-bottom: 30px;
+    -webkit-transition: all 0.4s ease 0s;
+    -moz-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+.service_items:hover{
+    box-shadow: 0px 15px 30px rgba(77, 87, 222, 0.3);
+    background: #fff;
+    }
+    .service_items h4 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+     color: #000000;
+            font-family: "Rubik", sans-serif;
+}
+ .service_items p{
+ 	margin-bottom: 0;
+ }
+/*<!--================ end Services =================-->*/
+
+
+/*<!--================Start Portfolio  =================-->*/
+.main_title {
+    /*margin-bottom: 100px;*/
+}
+.main_title h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    line-height: 50px;
+    text-transform: uppercase;
+        font-family: "Rubik", sans-serif;
+    color: #000000;
+}
+.portfolio_section .filters ul {
+    padding-left: 0;
+    margin-bottom: 50px;
+}
+.portfolio_section .filters ul li{
+display: inline-block;
+    margin-right: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #222222;
+    cursor: pointer;
+    -webkit-transition: all 0.4s ease 0s;
+    -moz-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+.portfolio_box .short_info {
+    margin-top: 30px;
+}
+.portfolio_box .short_info h4 {
+    text-transform: uppercase;
+    font-size: 20px;
+    margin-bottom: 0px;
+    font-family: "Rubik", sans-serif;
+    font-weight: 500;
+    color: #000000;
+}
+.portfolio_box .short_info h4 a {
+    color: #000000;
+}
+.Project1{
+    width: 100%;
+    background: linear-gradient(200deg,#68b1d8,#6886ad);
+    padding: 40px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.Project2{
+     width: 100%;
+   background: linear-gradient(to right, rgb(160, 209, 115), rgb(87, 201, 244));
+   padding: 40px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.Project3{
+   width: 100%;
+    background: #f0efff;
+   padding: 40px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.Project4{
+     width: 100%;
+    min-height: 282px;
+  /*background: linear-gradient(to bottom,#bc35fd 0,#216ec7 100%) no-repeat padding-box;*/
+    padding: 20px;
+    border-radius: 6px;
+   background-image: url("images/portfolio/wiseenroll_banner.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    background-size: cover;
+    z-index: 1;
+    /*background-attachment: fixed;*/
+}
+.Project4::before{
+          content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+   background: linear-gradient(to bottom,#bc35fd 0,#216ec7 100%) no-repeat padding-box;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+     border-radius: 6px;
+     opacity: 0.9;
+   
+}
+.Project5{
+    width: 100%;
+   background: linear-gradient(to right, rgb(0, 0, 70), rgb(28, 181, 224));
+    padding: 20px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.Project6{
+     width: 100%;
+  
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.Project6 img{
+      height: 300px;
+        border-radius: 6px;
+        object-fit: cover;
+}
+.project-logo{
+    position: absolute;
+    top:18%;
+    width: 40%;
+}
+.project-logo2{
+       position: absolute;
+    top: 22%;
+    width: 40%;
+    left: 30px;
+    z-index: 9;
+}
+.project1-tittle1{
+    color: #4ca2d1;
+    font-size: 24px;
+    font-weight: 500;
+}
+.project1-tittle2{
+    color: #ea5455;
+    font-size: 24px;
+    font-weight: 500;
+}
+.smartupload-color{
+     color: #7A58FC;
+    font-size: 24px;
+    font-weight: 500;
+}
+.short_info a{
+    text-decoration: none;
+}
+.wallstreet-color{
+     color: #00ACED;
+    font-size: 24px;
+    font-weight: 500;
+}
+.wiseenroll-color{
+     color: #bc35fd;
+    font-size: 24px;
+    font-weight: 500;
+}
+.Chatbot-color{
+     color: #0095d7;
+    font-size: 24px;
+    font-weight: 500;
+}
+/*<!--================End Portfolio  =================-->*/
+
+
+.testimonial .owl-carousel .owl-dots {
+    display: block !important;
+    text-align: center;
+}
+.testimonial .owl-carousel .owl-dots .owl-dot.active {
+    height: 12px;
+    width: 12px;
+    background: #854fee;
+}
+.testimonial .owl-carousel .owl-dots .owl-dot {
+    height: 10px;
+    width: 10px;
+    background: #d8d8d8;
+    border-radius: 17px;
+    display: inline-block;
+    margin-right: 10px;
+    -webkit-transition: all 0.4s ease 0s;
+    -moz-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+.testi_item {
+    padding: 50px 55px;
+    margin-bottom: 200px;
+    margin-left: 10px;
+    margin: 0px 10px 80px;
+    box-shadow: 0px 15px 30px 0px rgba(221, 221, 221, 0.3);
+    -webkit-transition: all 0.4s ease 0s;
+    -moz-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+    color: #777777;
+}
+.testi_item img{
+	border-radius: 6px;
+}
+.testi_item .testi_text h4 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+        font-family: "Rubik", sans-serif;
+    font-weight: 500;
+    color: #000000;
+}
+
+
+.contact_information .information-icon{
+	position: relative;
+    padding-left: 45px;
+}
+.contact_information .information-icon i{
+position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 600;
+  background: -webkit-linear-gradient(90deg, #4458dc 0%, #854fee 100%);
+    background: -moz-linear-gradient(90deg, #4458dc 0%, #854fee 100%);
+    background: -o-linear-gradient(90deg, #4458dc 0%, #854fee 100%);
+    /* background: linear-gradient(90deg, #4458dc 0%, #854fee 100%); */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.contact_information .information-icon h6{
+	font-size: 16px;
+    line-height: 24px;
+    font-weight: bold;
+    margin-bottom: 0px;
+    color: #000000;
+    font-family: "Rubik", sans-serif;
+}
+.contact_information .information-icon h6 a{
+	font-size: 16px;
+    line-height: 24px;
+    font-weight: bold;
+    margin-bottom: 0px;
+    color: #000000;
+    font-family: "Rubik", sans-serif;
+    text-decoration: none;
+}
+.contact_information .information-icon p{
+font-size: 14px;
+    line-height: 24px;
+    padding: 2px 0px;
+color: #777777 !important;
+    }
+.contact_form .form-group .form-control {
+    font-size: 13px;
+    line-height: 26px;
+    color: #999;
+    border: 1px solid #eeeeee;
+    font-family: "Roboto", sans-serif;
+    border-radius: 0px;
+    padding-left: 20px;
+}
+.contact_form .form-group .form-control:focus {
+    box-shadow: none;
+    outline: none;
+}
+.contact_form .form-group textarea.form-control {
+    height: 134px;
+}
+.contact_form .form-group {
+    margin-bottom: 10px;
+}
+
+
+.footer-color{
+	    background-image: linear-gradient(to right, #4458dc 0%, #854fee 100%), radial-gradient(circle at top left, #4458dc, #854fee);
+    color: #fff;
+    padding: 10px 0 10px 0;
+}
+
+
+.footerabout {
+    list-style: none;
+    color: #377FC2;
+    font-size: 14px;
+    /* padding-left: 0; */
+}
+.footerabout span {
+    color: #F26F28;
+    font-size: 20px;
+    padding: 10px;
+}
+.footer-follow  {
+    margin-left: 50px;
+    background: -webkit-linear-gradient(90deg, #4458dc 0%, #854fee 100%);
+    background: -moz-linear-gradient(90deg, #4458dc 0%, #854fee 100%);
+    background: -o-linear-gradient(90deg, #4458dc 0%, #854fee 100%);
+    /* background: linear-gradient(90deg, #4458dc 0%, #854fee 100%); */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.contact-us {
+    /* background-color: #18bfff; */
+    color: #377FC2;
+    font-size: 30px !important;
+    padding-right: 20px;
+}
+.copyright {
+    color: #377FC2;
+    text-align: center;
+}
+.copyright span {
+    color: #F26F28;
+}
+.project1{
+   width: 100%;
+    height: 300px;
+    background: linear-gradient(200deg,#68b1d8,#6886ad);
+}
+ .scroll-top{
+       position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 99;
+   background-image: linear-gradient(#4458DC, #854FEE);
+     box-shadow: 0px 10px 30px rgba(118, 85, 225, 0.3);
+    color: #fff !important;
+    border-radius: 30px;
+    padding: 15px;
+    font-weight: bold;
+    line-height: normal;
+    border: none;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+     visibility: hidden;
+     cursor: pointer;
+    }
+.bottom_button{
+visibility: visible;
+}
+@media (max-width: 1480px){
+    .home_right_img img{
+        max-width: 100%;
+    height: auto;
+    }
+}
+.border-toggler{
+    border: none;
+}
+.border-toggler:focus{
+    outline: none;
+}
+
+@media (max-width: 1300px){
+.about_img img{
+    max-width: 100%;
+}
+}
+.project-background{
+    background-image: url("images/project.png");
+        width: 100%;
+    height: 600px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    position: relative;
+}
+.docintact-logo{
+    position: absolute;
+    top: 32%;
+    left: 14%;
+}
+.docintact-content{
+    position: absolute;
+    top: 51%;
+    left: 13%;
+    right: 0;
+    width: 13%;
+    font-size: 11px;
+    line-height: 20px;
+}
+.wallstreet-logo{
+   position: absolute;
+    top: 16%;
+    left: 41%;
+}
+.wallstreet-content{
+   position: absolute;
+    top: 37%;
+    left: 39%;
+    right: 0;
+    width: 9%;
+    font-size: 11px;
+    line-height: 20px;
+}
+.smartupload-logo{
+position: absolute;
+    top: 57%;
+    left: 50%;
+}
+.smartupload-content{
+    position: absolute;
+    top: 31%;
+    left: 50%;
+    right: 0;
+    width: 14%;
+    font-size: 11px;
+    line-height: 20px;
+}
+.wiseenroll-logo{
+    position: absolute;
+    top: 51%;
+    left: 72%;
+}
+.wiseenroll-content{
+   position: absolute;
+    top: 30%;
+    left: 74%;
+    right: 0;
+    width: 20%;
+    font-size: 11px;
+    line-height: 20px; 
+}
+.chatbot-logo{
+position: absolute;
+    top: 53%;
+    left: 88%;
+}
+.chatbot-content{
+    position: absolute;
+    top: 67%;
+    left: 84%;
+    right: 0;
+    width: 16%;
+    font-size: 11px;
+    line-height: 20px;
+}
+.section_gap2{
+    padding: 100px 0 60px 0;
+}

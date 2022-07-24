@@ -1,0 +1,52 @@
+<mat-toolbar role="toolbar" class="task-header">
+    <div class="header-title">
+      <span>{{data?.title}}</span>
+    <span class="material-icons pointer">close</span>
+    </div>
+</mat-toolbar>
+
+<form [formGroup]="create_Form" (ngSubmit)="create_user()">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Id</mat-label>
+      <input matInput placeholder="User Name" formControlName="id">
+      <mat-error *ngIf="create_Form.get('id').hasError('required')">Please Enter Id</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>First Name</mat-label>
+      <input matInput placeholder="Password" formControlName="first">
+      <mat-error *ngIf="create_Form.get('first').hasError('required')">Please Enter First Name</mat-error>
+    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Password" formControlName="last">
+        <mat-error *ngIf="create_Form.get('last').hasError('required')">Please Enter Last Name</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Age</mat-label>
+        <input matInput placeholder="Password" formControlName="age">
+        <mat-error *ngIf="create_Form.get('age').hasError('required')">Please Enter age</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>subj1_marks</mat-label>
+        <input matInput placeholder="Password" formControlName="subj1_marks">
+        <mat-error *ngIf="create_Form.get('subj1_marks').hasError('required')">Please Enter age</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>subj2_marks</mat-label>
+        <input matInput placeholder="Password" formControlName="subj2_marks">
+        <mat-error *ngIf="create_Form.get('subj2_marks').hasError('required')">Please Enter age</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>subj3_marks</mat-label>
+        <input matInput placeholder="Password" formControlName="subj3_marks">
+        <mat-error *ngIf="create_Form.get('subj3_marks').hasError('required')">Please Enter age</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>subj4_marks</mat-label>
+        <input matInput placeholder="Password" formControlName="subj4_marks">
+        <mat-error *ngIf="create_Form.get('subj4_marks').hasError('required')">Please Enter age</mat-error>
+      </mat-form-field>
+  <p> <button type="submit">Submit</button></p>
+
+</form>

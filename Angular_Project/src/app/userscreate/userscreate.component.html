@@ -1,0 +1,56 @@
+<app-header></app-header>
+
+<form [formGroup]="createUserForm" class="create-form" (ngSubmit)="CreatUserSubmit()">
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>First name</mat-label>
+      <input matInput placeholder="Name" formControlName="first" />
+      <mat-error *ngIf="createUserForm.get('first').hasError('required')">Please Enter Name</mat-error>
+    </mat-form-field>
+ </div>
+ <div>   
+    <mat-form-field appearance="outline">
+      <mat-label>Last Name</mat-label>
+      <input matInput placeholder="Name" formControlName="last" />
+      <mat-error *ngIf="createUserForm.get('last').hasError('required')">Please Enter Name</mat-error>
+    </mat-form-field>
+</div>
+<div>
+    <mat-form-field appearance="outline">
+        <mat-label>Age</mat-label>
+        <input matInput placeholder="Name" formControlName="age" />
+        <mat-error *ngIf="createUserForm.get('age').hasError('required')">Please Enter Age</mat-error>
+      </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline">
+        <mat-label>subj1_marks</mat-label>
+        <input matInput placeholder="Name" formControlName="subj1_marks" />
+        <mat-error *ngIf="createUserForm.get('subj1_marks').hasError('required')">Please Enter Subj1Marks</mat-error>
+      </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline">
+        <mat-label>subj2_marks</mat-label>
+        <input matInput placeholder="Name" formControlName="subj2_marks" />
+        <mat-error *ngIf="createUserForm.get('subj2_marks').hasError('required')">Please Enter Subj2Marks</mat-error>
+      </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline">
+        <mat-label>subj3_marks</mat-label>
+        <input matInput placeholder="Name" formControlName="subj3_marks" />
+        <mat-error *ngIf="createUserForm.get('subj3_marks').hasError('required')">Please Enter Subj3Marks</mat-error>
+      </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline">
+        <mat-label>subj4_marks</mat-label>
+        <input matInput placeholder="Name" formControlName="subj4_marks" />
+        <mat-error *ngIf="createUserForm.get('subj4_marks').hasError('required')">Please Enter Subj4Marks</mat-error>
+      </mat-form-field>
+  </div>
+  <div>
+      <button type="submit">Submit</button>
+  </div>
+</form>

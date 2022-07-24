@@ -1,0 +1,78 @@
+.sidenav {
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #FF6F3D;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+  
+  .sidenav a {
+    padding: 6px 6px 6px 90px;
+    text-decoration: none;
+    font-size: 14px;
+    display: block;
+    height: 81px;
+    left: 0px;
+    top: 246px;
+    border: 1px solid #ED6637;
+    /* background: #ED6637; */
+    color: #fff;
+    text-align: left;
+    padding-top: 28px;
+  }
+  
+  .sidenav .boxShadow {
+    box-shadow: inset 0px 4px 4px rgb(0 0 0 / 10%);
+  }
+
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+
+  .logo img{
+    max-width: 150px;
+    display: block;
+    margin: auto;
+    padding: 25px;
+  }
+
+  .tabImage{
+    float: left;
+    /* background-color: white; */
+    margin: 22px 0px 0px 26px;
+    /* box-shadow: 0px 4px 4px rgb(0 0 0 / 10%), 4px 0px 4px rgb(0 0 0 / 10%), -4px 0px 4px rgb(0 0 0 / 10%); */
+    border-radius: 5px;
+    width: 44px;
+    height: 41px;
+  }
+
+  .badge {
+    color: #000000;
+    background-color: #ffffff;
+    border-radius: 50px;
+    padding: 10px;
+    letter-spacing: 0.03em;
+    font-size: 18px;
+    font-weight: 300;
+    width:215px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    color: #7A7A7A;
+}
+
+.rectangle-position {
+  position:absolute;
+  left: 0;
+  top:20%;
+  display: block !important;
+  
+}
+
+.active {
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.1);
+  border:2px solid #ED6637;
+  background: #ED6637;
+}

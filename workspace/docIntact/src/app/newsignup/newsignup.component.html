@@ -1,0 +1,232 @@
+<section>
+
+
+
+
+    <nav class="mb-1 navbar navbar-expand-lg navbar-dark main-nav">
+        <div class="container">
+        <a class="navbar-brand zero-pad" href="#"><img class="wid-260" src="assets/images/logo-small.png"></a>
+        <button class="navbar-toggler" style="background:#EF6D65" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse me-bg" id="navbarSupportedContent-333">
+            <ul class="navbar-nav ml-auto pad-10">
+            
+            </ul>
+           
+        </div>
+      </div>
+    </nav>
+    
+     
+    
+        </section>
+  
+  
+  
+  <section>
+  
+  
+  
+  
+  <div class="container" style="padding:80px 0">
+  
+  
+  
+            <div class="  redbg fix-modal-h" > 
+                  <div class="row">
+                      <div class="col-sm-12 col-xs-12 col-md-12 col-lg-5 d-non">
+                          <div class="welcome-creat-ac">
+                          <div class="text-center">
+                              <h5 class="white-colr txt2font">Welcome !</h5>
+                          </div>
+                          <div class="suit-img-mar text-center">
+                              <img src="assets/images/suit-persons.png" class="img-fluid" alt="Responsive image">
+                          </div>
+                         
+                          </div>
+                      </div>
+  
+                      <div class="col-sm-12 col-xs-12 col-md-12 col-lg-7">
+                              <div *ngIf="show1" class="forgot-pass-section2 mar-t-3rem">
+                              <div class="col-lg-5 m-auto" >
+                                      <img src="assets/images/success.png" class="pt-4" width="100%">
+                              </div>
+                              <h5 class="success-title mb-0 text-center">Success!</h5>
+                                          <h6 class="success-msg text-center">Your password has been Updated successfully </h6>
+                                          <div class="mt-093 text-center">
+                                                  <a class="back-to-sign-fon" href="#">Back to Sign In</a>
+                                          </div>
+                              </div>
+                              <div *ngIf="!show1">
+                                    <form class="create-ac-sec" #forgotForm="ngForm" (ngSubmit)="signup(forgotForm,'individual')" name="forgotForm" autocomplete="off" *ngIf="show">
+  
+                                            <div class="">
+                                                <p class="modal-title headfont">Start your account today.</p>
+                                            </div>
+                                          
+                                           
+                                            <!-- <div class="md-form headfont form-mar-bot-2">
+                                                    <i class=" prefix" style="margin: -12px 0 0 0"><img src="assets/images/mail.png"></i>
+                                                    <input type="text" class="form-control" style="padding: 4px 24px; margin: 0;">   
+                                                                               
+                                                </div> 
+                            -->
+                                            <div>
+                                                <div class="md-form txt2font form-mar-bot-2 ">
+                                                    <i class="prefix" style="margin: -12px 0 0 0"><img src="assets/images/Group1748.png">&nbsp;&nbsp;</i>
+                                                    <input  type="text" appConfirmEqualValidator="newpass" style="padding: 4px 24px; margin: 0;" placeholder="Enter your Name"  
+                                                    [class.has-error]="name1.invalid && name1.touched" [class.has-success]="name1.valid" [(ngModel)]="name"
+                                                    name="name" #name1="ngModel" required  class="form-control ">                                  
+                                                    <div *ngIf="name1.invalid&&(name1.dirty||name1.touched)||req&&name1.errors">
+                                                            <div class="text-danger" *ngIf="name1.errors.required">Name is Required</div></div>
+                                                            
+                            
+                                                </div>
+                                            <div class="md-form txt2font form-mar-bot-2">
+                                                    <i class=" prefix" style="margin: -12px 0 0 0"><img src="assets/images/Path15375.png"></i>
+                                                   
+                                                <input  type="password" placeholder="Password length 8 to 14 characters" #fcPassword="ngModel" 
+                                                  [(ngModel)]="cPassword" name="cPassword"  style="padding: 4px 24px; margin: 0;"pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,14}"  [class.has-error]="fcPassword.invalid && fcPassword.touched" [class.has-success]="fcPassword.valid"
+                                                  [ngModelOptions]="{ updateOn: 'change' }" required class="form-control ">                                 
+                                                
+                                                  <div *ngIf="fcPassword.invalid&&(fcPassword.dirty||fcPassword.touched)||req&&fcPassword.errors">
+                                                        <div class="text-danger" *ngIf="fcPassword.errors.required"> Password is Required</div>
+                                                        <div class="text-danger" *ngIf="fcPassword.errors.pattern">Must be combination of atleast
+                                                            one uppercase,one lowercase,one digit and one special character with 8 to 14
+                                                            characters Range
+                                                        </div> 
+                                                        </div>
+                                                </div>
+                
+                                            
+                
+                                           
+                
+                                            <div class="md-form txt2font form-mar-bot-2 ">
+                                                <i class="prefix" style="margin: -12px 0 0 0"><img src="assets/images/Path15375.png">&nbsp;&nbsp;</i>
+                                                <input  type="password" appConfirmEqualValidator="newpass" style="padding: 4px 24px; margin: 0;" placeholder="Password length 8 to 14 characters"  [class.has-error]="fcverifypassword.invalid && fcverifypassword.touched" [class.has-success]="fcverifypassword.valid" [(ngModel)]="ConfirmPassword"
+                                                name="ConfirmPassword" #fcverifypassword="ngModel" required  class="form-control ">                                  
+                                                <div *ngIf="fcverifypassword.invalid&&(fcverifypassword.dirty||fcverifypassword.touched)||req&&fcverifypassword.errors">
+                                                        <div class="text-danger" *ngIf="fcverifypassword.errors.required">Confirm Password is Required</div></div>
+                                                        <div class="text-danger" *ngIf="((forgotForm.value.cPassword!=forgotForm.value.ConfirmPassword) && fcverifypassword.dirty && fcverifypassword.touched) && forgotForm.value.cPassword ">Password
+                                                            Mismatch
+                                                        
+                                                    </div>
+                        
+                                            </div>
+                      
+                                            
+                                        </div>
+                
+                                        
+                                        
+                                     
+                                        <div>
+                                                <div class="form-check">
+                                                        <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+                                                        <label class="form-check-label" for="exampleCheck1">I agree to the Terms of Service and Privacy Policy.</label>
+                                                      </div>
+                       
+                                                
+                
+                                        </div>
+                                            <div class="row tpad-20 txt2font text-center dis-fx">
+                                            <div class=" ">
+                                                <button class="btn btn-sm sign-in1li txtun" type="submit" >Sign up</button>
+                                            </div>
+                                         
+                                            </div>                            
+                                          
+                                           
+                                        </form>
+                              </div>
+                        
+                          
+                      </div>
+                  </div>
+                  
+               </div> 
+  
+    </div>
+  
+  
+  
+  
+  
+  </section>
+  
+  
+        <section class=" footer-bg" >
+       
+           <div class="container">
+                <div class="row" style="padding: 22% 0 0 0;">
+                    <div class="col-lg-3 col-sm-12 col-xs-12 col-md-12">
+                        <a href="#"><img src="assets/images/Group2107.png"></a>
+                        </div>
+                        <div class="col-lg-1 col-sm-12 col-xs-12 col-md-12" style="margin: 24px 0 0 0;">
+                            <a href="#" class="white-colr">About Us</a>
+                           </div>
+                           <div class="col-lg-1 col-sm-12 col-xs-12 col-md-12" style="margin: 24px 0 0 0;">
+                                   <a href="#" class="white-colr">Features</a>
+                               </div>
+                               <div class="col-lg-1 col-sm-12 col-xs-12 col-md-12" style="margin: 24px 0 0 0;">
+                                       <a href="#" class="white-colr">Pricing</a>
+                                   </div>
+                                   <div class="col-lg-1 col-sm-12 col-xs-12 col-md-12" style="margin: 24px 0 0 0;">
+                                           <a href="#" class="white-colr">FAQ's</a>
+                                       </div>
+                                       <div class="col-lg-1 col-sm-12 col-xs-12 col-md-12" style="margin: 24px 0 0 0;padding: 0">
+                                               <a href="#" class="white-colr">Contact Us</a>
+                                           </div>
+                                           <div class="col-lg-2 col-sm-12 col-xs-12 col-md-12" style="margin: 24px 0 0 0;">
+                                                   <a href="#" class="white-colr">Terms & Conditions</a>
+                                               </div>
+                                           <div class="col-lg-2 col-sm-12 col-xs-12 col-md-12" style="margin: -20px 0 0 0;text-align: right">
+                                               <p class="white-colr">Follow Us</p>
+  
+                                               <span style="padding: 0 3px">
+                                                   <a href="#">
+                                                       <img src="assets/images/fb.png">
+                                                   </a>
+  
+                                               </span>
+                                               <span style="padding: 0 3px">
+                                                       <a href="#">
+                                                           <img src="assets/images/mail1.png">
+                                                       </a>
+  
+                                                   </span>
+                                                   <span style="padding: 0 3px">
+                                                           <a href="#">
+                                                               <img src="assets/images/Twitter1.png">
+                                                           </a>
+   
+                                                       </span>
+  
+                                                  
+                                               </div>
+  
+                    </div>
+  
+  
+  
+                    <div class="row"style="border-top:1px solid #fff">
+                        <div class="col-6 white-colr">
+                               © 2019 All Rights reserved to DOC INTACT
+                            </div>
+                            <div class="col-6" style="text-align: right">
+                                <span class="white-colr">Payment Modes Accepted :</span>
+                                <span><img src="assets/images/Group2209(2).png"></span>
+                               </div>
+                        </div>
+                   
+  
+  
+               
+                </div>
+
+  
+  </section>

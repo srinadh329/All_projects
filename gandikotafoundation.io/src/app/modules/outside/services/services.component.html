@@ -1,0 +1,22 @@
+<app-header></app-header>
+<section class="sec-pad">
+<div class="container">
+    <div class="row pb-4">
+        <div class="col-lg-4 pb-4" *ngFor="let service of serviceList">
+            <div class="blog-post rounded service-shadow">
+                <img [src]="service?.image" class="img-fluid rounded-top" alt="">
+                <div class="content pt-4 pb-4 p-3">
+                    <a href="#"><h6 class="text-custom fw-normal">{{service?.title}}</h6></a> 
+                    <!-- <a href="#"><h5 class="title text-dark">Helping Kids Grow Up Stonger</h5></a>  -->
+                    <p class="text-muted pb-3 border-bottom">{{service?.description}}</p>
+                    <ul class="list-unstyled mb-0">
+                        <li class="text-muted"><i class="mdi mdi-calendar-edit me-1"></i>{{service?.eventDate | date:'mediumDate'}}, {{service?.location}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<app-testimonial></app-testimonial>

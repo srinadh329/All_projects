@@ -1,0 +1,229 @@
+    <!-- page-header-start -->
+    <div class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="page-section">
+                        <h1 class="page-title ">ABOUT</h1>
+                        <div class="page-breadcrumb">
+                            <ol class="breadcrumb">
+                                <li><a>Home</a></li>
+                                <li>About Us</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 hidden-xs">
+                    <div class="page-section">
+                        <p>“Gandikota Foundation Believes that all Human Beings Are Entitled to health, Education and Prosperity”</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <!-- our service start -->
+  <section class="ourservice-section" id="services">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-12">
+                  <h2 class="text-center pb-2">WELCOME TO GANDIKOTA FOUNDATION</h2>
+                  <hr class="what-we-do-line">
+                  <p class="pt-2 pt-4 pb-2 what-wedo-section-height">Gandikota Foundation belives that all human beings are entitled to health,education and prospreity.We Currently support in Rural village to make healthy, education and prosperity a way of life</p>
+              </div>
+              <div class="d-none d-sm-none d-md-block wow fadeInUp pt-4 pb-2" data-wow-duration="1s">
+                  <div class="col-xs-12">
+                      <nav>
+                          <div class="nav  nav-fill" id="nav-tab" role="tablist">
+                              <a class="nav-item nav-link active ourservice-list" [ngClass]="{'active':info}" id="nav-home-tab" data-toggle="tab"   aria-controls="nav-home" aria-selected="true" (click)="info=true;about=false;services=false;">
+                                  <div class="ourservice-image">  <span class="glyphicon glyphicon-info-sign test"></span></div>
+                                  <div> <h5>ABOUT Foundation</h5></div>
+                                </a>
+                              <a class="nav-item nav-link ourservice-list" [ngClass]="{'active':about}" id="nav-profile-tab" data-toggle="tab"  aria-controls="nav-profile" aria-selected="false" (click)="info=false;about=true;services=false;"> 
+                                  <div class="ourservice-image">            <span class="glyphicon glyphicon-user test"></span>
+                                  </div>
+                                  <div><h5>Foundation Members</h5></div>
+                              </a>
+                              <a class="nav-item nav-link ourservice-list"  [ngClass]="{'active':services}" id="nav-contact-tab" data-toggle="tab"  aria-controls="nav-contact" aria-selected="false" (click)="info=false;about=false;services=true;"> 
+                                  <div class="ourservice-image"><span class="glyphicon glyphicon-th test"></span></div>
+                                  <div><h5>Foundation Services</h5></div>
+                              </a>
+                              <!-- <a class="nav-item nav-link ourservice-list" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false"> 
+                                  <div class="ourservice-image"><img src="assets/images/service-blockchain-icon.png"></div>
+                                  <div><h5>ERP / CRM</h5></div>
+                              </a> -->
+                          </div>
+                      </nav>
+                      <button hidden id="hidesrikanth" (click)="srikanth=false;poorna=true;chinna=false"> </button>
+                      <button hidden id="hidepoorna" (click)="srikanth=false;poorna=false;chinna=true"> </button>
+                      <button hidden id="hidechinna" (click)="srikanth=true;poorna=false;chinna=false"> </button>
+  
+                      <div class="tab-content home-services py-3 px-3 px-sm-0" id="nav-tabContent">
+                          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"   [ngClass]="{'venki':(about  || services)}">
+                              <div class="row">
+                                  <div class="col-lg-6 our-service-tabs">
+                                     <img src="assets/images/about-info.jpg" class='info-about' alt="no image found">
+                                  </div>
+                                  <div class="col-lg-6 our-service-tabs">
+                                      <p> Gandikota Foundation is a Non-government organisation (NGO) founded by Gandikota Srikanth in 2006 .Gandikota Foundation belives that all human beings are entitled to health,education and prospreity.We Currently support in Rural village to make healthy, education and prosperity a way of life</p>
+                                  </div>
+                              </div>
+                           
+                             
+                          </div>
+                          <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" [ngClass]="{'show':about, 'active':about}">
+                             <div class="row">
+                                 <div   class="tttt" [ngClass]="{'showabout':srikanth,'hideabout':(poorna || chinna) }" id="id1">
+                                      <h3> Sreekanth Gandikota- Founder of trustee</h3>
+  
+                                  <div class="col-lg-6 our-service-tabs" style="padding-top: 38px;padding-left: -29px; margin-left: -80px;">
+                                      <img src="assets/images/srikanth.jpg" alt="no image found" style="border-radius: 16px;height: 250px;">
+                                  </div>
+                                  <div class="col-lg-6 our-service-tabs">
+                                      <p> "I don't want to live in the kind of world where we don't look out for each other. Not just the people that are close to us, but anybody who needs a helping hand. I cant change the way anybody else thinks, or what they choose to do, but I can do my bit.".</p>
+                                  </div>
+                                 </div>
+                                 <div class="tttt" [ngClass]="{'showabout':poorna,'hideabout':(srikanth || chinna) }" id="id2">
+                                  <h3> Shiva Purnima kasaneni- Co-Founder of trustee</h3>
+                                  <div class="col-lg-6 our-service-tabs" style="padding-top: 38px;padding-left: -29px; margin-left: -80px;">
+                                      <img src="assets/images/poorna.jpg" alt="no image found" style="border-radius: 16px;height: 250px;">
+  
+                                  </div>
+                                  <div class="col-lg-6 our-service-tabs">
+                                      <p> “The best way to not feel hopeless is to get up and do something. Don’t wait for good things to happen to you. If you go out and make some good things happen, you will fill the world with hope, you will fill yourself with hope. ”.</p>
+                                  </div>
+                                 </div>
+                                 <div class="tttt"  [ngClass]="{'showabout':chinna,'hideabout':(srikanth || poorna) }" id="id3">
+                                  <h3>Manthri Chinnarao-  Executive Director</h3>
+  
+                                  <div class="col-lg-6 our-service-tabs" style="padding-top: 38px;padding-left: -29px; margin-left: -80px;">
+                                      <img src="assets/images/chinna.jpeg" alt="no image found" style="border-radius: 16px;height: 250px;">
+  
+                                  </div>
+                                  <div class="col-lg-6 our-service-tabs">
+                                      <p> “The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.”</p>
+                                  </div>
+                                 </div>
+                              </div>
+                          </div>
+                          <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" [ngClass]="{'show':services, 'active':services} ">
+                             <div class="row">
+                                  <div class="col-lg-6 our-service-tabs">
+                                      <img src="assets/images/services.jpg" alt="no image found" style="height: 278px;border-radius: 12px;">
+                                  </div>
+                                  <div class="col-lg-6 our-service-tabs">
+                                      <p>Our Foundation Mainly Focus on Education , youth Empowerment,Rural Development and health care, our main motive is  that all human beings are entitled to health,education and prospreity.We Currently support in Rural village to make healthy, education and prosperity a way of life </p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>    
+                  </div>
+              </div>
+              
+          </div>
+      </div>
+  </section>
+  <!-- our service end -->
+  
+  <!-- testimonials-start -->
+  <div class="space-medium bg-light">
+      <div class="container">
+          <div class="testimonial-carousel">
+              <div class="owl-carousel slider">
+                  <div class="item">
+                      <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-12 col-xs-12">
+                          <div class="">
+                              <div class="testimonial-content">
+                                  <div class="testimonial-icon">
+                                      <img src="assets/images/srikanth.jpg" class="quotes" alt="">
+                                  </div>
+                                  <div class="">
+                                      <ul>
+                                          <!-- <li><i class="fa fa-star"></i></li>
+                                          <li><i class="fa fa-star"></i></li>
+                                          <li><i class="fa fa-star"></i></li>
+                                          <li><i class="fa fa-star-half-empty"></i></li>
+                                          <li><i class="fa fa-star-o"></i></li> -->
+                                      </ul>
+                               </div>
+                                  <h2>No one has ever become poor by giving.</h2>
+                                  <p class="testimonial-text">"I don't want to live in the kind of world where we don't look out for each other. Not just the people that are close to us, but anybody who needs a helping hand. I cant change the way anybody else thinks, or what they choose to do, but I can do my bit."</p>
+                                  <div class="testimonial-meta">
+                                      <span>- Gandikota Srikanth</span> 
+                                  </div>
+                                  <div class="testimonial-col">
+                                      <span>Founder of trustee</span> 
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="item">
+                      <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-12 col-xs-12">
+                          <div class="">
+                              <div class="testimonial-content">
+                                  <div class="testimonial-icon">
+                                      <img src="assets/images/poorna.jpg" class="quotes" alt="">
+                                  </div>
+                                  <div class="">
+                                      <ul>
+                                          <!-- <li><i class="fa fa-star"></i></li>
+                                          <li><i class="fa fa-star"></i></li>
+                                          <li><i class="fa fa-star"></i></li>
+                                          <li><i class="fa fa-star-half-empty"></i></li>
+                                          <li><i class="fa fa-star-o"></i></li> -->
+                                      </ul>
+                               </div>
+                                  <h2>Gandikota Foundation brings to life again those who are spiritually dead.</h2>
+                                  <p class="testimonial-text">“The best way to not feel hopeless is to get up and do something. Don’t wait for good things to happen to you. If you go out and make some good things happen, you will fill the world with hope, you will fill yourself with hope. ”</p>
+                                  <div class="testimonial-meta">
+                                      <span>-Shiva Purnima kasaneni</span> </div>
+                                      <div class="testimonial-col">
+                                          <span>co-Founder of trustee</span> 
+                                      </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="item">
+                      <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-12 col-xs-12">
+                          <div class="">
+                              <div class="testimonial-content">
+                                  <div class="testimonial-icon">
+                                      <img src="assets/images/chinna.jpeg" class="quotes" alt="">
+                                  </div>
+                                  <div class="">
+                                      <ul>
+                                          <!-- <li><i class="fa fa-star"></i></li>
+                                          <li><i class="fa fa-star"></i></li>
+                                          <li><i class="fa fa-star"></i></li>
+                                          <li><i class="fa fa-star-half-empty"></i></li>
+                                          <li><i class="fa fa-star-o"></i></li> -->
+                                      </ul>
+                               </div>
+                                  <h2>Gandikota Foundation makes no decrease in property.</h2>
+                                  <p class="testimonial-text">“The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.”</p>
+                                  <div class="testimonial-meta">
+                                      <span>-Manthri Chinna Rao</span> </div>
+                                      <div class="testimonial-col">
+                                          <span>Executive Director</span> 
+                                      </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- testimonials-close  -->
+  

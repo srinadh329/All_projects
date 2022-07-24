@@ -1,0 +1,93 @@
+/*about us media quriey start*/
+
+@media only screen and (device-aspect-ratio: 768/1024)  /* does not work on iPad or LG */
+{
+	.about-color {
+    top: -34px;
+    background: linear-gradient(to right, #082871 , #00A9EC);
+    position: absolute;
+    left: -13px;
+    right: 0;
+    width: 92%;
+    height: 68%;
+    z-index: -1;
+}
+.what-wedo-blocks .what-wedo-image-firstimage {
+    transform: translate(290px, 0px);
+}
+.what-wedo-blocks:hover .what-wedo-image-secondimage {
+    visibility: visible;
+    transform: translate(236px, 0px);
+}
+.mobile-responsive-footersection2{
+    padding-left: 0;
+}
+}
+
+@media only screen and (device-aspect-ratio: 1024/1366)  /* does not work on iPad or LG */
+{
+	.what-wedo-blocks .what-wedo-image-firstimage {
+    transform: translate(91px, 0px);
+}
+.what-wedo-blocks:hover .what-wedo-image-secondimage {
+    visibility: visible;
+    transform: translate(37px, 0px);
+}
+.mobile-responsive-footersection1{
+	flex: 0 0 29%;
+    max-width: 31%;
+}
+.mobile-responsive-footersection4{
+flex: 0 0 29%;
+    max-width: 30%;
+}
+}
+@media only screen and (device-aspect-ratio: 1024/768)  /* does not work on iPad or LG */
+{
+	.mobile-responsive-footersection1{
+	flex: 0 0 29%;
+    max-width: 31%;
+}
+.mobile-responsive-footersection4{
+flex: 0 0 29%;
+    max-width: 30%;
+}
+.mobile-responsive-footersection1 img{
+
+padding-top: 23px;
+}
+.mobile-responsive-footersection2{
+    padding-left: 0;
+}
+.what-wedo-section-height{
+    padding-top: 10px !important;
+}
+.footer-services{
+    margin-top: 0;
+}
+}
+/*about us media quriey end*/
+
+@media (max-width: 576px){
+	.text-box h1{
+		font-size: 16px;
+	}
+}
+@media only screen and (device-aspect-ratio: 800/1280){
+.text-box p{
+	padding: 0;
+}
+}
+@media (max-width: 700px){
+    .service-add-sticky{
+        position: static !important;
+    }
+}
+@media (max-width: 700px){
+.carousel-item h1{
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+}

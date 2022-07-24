@@ -1,0 +1,119 @@
+<div class="common-transform">
+  <mat-card class="common-header">
+    <div class="row">
+      <div class="d-flex flex-column">
+        <h6 class="pt-2 no-space">Dashboard</h6>
+      </div>
+    </div>
+  </mat-card>
+  <mat-card class="creation-form mt-4">
+    <div class="row">
+      <div class="col-lg-4 col-md-12 col-sm-12 pb-3">
+        <mat-card class="matcard-width2">
+          <div class="row mat-row">
+            <div class="col-lg-8 col-md-8 col-8">
+              <p class="m-0">Today   Transactions </p>
+              <p class="count2">{{todaytrans}}</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-4 text-center">
+              <img src="././assets/images/transaction.png">
+            </div>
+          </div>
+        </mat-card>
+      </div>
+      <div class="col-lg-4 col-md-12 col-sm-12 pb-3">
+        <mat-card class="matcard-width3">
+          <div class="row mat-row">
+            <div class="col-lg-8 col-md-8 col-8">
+              <p class="m-0"> Remittance Transactions</p>
+              <p class="count3">{{remtrans}}</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-4 text-center">
+              <img src="././assets/images/transaction.png">
+            </div>
+          </div>
+        </mat-card>
+      </div>
+      <div class="col-lg-4 col-md-12 col-sm-12 pb-3">
+        <mat-card class="matcard-width">
+          <div class="row mat-row">
+            <div class="col-lg-8 col-md-8 col-8">
+              <p class="m-0">Total Transactions</p>
+              <p class="count">{{totaltrans}}</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-4 text-center">
+              <img src="././assets/images/transaction.png">
+            </div>  
+          </div>
+        </mat-card>
+      </div>
+    </div>
+    <!-- <div class="row pt-5">
+     
+      <div class="col-lg-5 col-md-5 col-sm-12">
+        <mat-card class="matcard-width4">
+          <div class="row mat-row">
+            <div class="col-lg-8 col-md-8 col-sm-8">
+              <p class="m-0 name">Total Transactions</p>
+              <p class="count4">{{totaltrans}}</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+              <img src="././assets/images/transaction.png">
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div> -->
+  </mat-card>
+  <div > 
+  <mat-card class="common-header mt-5">
+    <div class="row">
+      <div class="d-flex flex-column">
+        <h6 class="pt-2 no-space">Graphs</h6>
+      </div>
+   
+    </div>
+  </mat-card>
+  <mat-card class="creation-form mt-4"  >
+    <label class="col-sm-1 common-label1">Filter By :</label>
+    <mat-form-field appearance="outline" class="custom-branch-select-outline   col-sm-2">
+      <mat-select matInput  [(value)]="selected"  placeholder="Select Report Type" (selectionChange)="getbranchanlatics()">
+        <mat-option  value="Week">Last Week</mat-option>
+        <mat-option  value="Month">Last Month</mat-option>
+        <mat-option  value="Yearly" >Last Yearly</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <!-- <div class="card border-0 rounded-0"> -->
+          <div class="piechart-color">
+          <div class="card-title mb-1 p-3 d-flex">
+            <!-- <h6>Line Chart</h6> -->
+          </div>
+          <div class="card-body">
+            <div class="chart-container" style="position: relative;">
+              <canvas id="barChart"></canvas>
+            </div>
+          </div>
+          </div>
+      </div>
+      <!-- </div> -->
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <!-- <div class="card border-0 rounded-0"> -->
+          <div class="piechart-color">
+          <div class="card-title mb-1 p-3 d-flex">
+            <!-- <h6>Pie Chart</h6> -->
+          </div>
+          <div class="card-body">
+            <div class="chart-container" style="position: relative;">
+              <canvas id="pieChart"></canvas>
+            </div>
+          </div>
+          </div>
+      <!-- </div> -->
+      </div>
+    </div>
+    
+  </mat-card>
+</div>
+</div>

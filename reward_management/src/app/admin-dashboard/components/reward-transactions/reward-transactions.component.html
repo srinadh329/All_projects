@@ -1,0 +1,47 @@
+<div class="transaction-container">
+    <div class="row">
+       <app-admin-table-filter [isReconciliation]="false" (selectedFilter)="appliedFilter($event)"></app-admin-table-filter>
+    </div>
+    <div class="mt-5">
+        <div class="table-height" infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="50"
+            [scrollWindow]="false" (scrolled)="onScroll()">
+            <table class="table table-bordered">
+                <thead class="tableHeader">
+                    <tr>
+                        <th >Property Manager</th>
+                        <th >Resident Name</th>
+                        <th >Resident Email</th>
+                        <th >Rewards Issued</th>
+                        <th >Rewards Redeemed</th>
+                        <th >Rewards Cancelled</th>
+                        <th >Rewards Balance</th>
+                        <th>Status</th>
+                        <th >Transactions</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf = "userList && userList.length>0;else noItems">
+                    <tr *ngFor ="let transaction of userList">
+                        <td>{{transaction?.propertyManagerFirstName}} {{transaction?.propertyManagerLastName}}</td>
+                        <td>{{transaction.firstName}} {{transaction.lastName}}</td>
+                        <td>{{transaction.email}}</td>
+                        <td>${{transaction.rewardAmount}}</td>
+                        <td>${{redemedReward(transaction?.rewardHistory)}}</td>
+                        <td>${{calculateDeletedRewards(transaction?.rewardHistory)}}</td>
+                        <td>${{transaction.totalRewardBalance ? transaction.totalRewardBalance : 0}}</td>
+                        <td>{{getStatus(transaction?.rewardHistory)}}</td>
+                        <td><button class="btn btn-primary text-uppercase"
+                                [routerLink]="['/superadmin/dashboard/transactions',transaction.id]">View
+                                TRANSACTIONS</button></td>
+                    </tr>
+                </tbody>
+                <ng-template #noItems>
+                   <tbody>
+                       <tr>
+                           <td colspan="8">No Transactions Found</td>
+                       </tr>
+                   </tbody>
+                </ng-template>
+            </table>
+        </div>
+   </div>
+</div>

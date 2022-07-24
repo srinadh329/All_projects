@@ -1,0 +1,88 @@
+@import 'common';
+
+.about-banner{   
+    background-image: url("/assets/images/aboutus.png");
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+.bg-overlay{
+    background-color: $overlay-color;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+.page-next{
+    position: relative;
+    top: 164px;
+    z-index: 99;
+}
+.about-content p{
+    color: $p-color !important;
+    line-height: 33px;
+    text-align: justify;
+    font-size: 14px;
+}
+.about-button{
+   @include button();
+//    &:hover{
+
+//    }
+}
+.custom-text-primary{
+    color: $primer-color;
+}
+.work-process{
+        &:after{
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 40px;
+            top: 80px;
+            left: 80%;
+            background-image:url("/assets/images/process.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            z-index: 1;
+        }
+        
+}
+.icons{
+    color: $primer-color !important;
+}
+
+// .work-process.process-arrow{
+//     content: '';
+//     position: absolute;
+//     width: 60%;
+//     height: 40px;
+//     top: 80px;
+//     left: 80%;
+//     background: url(../images/process.png) center center no-repeat;
+//     z-index: 1;
+// }
+.team-concept{
+background-color:#f8f9fa!important;
+}
+.team-concept .team-image .team-overlay {
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    opacity: 0;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    padding: 8px 0 4px;
+    background-color: #f8f9fa!important;
+}
+.team-concept:hover .team-image .team-overlay {
+    opacity: 0.9;
+}

@@ -1,0 +1,48 @@
+-- FUNCTION: store.chooseproduct(numeric, character varying, numeric)
+
+-- DROP FUNCTION store.chooseproduct(numeric, character varying, numeric);
+
+CREATE OR REPLACE FUNCTION store.chooseproduct(
+	countryid numeric,
+	currency character varying,
+	branchid numeric)
+    RETURNS TABLE(contryid numeric, productid character varying, productgroup character varying, cntcurrency character varying, currencyrate numeric, chargeamount numeric) 
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+    ROWS 1000
+AS $BODY$
+           begin
+		         if exists(select a.prdid,b.cntccy,c.brnid from admin.cntprd a
+						   inner join admin.cntmas b on a.cntid = b.cntid
+						   inner join admin.brnmas c on a.prdgrp = c.prdgrp
+						   where a.cntid = countryid and b.cntccy = currency and c.brnid = branchid)then
+						   
+					if exists( select a.cntid,a.prdid,a.prdgrp,b.cntccy,c.ccyrat,d.chgamt
+						       from admin.cntprd a 
+						       inner join admin.cntmas b on a.cntid = b.cntid
+						       inner join admin.ratmas c on b.cntccy = c.ccyid
+						       inner join admin.chgmas d on a.prdid = d.prdid
+							   inner join admin.brnmas e on e.prdgrp = a.prdgrp
+						       where a.cntid = countryid and e.brnid = branchid) then
+						   
+						       return query select a.cntid,a.prdid,a.prdgrp,
+							   b.cntccy,c.ccyrat,d.chgamt from admin.cntprd a 
+						       inner join admin.cntmas b on a.cntid = b.cntid
+						       inner join admin.ratmas c on b.cntccy = c.ccyid
+						       inner join admin.chgmas d on a.prdid = d.prdid
+						       where a.cntid = countryid order by d.chgamt
+						       desc limit 1;
+							   
+						else raise exception 'Rate/charge is not configured for this product';
+				     end if;
+						   
+				  else raise exception 'Invalid Country/Currency';	   
+						   
+			  end if;		   
+		  end
+  $BODY$;
+
+ALTER FUNCTION store.chooseproduct(numeric, character varying, numeric)
+    OWNER TO postgres;

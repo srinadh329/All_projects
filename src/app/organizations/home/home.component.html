@@ -1,0 +1,110 @@
+<section>
+  <!-- <div class="row">
+    <div class="col-md-12">
+      <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+        <img src="{{organiztionDetails?.photo.path}}" *ngIf="organiztionDetails?.photo">
+        <a (click)="homeone()" style="cursor: pointer;" class="navbar-brand">{{Organizationdata?.organization_name}}</a>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+          aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link"><span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"></a>
+            </li>
+          </ul>
+          <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">Madhu</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownId">
+              <a class="dropdown-item">Profile</a>
+              <a class="dropdown-item" (click)=change() >Change Password</a>
+              <a class="dropdown-item" (click)="LogOut()">Logout</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div> -->
+
+  <div class="d-flex">
+
+    <div class="mainrow" [ngStyle]="{'height.px': maindiv}">
+      <ul class="navelements pl-0">
+        <li>
+          <img  class="clip-rect p-2" alt="User pic" src="assets/images/proimg.png" *ngIf="!organiztionDetails?.photo" width="100%">
+          <img  class="clip-rect p-2" alt="User pic" 
+          src="{{organiztionDetails?.photo.path}}" *ngIf="organiztionDetails?.photo" width="100%">
+
+           </li>
+        <li routerLink="orgdashboard"  routerLinkActive="activestate"  #rld="routerLinkActive" >
+          <img  class="p-2"  src="assets/images/menuicon.svg" *ngIf="!rld.isActive">
+          <img class="p-2" src="assets/images/menuactive.svg" *ngIf="rld.isActive">
+        </li>
+        <li *ngIf="Organizationdata?.organization_name == 'Cognitive Innovations'"  #rla="routerLinkActive" routerLink="NormalUsers" routerLinkActive="activestate">
+          <img  class="p-2" src="assets/images/User_List.png" *ngIf="!rla.isActive">
+          <img class="p-2" src="assets/images/useractive.png" *ngIf="rla.isActive">
+        </li>
+
+        <li routerLink="employee"  #rla="routerLinkActive" routerLinkActive="activestate">
+          <img class="p-2" src="assets/images/Employee_list.png" *ngIf="!rla.isActive">
+          <img class="p-2" src="assets/images/empblogactive.png" *ngIf="rla.isActive">
+         
+        </li>
+
+        <li *ngIf="Organizationdata?.organization_name == 'Cognitive Innovations'"  #rla="routerLinkActive"  routerLink="BlogControl"  routerLinkActive="activestate">
+          <img class="p-2" src="assets/images/Blog_List.png" *ngIf="!rla.isActive">
+          <img class="p-2" src="assets/images/blogactive.png" *ngIf="rla.isActive">
+        </li>
+        <li class="br-top" (click)="openchangepassword()" *ngIf='Organizationdata?.organization_name == "Cognitive Innovations"'>
+          <img src="assets/images/settings.svg" class="pt-3" >
+          </li>
+        <!-- <li>Files</li>
+        <li>Training</li> -->
+      </ul>
+    </div>
+    <!-- <div class="mainrow">
+          <ul >
+        <li routerLink="orgdashboard" class="Active">DashBoard</li>
+        <li routerLink="employee">Employees</li>
+        <li *ngIf="Organizationdata?.organization_name == 'Cognitive Innovations'" routerLink="NormalUsers">Users</li>
+        <li *ngIf="Organizationdata?.organization_name == 'Cognitive Innovations'" routerLink="BlogControl">Blogs</li >
+        <li >Files</li>
+        <li >Training</li >
+            </ul>
+          </div> -->
+
+    <div style="flex-grow: 1;">
+      <div class="row m-0 bg-f5 poppins-font">
+        <div class="col-lg-4 pt-2">
+          <!-- <img src="{{organiztionDetails?.photo.path}}" *ngIf="organiztionDetails?.photo"> -->
+          <p class="mb-0 pointer" (click)="homeone()">{{Organizationdata?.organization_name}}</p>
+     
+        </div>
+        <div class="col-lg-8">
+          <ul class="profileul d-flex nav align-items-center mb-0 float-right">
+            <li class="nav-item dropdown"><a aria-expanded="false"
+                aria-haspopup="true" class="nav-link dropdown-toggle color-70" data-toggle="dropdown"
+                id="navbarDropdown" role="button" style="font-size: 12px;"> Madhu </a>
+              <div aria-labelledby="navbarDropdown" class="dropdown-menu" style="font-size: 14px;">
+                <a class="dropdown-item pointer">Profile</a><a _ngcontent-ssf-c3=""
+                  class="dropdown-item pointer" (click)=" LogOut()">Logout</a></div>
+            </li>
+            <li class="nav-item "><a class="nav-link p-1"><img
+                  src="assets/images/profimg.png"></a></li>
+          </ul>
+        </div>
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div class="passwordpagediv" [@slideInOut2]="changepasswordState">
+      
+    <h6  class=" p-2 pointer hovercolor" (click)="settings('changepassword')">Change Password</h6>
+     <h6  class=" p-2 pointer hovercolor" (click)="settings('Organisation')">Change Profile</h6>
+    </div>
+    <div class="bgfade" *ngIf="isShown" (click)="closemodalbox()">
+    </div>
+</section>

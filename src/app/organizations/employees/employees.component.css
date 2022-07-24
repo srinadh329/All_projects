@@ -1,0 +1,10 @@
+.btn-invite{
+    background: transparent linear-gradient(103deg, #6966E9 0%, #69B1E3 100%) 0% 0% no-repeat padding-box;
+    color:#fff;
+  }
+
+  mat-form-field {
+    margin-right: 12px;
+  }
+  
+  

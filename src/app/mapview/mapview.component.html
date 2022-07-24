@@ -1,0 +1,62 @@
+<div class="position-relative">
+    <i class="fas fa-close closemodal pointer" style="z-index: 1;" (click)="onNoClick()"></i>
+   <div>
+    <app-locationmaps (getlat)="displayCounter( $event)" name="location" #map appId="APP-ID-HERE" appCode="APP-CODE-HERE" height="800px">
+    </app-locationmaps>
+      
+     </div>
+   </div>
+  
+
+<div class="p-24 poppins-font">
+    <div class="row mt-4">
+        <div class="col-10">
+            <form>
+                <img src="assets/images/mylocation.svg" class="locationicon"> 
+                <input type="text" placeholder="Pick one" aria-label="Number" class="form-control mapsearch" places-auto-complete autocomplete="off"
+                (keyup)="map.places(query)" type="text" placeholder="Search places..." [(ngModel)]="query"
+                name="query">
+                <div *ngIf="map.getsuggistions">
+                    <p *ngFor="let suggitions of map.getsuggistions.suggestions"
+                      (click)="map.locatMap(suggitions);map.clear();locationname(suggitions)"
+                      style="text-align: left">{{suggitions.label}}</p>
+                  </div>
+             </form>
+
+        </div>
+         <div class="col-2">
+             <button type="button" class="btn btnbgcolr" (click)="GO();">Send</button>
+         </div>
+    
+    </div>
+    
+    <div class="mt-3">
+        
+            
+                <button mat-raised-button color="basic" class="btn-transparent poppins-font" (click)="sendlocation()">
+                    <span class="pr-2"> 
+                        <img src="assets/images/location.svg">
+                     </span>
+                     Send Live Location
+                </button>
+            
+    </div>
+    
+    <div *ngIf="nearbylocations?.length>0" class="mt-3">
+        <p class="font-14 a5a5a p015" style="padding:0px 15px">Near by Places</p>
+        <div class="scrollable p015">
+        <ul class="map_list pl-0 font-color" *ngFor="let nearby of nearbylocations">
+            <li  (click)="selectedlocation(nearby)">
+                
+                <img src={{nearby.icon}} style="height:30px; width:30px;" class="locationimg">
+                {{nearby.title}} - {{nearby.category.title}}
+            </li>
+        </ul>
+    </div>
+    </div>
+    
+    <!-- <div class="text-center mb-5">
+    <button class="btn sendbtn" type="button" (click)="sendlocation()">Send</button>
+    </div> -->
+</div>
+

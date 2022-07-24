@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Template 1</title>
+	<!--  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=M+PLUS+Rounded+1c:wght@500&family=Open+Sans:wght@500&display=swap" rel="stylesheet"> -->
+	<style type="text/css">
+		body{
+			font-family: 'M PLUS Rounded 1c', sans-serif;
+		}
+		.templateView {
+			max-width: 600px;
+			margin: 0 auto;
+			background-color: #fff;
+			box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+			height: 152vh;
+		}
+
+		.logo {
+			text-align: right;
+		}
+
+		.email-heading h1,
+		p {
+			color: #502C1E;
+			margin: 0;
+			font-family: 'M PLUS Rounded 1c', sans-serif;;
+			
+		}
+
+		.email-heading h1 {
+			font-size: 56px;
+			
+		}
+
+		.email-heading p {
+			font-size: 24px;
+			font-weight: 600;
+		}
+
+		.email-heading {
+			background-image: url("https://scube-assets.s3.ap-south-1.amazonaws.com/gum-middle.jpeg");
+			height: 275px;
+			background-repeat: no-repeat;
+			background-position: bottom;
+			background-size: contain;
+			position: relative;
+		}
+
+		.email-content h1 {
+			margin: 0;
+			padding: 10px 0 16px 0;
+			color: #502C1E;
+			font-family: 'M PLUS Rounded 1c', sans-serif;
+		}
+
+		.email-content p {
+			text-align: justify;
+			font-size: 15px;
+			font-weight: 500;
+			line-height: 23px;
+			color: #502C1E;
+			font-family: 'M PLUS Rounded 1c', sans-serif;
+		}
+
+		.email-content p:nth-child(4) {
+			padding: 15px 0 6px 0;
+		}
+		.userMessage h1{
+			position: absolute;
+    top: 66%;
+    left: 12%;
+		}
+		.userMessage h1{
+			font-size: 50px;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    text-transform: uppercase;
+    color: #502C1E;
+    text-shadow: 1px 1px 1px #ffffff;
+    padding: 40px 0px 0 7px;
+		}
+		.order-details h1 {
+			margin: 0;
+			color: #502C1E;
+			font-family: 'M PLUS Rounded 1c', sans-serif;
+		}
+
+		.order-details-view {
+			background-color: #F4EFDB;
+			min-height: 174px;
+			border-radius: 12px;
+		}
+		.regards{
+			font-size: 19px;
+			padding: 10px 0 0 0;
+		}
+		.regards p:nth-child(1) {
+			padding: 18px 0 14px 0;
+			font-size: 22px;
+			 
+		}
+		.regards p:nth-child(3) {
+			
+			font-size: 22px;
+			 
+		}
+		.regards p:nth-child(2) {
+			font-family: 'M PLUS Rounded 1c', sans-serif;
+		}
+		.regards p{
+			font-family: 'Kaushan Script', cursive;
+
+		}
+		.footer-image {
+			background-image: url("https://scube-assets.s3.ap-south-1.amazonaws.com/footer.png");
+			min-height: 275px;
+			background-repeat: no-repeat;
+			position: relative;
+			top: -67px;
+		}
+
+		.footer-image p {
+			position: absolute;
+			top: 39%;
+			left: 23px;
+			font-size: 13px;
+			color: #fff;
+			font-family: 'Open Sans', sans-serif;
+			padding: 106px 0 0 22px;
+		}
+
+		.padding-view {
+			padding: 0 30px 0 30px;
+		}
+		@media screen and (max-width: 460px) and (min-width: 320px){
+			.userMessage h1{
+				font-size: 20px !important;
+				top: 74% !important;
+			}
+		}
+
+		@media screen and (max-width: 540px){
+			.templateView {
+				max-height: 881px;
+			}
+
+			.email-heading {
+				height: 170px;
+			}
+
+			.email-heading h1 {
+				font-size: 31px;
+			}
+
+			.email-heading p {
+				font-size: 12px;
+				font-weight: 600;
+			}
+		}
+		@media only screen and (device-aspect-ratio: 360/640) {
+			.templateView {
+				max-height: 881px;
+			}
+
+			.email-heading {
+				height: 124px;
+			}
+
+			.email-heading h1 {
+				font-size: 31px;
+			}
+
+			.email-heading p {
+				font-size: 12px;
+				font-weight: 600;
+			}
+		}
+		@media only screen and (device-aspect-ratio: 360/640) {
+			.templateView {
+				max-height: 881px;
+			}
+
+			.email-heading {
+				height: 124px;
+			}
+
+			.email-heading h1 {
+				font-size: 31px;
+			}
+
+			.email-heading p {
+				font-size: 12px;
+				font-weight: 600;
+			}
+		}
+		.order-details-table td img{
+			/*width: 50px;*/
+			border-radius: 5px;
+		}
+		.order-details-table tr td{
+			text-align: center;
+		}
+		.order-details-table tr{
+			border-bottom: 1px solid darkred;
+    z-index: 999;
+    margin: 12px 0 0 0;
+    display: block;
+    width: 100%;
+		}
+		.order-details-table{
+			width: 100%;
+    padding: 0 13px 0 13px;
+		}
+	</style>
+</head>
+
+<body>
+	<section class="templateView">
+		<div class="padding-view">
+			<header class="logo">
+				<img src="https://scube-users.s3.ap-south-1.amazonaws.com/gum-logo.png">
+			</header>
+			<div class="email-heading">
+				<h1>Kudos!</h1>
+				<p>You took a great decision to</p>
+				<p>enhance your child's health.</p>
+				<div class="userMessage">
+				<h1>purchase</h1>
+			</div>
+			</div>
+			
+			<div class="email-content">
+				<h1>Hi({{name}}),</h1>
+				<p>
+					Congratulations! You have successfully placed the order for the most amazing Gummies. Your Order ID
+					is
+					<order ID>.
+				</p>
+				<p><u>Track Order</u></p>
+				<p>We will notify you once your order is ready for dispatch.</p>
+			</div>
+			<div class="order-details">
+				<h1> Your Order Details:</h1>
+			</div>
+			<div class="order-details-view">
+				<table class="order-details-table">
+					<tr>
+						<td style="width: 16%;">
+							<img src="https://cdn.shopify.com/s/files/1/0566/3044/4214/products/Omega3_compact_cropped.jpg" width="50px">
+						</td>
+						<td style="width: 42%;">We will notify you once your order is </td>
+						<td style="text-align: end;"><h4 style="margin: 0;">$26.10</h4></td>
+					</tr>
+					<tr>
+						<td style="width: 16%;">
+							<img src="https://cdn.shopify.com/s/files/1/0566/3044/4214/products/Omega3_compact_cropped.jpg" width="50px">
+						</td>
+						<td style="width: 45%; text-align: left;">
+							<ul style="list-style: none; padding: 0;    margin: 0;line-height: 18px;">
+								<li>We will notify you once your order is</li>
+								<li style="font-size: 12px;">S 90cm-Height</li>
+								<li style="font-size: 15px;"><img src="https://cdn.shopify.com/shopifycloud/shopify/assets/themes_support/notifications/discounttag-d1f7c6d9334582b151797626a5ae244c56af0791fcd7841f21027dd44830bcc6.png" width="20px" style="vertical-align: bottom;">DISCOUNT (-$5.00)</li>
+							</ul>
+						
+						 </td>
+						<td style="text-align: end;">
+						
+						<h4 style="margin: 0; text-decoration: line-through;">$42.09</h4>
+						<h4 style="margin: 0;">$37.99</h4>
+					</td>
+					</tr>
+					<tr style="border: none;">
+						<td style="width:9%;text-align: left; padding: 0 0 0 14px;">Subtotal</td>
+						<td style="width:30%;text-align: end;"><h4 style="margin: 0;">$64.09</h4></td>
+					</tr>
+					<tr style="border: none; margin: 0;">
+						<td style="width:10%;text-align: left;padding: 0 0 0 14px;">Shipping</td>
+						<td style="width:30%;text-align: end;"><h4 style="margin: 0;">$10.00</h4></td>
+					</tr>
+					<tr style="margin: 0;">
+						<td style="width:9%;text-align: left;padding: 0 0 0 14px;">Taxes</td>
+						<td style="width:30%;text-align: end;"><h4 style="margin: 0;">$0.00</h4></td>
+					</tr>
+					<tr style="border: none; margin: 0;">
+						<td style="width:8%;text-align: left;padding: 0 0 0 14px;">Total</td>
+						<td style="width:30%;text-align: end;">
+							<ul style="list-style: none;">
+								<li><h4 style="margin: 0;">$74.09 SGD</h4></li>
+								<li>You saved $5.00</li>
+							</ul>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="regards">
+				<p><i>Don’t just be amazing, #BeGumazing.</i></p>
+				<p><b> Thanks and Regards,</b></p>
+				<p><i> Mr. Gumazing</i></p>
+			</div>
+		</div>
+		<footer class="footer-image">
+			<p>For any queries regarding your order, please contact us at <br>&lt;email ID&gt; or, <br>call us on
+				&lt;phone no.&gt;</p>
+		</footer>
+
+
+	</section>
+
+</body>
+
+</html>

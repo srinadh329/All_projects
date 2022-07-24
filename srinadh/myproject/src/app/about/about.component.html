@@ -1,0 +1,305 @@
+<section class="home-section">
+    <div class="container-fluid">
+        <div class="row m-0">
+            <div class="col-lg-12 home-flex">
+                <div class="text-center">
+                    <h1>ABOUT US</h1>
+                    <h6 class="pt-3">LEVERAGE DATA TO DRIVE PERSONALIZATION AT SCALE</h6>
+                    <div class="pt-3">
+                        <button type="button" class="btn btn-sm home-button1">The Global Transition</button>
+                        <button type="button" class="btn btn-sm home-button2"><i class="fa fa-play"
+                                aria-hidden="true"></i> Explore</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="second-section-banner">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 p-0">
+                <div class="second-off-banner">
+                    <div>
+                        <h4>THE DIGITAL SAVVY PHARMA MARKETER 2020</h4>
+                        <p class="pt-3 pb-3"> &quot;Must have tool for every pharma marketer&quot;</p>
+                        <button type="button" class="btn btn-sm home-button2"><i class="fa fa-play"
+                                aria-hidden="true"></i> Download</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="sec-pad">
+    <div class="container">
+        <div class="row dashboard-color flex-row-reverse">
+            <div class="col-lg-5 transaction-color">
+                <div class="row transaction-view">
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        <div class="success">
+                            <span class="material-icons">
+                                check_circle_outline
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-10 col-md-10 col-sm-10">
+                        <p class="mb-1 success-content">Successfull</p>
+                        <p class="success-count">100</p>
+                    </div>
+                </div>
+                <div class="row transaction-view">
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        <div class="pending">
+                            <span class="material-icons">
+                                schedule
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-10 col-md-10 col-sm-10">
+                        <p class="mb-1  success-content">Pending</p>
+                        <p class="success-count">100</p>
+                    </div>
+                </div>
+                <div class="row transaction-view">
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        <div class="failure">
+                            <span class="material-icons">
+                                cancel
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-10 col-md-10 col-sm-10">
+                        <p class="mb-1 success-content">Failure</p>
+                        <p class="success-count">100</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 cl-sm-6">
+                        <p class="transaction">Total Transactions</p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 cl-sm-6">
+                        <div class="input-view">
+                            <!-- <label class="col-4">Filter By:</label> -->
+                            <span>Filter By:</span>
+                            <mat-form-field appearance="outline" class="col-8">
+                                <input matInput placeholder="Placeholder">
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <ngx-charts-bar-vertical [view]="[0,300]" [results]="saleData" [showXAxisLabel]="true"
+                        [showYAxisLabel]="true" [xAxis]="true" [scheme]="colorScheme" [yAxis]="true" [gradient]="true"
+                        [barPadding]="barPadding">
+                    </ngx-charts-bar-vertical>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+</section>
+<section>
+    <button (click)="rowAdded()">add</button>
+    <!-- <button type="button" class="btn btn-danger btn-sm" (click)="rowDelete(index)">Remove</button> -->
+    <form [formGroup]="newforeignExchage" class="container mt-3">
+        <section class="container border mb-4 p-3" formArrayName="addforeign" *ngFor="let addforeign of foreignControls; let i = index;">
+        <div [formGroupName]="i">
+          <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label>Address</label>
+                    <input type="text" class="form-control" formControlName="foreigninputOne" placeholder="St. Thomas Apartment"/>
+                  </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label>Street</label>
+                    <input type="text" class="form-control" formControlName="foreigninputTwo" placeholder="South Street"/>
+                  </div>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text" class="form-control" formControlName="foreigninputThree" placeholder="Mumbai"/>
+                  </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label>Country</label>
+                    <select class="form-control" formControlName="foreigninputFour" placeholder="India">
+                      <option value="india">India</option>
+                      <option value="usa">USA</option>
+                      <option value="england">England</option>
+                    </select>
+                  </div>
+            </div>
+          </div>
+        </div>
+    
+      </section>
+     </form>
+</section>
+
+<section>
+    <div class="container">
+        <div class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row">
+                        <div class="col-sm"><img class="d-block w-100" src="//placehold.it/1200x600/444" alt="1 slide"></div>
+                        <div class="col-sm"><img class="d-block w-100" src="//placehold.it/1200x600/ccff00" alt="2 slide"></div>
+                        <div class="col-sm"><img class="d-block w-100" src="//placehold.it/1200x600" alt="3 slide"></div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row">
+                        <div class="col-sm"><img class="d-block w-100" src="/assets/images/bg.png" alt="4 slide"></div>
+                        <!-- <div class="col-sm"><img class="d-block w-100" src="/assets/images/thumbnail.jpg" alt="5 slide"></div>
+                        <div class="col-sm"><img class="d-block w-100" src="/assets/images/thumbnail.png" alt="6 slide"></div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="piechart-color">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 cl-sm-6">
+                            <p class="transaction">Wallet Transactions</p>
+                        </div>
+                        <div class="col-lg-6 col-md-6 cl-sm-6">
+                            <div class="input-view">
+                                <span>Filter By:</span>
+                                <mat-form-field appearance="outline" class="col-8">
+                                    <input matInput placeholder="Placeholder">
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div id="chart" style="width: 500px; height: 300px;"></div>
+                </div>
+
+            </div>
+            <div class="col-lg-6 d-flex">
+                <div class="piechart-color">
+                    <p class="transaction">Currencies</p>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-4 client">
+                                <div>
+                                    <h5 class="m-0">EUR</h2>
+                                        <h6 class="m-0">600</h3>
+                                </div>
+                                <div class="transcation-add">
+                                    <span class="material-icons">add</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 client">
+                                <div>
+                                    <h2 class="m-0">EUR</h2>
+                                    <h3 class="m-0">600</h3>
+                                </div>
+                                <div class="transcation-add">
+                                    <span class="material-icons">add</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 client">
+                                <div>
+                                    <h2 class="m-0">EUR</h2>
+                                    <h3 class="m-0">600</h3>
+                                </div>
+                                <div class="transcation-add">
+                                    <span class="material-icons">add</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 client">
+                                <div>
+                                    <h2 class="m-0">EUR</h2>
+                                    <h3 class="m-0">600</h3>
+                                </div>
+                                <div class="transcation-add">
+                                    <span class="material-icons">add</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 client">
+                                <div>
+                                    <h2 class="m-0">EUR</h2>
+                                    <h3 class="m-0">600</h3>
+                                </div>
+                                <div class="transcation-add">
+                                    <span class="material-icons">add</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 client">
+                                <div>
+                                    <h2 class="m-0">EUR</h2>
+                                    <h3 class="m-0">600</h3>
+                                </div>
+                                <div class="transcation-add">
+                                    <span class="material-icons">add</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-0 pt-5">
+                <div class="col-lg-4 col-md-4 col-sm-4 d-flex flex-column align-items-center">
+                    <div class="lable-color">
+                        <div>
+                            <p class="m-0">EUR</p>
+                            <p>200</p>
+                        </div>
+                        <div class="transcation-add">
+                            <span class="material-icons">add</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 d-flex flex-column align-items-center">
+                    <div class="lable-color">
+                        <div>
+                            <p class="m-0">EUR</p>
+                            <p>200</p>
+                        </div>
+                        <div class="transcation-add">
+                            <span class="material-icons">add</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 d-flex flex-column align-items-center">
+                    <div class="lable-color">
+                        <div>
+                            <p class="m-0">EUR</p>
+                            <p>200</p>
+                        </div>
+                        <div class="transcation-add">
+                            <span class="material-icons">add</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    <div class="transaction-line"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> -->

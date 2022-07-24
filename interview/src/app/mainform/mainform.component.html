@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <div>
+                <p (click)="login()" appParagraph>Login</p>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div>
+                <p (click)="Signup()">SignUp</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngFor="let sri of array">
+    {{sri}}
+    </div>
+    ----------------------------
+    <div *ngFor="let details of data">
+        <div [ngClass]="{'test':details.name=='siva'}">
+            {{details.name | uppercase}}
+            <span (click)="deletename(details)">Delete</span>
+        </div>
+       
+    </div>
+<router-outlet></router-outlet>

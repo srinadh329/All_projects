@@ -1,0 +1,70 @@
+.card {
+    width: 60%;
+    margin: auto;
+    background: #ee5d2f;
+    border-radius: 15px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+h4,
+h5 {
+    color: #ffff;
+}
+
+p {
+    text-align: left;
+    padding-left: 13%;
+    letter-spacing: 0.04em;
+    color: #ffffff;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.form-group > input {
+    height: 42px;
+    background: #dc3f0e;
+    box-shadow: inset 0px 4px 4px rgb(0 0 0 / 10%);
+    border-radius: 2px;
+    border: #dc3f0e;
+    color: #ffffff;
+}
+
+input::placeholder {
+    color: #e1e1e1;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 23px;
+    width: 90%;
+    letter-spacing: 0.06em;
+}
+
+label {
+    color: #ffffff;
+}
+
+.btn-primary {
+    width: auto;
+    border-radius: 50px;
+    background: #339ff1;
+    border: none;
+    height: 46px;
+    letter-spacing: 0.05em;
+    font-size: 19px;
+    line-height: 27px;
+}
+
+.err-msg {
+    color:#ffffff;
+}
+
+@media  screen and (max-width:768px) {
+    
+    .card {
+        width:100%
+    }
+}

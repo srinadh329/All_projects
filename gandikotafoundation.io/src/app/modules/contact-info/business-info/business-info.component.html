@@ -1,0 +1,73 @@
+<section class="main-section">
+    <div class="row">
+        <div class="card-item">
+            <div class="card-header">
+                <h4 class="section-title"> Contact Info</h4>
+                <div class="action-section pointer" [routerLink]="['/admin/contactus/edit']" >
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </div>
+
+            </div>
+            <div class="card-section row">
+                <div class="col-sm-4 row-item">
+                    <div class="d-flex">
+                        <label>Phone No:</label>
+                        <div class="pl-1" *ngFor="let item of contactInfo?.phone">{{item}}</div>
+                    </div>
+                </div>
+                <div class="col-sm-4 row-item">
+                    <div class="d-flex">
+                        <label>Email:</label>
+                        <div class="pl-1"  *ngFor="let item of contactInfo?.email">{{item}}</div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 row-item">
+                    <div class="d-flex">
+                        <label>Address1:</label>
+                        <div class="pl-1">{{contactInfo?.address?.line_1}}</div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 row-item">
+                    <div class="d-flex">
+                        <label>Address2:</label>
+                        <div class="pl-1">{{contactInfo?.address?.line_2}}</div>
+
+                    </div>
+                </div>
+                <div class="col-sm-4 row-item">
+                    <div class="d-flex">
+                        <label>city:</label>
+                        <div class="pl-1">{{contactInfo?.address?.city}}</div>
+                    </div>
+                </div>
+                <div class="col-sm-4 row-item">
+                    <div class="d-flex">
+                        <label>State:</label>
+                        <div class="pl-1">{{contactInfo?.address?.state}}</div>
+                    </div>
+                </div>
+                <div class="col-sm-4 row-item">
+                    <div class="d-flex">
+                        <label>Country:</label>
+                        <div class="pl-1">{{contactInfo?.address?.country}}</div>
+                    </div>
+                </div>
+                <div class="col-sm-4 row-item">
+                    <div class="d-flex">
+                        <label>Pincode:</label>
+                        <div class="pl-1">{{contactInfo?.address?.pincode}}</div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 row-item">
+                    <div class="d-flex">
+                        <label>Location:</label>
+                        <div class="pl-1">{{contactInfo?.address?.location}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,92 @@
+<section [ngStyle]="{'height.px': divheight}" class="bg-f5">
+  <div class="container-fluid">
+  <div class="row poppins-font p-2 bg-fff">
+    
+      <div>
+        <ngx-avatar [name]="'ChatIntact'" value="28%" size="40" [round]="false"
+        [cornerRadius]="10">
+      </ngx-avatar>
+      </div>
+   <div class="ml-3">
+    <p class="mb-0">ChatIntact</p>
+    <p *ngIf="Streams.length>0" (click)="ShowCallMembers(Streams)" class="mb-0 font-14 color70">{{Streams.length}} members</p>
+   </div>  
+  </div>
+   
+  <div class="mt-5 pt-5">
+    <div class="row">
+      <div *ngIf='connection && connection.attachStreams.length' class="col-lg-12">
+        <div class="row justify-content-center">
+
+          <div class="col-lg-4 mr-10 poppins-font" *ngFor="let stream of Streams let i = index" [attr.id]=stream.streamid>
+            <div *ngIf="stream.type=='remote'" class="position-relative hovercaller pointer">
+        
+                <video id=videoplayer scrolling="auto" width="100%" [srcObject]="stream.stream" autoplay [volume]=1></video>
+                <!-- {{stream.extra.user}} connected. -->
+        
+                <div class="callername">
+                  <p>{{stream.extra.user}}</p>
+                </div>
+            </div>
+         
+
+
+            <div *ngIf="stream.type=='local'" class="position-relative hovercaller pointer">
+            
+                <video id=localvideo scrolling="auto" width="100%" [srcObject]="stream.stream" autoplay [volume]=0></video>
+                <!-- {{stream.extra.user}} connected. -->
+
+      
+                <div class="callername">
+                  <p>{{stream.extra.user}}</p>
+                </div>
+
+            </div>
+          </div>
+
+
+
+        </div>
+
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 text-center  mt-4">
+        <!-- <p class="font-color poppins-font float-left">Duration :16mins</p> -->
+        <mat-card-actions class="pt-0">
+          <span class="material-icons pointer mr-5 font-30 iconscolor" *ngIf="Mute" (click)="mute()">
+            volume_up </span>
+          <!-- <img src="/assets/Audio.png"  class="img-fluid image-1" alt="audio"> -->
+
+          <span class="material-icons mr-5 pointer font-30 iconscolor" *ngIf="!Mute" (click)="Unmute()">
+            volume_off
+          </span>
+
+          <span class="material-icons  dot pointer" (click)="chatpage()">
+            call_end
+          </span>
+
+
+          <!-- <img src="/assets/Group6505.png"  class="img-fluid image-1" alt="audio"> -->
+
+          <!-- <img src="/assets/Video.png" class="img-fluid image-2"
+                        alt="video"> -->
+          <span class="material-icons ml-5 pointer font-30 iconscolor" *ngIf="Videoshow" (click)="Dontshowvideo()">
+            videocam
+          </span>
+
+          <span class="material-icons ml-5 pointer font-30 iconscolor" *ngIf="!Videoshow" (click)="showvideo()">
+            videocam_off
+          </span>
+          <!-- <img src="/assets/Group6504.png"  class="img-fluid image-2"
+                        alt="video"> -->
+
+        </mat-card-actions>
+      </div>
+    </div>
+  </div>
+
+  </div>
+</section>

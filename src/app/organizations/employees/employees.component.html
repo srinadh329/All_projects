@@ -1,0 +1,1302 @@
+<!-- <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>EmailID</th>
+        <th>Role</th>
+       
+        <th>Action</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      {{userslist | json}}
+      <tr *ngFor="let employee of employeelist">
+        <td>{{employee.Name}}</td>
+        <td>{{employee.EmailId}}</td>
+        <td>{{employee.roleid.role_name}}</td>
+      </tr>
+    </tbody>
+  </table> -->
+
+  <div class="row m-0">
+    <div class="col-lg-12 mt-3">
+      <h6>List of Employees</h6>
+      <div [ngStyle]="{'max-height.px': divheight}" class="tablestyle mt-3">
+        <table  class="table table-striped emp-table poppins-font text-left"  >
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Name</th>
+              <th>EmailID</th>
+              <th>Role</th>
+              <th>Action</th>
+             
+              <!-- <th>Action</th> -->
+              
+            </tr>
+          </thead>
+          <tbody class="font-color font-14 fw-500" >
+           
+            <tr *ngFor="let employee of employeelist;let i =index">
+              <td>{{i+1}}</td>
+              <td>{{employee.Name}}</td>
+              <td>{{employee.EmailId}}</td>
+              <td>{{employee.roleid.role_name}}</td>
+              <td><button class="btn btn-invite" (click)="employeeDetails(employee)">Manage</button></td>
+            </tr>
+        
+        
+          </tbody>
+        </table>
+      </div>
+  
+    </div>
+  
+  </div>
+  <ng-template #Employee>
+    <div *ngIf="listusers" class="poppins-font">
+      <i class="fas fa-times float-right" mat-dialog-close="yes"></i>
+        <p class="font-weight-bold font-18">Friends of {{selectedUser?.Name}}</p>
+        <div class="row">
+          <div *ngFor="let friends of listusers" class="col-lg-12">
+            <div *ngIf="selectedUser._id == friends.senderId._id" class="d-flex mb-2">
+              <div>
+                <ngx-avatar [name]="friends?.receiverid.Name" value="28%" size="35" [round]="false"
+                          [cornerRadius]="12">
+                        </ngx-avatar>
+              </div>
+               <p (click)="chat(friends._id)" class="ml-2">{{friends?.receiverid.Name}}</p> 
+            </div>
+             
+            <div *ngIf="selectedUser._id == friends.receiverid._id" class="d-flex mb-2">
+              <div>
+                <ngx-avatar [name]="friends?.senderId.Name" value="28%" size="35" [round]="false"
+                          [cornerRadius]="12">
+                        </ngx-avatar>
+              </div>
+            <p (click)="chat(friends._id)" class="ml-2"> {{friends?.senderId.Name}}</p>
+         </div>
+         </div>
+        </div>
+
+  </div>
+    <div *ngIf="Groups" class="mt-3" class="poppins-font">
+        <p class="font-weight-bold mt-3 font-18">Groups of {{selectedUser?.Name}}</p>
+
+        <div class="row">
+          <div class="col-lg-12" *ngFor="let group of Groups">
+            <div class="d-flex mb-2">
+              <div>
+                <ngx-avatar [name]="group?.GroupId.GroupName" value="28%" size="35" [round]="false"
+                [cornerRadius]="12">
+              </ngx-avatar>
+              </div>
+              <p (click)="groupdata(group)" class="ml-2">{{group?.GroupId.GroupName}}</p> 
+             </div>
+          </div>
+        </div>
+  </div>
+</ng-template>
+
+
+<ng-template #EmployeeMessages>
+  <div *ngIf="userMessage && !groupMessages">
+     <form #selectedMessages="ngForm" (ngSubmit)="selectMessage(selectedMessages.value)">
+    <mat-form-field class="width-100">
+      <mat-label>from</mat-label>
+      <input matInput name="from_date" [(ngModel)]="selectedMessages.from_date" autocomplete="off"  placeholder="dd / mm / yyyy"
+        [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+     
+    </mat-form-field>
+
+    <mat-form-field class="width-100">
+      <mat-label>To</mat-label>
+      <input matInput name="to_date" ngModel autocomplete="off"  placeholder="dd / mm / yyyy"
+          [matDatepicker]="picker1" [min]="selectedMessages.from_date">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+     
+    </mat-form-field> 
+    <button class="btn btn-primary" type="submit">Show Messages</button>
+  </form>
+  <div  *ngFor="let user of userMessage">
+      <div class="row mt-3">
+          <div class="col-lg-6 col-xl-5 col-md-6 col-sm-12">
+      <div *ngIf="selectedUser?._id == user.receiverId">
+          <div class="ml-3">
+
+              <div class="bgsh m-2 " *ngIf="user.parentId && !(user?.deletingMsgstatus == '1')">
+                  <!-- <i   (click)="replymsg()" class="fas fa-times-circle float-right pointer p-2"></i> -->
+                  <div class="d-flex align-items-center p-2">
+  
+                    <div *ngIf="user?.parentId">
+                      <ngx-avatar [name]="user?.parentId.senderName" value="28%" size="40" [round]="false"
+                        [cornerRadius]="10">
+                      </ngx-avatar>
+                    </div>
+  
+  
+                    <div class="ml-2 min-width-0">
+                      <p class="mb-0  txt-hide " >
+                        {{user.parentId.message}} </p>
+                      <!--Replying Image -->
+                      <div
+                        *ngIf="user?.parentId && user?.pid != null && user?.parentId?.photo && !(user?.deletingMsgstatus == '1')"
+                       >
+  
+                        <div *ngFor="let type of imgmimetype">
+  
+                          <div *ngIf="user?.pid?.type == type" class="d-flex just-space-between">
+                            <div class=" min-width-0 width250">
+                              <p class="mb-0  txt-hide pr-3">{{user?.pid?.name}}</p>
+                              <small class="mb-0 ">{{user?.pid?.type}}</small>
+                            </div>
+                            <div class="text-right p-0">
+                            <img src="{{user?.pid?.path}}" width="60px" height="100%">
+                            </div>
+  
+                          </div>
+                        </div>
+                      </div>
+  
+                      <!-- Replying Video -->
+                      <div
+                        *ngIf=" user?.parentId && user?.pid != null && user?.parentId?.photo && !(user?.deletingMsgstatus == '1')"
+                       >
+                        <div *ngFor="let type of videomimetype">
+                          <div *ngIf="user?.pid.type == type" class="d-flex just-space-between">
+                            <div class="min-width-0 width250">
+                              <p class="mb-0 pr-3 txt-hide">{{user?.pid?.name}}</p>
+                              <small class="mb-0 ">{{user?.pid?.type}}</small>
+                            </div>
+                            <div class="text-right p-0">
+                              <video src="{{user?.pid.path}}" preload="none" alt="User video"
+                                aria-readonly="true" style=" width:60px; height: 100%;" controls
+                                controlsList="nodownload">
+                          
+                              </video>
+                            </div>
+  
+                          </div>
+                        </div>
+                      </div>
+  
+  
+                      <!--Replying Audio -->
+                      <div
+                        *ngIf="  user?.parentId && user?.pid != null && user?.parentId?.photo !=[] && user?.parentId?.media == null && !(user?.deletingMsgstatus == '1')"
+                       >
+                        <div *ngFor="let type of audiomimetype">
+                          <div *ngIf="user?.pid?.type == type">
+                            <p class="mb-0  txt-hide ">{{user?.pid?.type}}</p>
+                            <p class="mb-0 txt-hide font-12">{{user?.pid?.name}}</p>
+                
+                          </div>
+                        </div>
+                      </div>
+  
+  
+  
+                      <div
+                        *ngIf="user?.parentId && user?.pid != null && user?.parentId?.media != null && !(user?.deletingMsgstatus == '1')"
+                       >
+  
+                        <div *ngFor="let type of audiomimetype">
+                          <div *ngIf="user?.pid.type == type">
+                            <p class="mb-0  txt-hide ">{{user?.pid?.type}}</p>
+                            <p class="mb-0 txt-hide font-12">{{user?.pid?.name}}</p>
+                          
+                          </div>
+  
+                        </div>
+                      </div>
+  
+                      <!-- Replying location -->
+                      <div *ngIf="user.parentId?.locationurl && user.parentId?.Gps "
+                        >
+                        <div class="d-flex ">
+                          <div class="min-width-0 width250">
+                            <p class="mb-0  txt-hide" *ngIf="user.parentId?.locationlabel">
+                              {{user.parentId?.locationlabel}}</p>
+                          
+                          </div>
+                          <div class="text-right ">
+                            <img src="assets/map.png" width="60px" height="100%">
+                          </div>
+  
+                        </div>
+                  
+                      </div>
+  
+  
+  
+                      <!-- Replying Docs -->
+                      <div
+                        *ngIf="user?.parentId && user?.pid != null && user?.parentId?.photo && (user?.pid.type ==  'application/pdf' || user?.pid.type ==  'text/plain' || user?.pid.type ==  'text/csv' || user?.pid.type ==  'application/msword' || user?.pid.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || user?.pid.type == 'application/vnd.ms-powerpoint' || user?.pid.type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation' || user?.pid.type == 'application/vnd.ms-excel' ||  user?.pid.type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') && !(user?.deletingMsgstatus == '1')">
+                        <div >
+                          <div *ngIf=" user?.pid.type == 'application/pdf'" class="d-flex">
+  
+                            <div class="flex-1 min-width-0 width250">
+                              <p class="text-left txt-hide  pr-3 font-14 pt-2">{{ user?.pid.name}}</p>
+                            </div>
+                            <div>
+                              <img src="assets/images/pdfnew.png" data-backdrop="none" width="100%" />
+  
+                            </div>
+                          </div>
+  
+                          <div *ngIf=" user?.pid.type == 'text/plain'" class="d-flex">
+                            <div class="flex-1 min-width-0 width250">
+                              <p class="text-left txt-hide  pr-3 font-14 pt-2">{{ user?.pid.name}}</p>
+                            </div>
+                            <div>
+                              <img src="assets/images/txt.png" data-backdrop="none" width="100%" />
+                            </div>
+                          </div>
+  
+                          <div *ngIf=" user?.pid.type == 'text/csv'" class="d-flex">
+                            <div class="flex-1 min-width-0 width250">
+                              <p class="text-left txt-hide  pr-3 font-14 pt-2">{{ user?.pid.name}}</p>
+                            </div>
+                            <div>
+                              <img src="assets/images/csv.png" data-backdrop="none" width="100%" />
+                            </div>
+                          </div>
+  
+                          <div *ngIf=" user?.pid.type == 'application/msword'" class="d-flex">
+  
+                            <div class="flex-1 min-width-0 width250">
+                              <p class="text-left txt-hide  pr-3 font-14 pt-2">{{ user?.pid.name}}</p>
+                            </div>
+  
+                            <div>
+                              <img src="assets/images/doc.png" data-backdrop="none" width="100%" />
+  
+                            </div>
+                          </div>
+  
+                          <div
+                            *ngIf=" user?.pid.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
+                            class="d-flex">
+                            <div class="flex-1 min-width-0 width250">
+                              <p class="text-left txt-hide  pr-3 font-14 pt-2">{{ user?.pid.name}}</p>
+                            </div>
+                            <div>
+                              <img src="assets/images/word.png" data-backdrop="none" width="100%" />
+  
+                            </div>
+  
+                          </div>
+  
+                          <div *ngIf=" user?.pid.type == 'application/vnd.ms-powerpoint'" class="d-flex">
+                            <div class="flex-1 min-width-0 width250">
+                              <p class="text-left txt-hide  pr-3 font-14 pt-2">{{ user?.pid.name}}</p>
+                            </div>
+                            <div>
+                              <img src="assets/images/pptnew.png" data-backdrop="none" width="100%" />
+  
+                            </div>
+  
+                          </div>
+  
+                          <div
+                            *ngIf=" user?.pid.type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'"
+                            class="d-flex">
+                            <div class="flex-1 min-width-0 width250">
+                              <p class="text-left txt-hide  pr-3 font-14 pt-2">{{ user?.pid.name}}</p>
+                            </div>
+                            <div>
+                              <img src="assets/images/pptx.png" data-backdrop="none" width="100%" />
+  
+                            </div>
+  
+                          </div>
+  
+                          <div *ngIf=" user?.pid.type == 'application/vnd.ms-excel'" class="d-flex">
+  
+                            <div class="flex-1 min-width-0 width250">
+                              <p class="text-left txt-hide  pr-3 font-14 pt-2">{{ user?.pid.name}}</p>
+                            </div>
+                            <div>
+                              <img src="assets/images/xls.png" data-backdrop="none" width="100%" />
+  
+                            </div>
+                          </div>
+  
+  
+                          <div
+                            *ngIf=" user?.pid.type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
+                            class="d-flex">
+  
+                            <div class="flex-1 min-width-0 width250">
+                              <p class="text-left txt-hide  pr-3 font-14 pt-2">{{ user?.pid.name}}</p>
+                            </div>
+                            <div>
+                              <img src="assets/images/xlsx.png" data-backdrop="none" width="100%" />
+  
+                            </div>
+                          </div>
+  
+                        </div>
+                      </div>
+  
+                    </div>
+  
+                  </div>
+                </div>
+                <div  class="d-flex ml-2">
+          <ngx-avatar [name]="user.senderName" value="28%" size="40" [round]="false" [cornerRadius]="10" *ngIf="!(user.senderimg?.path)">
+          </ngx-avatar>
+          <div *ngIf="user.senderimg?.path">   
+            <img src="{{user.senderimg?.path}}" width="50px" height="50px">
+          </div>   
+          
+        <p *ngIf="!(user?.deletingMsgstatus == '1') && user.message!=null && user.message!=undefined" class="chatmsgspd sendertxt">{{user.message}}</p>  
+
+        <div *ngIf="(user?.deletingMsgstatus == '1')">
+          <p class="hashtxt  mb-0 chatmsgspd">{{user?.MessageHash}}</p>
+        </div>
+
+        <div *ngIf="user.photo!=[]  && selectedUser?._id == user.receiverId && !(user?.deletingMsgstatus == '1')">
+        <div *ngFor="let img of user.photo">
+
+
+          <!----------------------------------------------------------------- Image of receiver ---------------------------------------------------------------->
+          <div *ngFor="let type of imgmimetype" class="position-relative">
+            <div *ngIf="img.type == type">
+              
+                <img src="{{img.path}}" alt="User pic" width="100%" height="100%" class="imagebr" />
+              
+            </div>
+          </div>
+
+
+
+          <!----------------------------------------------------------------- Audio of receiver ---------------------------------------------------------------->
+
+          <div *ngFor="let type of audiomimetype">
+            <div *ngIf="img.type == type" class="p-2">
+              <audio src="{{img.path}}" preload="none" alt="User audio" style="width:100%;" controls
+                 class="htmlvideo receiveraudio">
+              </audio>
+            </div>
+          </div>
+
+
+          <!----------------------------------------------------------------- Video of receiver ---------------------------------------------------------------->
+
+          <div *ngFor="let type of videomimetype">
+            <div *ngIf="img.type == type">
+
+              <video src="{{img.path}}" preload="none" alt="User audio" width="100%" height="225px"
+                controls class="htmlvideo">
+              </video>
+            </div>
+          </div>
+
+          <!----------------------------------------------------------------- Document of receiver ---------------------------------------------------------------->
+
+
+          <div
+            *ngIf="img.type ==  'application/pdf' || img.type ==  'text/plain' || img.type ==  'text/csv' || img.type ==  'application/msword' || img.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || img.type == 'application/vnd.ms-powerpoint' || img.type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation' || img.type == 'application/vnd.ms-excel' ||  img.type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' "
+           >
+            <!-- pdf view -->
+
+
+            <div *ngIf="img.type == 'application/pdf'" class="d-flex pdfdiv">
+              <div>
+                <img src="assets/images/pdfnew.png" data-backdrop="none" width="100%" />
+
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+          
+            </div>
+
+
+            <div *ngIf="img.type == 'text/plain'" 
+              class="d-flex pdfdiv">
+              <div>
+                <img src="assets/images/txt.png" data-backdrop="none" width="100%" />
+
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+              
+            </div>
+
+            <div *ngIf="img.type == 'text/csv'" 
+              class="d-flex pdfdiv">
+              <div>
+                <img src="assets/images/csv.png" data-backdrop="none" width="100%" />
+
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+     
+            </div>
+
+
+            <div *ngIf="img.type == 'application/msword'" 
+              class="d-flex pdfdiv">
+              <div>
+                <img src="assets/images/doc.png" data-backdrop="none" width="100%" />
+
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+          
+            </div>
+
+
+            <div
+              *ngIf="img.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
+              class="d-flex pdfdiv">
+              <div>
+                <img src="assets/images/docx.png" data-backdrop="none" width="100%" />
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left  pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+                    </div>
+
+
+            <div *ngIf="img.type == 'application/vnd.ms-powerpoint'"  class="d-flex pdfdiv">
+              <div>
+                <img src="assets/images/ppt.png" data-backdrop="none" width="100%" />
+
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+                          </div>
+
+            <div
+              *ngIf="img.type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'"
+                              class="d-flex pdfdiv">
+              <div>
+                <img src="assets/images/pptx.png" data-backdrop="none" width="100%" />
+
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+                       </div>
+
+
+            <div *ngIf="img.type == 'application/vnd.ms-excel'" class="d-flex pdfdiv">
+              <div>
+                <img src="assets/images/xls.png" data-backdrop="none" width="100%" />
+
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+                        </div>
+
+            <div
+              *ngIf="img.type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
+                           class="d-flex pdfdiv">
+              <div>
+                <img src="assets/images/xlsx.png" data-backdrop="none" width="100%" />
+
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+                     </div>
+          </div>
+
+        </div>
+        </div>
+        <!-- <div class="position-relative">
+
+          <span
+            *ngIf="user.locationurl && user.Gps && id== user.receiverId && user.deletingMsgstatus!='1'"
+            id="{{user._id}}">
+            <app-messagemap [coordinates]="user.Gps" name="location" #map appId="APP-ID-HERE"
+              appCode="APP-CODE-HERE" height="800px">
+            </app-messagemap>
+            <a style="cursor: pointer;" href={{user.locationurl}} target="_blank">
+              <mat-icon class="mapicon">zoom_out_map</mat-icon>
+            </a>
+          </span>
+        </div> -->
+        
+      </div>
+      </div>
+      </div>
+      </div>
+      <div class="col-lg-6 col-xl-5 col-md-6 col-sm-12 ml-auto">
+      <div *ngIf="selectedUser?._id == user.senderId">
+                     <div class="bgsh m-2 " *ngIf="user.parentId && !(user?.deletingMsgstatus == '1')">
+              <!-- <i   (click)="replymsg()" class="fas fa-times-circle float-right pointer p-2"></i> -->
+              <div class="d-flex align-items-center p-2">
+
+                <div *ngIf="user?.parentId">
+                  <ngx-avatar [name]="user?.parentId.senderName" value="28%" size="40" [round]="false"
+                    [cornerRadius]="10">
+                  </ngx-avatar>
+                </div>
+
+
+                <div class="ml-2 min-width-0">
+                  <p class="mb-0  txt-hide " >
+                    {{user.parentId.message}} </p>
+                  <!--Replying Image -->
+                  <div
+                    *ngIf="user?.parentId && user?.pid != null && user?.parentId?.photo && !(user?.deletingMsgstatus == '1')"
+                   >
+
+                    <div *ngFor="let type of imgmimetype">
+
+                      <div *ngIf="user?.pid?.type == type" class="d-flex just-space-between">
+                        <div class=" min-width-0 width250">
+                          <p class="mb-0  txt-hide pr-3">{{user?.pid?.name}}</p>
+                          <small class="mb-0 ">{{user?.pid?.type}}</small>
+                        </div>
+                        <div class="text-right p-0">
+                        <img src="{{user?.pid?.path}}" width="60px" height="100%">
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Replying Video -->
+                  <div
+                    *ngIf=" user?.parentId && user?.pid != null && user?.parentId?.photo && !(user?.deletingMsgstatus == '1')"
+                   >
+                    <div *ngFor="let type of videomimetype">
+                      <div *ngIf="user?.pid.type == type" class="d-flex just-space-between">
+                        <div class="min-width-0 width250">
+                          <p class="mb-0 pr-3 txt-hide">{{user?.pid?.name}}</p>
+                          <small class="mb-0 ">{{user?.pid?.type}}</small>
+                        </div>
+                        <div class="text-right p-0">
+                          <video src="{{user?.pid.path}}" preload="none" alt="User video"
+                            aria-readonly="true" style=" width:60px; height: 100%;" controls
+                            controlsList="nodownload">
+                      
+                          </video>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <!--Replying Audio -->
+                  <div
+                    *ngIf="  user?.parentId && user?.pid != null && user?.parentId?.photo !=[] && user?.parentId?.media == null && !(user?.deletingMsgstatus == '1')"
+                   >
+                    <div *ngFor="let type of audiomimetype">
+                      <div *ngIf="user?.pid?.type == type">
+                        <p class="mb-0  txt-hide ">{{user?.pid?.type}}</p>
+                        <p class="mb-0 txt-hide font-12">{{user?.pid?.name}}</p>
+            
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <div
+                    *ngIf="user?.parentId && user?.pid != null && user?.parentId?.media != null && !(user?.deletingMsgstatus == '1')"
+                   >
+
+                    <div *ngFor="let type of audiomimetype">
+                      <div *ngIf="user?.pid.type == type">
+                        <p class="mb-0  txt-hide ">{{user?.pid?.type}}</p>
+                        <p class="mb-0 txt-hide font-12">{{user?.pid?.name}}</p>
+                      
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <!-- Replying location -->
+                  <div *ngIf="user.parentId?.locationurl && user.parentId?.Gps "
+                    >
+                    <div class="d-flex ">
+                      <div class="min-width-0 width250">
+                        <p class="mb-0  txt-hide" *ngIf="user.parentId?.locationlabel">
+                          {{user.parentId?.locationlabel}}</p>
+                      
+                      </div>
+                      <div class="text-right ">
+                        <img src="assets/map.png" width="60px" height="100%">
+                      </div>
+
+                    </div>
+              
+                  </div>
+
+
+
+                  <!-- Replying Docs -->
+                  <div
+                    *ngIf="user?.parentId && user?.pid != null && user?.parentId?.photo && (user?.pid.type ==  'application/pdf' || user?.pid.type ==  'text/plain' || user?.pid.type ==  'text/csv' || user?.pid.type ==  'application/msword' || user?.pid.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || user?.pid.type == 'application/vnd.ms-powerpoint' || user?.pid.type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation' || user?.pid.type == 'application/vnd.ms-excel' ||  user?.pid.type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') && !(user?.deletingMsgstatus == '1')">
+                    <div >
+                      <div *ngIf=" user?.pid.type == 'application/pdf'" class="d-flex">
+
+                        <div class="flex-1 min-width-0 width250">
+                          <p class="text-left txt-hide  pr-3 font-14 pt-2">{{ user?.pid.name}}</p>
+                        </div>
+                        <div>
+                          <img src="assets/images/pdfnew.png" data-backdrop="none" width="100%" />
+
+                        </div>
+                      </div>
+
+                      <div *ngIf=" user?.pid.type == 'text/plain'" class="d-flex">
+                        <div class="flex-1 min-width-0 width250">
+                          <p class="text-left txt-hide  pr-3 font-14 pt-2">{{ user?.pid.name}}</p>
+                        </div>
+                        <div>
+                          <img src="assets/images/txt.png" data-backdrop="none" width="100%" />
+                        </div>
+                      </div>
+
+                      <div *ngIf=" user?.pid.type == 'text/csv'" class="d-flex">
+                        <div class="flex-1 min-width-0 width250">
+                          <p class="text-left txt-hide  pr-3 font-14 pt-2">{{ user?.pid.name}}</p>
+                        </div>
+                        <div>
+                          <img src="assets/images/csv.png" data-backdrop="none" width="100%" />
+                        </div>
+                      </div>
+
+                      <div *ngIf=" user?.pid.type == 'application/msword'" class="d-flex">
+
+                        <div class="flex-1 min-width-0 width250">
+                          <p class="text-left txt-hide  pr-3 font-14 pt-2">{{ user?.pid.name}}</p>
+                        </div>
+
+                        <div>
+                          <img src="assets/images/doc.png" data-backdrop="none" width="100%" />
+
+                        </div>
+                      </div>
+
+                      <div
+                        *ngIf=" user?.pid.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
+                        class="d-flex">
+                        <div class="flex-1 min-width-0 width250">
+                          <p class="text-left txt-hide  pr-3 font-14 pt-2">{{ user?.pid.name}}</p>
+                        </div>
+                        <div>
+                          <img src="assets/images/word.png" data-backdrop="none" width="100%" />
+
+                        </div>
+
+                      </div>
+
+                      <div *ngIf=" user?.pid.type == 'application/vnd.ms-powerpoint'" class="d-flex">
+                        <div class="flex-1 min-width-0 width250">
+                          <p class="text-left txt-hide  pr-3 font-14 pt-2">{{ user?.pid.name}}</p>
+                        </div>
+                        <div>
+                          <img src="assets/images/pptnew.png" data-backdrop="none" width="100%" />
+
+                        </div>
+
+                      </div>
+
+                      <div
+                        *ngIf=" user?.pid.type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'"
+                        class="d-flex">
+                        <div class="flex-1 min-width-0 width250">
+                          <p class="text-left txt-hide  pr-3 font-14 pt-2">{{ user?.pid.name}}</p>
+                        </div>
+                        <div>
+                          <img src="assets/images/pptx.png" data-backdrop="none" width="100%" />
+
+                        </div>
+
+                      </div>
+
+                      <div *ngIf=" user?.pid.type == 'application/vnd.ms-excel'" class="d-flex">
+
+                        <div class="flex-1 min-width-0 width250">
+                          <p class="text-left txt-hide  pr-3 font-14 pt-2">{{ user?.pid.name}}</p>
+                        </div>
+                        <div>
+                          <img src="assets/images/xls.png" data-backdrop="none" width="100%" />
+
+                        </div>
+                      </div>
+
+
+                      <div
+                        *ngIf=" user?.pid.type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
+                        class="d-flex">
+
+                        <div class="flex-1 min-width-0 width250">
+                          <p class="text-left txt-hide  pr-3 font-14 pt-2">{{ user?.pid.name}}</p>
+                        </div>
+                        <div>
+                          <img src="assets/images/xlsx.png" data-backdrop="none" width="100%" />
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="d-flex ml-2" style="justify-content: flex-end;">
+            <ngx-avatar [name]="user.senderName" value="28%" size="40" [round]="false" [cornerRadius]="10" *ngIf="!(user.senderimg?.path)">
+          </ngx-avatar>
+          <div *ngIf="user.senderimg?.path">   
+            <img src="{{user.senderimg?.path}}" width="50px" height="50px">
+          </div>   
+          <p *ngIf="!(user?.deletingMsgstatus == '1') && user.message!=null && user.message!=undefined" class="chatmsgspd sendertxt">{{user.message}}</p>  
+
+
+       <div *ngIf="(user?.deletingMsgstatus == '1')">
+          <p class="hashtxt  mb-0 chatmsgspd">{{user?.MessageHash}}</p>
+        </div>
+
+          <div *ngIf="user.photo!=[] && selectedUser?._id == user.senderId && !(user?.deletingMsgstatus == '1')">
+       <div *ngFor="let img of user.photo">
+
+
+          <!----------------------------------------------------------------- Image of receiver ---------------------------------------------------------------->
+          <div *ngFor="let type of imgmimetype" class="position-relative">
+            <div *ngIf="img.type == type">
+              
+                <img src="{{img.path}}" alt="User pic" width="100%" height="100%" class="imagebr" />
+              
+            </div>
+          </div>
+
+
+
+          <!----------------------------------------------------------------- Audio of receiver ---------------------------------------------------------------->
+
+          <div *ngFor="let type of audiomimetype">
+            <div *ngIf="img.type == type" class="p-2">
+              <audio src="{{img.path}}" preload="none" alt="User audio" style="width:100%;" controls
+                 class="htmlvideo receiveraudio">
+              </audio>
+            </div>
+          </div>
+
+
+          <!----------------------------------------------------------------- Video of receiver ---------------------------------------------------------------->
+
+          <div *ngFor="let type of videomimetype">
+            <div *ngIf="img.type == type">
+
+              <video src="{{img.path}}" preload="none" alt="User audio" width="100%" height="225px"
+                controls class="htmlvideo">
+              </video>
+            </div>
+          </div>
+
+          <!----------------------------------------------------------------- Document of receiver ---------------------------------------------------------------->
+
+
+          <div
+            *ngIf="img.type ==  'application/pdf' || img.type ==  'text/plain' || img.type ==  'text/csv' || img.type ==  'application/msword' || img.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || img.type == 'application/vnd.ms-powerpoint' || img.type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation' || img.type == 'application/vnd.ms-excel' ||  img.type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' "
+           >
+            <!-- pdf view -->
+
+
+            <div *ngIf="img.type == 'application/pdf'" class="d-flex pdfdiv">
+              <div>
+                <img src="assets/images/pdfnew.png" data-backdrop="none" width="100%" />
+
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+          
+            </div>
+
+
+            <div *ngIf="img.type == 'text/plain'" 
+              class="d-flex pdfdiv">
+              <div>
+                <img src="assets/images/txt.png" data-backdrop="none" width="100%" />
+
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+              
+            </div>
+
+            <div *ngIf="img.type == 'text/csv'" 
+              class="d-flex pdfdiv">
+              <div>
+                <img src="assets/images/csv.png" data-backdrop="none" width="100%" />
+
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+     
+            </div>
+
+
+            <div *ngIf="img.type == 'application/msword'" 
+              class="d-flex pdfdiv">
+              <div>
+                <img src="assets/images/doc.png" data-backdrop="none" width="100%" />
+
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+          
+            </div>
+
+
+            <div
+              *ngIf="img.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
+              class="d-flex pdfdiv">
+              <div>
+                <img src="assets/images/docx.png" data-backdrop="none" width="100%" />
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left  pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+                    </div>
+
+
+            <div *ngIf="img.type == 'application/vnd.ms-powerpoint'"  class="d-flex pdfdiv">
+              <div>
+                <img src="assets/images/ppt.png" data-backdrop="none" width="100%" />
+
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+                          </div>
+
+            <div
+              *ngIf="img.type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'"
+                              class="d-flex pdfdiv">
+              <div>
+                <img src="assets/images/pptx.png" data-backdrop="none" width="100%" />
+
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+                       </div>
+
+
+            <div *ngIf="img.type == 'application/vnd.ms-excel'" class="d-flex pdfdiv">
+              <div>
+                <img src="assets/images/xls.png" data-backdrop="none" width="100%" />
+
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+                        </div>
+
+            <div
+              *ngIf="img.type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
+                           class="d-flex pdfdiv">
+              <div>
+                <img src="assets/images/xlsx.png" data-backdrop="none" width="100%" />
+
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+                     </div>
+          </div>
+
+        </div>
+        <!-- <div class="position-relative">
+
+          <span
+            *ngIf="user.locationurl && user.Gps && id== user.receiverId && user.deletingMsgstatus!='1'"
+            id="{{user._id}}">
+            <app-messagemap [coordinates]="user.Gps" name="location" #map appId="APP-ID-HERE"
+              appCode="APP-CODE-HERE" height="800px">
+            </app-messagemap>
+            <a style="cursor: pointer;" href={{user.locationurl}} target="_blank">
+              <mat-icon class="mapicon">zoom_out_map</mat-icon>
+            </a>
+          </span>
+        </div> -->
+      </div>
+        </div>
+      </div>
+      </div>
+      </div>
+  </div>
+</div>
+
+<div *ngIf="groupMessages">
+  <h1 class="text-center text-danger">{{selectGroup?.GroupId.GroupName}}</h1>
+  <div *ngFor="let groupmessage of groupMessages">
+
+      <div class="col-lg-6 col-xl-5 col-md-6 col-sm-12">
+      <div *ngIf="selectedUser._id != groupmessage.groupSenderId._id">
+          <div class="d-flex ml-2">
+              <div class="position-relative receiver_msg">
+              <ngx-avatar [name]="groupmessage.groupSenderId.Name" value="28%" size="40" [round]="false"
+                [cornerRadius]="10">
+              </ngx-avatar>
+            </div>
+            <div class="mb-0 chatmsgspd" *ngIf=" (groupmessage.message && groupmessage.deletedStatus == true);">
+              {{groupmessage.message}}
+            </div>
+            <div class="mb-0 chatmsgspd" *ngIf=" (groupmessage.deletedStatus == false);">
+              {{groupmessage.hashForm}}
+            </div>
+            <div
+            *ngIf="groupmessage.photo!=[] && selectedUser._id== groupmessage.groupSenderId._id && groupmessage.deletedStatus == true">
+            <!-- Images -->
+            <div *ngFor="let img of groupmessage.photo" class="position-relative">
+              <div *ngFor="let type of imgmimetype">
+                <div *ngIf="img.type == type">
+                  <div>
+                    <img src="{{img.path}}" class="imagebr1" alt="User pic" width="100%"
+                      height="100%" />
+                  </div>
+        
+                </div>
+              </div>
+            </div>
+            <!-- Audio -->
+            <div *ngFor="let img of groupmessage.photo">
+              <div *ngFor="let type of audiomimetype">
+                <div *ngIf="img.type == type" class="documentview p-2">
+                  <audio src="{{img.path}}" preload="none" alt="User audio" style="width:200px;"
+                    controls class="htmlvideo">
+                  
+                  </audio>
+        
+                </div>
+              </div>
+            </div>
+            <!-- Video -->
+            <div *ngFor="let img of groupmessage.photo">
+              <div *ngFor="let type of videomimetype">
+                <div *ngIf="img.type == type" class="documentview">
+                  <div>
+                    <video src="{{img.path}}" preload="none" alt="User video"
+                      style=" width: 100%; height: 250px;" controls class="htmlvideo">
+                  
+                    </video>
+                  </div>
+          
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
+          <!-- Group Document -->
+          <div *ngFor="let img of groupmessage.photo" class="documentview">
+            <div *ngIf="img.type == 'application/pdf'"  class="d-flex pdfdiv">
+              <div>
+                <img src="assets/images/pdfnew.png" data-backdrop="none" width="100%" />
+
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+            
+            </div>
+
+            <div *ngIf="img.type == 'text/plain'" 
+              class="d-flex pdfdiv">
+              <div>
+                <img src="assets/images/txt.png" data-backdrop="none" width="100%" />
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+            
+            </div>
+
+            <div *ngIf="img.type == 'text/csv'" 
+              class="d-flex pdfdiv">
+              <div>
+                <img src="assets/docicons/csv.png" data-backdrop="none" width="100%" />
+
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+           
+            </div>
+
+            <div *ngIf="img.type == 'application/msword'"  class="d-flex pdfdiv">
+              <div>
+                <img src="assets/docicons/doc.png" data-backdrop="none" width="100%" />
+
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+             
+            </div>
+
+            <div
+              *ngIf="img.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
+              class="d-flex pdfdiv">
+              <div>
+                <img src="assets/docicons/word.png" data-backdrop="none" width="100%" />
+
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+           
+            </div>
+
+            <div *ngIf="img.type == 'application/vnd.ms-powerpoint'" class="d-flex pdfdiv">
+              <div>
+                <img src="assets/docicons/ppt.png" data-backdrop="none" width="100%" />
+
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+             
+            </div>
+
+            <div
+              *ngIf="img.type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'"
+              class="d-flex pdfdiv">
+              <div>
+                <img src="assets/docicons/pptx.png" data-backdrop="none" width="100%" />
+
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+          
+            </div>
+
+            <div *ngIf="img.type == 'application/vnd.ms-excel'" class="d-flex pdfdiv">
+              <div>
+                <img src="assets/docicons/xls.png" data-backdrop="none" width="100%" />
+
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+            
+            </div>
+
+            <div *ngIf="img.type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
+               class="d-flex pdfdiv">
+              <div>
+                <img src="assets/docicons/xlsx.png" data-backdrop="none" width="100%" />
+
+              </div>
+              <div class="flex-1 min-width-0 width250">
+                <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+              </div>
+           
+            </div>
+          </div>
+          <!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
+          <div *ngIf="groupmessage.media" class="p-2">
+            <audio controls class="htmlvideo" width="250px">
+              <source src="{{groupmessage.media?.path}}" type="audio/webm">
+            </audio>
+         
+          </div>
+            </div>
+            </div>
+      </div>
+      <div class="col-lg-6 col-xl-5 col-md-6 col-sm-12 ml-auto">
+              <div *ngIf="selectedUser._id == groupmessage.groupSenderId._id">
+                  <div class="d-flex mr-2" style="justify-content: flex-end;">
+                    <div class="sendertxt">
+                      <ngx-avatar [name]="groupmessage.groupSenderId.Name" value="28%" size="40" [round]="false"
+                        [cornerRadius]="10">
+                      </ngx-avatar>
+                    </div>
+                      <div class="mb-0 chatmsgspd" *ngIf=" (groupmessage.message && groupmessage.deletedStatus == true);">
+                          {{groupmessage.message}}
+                        </div>
+                        <div class="mb-0 chatmsgspd" *ngIf=" (groupmessage.deletedStatus == false);">
+                          {{groupmessage.hashForm}}
+                        </div>
+                    <div
+                    *ngIf="groupmessage.photo!=[] && selectedUser._id== groupmessage.groupSenderId._id && groupmessage.deletedStatus == true">
+                    <!-- Images -->
+                    <div *ngFor="let img of groupmessage.photo" class="position-relative">
+                      <div *ngFor="let type of imgmimetype">
+                        <div *ngIf="img.type == type">
+                          <div>
+                            <img src="{{img.path}}" class="imagebr1" alt="User pic" width="100%"
+                              height="100%" />
+                          </div>
+                
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Audio -->
+                    <div *ngFor="let img of groupmessage.photo">
+                      <div *ngFor="let type of audiomimetype">
+                        <div *ngIf="img.type == type" class="documentview p-2">
+                          <audio src="{{img.path}}" preload="none" alt="User audio" style="width:200px;"
+                            controls class="htmlvideo">
+                          
+                          </audio>
+                
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Video -->
+                    <div *ngFor="let img of groupmessage.photo">
+                      <div *ngFor="let type of videomimetype">
+                        <div *ngIf="img.type == type" class="documentview">
+                          <div>
+                            <video src="{{img.path}}" preload="none" alt="User video"
+                              style=" width: 100%; height: 250px;" controls class="htmlvideo">
+                          
+                            </video>
+                          </div>
+                  
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
+                  <!-- Group Document -->
+                  <div *ngFor="let img of groupmessage.photo" class="documentview">
+                    <div *ngIf="img.type == 'application/pdf'"  class="d-flex pdfdiv">
+                      <div>
+                        <img src="assets/images/pdfnew.png" data-backdrop="none" width="100%" />
+      
+                      </div>
+                      <div class="flex-1 min-width-0 width250">
+                        <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+                      </div>
+                    
+                    </div>
+      
+                    <div *ngIf="img.type == 'text/plain'" 
+                      class="d-flex pdfdiv">
+                      <div>
+                        <img src="assets/images/txt.png" data-backdrop="none" width="100%" />
+                      </div>
+                      <div class="flex-1 min-width-0 width250">
+                        <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+                      </div>
+                    
+                    </div>
+      
+                    <div *ngIf="img.type == 'text/csv'" 
+                      class="d-flex pdfdiv">
+                      <div>
+                        <img src="assets/docicons/csv.png" data-backdrop="none" width="100%" />
+      
+                      </div>
+                      <div class="flex-1 min-width-0 width250">
+                        <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+                      </div>
+                   
+                    </div>
+      
+                    <div *ngIf="img.type == 'application/msword'"  class="d-flex pdfdiv">
+                      <div>
+                        <img src="assets/docicons/doc.png" data-backdrop="none" width="100%" />
+      
+                      </div>
+                      <div class="flex-1 min-width-0 width250">
+                        <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+                      </div>
+                     
+                    </div>
+      
+                    <div
+                      *ngIf="img.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
+                      class="d-flex pdfdiv">
+                      <div>
+                        <img src="assets/docicons/word.png" data-backdrop="none" width="100%" />
+      
+                      </div>
+                      <div class="flex-1 min-width-0 width250">
+                        <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+                      </div>
+                   
+                    </div>
+      
+                    <div *ngIf="img.type == 'application/vnd.ms-powerpoint'" class="d-flex pdfdiv">
+                      <div>
+                        <img src="assets/docicons/ppt.png" data-backdrop="none" width="100%" />
+      
+                      </div>
+                      <div class="flex-1 min-width-0 width250">
+                        <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+                      </div>
+                     
+                    </div>
+      
+                    <div
+                      *ngIf="img.type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'"
+                      class="d-flex pdfdiv">
+                      <div>
+                        <img src="assets/docicons/pptx.png" data-backdrop="none" width="100%" />
+      
+                      </div>
+                      <div class="flex-1 min-width-0 width250">
+                        <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+                      </div>
+                  
+                    </div>
+      
+                    <div *ngIf="img.type == 'application/vnd.ms-excel'" class="d-flex pdfdiv">
+                      <div>
+                        <img src="assets/docicons/xls.png" data-backdrop="none" width="100%" />
+      
+                      </div>
+                      <div class="flex-1 min-width-0 width250">
+                        <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+                      </div>
+                    
+                    </div>
+      
+                    <div *ngIf="img.type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
+                       class="d-flex pdfdiv">
+                      <div>
+                        <img src="assets/docicons/xlsx.png" data-backdrop="none" width="100%" />
+      
+                      </div>
+                      <div class="flex-1 min-width-0 width250">
+                        <p class="text-left pl-2 pr-3 pt-1">{{img.name}}</p>
+                      </div>
+                   
+                    </div>
+                  </div>
+                  <!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
+                  <div *ngIf="groupmessage.media" class="p-2">
+                    <audio controls class="htmlvideo" width="250px">
+                      <source src="{{groupmessage.media?.path}}" type="audio/webm">
+                    </audio>
+                 
+                  </div>
+                  
+                    </div>
+                    </div>
+                    </div>
+  
+</div>
+</div>
+
+</ng-template>

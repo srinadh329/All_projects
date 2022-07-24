@@ -1,0 +1,45 @@
+-- FUNCTION: store.misc_auth(numeric, character varying, character varying, character varying, character varying, character varying, character varying)
+
+-- DROP FUNCTION store.misc_auth(numeric, character varying, character varying, character varying, character varying, character varying, character varying);
+
+CREATE OR REPLACE FUNCTION store.misc_auth(
+	applicationno numeric,
+	authstatus character varying,
+	productid character varying,
+	authuser character varying,
+	authdate character varying,
+	vouchernumber character varying,
+	authtime character varying)
+    RETURNS character varying
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+AS $BODY$
+DECLARE
+                    vouchercount numeric;
+		            transactionnumber character varying;
+	BEGIN
+	if(productid='NB') THEN
+	 select count(*) + 1 into vouchercount from store.prdtxn 
+							  where trnno ilike '#NB%';
+												END IF;
+  	if(productid='AA') THEN
+	 select count(*) + 1 into vouchercount from store.prdtxn 
+							  where trnno ilike '#AA%';
+												END IF;
+							  transactionnumber = concat(vouchernumber,vouchercount);
+	if(authstatus='A') THEN
+		UPDATE store.prdtxn SET  status=authstatus,trnno=transactionnumber,modtim=authtime,modusr=authuser,moddat= authdate  where appno = applicationno ;
+		RETURN 'Authorized';
+		END IF;
+	if(authstatus='R') THEN
+		UPDATE store.prdtxn SET  status=authstatus,modtim=authtime,modusr=authuser,moddat= authdate  where appno = applicationno ;		
+		RETURN 'Rejected';
+		END IF;
+		
+	END;
+$BODY$;
+
+ALTER FUNCTION store.misc_auth(numeric, character varying, character varying, character varying, character varying, character varying, character varying)
+    OWNER TO postgres;

@@ -1,0 +1,165 @@
+<app-sidebar></app-sidebar>
+
+<div class="main">
+    <app-header></app-header>
+    <div class="body">
+        <div class="row" *ngIf="!isPayAllInvoices">
+            <div class="col-6 mt-1">
+            
+                <h5 style="cursor:pointer" (click)="backToInvoice()"><span><i class="fas fa-arrow-left fa-1x theme-color pointer" style="margin-right: 10px;"></i></span>  BACK TO INVOICES</h5>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <ng-container *ngIf="isPayAllInvoices">
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-3">
+                            <div class="circle">
+                                <div class="bubble"><span>2</span></div>
+                                <img class="img-style-note" src="assets/invoice.png" alt="invoice">
+                            </div>
+                        </div>
+                        <div class="col-5  text-center">
+                            <p class="m-0"><span class="badge badge-light w-100">You currently have 2 Unpaid
+                                    Invoices</span></p>
+                            <select class="mt-3 ml-unpaid" placeholder="Select a Payment Option">
+                                <option value="">Credit Card/Debit Card</option>
+                                <option value="">Bank Account</option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <div class="d-flex flex-column align-items-center justify-content-center">
+                                <h3>$300</h3>
+                                <button class="btn btn-success" [disabled]="!checkedInvoicesLength">PAY INVOICES</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-1">
+                            <div>
+                                <input class="form-check-input" type="checkbox"
+                                    [checked]="checkedInvoicesLength == invoices.length" id="payAllInvoice"
+                                    (click)="payAllSelected($event)" value="" aria-label="...">
+                            </div>
+                        </div>
+                        <div class="col-11">
+                            <hr>
+                            <label style = "cursor:pointer" for="payAllInvoice">SELECT ALL</label>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row mt-4 mb-2 align-items-center" *ngFor="let invoiceList of invoices;let i = index">
+                        <div class="row align-items-center">
+                            <div class="col-1">
+                                <div>
+                                    <input class="form-check-input align-checkbox"
+                                        (click)="selectInvoice($event,invoiceList)"
+                                        [checked]="findElementExists(invoiceList)" type="checkbox" id="checkboxNoLabel"
+                                        value="" aria-label="...">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <section>
+                                    <p><span class="badge badge-light">{{invoiceList.invoiceNo}}</span></p>
+                                </section>
+
+                            </div>
+                            <div class="col-5">
+                                <section>
+                                    <p><span class="invoice-details">Date Generated:</span><span>
+                                            {{invoiceList.date}}</span></p>
+                                    <p><span class="invoice-details">Resident ID:</span><span>
+                                            {{invoiceList.residentId}}</span></p>
+                                    <p><span class="invoice-details">Resident Name:</span><span>
+                                            {{invoiceList.residentName}}</span></p>
+
+                                </section>
+                            </div>
+                            <div class="col-4">
+                                <section>
+                                    <p><span class="invoice-details">Building Name:</span><span>
+                                            {{invoiceList.buildingName}}</span></p>
+                                    <p><span class="invoice-details">Amount:</span><span> {{invoiceList.amount}}</span>
+                                    </p>
+                                    <p><span class="invoice-details">Invoice No:</span><span>
+                                            {{invoiceList.invoiceReference}}</span></p>
+
+                                </section>
+                            </div>
+                            <div class="row" *ngIf="i < invoices.length - 1">
+                                <div class="col-1"></div>
+                                <div class="col-lg-11">
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="!isPayAllInvoices">
+   
+                    <div class="row">
+                        <div class="col-7 border-end">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="circle">
+                
+                                        <img class="img-style-note" src="assets/invoice.png" alt="invoice">
+                                    </div>
+                                </div>
+                                <div class="col-7 text-center">
+                                    <select class="mt-3 ml-unpaid" placeholder="Select a Payment Option">
+                                        <option value="">Credit Card/Debit Card</option>
+                                        <option value="">Bank Account</option>
+                                    </select>
+                                    <button class="btn btn-success mt-5" style="width:80%">PAY INVOICE</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="d-flex flex-column align-items-center justify-content-center">
+                                <h3 class="mb-3">AMOUNT DUE:</h3>
+                                <h3>$300</h3>
+                                <p class="mt-3"><span class="badge badge-light w-100">INVOICE NUMBER: L250065</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mt-4">
+                        <div class="col-3">
+                            <section>
+                                <p><span class="badge badge-light">L250065</span></p>
+                            </section>
+
+                        </div>
+                        <div class="col-5">
+                            <section>
+                                <p><span class="invoice-details">Date Generated:</span><span>
+                                    Wednesday, July 7th 2021</span></p>
+                                <p><span class="invoice-details">Resident ID:</span><span>
+                                    #54732964</span></p>
+                                <p><span class="invoice-details">Resident Name:</span><span>
+                                    Dre Chrisiano</span></p>
+
+                            </section>
+                        </div>
+                        <div class="col-4">
+                            <section>
+                                <p><span class="invoice-details">Building Name:</span><span>
+                                    Infinite Chicago</span></p>
+                                <p><span class="invoice-details">Amount:</span><span> $300</span>
+                                </p>
+                                <p><span class="invoice-details">Invoice No:</span><span>
+                                    #78324987</span></p>
+
+                            </section>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

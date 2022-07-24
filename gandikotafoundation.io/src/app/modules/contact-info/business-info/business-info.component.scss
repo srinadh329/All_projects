@@ -1,0 +1,23 @@
+.main-section{
+    padding: 0 48px 0 27px;
+    .action-section{
+        font-size: 18px;
+    }
+    .card-item{
+        width: 100%;
+        padding: 2em 2em;
+        background: #efeded;
+        border-radius: 10px;
+        .card-header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card-section{
+            padding-top: 12px;
+        }
+        .row-item{
+            padding: 2rem;
+        }
+    }
+}

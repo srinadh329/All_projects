@@ -1,0 +1,83 @@
+.contactus-section{
+
+padding-top: 43px;
+    padding-bottom: 45px;
+    background-color: #e1ebed;
+
+    }
+    .contact-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+.contactus-circle{
+	background-color: #fff;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    padding: 11px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.contact-section form{
+padding: 14px 40px 40px 46px;
+}
+.contact-section form .form-control{
+
+   padding: 12px 12px 12px 12px;
+    background-color: #68a0ca;
+     color: #fff; 
+    border: none;
+}
+.contact-section form .form-control:focus{
+	box-shadow: none;
+}
+
+textarea{
+	height: 200px;
+}
+.contact-section form button{
+padding: 10px 50px 10px 50px;
+    background-color: #fff;
+        font-size: 17px;
+    font-weight: 500;
+    }
+    input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+.bcg-button{
+background: #fff;
+   padding: 10px 45px 10px 45px;
+    border-radius: 7px;
+    color: #000;
+    font-size: 19px;
+    font-weight: 600;
+    border: none;
+
+    }
+    .address-view{
+    	padding: 30px 0 30px 0;
+    }
+    .contact-view{
+    	padding: 40px 0 40px 0;
+    }
+    .contact-anchor a{
+            color: #212529 !important;
+    text-decoration: none;
+    }
+    .contact-background{
+        background:linear-gradient(#082871,#00A9EC);
+        border-radius: 10px;
+    }
+    .contact-background form{
+            margin-top: 25px;
+    margin-bottom: 25px;
+    }

@@ -1,0 +1,26 @@
+.login-button{
+border: 1px solid #ED1A21;
+    padding: 8px 40px 8px 40px;
+    background: linear-gradient(-90deg, #211F20, #ED1A21);
+    color: #fff;
+
+}
+.dialog-header{
+    background: linear-gradient(-90deg, #211F20, #ED1A21);
+    // background: #211F20;
+    height:47px; 
+     width:auto;
+     margin-right: -24px;
+     margin-left: -24px;
+     margin-top: -26px;
+}
+.task-header {
+    background-color: transparent;
+    padding: 0 5px;
+    padding: 0px 10px 0px 20px;
+    height: 47px;
+     color:  #fff;
+}
+.fx-spacer {
+    flex: 1 1 auto;
+}

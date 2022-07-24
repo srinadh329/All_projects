@@ -1,0 +1,51 @@
+@mixin gradient-side-nav() {
+    background: rgba(0, 169, 236, 1);
+    background: -moz-linear-gradient(165deg, #00A9EC 0%, #082871 100%);
+    background: -webkit-linear-gradient(165deg, #00A9EC 0%, #082871 100%);
+    background: transparent linear-gradient(165deg, #00A9EC 0%, #082871 100%) 0% 0% no-repeat padding-box;
+  }
+  @mixin gradient-login() {
+    background: rgba(0, 169, 236, 1);
+    background: -moz-linear-gradient(135deg, #00A9EC 0%, #082871 100%);
+    background: -webkit-linear-gradient(135deg, #00A9EC 0%, #082871 100%);
+    background: transparent linear-gradient(135deg, #00A9EC 0%, #082871 100%) 0% 0% no-repeat padding-box;
+  }
+  @mixin common-header-gradient() {
+    background: rgba(0, 169, 236, 1);
+    background: -moz-linear-gradient(90deg, #00A9EC 0%, #082871 100%);
+    background: -webkit-linear-gradient(90deg, #00A9EC 0%, #082871 100%);
+    background: transparent linear-gradient(90deg, #00A9EC 0%, #082871 100%) 0% 0% no-repeat padding-box;
+  }
+  @mixin home-border-gradient() {
+    background: rgba(0, 169, 236, 1);
+    background: -moz-linear-gradient( to left, rgba(0, 169, 236, 1) 88%, rgba(0, 169, 236, 1) 70%, rgb(255, 255, 255) 88% ) bottom no-repeat;
+    background: -webkit-linear-gradient( to left, rgba(0, 169, 236, 1) 88%, rgba(0, 169, 236, 1) 70%, rgb(255, 255, 255) 88% ) bottom no-repeat;
+    background: transparent linear-gradient( to left, rgba(0, 169, 236, 1) 88%, rgba(0, 169, 236, 1) 70%, rgb(255, 255, 255) 88% ) bottom no-repeat;;
+  }
+  @mixin button {
+    @include gradient-login;
+    padding: 10px 34px 10px 34px;
+    font-size: 14px;
+    line-height: initial;
+    text-transform: capitalize;
+    font-weight: 700;
+    color: $white-color;
+    border: 1px solid $transparent-color;
+    position: relative;
+    cursor: pointer;
+    box-shadow: none;
+    outline: none;
+    transition: background-color 0.6s, color 0.6s;
+    -webkit-transition: all 0.6s;
+    -o-transition: all 0.6s;
+    -ms-transition: all 0.6s;
+    -moz-transition: all 0.6s;
+    transition: all 0.6s;
+
+    
+  
+  }
+  @mixin list{
+    list-style: none;
+   
+  }

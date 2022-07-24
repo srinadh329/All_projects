@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-md-12 d-flex align-items-center">
+        <span class="pointer" (click)="navigateBack()"><i class="fa fa-arrow-left" aria-hidden="true"></i></span>
+        <h1 class="mb-0 ml-2">View Request Info</h1>
+    </div>
+    <hr />
+    <form [formGroup]='contactRequest' (ngSubmit)="onSubmit()" class="w-100">
+        <mat-form-field appearance="outline" class="w-100 col-md-6 col-sm-12">
+            <mat-label>Person Name</mat-label>
+            <input matInput formControlName="name" readonly>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100 col-md-6 col-sm-12">
+            <mat-label>Person Email</mat-label>
+            <input matInput formControlName="email" readonly>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100 col-md-6 col-sm-12">
+            <mat-label>Person Phone Number</mat-label>
+            <input matInput formControlName="phone" readonly>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-100 col-md-6">
+            <mat-label>Message</mat-label>
+            <textarea matInput formControlName="message" rows='6' readonly></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100 col-md-6">
+            <mat-label>Contact Status</mat-label>
+            <mat-select formControlName="status">
+                <mat-option value="false">
+                    Not Contacted
+                </mat-option>
+                <mat-option value="true">
+                    Contacted
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div class="col-md-12 text-center mt-4">
+            <button class="submit-button " type="submit">Update this Details</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,128 @@
+#myCarousel .carousel-item .mask {
+    position: absolute;
+    top: 0;
+	left:0;
+	height:100%;
+    width: 100%;
+    background-attachment: fixed;
+}
+#myCarousel h4{
+	font-size:50px;
+	margin-bottom:15px;
+	color:#FFF;
+	line-height:100%;
+	letter-spacing:0.5px;
+	font-weight:600;
+}
+#myCarousel p{
+	font-size:18px;
+	margin-bottom:15px;
+	color:#d5d5d5;
+}
+#myCarousel .carousel-item a
+{
+  /*background:#F47735; 
+  font-size:14px; 
+  color:#FFF; 
+  padding:13px 32px; 
+  display:inline-block; */
+  background: #F47735;
+    font-size: 14px;
+    color: #FFF;
+    padding: 10px 34px;
+    display: inline-block;
+    border-radius: 13px;
+}
+#myCarousel .carousel-item a:hover
+{
+  background:#394fa2; 
+  text-decoration:none;  
+}
+
+#myCarousel .carousel-item h4
+{
+   animation-name:fadeInLeft;
+} 
+#myCarousel .carousel-item p
+{
+  animation-name:slideInRight;
+  text-align: justify;
+} 
+#myCarousel .carousel-item a
+{
+  animation-name:fadeInUp;
+}
+#myCarousel .carousel-item .mask img
+{
+  animation-name:slideInRight; 
+  display:block; 
+  height:auto; 
+  max-width:100%;
+}
+#myCarousel h4, #myCarousel p, #myCarousel a, #myCarousel .carousel-item .mask img
+{
+    animation-duration: 1.2s;
+    animation-fill-mode: both;
+}
+#myCarousel .container 
+{
+  /*max-width: 1430px;*/
+  margin-top: 180px;  
+}
+#myCarousel .carousel-item
+{
+  height:100%; min-height:680px; 
+}
+#myCarousel
+{
+  position:relative; 
+  z-index:1; 
+}
+.carousel-item {
+    position: relative;
+    display: none;
+    align-items: center;
+    width: 100%;
+    transition: -webkit-transform .6s ease;
+    transition: transform .6s ease;
+    transition: transform .6s ease,-webkit-transform .6s ease;
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+.carousel-fade .carousel-item {
+	opacity: 0;
+	transition-duration: .6s;
+	transition-property: opacity
+}
+.carousel-fade .carousel-item-next.carousel-item-left, .carousel-fade .carousel-item-prev.carousel-item-right, .carousel-fade .carousel-item.active {
+	opacity: 1
+}
+.carousel-fade .carousel-item-left.active, .carousel-fade .carousel-item-right.active {
+	opacity: 0
+}
+.carousel-fade .carousel-item-left.active, .carousel-fade .carousel-item-next, .carousel-fade .carousel-item-prev, .carousel-fade .carousel-item-prev.active, .carousel-fade .carousel-item.active {
+	
+	transform: translateX(0)
+}
+
+
+@media only screen and (max-width: 360px) {
+ #myCarousel .carousel-item {
+    height: 100%;
+    min-height: 870px;
+    
+}
+.carousel-inner{
+  background-color: #3382b9;
+}
+}
+@media only screen and (max-width: 600px) {
+ #myCarousel .carousel-item {
+    height: 100%;
+    min-height: 870px;
+    background-color: #3382b9;
+}
+.carousel-inner{
+  background-color: #3382b9;
+}
+}

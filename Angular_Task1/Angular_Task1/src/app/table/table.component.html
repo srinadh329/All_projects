@@ -1,0 +1,79 @@
+<div class="signout-view">
+  <p>User Details</p>
+
+  <p (click)="logout()">
+      SignOut
+    <!-- <mat-icon>power_settings_new</mat-icon>SignOut -->
+  </p>
+</div>
+
+<mat-form-field appearance="outline">
+    <mat-select (selectionChange)="getSelected($event)">
+      <mat-option value="high">High to Low</mat-option>
+      <mat-option value="low">Low to High</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+<p (click)="addUser()">	<mat-icon class="add">add</mat-icon> Add User</p>
+
+<input type="text" (keyup)="search(value)" [(ngModel)]="value">
+<table>
+    <thead>
+        <tr>
+            <th>Id
+                <mat-icon (click)="asyn('id')">keyboard_arrow_up</mat-icon>
+                <mat-icon (click)="desyn('id')">keyboard_arrow_down</mat-icon>
+            </th>
+            <th>Name
+                <mat-icon (click)="asynName('name')">keyboard_arrow_up</mat-icon>
+                <mat-icon (click)="desynName('name')">keyboard_arrow_down</mat-icon>
+            </th>
+            <th>Age
+                <mat-icon (click)="asyn('age')">keyboard_arrow_up</mat-icon>
+                <mat-icon (click)="desyn('age')">keyboard_arrow_down</mat-icon>
+            </th>
+            <th>subj1_marks
+                <mat-icon (click)="asyn('subj1_marks')">keyboard_arrow_up</mat-icon>
+                <mat-icon (click)="desyn('subj1_marks')">keyboard_arrow_down</mat-icon>
+            </th>
+            <th>subj2_marks
+                <mat-icon (click)="asyn('subj2_marks')">keyboard_arrow_up</mat-icon>
+                <mat-icon (click)="desyn('subj2_marks')">keyboard_arrow_down</mat-icon>
+            </th>
+            <th>subj3_marks
+                <mat-icon (click)="asyn('subj3_marks')">keyboard_arrow_up</mat-icon>
+                <mat-icon (click)="desyn('subj3_marks')">keyboard_arrow_down</mat-icon>
+            </th>
+            <th>subj4_marks
+                <mat-icon (click)="asyn('subj4_marks')">keyboard_arrow_up</mat-icon>
+                <mat-icon (click)="desyn('subj4_marks')">keyboard_arrow_down</mat-icon>
+            </th>
+            <th>Total
+                <mat-icon (click)="asyn('total')">keyboard_arrow_up</mat-icon>
+                <mat-icon (click)="desyn('total')">keyboard_arrow_down</mat-icon>
+            </th>
+            <th>Status
+                <mat-icon (click)="asynName('status')">keyboard_arrow_up</mat-icon>
+                <mat-icon (click)="desynName('status')">keyboard_arrow_down</mat-icon>
+            </th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let students of student">
+            <td>{{students?.id}}</td>
+            <td>{{students?.name}}</td>
+            <td>{{students?.age}}</td>
+            <td>{{students?.subj1_marks}}</td>
+            <td>{{students?.subj2_marks}}</td>
+            <td>{{students?.subj3_marks}}</td>
+            <td>{{students?.subj4_marks}}</td>
+            <td>{{students?.total}}</td>
+            <td>{{students?.status}}</td>
+            <td (click)="editUser(students)"><mat-icon>edit</mat-icon></td>
+            <td (click)="deleteUser(students)"><mat-icon>delete</mat-icon></td>    
+        </tr>
+    </tbody>
+</table>

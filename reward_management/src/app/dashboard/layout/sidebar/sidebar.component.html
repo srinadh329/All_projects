@@ -1,0 +1,14 @@
+<div class="sidenav">
+    <div class="logo">
+            <img src="../../assets/Logo-circle-icon.png" alt="inhabitr_logo">
+            <p class="text-center"><span class="badge badge-light">{{propertyName}}</span></p>
+    </div>
+    <div>
+       <span class="tabs d-block position-relative"><img class="tabImage" src="../../assets/add-icon.png" alt="add"><img class="d-none" [ngClass]="{'rectangle-position':rl.isActive}"  src="../../assets/Rectangle.png" alt="add"> <a routerLink="/create-reward" routerLinkActive="active" #rl="routerLinkActive">CREATE REWARD</a></span>
+       <span class="tabs d-block position-relative"><img class="tabImage" src="../../assets/invoice-icon.png" alt="reward"><img class="d-none" [ngClass]="{'rectangle-position':routerReward.isActive}"  src="../../assets/Rectangle.png" alt="add"> <a routerLink="/reward-details" routerLinkActive="active" #routerReward="routerLinkActive">REWARD TRANSACTIONS</a></span>  
+       <span class="tabs d-block position-relative"><img class="tabImage" src="../../assets/rewards-icon.png" alt="reward"><img class="d-none" [ngClass]="{'rectangle-position':routerRewardDetails.isActive}"  src="../../assets/Rectangle.png" alt="add"> <a routerLink="/rewards" routerLinkActive="active" #routerRewardDetails="routerLinkActive">RECENTLY CREATED REWARDS</a></span>   
+       <!-- <span class="tabs"><img class="tabImage" src="../../assets/invoice-icon.png" alt="invoice"> <a routerLink="/invoices" (click)="toggleClass($event)">INVOICES</a></span>
+       <span class="tabs"><img class="tabImage" src="../../assets/payment-icon.png" alt="payment"> <a routerLink="/payments" (click)="toggleClass($event)">PAYMENTS</a></span> -->
+       <!-- <span class="tabs"><img class="tabImage" src="../../assets/add-icon.png" alt="add"> <a routerLink="/cancelled-rewards" (click)="toggleClass($event)">CANCELLED REWARD</a></span> -->
+    </div>
+  </div>

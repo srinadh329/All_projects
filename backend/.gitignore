@@ -1,0 +1,6 @@
+node_modules
+.idea
+/server/config/local.env.js
+/server/config/express.js
+npm-debug.log
+

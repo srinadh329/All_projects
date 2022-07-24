@@ -1,0 +1,23 @@
+<div class="sidenav">
+    <div class="logo ">
+        <img src="assets/images/Logo-circle-icon.png" alt="inhabitr_logo">
+        <p class="text-center "><span class="badge badge-light">Administrator</span></p>
+    </div>
+    <div class="mt-5">
+        <div class="tabs position-relative" [ngClass]="{'active':manager.isActive}"><img class="tabImage d-block"
+                src="assets/images/user.svg" alt="add"><img class="d-none"
+                [ngClass]="{'rectangle-position':manager.isActive}" src="assets/images/Rectangle.png" alt="add"> <a
+                routerLink="/superadmin/dashboard/manager" routerLinkActive="none" #manager="routerLinkActive"
+                class="d-block">PROPERTY MANAGERS</a></div>
+        <div class="tabs position-relative" [ngClass]="{'active':reconciliation.isActive}"><img class="tabImage d-block"
+                src="assets/images/reconciliation.svg" alt="reward"><img class="d-none"
+                [ngClass]="{'rectangle-position':reconciliation.isActive}" src="assets/images/Rectangle.png" alt="add">
+            <a routerLink="/superadmin/dashboard/reconciliation" routerLinkActive="none" #reconciliation="routerLinkActive"
+                class="d-block">REWARDS RECONCILIATION REPORT</a></div>
+        <div class="tabs position-relative" [ngClass]="{'active':transactions.isActive}"><img class="tabImage d-block"
+                src="assets/images/rewards-icon.svg" alt="reward"><img class="d-none"
+                [ngClass]="{'rectangle-position':transactions.isActive}" src="assets/images/Rectangle.png" alt="add"> <a
+                routerLink="/superadmin/dashboard/transactions" routerLinkActive="none" #transactions="routerLinkActive"
+                class="d-block">REWARD TRANSACTIONS</a></div>
+    </div>
+</div>

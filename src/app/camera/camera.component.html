@@ -1,0 +1,42 @@
+
+<!-- <div class="row" *ngIf="videorecord" style="text-align: center;">
+  Recording Time Left: {{recordminute}} : {{recordseconds}}
+</div> -->
+<div class="row" style="position: relative;height:100%;">
+  <video #video class="video" autoplay playsinline ></video>
+  <div  class="closrebtn">
+    <button *ngIf="!trigger" type="button" class="close" (click)=closedialog()>
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <div  *ngIf="videorecord" class="poppins-font font-weight-bold font-color">
+  Recording Time Left: {{recordminute}} : {{recordseconds}}
+</div> 
+  </div>
+
+  <div *ngIf="cameraInit" class="camerainit">
+  <button [disabled]="videorecord || trigger" (click)="takepicture()" class="bg-cam">
+  <img src="assets/images/cameracall.svg">
+  </button>
+
+  <button [disabled]="trigger" (click)="startrecord()" *ngIf="!videorecord" class="ml-3" >
+    <img src="assets/images/Videocall.svg">
+
+  </button>
+
+  <button *ngIf="videorecord" (click)="stoprecord()" class="ml-3">
+    <img src="assets/images/video0ff.svg">
+  </button>
+  <button *ngIf="videorecord && !pauserecordvideo" (click)="pauserecord()" class="ml-3">
+    <mat-icon>pause</mat-icon>
+  </button>
+  <button *ngIf="videorecord && pauserecordvideo" (click)="resumerecord()" class="ml-3">
+    <mat-icon>pause</mat-icon>
+  </button>
+
+  <button *ngIf="videorecord" (click)="stoprecord()" class="ml-3">
+    <i class="fas fa-stop"></i>
+  </button>
+</div>
+</div>
+
+  <canvas #canvas id="canvas" class="vid" style="display: none"></canvas>

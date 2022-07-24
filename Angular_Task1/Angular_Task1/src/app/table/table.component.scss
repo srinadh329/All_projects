@@ -1,0 +1,15 @@
+.signout-view{
+    padding: 10px 11px 10px 0;
+    background-color: #dfdfdf;
+    :nth-child(1){
+        float: left;
+    }
+    :nth-child(2){
+        text-align: right;
+        vertical-align: bottom
+    }
+}
+.add{
+    vertical-align: bottom;
+    cursor: pointer;
+}

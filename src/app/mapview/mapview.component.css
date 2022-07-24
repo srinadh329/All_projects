@@ -1,0 +1,94 @@
+.map_list li{
+    list-style: none;
+    font-size: 12px;
+    padding-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.closemodal{
+    position: absolute;
+    right: 0;
+    margin: 10px;
+    padding: 7px 10px 7px 10px;
+    background-color: #292929;
+    border-radius: 50%;
+    color:#fff;
+}
+
+
+.sendbtn{
+    background: transparent linear-gradient(180deg, #6966E9 0%, #69B1E3 100%) 0% 0% no-repeat padding-box;
+    border-radius: 4px;
+    padding: 3px 26px;
+    font-size: 14px;
+    color: #fff;
+    }
+
+    .btnbgcolr{
+        background: transparent linear-gradient(180deg, #6966E9 0%, #69B1E3 100%) 0% 0% no-repeat padding-box;
+        border-radius: 4px;
+        color:#fff;
+    }
+    
+    .p-24{
+        padding: 0px 24px;
+    }
+
+    .locationicon{
+        position: absolute;
+        padding: 10px;
+    }
+
+
+
+    .mapsearch{
+     padding: .375rem 2.45rem;
+    }
+    .mapsearch::placeholder{
+        color:#a5a5a5;
+        font-size: 14px;
+    }
+    .mapsearch:focus{
+        box-shadow: 0 0 0 0.2rem rgba(76, 125, 255,0.2);
+    }
+
+   
+    .a5a5a{
+        color: #a5a5a5;
+    }
+
+    .locationimg{
+        background-color: #F2F2FF;
+        border-radius: 50%;
+        display: inline-block;
+ 
+        padding: 3px 3px;
+        border-radius: 50%;
+        margin-right: 5px;
+    }
+    
+    .scrollable
+    {
+   
+         height:200px;
+         overflow-y: scroll
+    }
+
+    .scrollable::-webkit-scrollbar
+{
+width: 5px;  
+background-color: #f1f1f1;
+}
+
+.scrollable::-webkit-scrollbar-thumb
+{
+background-color:#a5a5a5;
+}
+
+
+.p015{
+    padding:0px 15px; 
+}
+

@@ -1,0 +1,196 @@
+<div class="common-transform">
+  <mat-card class="common-header">
+    <div class="row">
+      <div class="d-flex flex-column">
+        <h6 class="pt-2 no-space">{{selected}} Reports</h6>
+
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="creation-form mt-4" *ngIf="selected==='Branch Users'">
+    <div class="row d-flex flex-column align-items-end">
+      <div class="d-flex">
+        <form [formGroup]="userStatusForm" #formDirective="ngForm">
+          <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-8 w-100">
+            <mat-select matInput *ngIf="selected==='Branch Users'" formControlName="status" placeholder="Select Status" (selectionChange)="getBranchUserList();">
+              <mat-option value="ALL">ALL</mat-option>
+              <mat-option value="ACTIVE">ACTIVE</mat-option>
+              <mat-option value="INACTIVE">INACTIVE</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </form>
+     
+        <div>
+          <img src="././assets/images/excel.png"
+            (click)=" (branchUsersData && branchUsersData.length>0) && exportJsonAsExcelFile(branchUsersData,'Branch Users')"
+            class="pr-4" width="50%">
+          <img src="././assets/images/pdf.png"
+            (click)="(branchUsersData && branchUsersData.length>0) && downloadPdf()" width="30%">
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+
+  <mat-card class="creation-form mt-4" *ngIf="selected==='Online Users'">
+    <div class="row d-flex flex-column align-items-end">
+      <div class="d-flex">
+        <form [formGroup]="userStatusForm" #formDirective="ngForm">
+          <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-8 w-100">
+            <mat-select matInput *ngIf="selected==='Online Users'" formControlName="status" placeholder="Select Type" (selectionChange)="getOnlineUsersList();">
+              <mat-option value="ALL" >ALL</mat-option>
+              <mat-option value="ACTIVE" >ACTIVE</mat-option>
+              <mat-option value="INACTIVE" >INACTIVE</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </form>
+      
+        <div>
+          <img src="././assets/images/excel.png"
+            (click)=" (onlineUsersData && onlineUsersData.length>0) && exportJsonAsExcelFile(onlineUsersData,'Online Users')"
+            class="pr-4" width="50%">
+          <img src="././assets/images/pdf.png"
+            (click)="(onlineUsersData && onlineUsersData.length>0) && downloadPdf()" width="30%">
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="creation-form mt-4" *ngIf="selected==='Branch Wise Transactions'">
+    <form [formGroup]="branchTransactionsForm" #formDirective="ngForm" (ngSubmit)="branchWiseTransactions();">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 col-sm-9">
+          <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-4 w-100">
+            <mat-select matInput formControlName="brnid" placeholder="Select Type">
+              <mat-option *ngFor="let brn of branches" [value]="brn.brnid">{{brn.brnnam}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-4 w-100">
+            <input matInput [matDatepicker]="picker1" placeholder="From Date" formControlName="fromDate"
+              (dateChange)="datechangebranch($event)" [max]="maxDate" readonly>
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-4 w-100">
+            <input matInput [matDatepicker]="picker2" placeholder="To Date" formControlName="toDate"
+              [min]="maxDatebranch" [max]="maxDate" readonly>
+            <mat-datepicker-toggle matSuffix [for]="picker2" [disabled] ="disabletodate"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+          <div class="ml-3">
+          <button type="submit" class="label-button">Search</button>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-2 col-sm-3 d-flex flex-column align-items-end">
+          <div>
+            <img src="././assets/images/excel.png"
+              (click)=" (branchWiseTrnsactionsData && branchWiseTrnsactionsData.length>0) && exportJsonAsExcelFile(branchWiseTrnsactionsData,'Branch Wise Transactions')"
+              class="pr-4" width="50%">
+            <img src="././assets/images/pdf.png"
+              (click)=" (branchWiseTrnsactionsData && branchWiseTrnsactionsData.length>0) && downloadPdf()" width="30%">
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </mat-card>
+
+
+  <mat-card class="creation-form mt-4" *ngIf="selected==='Product Wise Transactions'">
+    <form [formGroup]="productWiseTransactionForm" #formDirective="ngForm" (ngSubmit)="productWiseTransactions();">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 col-sm-9">
+          <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-4 w-100">
+            <mat-select matInput formControlName="prdid" placeholder="Select Type">
+              <mat-option *ngFor="let prd of productdata" [value]="prd.prdid">{{prd.prdlnm}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-4 w-100">
+            <input matInput [matDatepicker]="picker1" placeholder="From Date" formControlName="fromDate"
+              (dateChange)="datechangeproduct($event)" [max]="maxDate" readonly>
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-4 w-100">
+            <input matInput [matDatepicker]="picker2" placeholder="To Date" formControlName="toDate"
+              [min]="maxDateproduct" [max]="maxDate" readonly>
+            <mat-datepicker-toggle matSuffix [for]="picker2" [disabled] ="disabletodate"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+          <div class="ml-3">
+            <button type="submit" class="label-button">Search</button>
+          </div>
+          
+        </div>
+
+        <div class="col-lg-4 col-md-2 col-sm-3 d-flex flex-column align-items-end">
+          <div>
+            <img src="././assets/images/excel.png"
+              (click)="(productWiseTransactionsData && productWiseTransactionsData.length>0) && exportJsonAsExcelFile(productWiseTransactionsData,'Product Wise Transactions')"
+              class="pr-4" width="50%">
+            <img src="././assets/images/pdf.png"
+              (click)=" (productWiseTransactionsData && productWiseTransactionsData.length>0) && downloadPdf()" width="30%">
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+
+  <mat-card class="creation-form mt-4" *ngIf="selected==='Branch User Wise Transactions'">
+    <form [formGroup]="branchUserTransactionForm" #formDirective="ngForm" (ngSubmit)="branchuserwise();">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 col-sm-9">
+          <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-4 w-100">
+            <mat-select matInput formControlName="brnid" placeholder="Select branch" (selectionChange)="getbranchwiseuser($event)">
+              <mat-option *ngFor="let b of branches" [value]="b.brnid">{{b.brnnam}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-4 w-100">
+            <mat-select matInput formControlName="userid" placeholder="Select User">
+              <mat-option *ngFor="let b of branchUsers" [value]="b.loginid">{{b.loginid}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-4 w-100">
+            <input matInput [matDatepicker]="picker1" placeholder="From Date" formControlName="fromDate"
+              (dateChange)="datechangeuserwise($event)" [max]="maxDate" readonly>
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-4 w-100">
+            <input matInput [matDatepicker]="picker2" placeholder="To Date" formControlName="toDate"
+              [min]="maxDateuserwise" [max]="maxDate" readonly>
+            <mat-datepicker-toggle matSuffix [for]="picker2" [disabled] ="disabletodate"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+          <button type="submit" class="label-button">Search</button>
+        </div>
+
+        <div class="col-lg-4 col-md-2 col-sm-3 d-flex flex-column align-items-end">
+          <div>
+            <img src="././assets/images/excel.png"
+              (click)=" (branchUsersTransactionsData && branchUsersTransactionsData.length>0) && exportJsonAsExcelFile(branchUsersTransactionsData,'Branch User Wise Transactions')"
+              class="pr-4" width="50%">
+            <img src="././assets/images/pdf.png"
+              (click)="(branchUsersTransactionsData && branchUsersTransactionsData.length>0) && downloadPdf()" width="30%">
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+
+
+
+  <app-table *ngIf="selected==='Online Users'" [tableHeaders]="onlineUsersHeaders" [reportList]="onlineUsersData">
+  </app-table>
+  <app-table *ngIf="selected==='Branch Users'" [tableHeaders]="branchUersHeaders" [userwiselist]="branchUsersData">
+  </app-table>
+  <app-table *ngIf="selected==='Branch Wise Transactions'" [tableHeaders]="branchwisetransactionHeader"
+    [branchwisetransactionreportdata]="branchWiseTrnsactionsData"></app-table>
+  <app-table *ngIf="selected==='Product Wise Transactions'" [tableHeaders]="productWiseTransactionHeaders"
+    [reportsProductList]="productWiseTransactionsData"></app-table>
+  <app-table *ngIf="selected==='Branch User Wise Transactions'" [tableHeaders]="BranchUserTransactionHeaders"
+    [branchwiseuserdata]="branchUsersTransactionsData"></app-table>
+</div>

@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-md-12 d-flex align-items-center">
+        <span class="pointer" (click)="navigateBack()"><i class="fa fa-arrow-left" aria-hidden="true"></i></span>
+        <h1 class="mb-0 ml-2">{{title}} Testimonial</h1>
+    </div>
+    <hr />
+    <form [formGroup]='Testimonial' (ngSubmit)="onSubmit()" class="w-100">
+        <mat-form-field appearance="outline" class="w-100 col-md-12 col-sm-12">
+            <mat-label>Person Name</mat-label>
+            <input matInput formControlName="name">
+            <mat-error *ngIf="Testimonial.get('name').hasError('required')">
+                Please Enter Name
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100 col-md-12">
+            <mat-label>Review</mat-label>
+            <textarea matInput formControlName="review" rows='6'></textarea>
+            <mat-error *ngIf="Testimonial.get('review').hasError('required')">
+                Please Enter Review
+            </mat-error>
+        </mat-form-field>
+        <div class="d-flex w-100 justify-content-between">
+            <div class="w-100 col-md-6">
+                <div class="border-upload" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
+                    <img *ngIf="Testimonial?.value?.image" [src]="Testimonial?.value?.image" width="8%" />
+                    <input type="file" accept="image/*" #image class="custom-file-input"
+                        (change)="uploadImage(image.files)" class="custom-control-input d-none" id="image">
+                    <span class="list-browse"> Drag Your Images Here or</span>
+                    <span (click)="openimage();$event.stopPropagation()" class="blue pointer pl-2">Browse</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 text-center mt-4">
+            <button class="submit-button " type="submit">Create this Details</button>
+        </div>
+    </form>
+</div>

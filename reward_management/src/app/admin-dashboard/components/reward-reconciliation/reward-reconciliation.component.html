@@ -1,0 +1,79 @@
+<div id="text-input">
+    <div class="reconciliation-container">
+        <div class="row">
+            <app-amount [totalAmount]="conciliationObj"></app-amount>
+        </div>
+        <div class="mt-5" data-html2canvas-ignore>
+            <app-admin-table-filter [isReconciliation]="true" (export)="exportPdf()"
+                (selectedFilter)="appliedFilter($event)">
+            </app-admin-table-filter>
+        </div>
+    </div>
+</div>
+
+<div class="row text-center filter-amount m-0 p-4 align-items-center" id="builing-amt"
+    *ngIf="selectedBuildingAmount != null">
+    <div class="col border-end">
+        <h4 class="fw-bold m-1">${{selectedBuildingAmount?.totalLoadedAmount}}</h4>
+        <p class="title-font m-0">Amount Loaded</p>
+    </div>
+    <div class="col border-end">
+        <h4 class="fw-bold m-1">${{selectedBuildingAmount?.rewardsRedeemed}}</h4>
+        <p class="title-font m-0">Rewards Redeemed</p>
+    </div>
+    <div class="col d-flex flex-row justify-content-around" >
+        <div>
+            <h4 class="fw-bold m-1">${{selectedBuildingAmount?.balanceAmount}}</h4>
+            <p class="title-font m-0">Available Balance </p>
+        </div>
+        <div class="ml-2" data-html2canvas-ignore>
+            <button class="btn btn-primary mt-2" *ngIf="conciliationObj?.status == 'IS_AVAILABLE'" (click)="reClaimAmount()">Reclaim Amount</button>
+            <button class="btn btn-dark mt-2 pe-none" *ngIf="conciliationObj?.status == 'INITIATED'">Initiated</button>
+            <button class="btn btn-success mt-2 pe-none" *ngIf="conciliationObj?.status == 'RECLAIM_COMPLETED'">Closed</button>
+        </div> 
+    </div>
+</div>
+
+<div class="reconciliation-container">
+    <div class="mt-3">
+        <div class="table-height" infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="50"
+            [scrollWindow]="false" (scrolled)="onScroll()">
+            <table class="table table-bordered" id="my-table">
+                <thead class="tableHeader">
+                    <tr>
+                        <th>Property Manager</th>
+                        <th>Resident Name</th>
+                        <th>Resident Email</th>
+                        <th>Rewards Issued</th>
+                        <th>Rewards Issue
+                            Date</th>
+                        <th>Rewards Redeemed</th>
+                        <th>Rewards Cancelled</th>
+                        <th>Rewards Balance</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="userList && userList.length>0;else noItems">
+                    <tr *ngFor="let transaction of userList">
+                        <td>{{transaction.propertyManagerFirstName}} {{transaction.propertyManagerLastName}}</td>
+                        <td>{{transaction.firstName}} {{transaction.lastName}}</td>
+                        <td>{{transaction.email}}</td>
+                        <td>${{transaction.totalRewardAmount ? transaction.totalRewardAmount : 0}}</td>
+                        <td>{{transaction.updatedDatetime | date:'longDate'}}</td>
+                        <td>${{transaction.totalRewardAmountRedeemed ? transaction.totalRewardAmountRedeemed : 0}}
+                        </td>
+                        <td>${{transaction?.totalCanceledRewardAmount ? transaction?.totalCanceledRewardAmount : 0}}
+                        </td>
+                        <td>${{transaction?.rewardAmount ? transaction?.rewardAmount : 0}}</td>
+                    </tr>
+                </tbody>
+                <ng-template #noItems>
+                    <tbody>
+                        <tr>
+                            <td colspan="6">No Transactions Founds</td>
+                        </tr>
+                    </tbody>
+                </ng-template>
+            </table>
+        </div>
+    </div>
+</div>

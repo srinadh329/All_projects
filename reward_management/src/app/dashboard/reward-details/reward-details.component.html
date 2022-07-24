@@ -1,0 +1,57 @@
+<app-sidebar></app-sidebar>
+
+<div class="main">
+    <app-header></app-header>
+    <div class="body">
+        <div class="row">
+            <div class="col-lg-12">
+                <app-table-filter (searchInputChange)="searchChangeEvent($event)"></app-table-filter>
+
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-lg-12">
+                <!-- <div class="table-height" infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="50"
+                [scrollWindow]="false" (scrolled)="onScroll()"> -->
+                    <table class="w-100 table table-hover">
+                        <thead>
+                            <tr class="tableHeader ">
+                                <!-- <th width="10%">Resident ID</th> -->
+                                <th width="10%">Property Manager</th>
+                                <th width="10%">Building Name</th>
+                                <th width="10%">Resident Name</th>
+                                <th width="20%">Resident Email</th>
+                                
+                                <th width="10%">Reward Issued</th>
+                                <th width="10%">Reward Redeemed</th>
+                                <th width="10%">Reward Balance</th>
+                                <!-- <th width="10%">Status</th> -->
+                                <th width="20%">Transaction</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of promoCodeList;let i = index">
+                                <!-- <td>{{item?.residentId}}</td> -->
+                                <td>{{item?.propertyManagerFirstName}} {{item?.propertyManagerLastName}}</td>
+                                <td>{{item?.propertyData?.name}}</td>
+                                <td>{{item?.firstName}} {{item?.lastName}}</td>
+                                <td>{{item?.email}}</td>
+                                
+                                <td>${{item?.rewardAmount}}</td>
+                                <!-- <td>${{redemedReward(item?.rewardHistory)}}</td> -->
+                                <td>${{item?.totalRewardAmountRedeemed}}</td>
+                                <!-- <td >{{getStatus(item?.rewardHistory)}}</td> -->
+                                <td>${{item?.totalRewardBalance ? item?.totalRewardBalance : '0'}}</td>
+                                <td> <button class="btn btn-primary"
+                                            [routerLink]="['/reward-details/transactions',item.id]">VIEW TRANSACTIONS</button>
+                                </td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,285 @@
+@media (max-width: 1000px) and (min-width: 768px){
+    // ********************home leftside part scss start********************
+//     .header-image img {
+//     background-color: $white-color !important;
+//     border-radius: 5px !important;
+//     padding: 11px 13px 16px 14px !important;
+//     max-width: 73px !important;
+//     margin: 8px 0 12px -8px !important;
+// }
+// ********************home leftside part scss end********************
+// ********************home sidenav part scss start******************** 
+    .sidenav-color{
+        .main-list{
+            ul{
+                padding: 15px 0 0 1px !important;
+                li{
+                    padding: 10px 0px 8px 10px !important;
+                    font-size: 12px !important;
+                    margin: 6px 0 9px 0;
+                    font-weight: 600 !important;
+                    line-height: 16px !important;
+                }
+            }
+        }
+    }
+    .mobile-image{
+        width: 133px;
+    }
+// ********************home sidenav part scss start******************** 
+
+}
+@media (max-width: 1256px) and (min-width: 1001px){
+    // ********************home leftside part scss start********************
+// .header-image img {
+//     padding: 11px 20px 16px 16px !important;
+//     max-width: 93px !important;
+// }
+    // ********************home leftside part scss end********************
+    // ********************home sidenav part scss start******************** 
+.sidenav-color{
+    .main-list{
+        ul{
+            padding: 15px 0 0 1px !important;
+            li{
+                padding: 7px 14px 7px 13px !important;
+                padding: 7px 0px 7px 13px !important;
+                font-size: 14px !important;
+            }
+        }
+    }
+}
+// ********************home sidenav part scss end******************** 
+}
+@media (max-width: 767px){
+    // ********************home sidenav part scss start******************** 
+    #viewport{
+        padding-left: 0 !important;
+    }
+    .common-position{
+        padding: 0 !important;
+        }
+    .mobile-hide{
+        display: none;
+    }
+    .sidenav-color{
+        position: static !important;
+        width: 100%;
+        height: auto !important;
+        bottom: auto !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+        .main-list{
+            top: 0 !important;
+            padding: 0 !important;
+            margin-top: 0 !important;
+            ul{
+                text-align: center !important;
+            }
+        }
+
+    }
+    .common-position {
+        top: 2em !important;
+    }
+    .login-section{
+        .section-row{
+            border-radius: initial !important;
+        }
+    }
+    // ********************home sidenav part scss end******************** 
+    .login-transform{
+        transform: inherit !important;
+        padding-top: 24px;
+    }
+    .navbar-top {
+        padding: 10px 0 10px 0px !important;
+    }
+}
+// .mobile-responsive-image{
+//     padding: 8px 0px 13px 0px;
+//     width: 57px;
+// }
+.mobile-profile-flex{
+display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.mobile-toggler.navbar-toggler{
+    background-color: none;
+    outline: none;
+    border: none;
+}
+.mobile-home-background2{
+background: $white-color;
+    box-shadow: 0px 0px 11px $dark-color;
+    min-width: 150px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.mobile-home-background1{
+background: $home-color;
+    box-shadow: 0px 0px 11px $dark-color;
+    padding: 0px 20px 0px 20px !important;
+    span{
+        margin: 6px 0 0 0;
+    }
+
+}
+
+@media only screen and (device-aspect-ratio: 1024/1366)  /* does not work on iPad or LG */
+{
+    .navbar-top {
+        top: 2% !important;
+    }
+}
+@media only screen and (device-aspect-ratio: 1366/1024)  /* does not work on iPad or LG */
+{
+    .navbar-top {
+        top: 3% !important;
+    }
+}
+@media only screen and (device-aspect-ratio: 768/1024)  /* does not work on iPad or LG */
+{
+    .navbar-top {
+        top: 13% !important;
+    }
+}
+@media (max-width: 1131px) and (min-width: 456px){
+    // .no-space{
+    //     white-space: nowrap;
+    // }
+}
+@media (max-width: 1300px) and (min-width: 943px){
+    .instant-form-padding2{
+        padding-left: 0px;
+        .custom-branch-select-outline{
+            padding-left: 45px !important;
+        }
+    }
+}
+// @media (max-width: 942px) and (min-width: 939px){
+//     .instant-form-padding1{
+//         padding-left: 0px;
+//     }
+// }
+
+// @media only screen and (device-aspect-ratio: 1440/900)  
+// {
+//     .registerHeight {
+//         overflow: auto;
+//         height: 292px;
+//     }
+// }
+// @media only screen and (device-aspect-ratio: 1280/950)  
+// {
+//     .registerHeight {
+//         overflow: auto;
+//         height: 304px;
+//     }
+// }
+// @media only screen and (device-aspect-ratio: 1366/1024)
+// {
+//     .registerHeight {
+//         overflow: auto;
+//         height: 304px;
+//     }
+// }
+// @media only screen and (device-aspect-ratio: 1024/1366)  
+// {
+//     .registerHeight {
+//         overflow: auto;
+//         height: 304px;
+//     }
+// }
+// @media only screen and (device-aspect-ratio: 768/1024)  
+// {
+//     .registerHeight {
+//         overflow: auto;
+//         height: 268px !important;
+//     }
+// }
+// @media only screen and (device-aspect-ratio: 1024/768)  
+// {
+//     .registerHeight {
+//         overflow: auto;
+//         height: 300px;
+//     }
+// }
+@media (max-width: 991px) and (min-width: 768px){
+    .login-section{
+        .form-padding{
+            padding: 20px 0px 0px 0px !important;
+        }
+    }
+    }
+    @media (max-width: 1134px){
+.matcard-width {
+    max-width: 100% !important;
+    margin: 0 !important;
+}
+.matcard-width4 {
+    max-width: 100% !important;
+    margin: 0 !important;
+}
+}
+@media (max-width: 767px) and (min-width: 520px){
+.custom-mat-radio-group{
+    display: flex;
+    width: 100%;
+}
+
+}
+
+.mobile-login{
+    font-size: 12px;
+    padding: 0 0 7px 0;
+}
+@media (min-width: 1200px){
+    .funds-radio-group{
+        display: flex;
+        width: 40%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 560px){
+    .common-header{
+        h6{
+            font-size: 11px;
+        }
+        .common-search{
+            input{
+                width: 100% !important;
+                padding: 3px 0px 3px 3px !important;
+            }
+        }
+
+    .search-icon{
+        right: 14% !important;
+    }
+    }
+       
+}
+@media (max-width: 600px){
+    .withincountryamountheight{
+        max-height: 50vh !important;
+    }
+    .withincountryheight{
+        max-height: 62vh !important;
+    }
+    .savebeneficiaryheight{
+        max-height: 54vh !important;
+    } 
+    .upiheight{
+        max-height: 50vh !important;
+    }
+    .addcard-height{
+        max-height: 50vh !important;
+    }
+    .addfund-height{
+        max-height: 40vh !important;
+    }
+}

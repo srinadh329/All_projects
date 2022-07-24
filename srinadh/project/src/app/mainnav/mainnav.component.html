@@ -1,0 +1,101 @@
+<section>
+    <div id="viewport" >
+        <div id="sidebar" class="d-none d-sm-none d-md-block d-lg-block">
+            <header>
+              <img src="././assets/images/logo1.png">
+            </header>
+            <nav class="navbar navbar-expand-lg navbar-expand-md navbar-light p-0 navbar-top">
+            <ul class="flex-column w-100 new-sidebar">
+              <li class="nav-item" routerLink="/menu/dashboard" [routerLinkActive]="['mainactive']">
+                <i class="fa fa-user" aria-hidden="true"></i><span class="pl-4">Dashboard</span></li>
+              <li  routerLink="/menu/mycardComponent" [routerLinkActive]="['mainactive']"><i class="fa fa-user" aria-hidden="true"></i><span class="pl-4">Your Cards</span></li>
+              <li> <i class="fa fa-user" aria-hidden="true"></i>Transaction Reports</li>
+              <li> <i class="fa fa-user" aria-hidden="true"></i>Transaction Reports</li>
+            </ul>
+            </nav>
+          </div>
+          <div id="content" class="d-none d-sm-none d-md-block d-lg-block">
+            <div class="container-fluid header-nav-fixed">
+            <div class="row">
+              <div class="col-lg-6 col-md-6 first-transform">
+                <div class=" d-md-block d-lg-block">
+                <div class="pl-3  mr-auto home-bar">
+                  <h5 class="m-0">Good Morning</h5>
+                  <h1>Natasha Romanoff</h1>
+                </div>
+              </div>
+              </div>
+              <div class="col-lg-6 col-md-6 text-right">
+                <div class="bs-example cursor d-flex flex-row justify-content-end align-items-center all-services">
+                  <p class="m-0">All Services</p>
+                  <p class="m-0"><i class="fa fa-address-book-o" aria-hidden="true"></i></p>
+                  <div class="dropdown custom-dropdown cursor">
+                    <a  class="profile-name" data-toggle="dropdown">
+                      <ngx-avatar   name="Srinadh"   size=40></ngx-avatar>
+                     </a>
+                    <div class="dropdown-menu login-menu-dropdown">
+                        <a class="dropdown-item">Profile</a>
+                        <a class="dropdown-item" (click)="logout()">Logout</a>
+                    </div>
+                  </div>
+                  <p class="m-0"><i class="fa fa-bell-o" aria-hidden="true"></i></p>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="d-sm-block d-md-none d-lg-none">
+            <nav class="navbar navbar-light bg-light">
+              <a class="navbar-brand" href="#"> <img src="././assets/images/logo1.png" width="98px"></a>
+              <div class="bs-example cursor d-flex flex-row justify-content-end">
+                <p>All Services</p>
+                <p><i class="fa fa-address-book-o" aria-hidden="true"></i></p>
+                <div class="dropdown">
+                  <a  class="profile-name" data-toggle="dropdown">
+                    <ngx-avatar   name="Srinadh"   size=40></ngx-avatar>
+                   </a>
+                  <div class="dropdown-menu login-menu-dropdown">
+                      <a class="dropdown-item">Profile</a>
+                      <a class="dropdown-item">Logout</a>
+                  </div>
+                </div>
+                <p><i class="fa fa-bell-o" aria-hidden="true"></i></p>
+              </div>
+            </nav>
+            <section class="navbar-color">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-lg-12 p-0">
+                    <nav class="navbar navbar-dark dark-line">
+                      <a class="navbar-brand p-0" href="index.html">
+                      </a>
+                      <button class="navbar-toggler toggler-color" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <img src="././assets/images/menu.png">
+                        </button>
+                    </nav>
+                    <div class="pos-f-t">
+                      <div class="collapse" id="navbarNavAltMarkup">
+                        <div class="bg-color">
+                          <ul class="flex-column w-100 new-sidebar">
+                            <li class="nav-item" routerLink="/menu/dashboard" [routerLinkActive]="['mainactive']">
+                              <i class="fa fa-user" aria-hidden="true"></i><span class="pl-4">Dashboard</span></li>
+                            <li  routerLink="/menu/mycardComponent" [routerLinkActive]="['mainactive']"><i class="fa fa-user" aria-hidden="true"></i><span class="pl-4">Your Cards</span></li>
+                            <li> <i class="fa fa-user" aria-hidden="true"></i>Transaction Reports</li>
+                            <li> <i class="fa fa-user" aria-hidden="true"></i>Transaction Reports</li>
+                          </ul>
+                        </div>
+                      </div>
+          
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div class="container-fluid">
+            <div class="col-sm-12">
+            <router-outlet></router-outlet>
+          </div>
+          </div>
+    </div>
+</section>

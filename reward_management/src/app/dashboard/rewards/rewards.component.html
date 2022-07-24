@@ -1,0 +1,91 @@
+<app-sidebar></app-sidebar>
+
+<div class="main">
+    <app-header></app-header>
+    <div class="body">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-lg-2 create-container text-center" (click)="createReward()">
+                <img src="assets/create-reward.png" class="create-promo-code">
+                <p>CREATE REWARD</p>
+            </div>
+            <div class="col-lg-10">
+                <app-load-cash [showRewards]="false"></app-load-cash>
+            </div>
+
+        </div>
+        <div class="row mt-5">
+            <div class="col-lg-12">
+                <app-table-filter (searchInputChange)="searchChangeEvent($event)"></app-table-filter>
+            </div>
+        </div>
+        
+        <div class="row mt-3">
+            <div class="col-lg-12">
+                <h2 class="promo-code-text">RECENTLY CREATED REWARDS</h2>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-lg-12">
+                <table class="w-100 table table-hover">
+                    <thead>
+                        <tr class="tableHeader ">
+                            <th >Property Manager</th>
+                            <th >Building Name</th> 
+                            <th >Resident Name</th>
+                            <th >Resident Email</th>
+                             
+                            <th >Reward Issued</th>
+                            <th >Status</th>
+                            <th width="15%">Issued Date</th>
+                            <th width="25%">Expiry Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of promoCodeList;let i = index">
+                            <td>{{item?.userData.propertyManagerFirstName}} {{item?.userData.propertyManagerLastName}}</td>
+                            <td>{{item?.propertyData?.name}}</td>
+                            <td>{{item?.userData?.firstName}} {{item?.userData?.lastName}}</td>
+                            <td>{{item?.userData?.email}}</td>
+                            <td>${{item?.rewardAmount}}</td>
+                            <td>{{(item.deleteStatus == 0 || item.deleteStatus == null) ? ( item?.is_expired ? 'Expired' : (item.status
+                                == 1 ? 'Activated' : 'Not Activated')) :
+                                'Cancelled'}}</td>
+                            <td>{{item?.updatedDatetime | date:'longDate'}}</td>
+                            <td class="text-center"><span>{{item?.rewardEndDate | date:'longDate'}} <i  style="padding-left: 7px;" *ngIf="(item.deleteStatus == 0 || item.deleteStatus == null) && !item.is_expired" (click)="deletedReward(item)" class="far fa-trash-alt pointer"></i></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteReward" tabindex="-1" aria-labelledby="deleteRewardLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content p-3">
+            <!-- <div class="modal-header border-0">
+                <h5 class="modal-title" id="deleteRewardLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div> -->
+
+            <div class="modal-body text-center">
+                <h3 class="border-bottom pb-2">DELETE REWARD</h3>
+                <h2 class="m-0 mt-4" *ngIf="rewardType.type == 'cancel'">Do you want to cancel ${{rewardType.deleteAmount}} rewards? </h2>
+                <h2 class="m-0 mt-4" *ngIf="rewardType.type == 'zero'">Sorry Resident has no rewards to cancel.</h2>
+                <h2 class="m-0 mt-4" *ngIf="rewardType.type == 'partial'">Resident has only ${{rewardType.deleteAmount}} rewards that can be canceled.</h2>
+            </div>
+            <div class="modal-footer justify-content-center border-0" *ngIf="rewardType.type == 'cancel' || rewardType.type == 'partial'">
+                <button type="button" class="btn btn-primary" (click)="deleteRewardService(rewardType.id)">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+            </div>
+            <div class="modal-footer justify-content-center border-0" *ngIf="rewardType.type == 'zero'">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-atom">
+    <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>

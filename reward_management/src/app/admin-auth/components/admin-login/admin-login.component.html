@@ -1,0 +1,91 @@
+<div class="container-fluid">
+    <div class="row vh-100">
+        <div class="col-lg-7 col-md-12 positive-relative">
+            <div class="logo p-5">
+                <img src="https://ca-studentdev.inhabitr.com/assets/img/inhabitr_logo/caLogoNew.png" width="200"
+                    height="100" alt="alt_text" style="max-width:100px;height:auto;">
+            </div>
+
+            <div class="login-main">
+                <img src="assets/images/rewards-image.png" />
+                <h3 class="admin">REWARDS SUPERADMIN</h3>
+                <p style="color: #858181;">Manage your CA property managers.</p>
+            </div>
+
+        </div>
+        <div class="col-lg-5 col-md-12 p-0 bg-theme">
+            <div class="m-auto login-align" id="bgTheme">
+                <div>
+                    <h4 class="mt-5 text-center" style="font-weight: 600;">WELCOME BACK</h4>
+                    <p class="text-center" style="font-weight:100 !important;color:black;">Sign In to your Account</p>
+                </div>
+                <div class="login-form">
+                    <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group">
+                            <label class="mb-1">Email ID</label>
+                            <input required #username="ngModel" type="text" name="username"
+                                [(ngModel)]="loginUserData.loginEmail" class="form-control padding-input login_control"
+                                placeholder="Enter your Email ID">
+                            <span *ngIf="username.invalid && username.touched" class="error">Enter email Id</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="mb-1">Password</label>
+                            <input type="password" required #password="ngModel"
+                                [(ngModel)]="loginUserData.loginPassword" name="password" ngModel
+                                class="form-control padding-input login_control" placeholder="Enter your Password">
+                            <span *ngIf="password.invalid && password.touched" class="error">Enter valid password</span>
+                        </div>
+                        <div class="form-group text-end">
+                            <a class="mb-3 align-right forgot-password " data-bs-toggle="modal"
+                                data-bs-target="#forgotPassword" (click)="showRecoveryBlock = true">Forgot Password?</a>
+                        </div>
+                        <div class=" text-center login-block">
+                            <button type="submit" class="btn btn-primary mb-4">LOGIN</button><br />
+                            <!-- <button type="button" class="btn btn-primary" style="background-color:#1969AF"
+                                (click)="singup()">SIGNUP</button> -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="forgotPassword" tabindex="-1" aria-labelledby="forgotPasswordLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content p-3">
+            <div class="modal-header border-0">
+                <!-- <h5 class="modal-title" id="forgotPasswordLabel">Modal title</h5> -->
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body text-center">
+                <h3 class="border-bottom pb-2">RECOVER PASSWORD</h3>
+                <div class="form-group" *ngIf="showRecoveryBlock">
+                    <p>Please provide your email</p>
+                    <input type="text" class="pass_recovery" [formControl]="emailControl">
+                    <div *ngIf="emailControl.touched && emailControl?.errors?.required">
+                        Please enter recovery email
+                    </div>
+                    <div *ngIf="emailControl.touched && emailControl?.errors?.email">
+                        Please enter valid email
+                    </div>
+                </div>
+                <div *ngIf="!showRecoveryBlock">
+                    <p>An email has been sent. Please click
+                        the link when you receive it.</p>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center border-0">
+                <button type="button" class="btn  btn_theme" (click)="submitRecovery() " *ngIf="showRecoveryBlock">Email
+                    me a recovery
+                    link</button>
+                <button type="button" class="btn btn-primary" (click)="emailControl.reset()" data-bs-dismiss="modal"
+                    *ngIf="!showRecoveryBlock">Close
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>

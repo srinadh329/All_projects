@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-md-12 d-flex align-items-center">
+        <span class="pointer" (click)="navigateBack()"><i class="fa fa-arrow-left" aria-hidden="true"></i></span>
+        <h1 class="mb-0 ml-2">{{title}} Service</h1>
+    </div>
+    <hr />
+    <form [formGroup]='serviceForm' (ngSubmit)="onSubmit()" class="w-100">
+        <mat-form-field appearance="outline" class="w-100 col-md-6 col-sm-12">
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="title">
+            <mat-error *ngIf="serviceForm.get('title').hasError('required')">
+                Please Enter title
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100 col-md-6 col-sm-12">
+            <mat-label>Location</mat-label>
+            <input matInput formControlName="location">
+            <mat-error *ngIf="serviceForm.get('location').hasError('required')">
+                Please Enter location
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100 col-md-12">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description" rows='6'></textarea>
+            <mat-error *ngIf="serviceForm.get('description').hasError('required')">
+                Please Enter description
+            </mat-error>
+        </mat-form-field>
+        <div class="d-flex w-100 justify-content-between">
+            <mat-form-field appearance="outline" class="w-100 col-md-6 col-sm-12">
+                <mat-label>Date</mat-label>
+                <input matInput formControlName="eventDate" [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="serviceForm.get('eventDate').hasError('required')">
+                    Please Select Date
+                </mat-error>
+            </mat-form-field>
+            <div class="w-100 col-md-6">
+                <div class="border-upload" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
+                    <img *ngIf="serviceForm?.value?.image" [src]="serviceForm?.value?.image" width="8%" />
+                    <input type="file" accept="image/*" #image class="custom-file-input"
+                        (change)="uploadImage(image.files)" class="custom-control-input d-none" id="image">
+                    <span class="list-browse"> Drag Your Images Here or</span>
+                    <span (click)="openimage();$event.stopPropagation()" class="blue pointer pl-2">Browse</span>
+                </div>
+            </div>
+          
+        </div>
+        <div class="col-md-6 mt-4">
+            <section class="example-section">
+                <mat-slide-toggle formControlName="is_popular">is Popular Event</mat-slide-toggle>
+
+              </section>
+          
+        </div>
+        <div class="col-md-12 text-center mt-4">
+            <button class="submit-button " type="submit">Create this Details</button>
+        </div>
+    </form>
+</div>

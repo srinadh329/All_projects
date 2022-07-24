@@ -1,0 +1,260 @@
+<section>
+  <div id="viewport" >
+    <!-- Sidebar -->
+    <div id="sidebar" class="d-none d-sm-none d-md-block d-lg-block">
+      <header>
+        <img src="././assets/images/logo1.png">
+      </header>
+      <nav class="navbar navbar-expand-lg navbar-expand-md navbar-light p-0 navbar-top">
+        <ul class="flex-column w-100 mobile-scroll new-sidebar" id="style-4">
+          <li class="nav-item" data-target="#navbarSupportedContent" (click)="routerchanges('admin/dashboard')" [ngClass]="{'active': router.url.includes('dashboard')}">
+            <a class="nav-item">Dashboard</a></li>
+          <li class="nav-item" data-target="#navbarSupportedContent" (click)="routerchanges('admin/branch')" [ngClass]="{'active': router.url.includes('branch')}">
+            <a class="nav-item">Branch</a></li>
+          <li data-target="#navbarSupportedContent" (click)="routerchanges('admin/country')" [ngClass]="{'active': router.url.includes('country')}"><a>Country</a></li>
+          <li data-target="#navbarSupportedContent" (click)="routerchanges('admin/currency')" [ngClass]="{'active': router.url.includes('currency')}">Currency</li>
+          <li data-target="#navbarSupportedContent" (click)="routerchanges('admin/product')" [ngClass]="{'active': router.url.includes('product')}">Product</li>
+          <li data-target="#navbarSupportedContent" (click)="routerchanges('admin/prdcnt')" [ngClass]="{'active': router.url.includes('prdcnt')}">Country Product</li>
+
+          <li data-target="#navbarSupportedContent"  [ngClass]="{'active': router.url.includes('reports')|| router.url.includes('brnwisetransactions')||router.url.includes('brnusrwisetransactions')||router.url.includes('prdwisetransactions')}">
+              <div class="dropdown" [ngClass]="{'dropright': toggle}">
+                <div  class="dropdown-toggle custom-toggle" data-toggle="dropdown" (click)="report();$event.stopPropagation"> Reports</div>
+                <div class="dropdown-menu custom-dropdown" >
+                  <a class="dropdown-item" [ngClass]="{'active-link': router.url.includes('admin/onlusrreports')}" (click)="routerchanges('admin/onlusrreports')" >Online Users Reports</a>
+                  <a class="dropdown-item" [ngClass]="{'active-link': router.url.includes('admin/brnwisetransactions')}" (click)="routerchanges('admin/brnwisetransactions')">Branch Wise Transaction Reports</a>
+                  <a class="dropdown-item" [ngClass]="{'active-link': router.url.includes('admin/prdwisetransactions')}" (click)="routerchanges('admin/prdwisetransactions')" >Product Wise Transaction Reports</a>
+                  <a class="dropdown-item" [ngClass]="{'active-link': router.url.includes('admin/brnusrwisetransactions')}" (click)="routerchanges('admin/brnusrwisetransactions')">Branch User Wise Transaction Reports</a>
+                  <a class="dropdown-item" [ngClass]="{'active-link': router.url.includes('admin/brnusrreports')}" (click)="routerchanges('admin/brnusrreports')" >Branch Users Reports</a>
+
+                </div>
+              </div>
+          </li>
+          <li data-target="#navbarSupportedContent" (click)="routerchanges('admin/goldcard')" [ngClass]="{'active': router.url.includes('goldcard')}">Gold Card</li>
+          <li data-target="#navbarSupportedContent" (click)="routerchanges('admin/rates')" [ngClass]="{'active': router.url.includes('rates')}">Rates</li>
+          <li data-target="#navbarSupportedContent" (click)="routerchanges('admin/charges')" [ngClass]="{'active': router.url.includes('charges')}">Charges </li>
+          <li data-target="#navbarSupportedContent" (click)="routerchanges('admin/userroles')" [ngClass]="{'active': router.url.includes('userroles')}">User Roles</li>
+        </ul>
+      </nav>
+    </div>
+    <div id="content" class="d-none d-sm-none d-md-block d-lg-block">
+      <div class="container-fluid header-nav-fixed">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 first-transform">
+          <div class=" d-md-block d-lg-block">
+          <div class="pl-3 d-flex mr-auto home-bar">
+            <div class="p-2 text-dark home-background1" href="#">
+              <span class="material-icons cursor" (click)="routerchanges('admin/dashboard')">home</span></div>
+            <div class="p-2 text-dark home-background2" href="#"><span
+                class="text-capitalize">{{currentRouter}}</span></div>
+            <div class="p-2 text-dark home-background3" href="#"><span class="text-capitalize text-white">{{currentproduct?.product}}</span></div>
+          </div>
+        </div>
+        </div>
+        <div class="col-lg-6 col-md-6 text-right">
+          <p class="mb-0 desktop-view">{{ time | date: 'dd MMM yyyy  hh:mm:ss a' }}</p>
+          <div class="bs-example desktop-view1">
+            
+            <div class="dropdown">
+              <a  class="dropdown-toggle profile-name cursor" data-toggle="dropdown">
+                <ngx-avatar width="40px" height="40px"  name={{username.loginid}} class="custom-avatar"></ngx-avatar>
+                {{username.loginid}}</a>
+              <div class="dropdown-menu login-menu-dropdown">
+                <a (click)="routerchanges('admin/changepassword')" class="dropdown-item logout-item cursor">Change Password</a>
+                <a  (click)="logOut()"  class="dropdown-item logout-item cursor">Log-out</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="d-sm-block d-md-none d-lg-none">
+      <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#"> <img src="././assets/images/logo1.png" width="98px"></a>
+        <div class="bs-example cursor">
+          <div class="dropdown">
+            <p>{{ time | date: 'dd MMM yyyy  hh:mm:ss a' }}</p>
+            <a href="#" class="dropdown-toggle profile-name" data-toggle="dropdown">
+              <ngx-avatar width="40px" height="40px"  name={{username.loginid}} class="custom-avatar"></ngx-avatar>
+              {{username.loginid}}</a>
+            <div class="dropdown-menu">
+              <a  (click)="logOut()"  class="dropdown-item logout-item">Log-out</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <section class="navbar-color">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-12 p-0">
+              <nav class="navbar navbar-dark dark-line">
+                <a class="navbar-brand p-0" href="index.html">
+                  <!-- <span class="material-icons cursor" (click)="routerlink('dashboard','dashboard')">home</span> -->
+                </a>
+                <button class="navbar-toggler toggler-color" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                  <img src="././assets/images/menu.png">
+                  </button>
+              </nav>
+              <div class="pos-f-t">
+                <div class="collapse" id="navbarNavAltMarkup">
+                  <div class="bg-color">
+                    <ul class="flex-column w-100 mobile-scroll new-sidebar" id="style-4">
+                      <li class="nav-item" data-target="#navbarSupportedContent" (click)="routerchanges('admin/dashboard')" [ngClass]="{'active': router.url.includes('dashboard')}">
+                        <a class="nav-item">Dashboard</a></li>
+                      <li class="nav-item" data-target="#navbarSupportedContent" (click)="routerchanges('admin/branch')" [ngClass]="{'active': router.url.includes('branch')}">
+                        <a class="nav-item">Branch</a></li>
+                      <li data-target="#navbarSupportedContent" (click)="routerchanges('admin/country')" [ngClass]="{'active': router.url.includes('country')}"><a>Country</a></li>
+                      <li data-target="#navbarSupportedContent" (click)="routerchanges('admin/currency')" [ngClass]="{'active': router.url.includes('currency')}">Currency</li>
+                      <li data-target="#navbarSupportedContent" (click)="routerchanges('admin/product')" [ngClass]="{'active': router.url.includes('product')}">Product</li>
+                      <li data-target="#navbarSupportedContent" (click)="routerchanges('admin/prdcnt')" [ngClass]="{'active': router.url.includes('prdcnt')}">Country Product</li>
+            
+                      <li data-target="#navbarSupportedContent"  [ngClass]="{'active': router.url.includes('reports')|| router.url.includes('brnwisetransactions')||router.url.includes('brnusrwisetransactions')||router.url.includes('prdwisetransactions')}">
+                          <div class="dropdown" [ngClass]="{'dropright': toggle}">
+                            <div  class="dropdown-toggle" data-toggle="dropdown" (click)="report();$event.stopPropagation"> Reports</div>
+                            <div class="dropdown-menu custom-dropdown" >
+                              <a class="dropdown-item" [ngClass]="{'active-link': router.url.includes('admin/onlusrreports')}" (click)="routerchanges('admin/onlusrreports')" >Online Users Reports</a>
+                              <a class="dropdown-item" [ngClass]="{'active-link': router.url.includes('admin/brnwisetransactions')}" (click)="routerchanges('admin/brnwisetransactions')">Branch Wise Transaction Reports</a>
+                              <a class="dropdown-item" [ngClass]="{'active-link': router.url.includes('admin/prdwisetransactions')}" (click)="routerchanges('admin/prdwisetransactions')" >Product Wise Transaction Reports</a>
+                              <a class="dropdown-item" [ngClass]="{'active-link': router.url.includes('admin/brnusrwisetransactions')}" (click)="routerchanges('admin/brnusrwisetransactions')">Branch User Wise Transaction Reports</a>
+                              <a class="dropdown-item" [ngClass]="{'active-link': router.url.includes('admin/brnusrreports')}" (click)="routerchanges('admin/brnusrreports')" >Branch Users Reports</a>
+            
+                            </div>
+                          </div>
+                      </li>
+                      <li data-target="#navbarSupportedContent" (click)="routerchanges('admin/goldcard')" [ngClass]="{'active': router.url.includes('goldcard')}">Gold Card</li>
+                      <li data-target="#navbarSupportedContent" (click)="routerchanges('admin/rates')" [ngClass]="{'active': router.url.includes('rates')}">Rates</li>
+                      <li data-target="#navbarSupportedContent" (click)="routerchanges('admin/charges')" [ngClass]="{'active': router.url.includes('charges')}">Charges </li>
+                      <li data-target="#navbarSupportedContent" (click)="routerchanges('admin/userroles')" [ngClass]="{'active': router.url.includes('userroles')}">User Roles</li>
+                    </ul>
+                  </div>
+                </div>
+    
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+      <div class="container-fluid">
+        <div class="col-sm-12">
+        <router-outlet></router-outlet>
+      </div>
+      </div>
+   
+  </div>
+</section>
+
+
+
+
+<!-- <nav class="navbar fixed-top navbar-expand-lg navbar-expand-md bg-white custom-navbar mobile-hide">
+  <a class="navbar-brand invisible" href="#"> <img src="././assets/images/logo1.png" class="invisible mobile-image"></a>
+  <div class="collapse navbar-collapse">
+    <div class="pl-3 d-flex mr-auto home-bar">
+      <div class="p-2 text-dark home-background1" href="#">
+        <span class="material-icons cursor" (click)="routerchanges('admin/dashboard')">home</span></div>
+      <div class="p-2 text-dark home-background2" href="#"><span
+          class="text-capitalize">{{currentRouter}}</span></div>
+      <div class="p-2 text-dark home-background3" href="#"><span class="text-capitalize text-white">{{currentproduct?.product}}</span></div>
+    </div>
+
+    <span class="navbar-text">
+      <div class="bs-example">
+        <div class="dropdown">
+          <p>{{ time | date: 'dd MMM yyyy  hh:mm:ss a' }}</p>
+          <a href="#" class="dropdown-toggle profile-name" data-toggle="dropdown">
+            <ngx-avatar width="40px" height="40px"  name={{username.loginid}} class="custom-avatar"></ngx-avatar>
+            {{username.loginid}}</a>
+          <div class="dropdown-menu">
+            <a  (click)="logOut()"  class="dropdown-item logout-item">Log-out</a>
+          </div>
+        </div>
+      </div>
+    </span>
+  </div>
+</nav>
+<div class="underline mobile-hide"></div>
+
+
+<section>
+  <div class="container-fluid">
+    <div class="d-sm-block d-lg-none d-md-none">
+      <nav class="navbar">
+        <a class="navbar-brand" href="#"> <img src="././assets/images/logo1.png" class="mobile-responsive-image"></a>
+        <div class="bs-example">
+          <div class="dropdown">
+            <p class="mobile-time">{{ time | date: 'dd MMM yyyy  hh:mm:ss a' }}</p>
+            <a href="#" class="dropdown-toggle profile-name" data-toggle="dropdown">
+              <ngx-avatar width="40px" height="40px"  name={{username.loginid}} class="custom-avatar"></ngx-avatar>
+              {{username.loginid}}</a>
+            <div class="dropdown-menu">
+              <a  (click)="logOut()"  class="dropdown-item">Log-out</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+    </div>
+
+    <div class="row">
+      <div class="col-lg-2 col-md-2 p-0 col-sm-12">
+    
+        <div class="sidenav-color">
+          <div class="div-logo">
+            <img src="././assets/images/logo1.png" class="mobile-hide mobile-image">
+          </div>
+          <nav class="navbar navbar-expand-lg navbar-expand-md navbar-light navbar-top p-0">
+          
+            <div class="d-sm-block d-md-none">
+              <div class="d-flex">
+                <div class="p-2 text-dark mobile-home-background1" href="#">
+                  <span class="material-icons">home</span></div>
+                <div class="p-2 text-dark mobile-home-background2" href="#"><span
+                    class="text-capitalize">{{currentRouter}}</span></div>
+              </div>
+            </div>
+            <button class="navbar-toggler mobile-toggler" type="button" data-toggle="collapse"
+              data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+              aria-label="Toggle navigation">
+              <img src="././assets/images/menu.png">
+            </button>
+
+            <div class="main-list collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="flex-column w-100 mobile-scroll" id="style-4">
+                <li class="nav-item" data-target="#navbarSupportedContent" (click)="routerchanges('admin/dashboard')" [ngClass]="{'active': router.url.includes('dashboard')}">
+                  <a class="nav-item">Dashboard</a></li>
+                <li class="nav-item" data-target="#navbarSupportedContent" (click)="routerchanges('admin/branch')" [ngClass]="{'active': router.url.includes('branch')}">
+                  <a class="nav-item">Branch</a></li>
+                <li data-target="#navbarSupportedContent" (click)="routerchanges('admin/country')" [ngClass]="{'active': router.url.includes('country')}"><a>Country</a></li>
+                <li data-target="#navbarSupportedContent" (click)="routerchanges('admin/currency')" [ngClass]="{'active': router.url.includes('currency')}">Currency</li>
+                <li data-target="#navbarSupportedContent" (click)="routerchanges('admin/product')" [ngClass]="{'active': router.url.includes('product')}">Product</li>
+                <li data-target="#navbarSupportedContent" (click)="routerchanges('admin/prdcnt')" [ngClass]="{'active': router.url.includes('prdcnt')}">Country Product</li>
+
+                <li data-target="#navbarSupportedContent"  [ngClass]="{'active': router.url.includes('reports')|| router.url.includes('brnwisetransactions')||router.url.includes('brnusrwisetransactions')||router.url.includes('prdwisetransactions')}">
+                    <div class="dropdown" [ngClass]="{'dropright': toggle}">
+                      <div  class="dropdown-toggle" data-toggle="dropdown" (click)="report();$event.stopPropagation"> Reports</div>
+                      <div class="dropdown-menu custom-dropdown" >
+                        <a class="dropdown-item" [ngClass]="{'active-link': router.url.includes('admin/onlusrreports')}" (click)="routerchanges('admin/onlusrreports')" >Online Users Reports</a>
+                        <a class="dropdown-item" [ngClass]="{'active-link': router.url.includes('admin/brnwisetransactions')}" (click)="routerchanges('admin/brnwisetransactions')">Branch Wise Transaction Reports</a>
+                        <a class="dropdown-item" [ngClass]="{'active-link': router.url.includes('admin/prdwisetransactions')}" (click)="routerchanges('admin/prdwisetransactions')" >Product Wise Transaction Reports</a>
+                        <a class="dropdown-item" [ngClass]="{'active-link': router.url.includes('admin/brnusrwisetransactions')}" (click)="routerchanges('admin/brnusrwisetransactions')">Branch User Wise Transaction Reports</a>
+                        <a class="dropdown-item" [ngClass]="{'active-link': router.url.includes('admin/brnusrreports')}" (click)="routerchanges('admin/brnusrreports')" >Branch Users Reports</a>
+
+                      </div>
+                    </div>
+                </li>
+                <li data-target="#navbarSupportedContent" (click)="routerchanges('admin/goldcard')" [ngClass]="{'active': router.url.includes('goldcard')}">Gold Card</li>
+                <li data-target="#navbarSupportedContent" (click)="routerchanges('admin/rates')" [ngClass]="{'active': router.url.includes('rates')}">Rates</li>
+                <li data-target="#navbarSupportedContent" (click)="routerchanges('admin/charges')" [ngClass]="{'active': router.url.includes('charges')}">Charges </li>
+                <li data-target="#navbarSupportedContent" (click)="routerchanges('admin/userroles')" [ngClass]="{'active': router.url.includes('userroles')}">User Roles</li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="col-lg-10 col-md-10 col-sm-12">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</section> -->

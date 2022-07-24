@@ -1,0 +1,38 @@
+javascript: it is a front end framwork it excute script in browser and also we want to dynamic validation we need javascript for everyfront end framwork.
+ES6(Ecema Script6):2015
+arrow function()
+
+string literal or template literal `{variablename}`
+let cosnt introduced in es6
+
+
+var : var can be accessed by globalscope and block scope 
+
+let : let can be accesses with in block scope can't access in outer scope
+
+const : its similar to let in addition we cannot reassigned const variable
+
+spread operator:
+...
+
+
+slice: remove or truncate value in array
+
+splice : remove or add values at particular position in array
+
+foreach:
+for in:
+for of:
+
+async - await:
+
+callback: callback is a function passing function as a parameter to another function
+
+
+
+
+
+
+
+
+

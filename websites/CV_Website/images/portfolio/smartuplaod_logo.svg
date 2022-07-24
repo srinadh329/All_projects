@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="186" height="36" viewBox="0 0 186 36">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_13810" data-name="Rectangle 13810" width="12.658" height="16.009" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="Group_19608" data-name="Group 19608" transform="translate(-375 -60)">
+    <g id="Group_19607" data-name="Group 19607" transform="translate(375 60)">
+      <g id="Group_19605" data-name="Group 19605" transform="translate(6.312 28.861)">
+        <path id="Path_68134" data-name="Path 68134" d="M75.832,86.588H68.584a.564.564,0,1,1,0-1.128h7.254a.563.563,0,0,1,.564.564A.572.572,0,0,1,75.832,86.588Z" transform="translate(-68.02 -85.46)" fill="#7a58fc"/>
+      </g>
+      <g id="Group_19606" data-name="Group 19606" transform="translate(6.966 31.363)">
+        <path id="Path_68135" data-name="Path 68135" d="M75.65,90.758H69.644a.565.565,0,0,1,0-1.128H75.65a.565.565,0,0,1,0,1.128Z" transform="translate(-69.11 -89.63)" fill="#7a58fc"/>
+      </g>
+      <path id="Path_68136" data-name="Path 68136" d="M73.548,95.908a2.178,2.178,0,0,0,2.178-2.178H71.37A2.178,2.178,0,0,0,73.548,95.908Z" transform="translate(-63.048 -59.908)" fill="#7a58fc"/>
+      <path id="Path_68137" data-name="Path 68137" d="M75.1,55.465a10.773,10.773,0,0,0,3.032-7.518,10.5,10.5,0,1,0-21,0,10.762,10.762,0,0,0,3.032,7.518,13.679,13.679,0,0,1,3.314,9.272h8.308A13.679,13.679,0,0,1,75.1,55.465Z" transform="translate(-57.13 -37.25)" fill="#7a58fc"/>
+      <g id="Group_19602" data-name="Group 19602" transform="translate(4.326 3.761)">
+        <g id="Group_19601" data-name="Group 19601">
+          <g id="Group_19600" data-name="Group 19600" clip-path="url(#clip-path)">
+            <path id="Path_68106" data-name="Path 68106" d="M12.463,5.659,6.531.094a.364.364,0,0,0-.495,0L.1,5.659a.314.314,0,0,0,0,.466l1.58,1.482a.365.365,0,0,0,.495,0L4.721,5.219V15.642a.341.341,0,0,0,.35.328H7.493a.341.341,0,0,0,.35-.328V5.222l2.545,2.387a.377.377,0,0,0,.495,0l1.582-1.482a.32.32,0,0,0,.1-.232.332.332,0,0,0-.105-.236Zm0,0" transform="translate(0.002 0.002)" fill="#fff"/>
+          </g>
+        </g>
+      </g>
+    </g>
+    <text id="Smart_Upload" data-name="Smart Upload" transform="translate(413 86)" fill="#7a58fc" font-size="21" font-family="OpenSans-Extrabold, Open Sans" font-weight="800"><tspan x="0" y="0">Smart Upload</tspan></text>
+  </g>
+</svg>

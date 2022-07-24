@@ -1,0 +1,245 @@
+// home banner section start
+.home-section{
+    background-color: #cccccc;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.active-color{
+    color: rgb(199, 177, 153);
+}
+.home-flex{
+        display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+.home-button1{
+    background-color: rgb(199, 177, 153);
+    color: #fff;
+    padding: 6px 30px 6px 30px;
+    font-size: 16px;
+}
+.home-button2{
+        color: black;
+    background-color: #fff;
+    padding: 6px 50px 6px 16px;
+    font-size: 16px;
+}
+.home-button2 i{
+    background: black;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    padding: 4px 0 0 1px;
+}
+// home banner section end
+
+
+// home second section start
+.second-section-banner{
+	background-image: url("/assets/images/bg.png");
+	    min-height: 500px;
+	    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.second-off-banner{
+	background-color: rgba(178, 160, 140, 0.47);
+	min-height:500px;
+	position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+// home second section end
+
+// dashboard start
+.sec-pad{
+    padding: 60px 0 60px 0;
+}
+
+.dashboard-color{
+    background-color: #fff;
+    box-shadow: 0px 0px 8px #00000036;
+    border-radius: 20px;
+}
+.transaction-color{
+    background-color: #F2F2F2;
+    box-shadow: 0px 0px 8px #00000036;
+    border-radius: 0px 20px 20px 0px;
+}
+.piechart-color{
+    background-color: #fff;
+    box-shadow: 0px 0px 8px #00000036;
+    border-radius: 20px;
+    width: 100%;
+}
+.transaction{
+    margin: 0;
+    padding: 17px 0 0 32px;
+}
+.input-view{
+    padding: 3px 0 0 54px;
+}
+.success{
+    background-color: #FF946C;
+    text-align: center;
+    border-radius: 9px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .material-icons{
+        font-size: 32px;
+    color: #fff;
+    }
+  
+}
+.success-content{
+    font-size: 17px;
+}
+.success-count{
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+    padding: 6px 0 0 0;
+}
+.pending{
+    background-color: #8756FA;
+    text-align: center;
+    border-radius: 9px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .material-icons{
+        font-size: 32px;
+    color: #fff;
+    }
+}
+
+.failure{
+    background-color: #FA6666;
+    text-align: center;
+    border-radius: 9px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .material-icons{
+        font-size: 32px;
+    color: #fff;
+    }
+}
+.transaction-view{
+    margin: 50px 0 0 30px;
+}
+.transaction-line{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    margin: 0 0 16px 0;
+    padding: 0 0 16px 0;
+    position: absolute;
+    left: 46px;
+    right: 46px;
+    &::before{
+        content: "";
+        border-left: 1px solid rgba(0, 0, 0, 0.12);
+        margin: 0 0 16px 0;
+        padding: 0 0 16px 0;
+        position: absolute;
+        left: 147px;
+        top: -96px;
+        bottom: 0;
+        width: 58px;
+        height: 289px;
+    }
+    &::after{
+        content: "";
+        border-left: 1px solid rgba(0, 0, 0, 0.12);
+        margin: 0 0 16px 0;
+        padding: 0 0 16px 0;
+        position: absolute;
+        left: 303px;
+        top: -96px;
+        bottom: 0;
+        width: 58px;
+        height: 289px;
+    }
+}
+.lable-color{
+    // background: transparent linear-gradient(136deg, #4BC4F4 0%, #00719C 100%) 0% 0% no-repeat padding-box;
+    width: 100px;
+    height: 85px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    &:hover{
+        background: transparent linear-gradient(136deg, #4BC4F4 0%, #00719C 100%) 0% 0% no-repeat padding-box;
+        color: #fff;
+        .transcation-add{
+            visibility: visible;
+        }
+    }
+}
+.transcation-add{
+    background-color: #0000004d;
+    position: absolute;
+    bottom: -1px;
+    /* width: 100%; */
+    width: 100%;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    visibility: hidden;
+    border-radius: 5px;
+    .material-icons{
+        font-size: 20px;
+    }
+}
+
+.client {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    // max-width: 160px;
+    // height: 220px;
+    background-color: #fff;
+    text-align: center;
+    letter-spacing: 1px;
+    -webkit-transition: all 0.1s;
+    -moz-transition: all 0.1s;
+    transition: all 0.1s;
+    border-right: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    padding: 40px 0 40px 0px;
+    &:hover{
+        transform: scale(1.1);
+        box-shadow: 10px 10px 91px 0px #c5c5c5;
+    z-index: 9999;
+    border-right: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    cursor: pointer;
+    background: transparent linear-gradient(136deg, #4BC4F4 0%, #00719C 100%) 0% 0% no-repeat padding-box;
+    color: #fff;
+    .transcation-add{
+        visibility: visible;
+    }
+    }
+   
+}
+

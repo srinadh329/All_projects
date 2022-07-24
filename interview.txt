@@ -1,0 +1,39 @@
+html quesetion
+
+1.what are the new feature in html5
+2.why are using !Doctype
+3.what is difference between div and span
+4.Define Semantic elements in HTML.
+5.what are the web storages
+6.when i define header below the footer tag what will happened in browser.
+7.What are the different new form element types in HTML 5?
+8.How are tags migrated from HTML4 to HTML5?
+
+css
+
+1.what is the difference between scss and css.
+2.what is difference between relative and postion.
+3.how do you write device compartibilty.
+4.how many ways you can define css.
+5.what are pseudo elements with example.
+6.what are nth child properties.
+7.what is the use of the z-index.
+8.what is the css box model and what are its elemets.
+9.Explain the difference between visibility: hidden and display: none?
+10.What is RWD?
+
+javascript
+
+1.what is new features in es6.
+2.what is closures.
+3.what is difference between let and const.
+4.what is hoisting in javascript.
+5.web workers in javascript.
+6.how do you debuge the code in browser.
+7.Define anonymous function.
+8.What are the JavaScript data types?
+9.What is the role of a strict mode in JavaScript?
+10.How can the style/class of an element be changed?
+11.what is the typescript
+
+how can you handle new features at the middle of work?

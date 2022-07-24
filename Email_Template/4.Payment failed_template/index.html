@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Template 4</title>
+	<style type="text/css">
+		@font-face {
+		  font-family: "Signatra";
+		  src: url("https://scube-assets.s3.ap-south-1.amazonaws.com/Signatra.ttf") format("truetype");
+		  font-weight: normal;
+		  font-style: normal;
+		  font-display: swap;
+		}
+		@font-face {
+		  font-family: "HermanoAlto Round";
+		  src: url("https://scube-assets.s3.ap-south-1.amazonaws.com/HermanoAlto+Round.ttf") format("truetype");
+		  font-weight: normal;
+		  font-style: normal;
+		  font-display: swap;
+		}
+		@font-face {
+		  font-family: "DINPro-Medium";
+		  src: url("https://scube-assets.s3.ap-south-1.amazonaws.com/DINPro-Bold.otf") format("truetype");
+		  font-weight: normal;
+		  font-style: normal;
+		  font-display: swap;
+		}
+		@font-face {
+		  font-family: "BalooTamma-Regular";
+		  src: url("https://scube-assets.s3.ap-south-1.amazonaws.com/BalooTamma-Regular.ttf") format("truetype");
+		  font-weight: normal;
+		  font-style: normal;
+		  font-display: swap;
+		}
+
+		.templateView {
+			max-width: 600px;
+			margin: 0 auto;
+			background-color: #fff;
+			box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+			max-height: 968px;
+		}
+
+		.logo {
+			text-align: right;
+		}
+
+		.email-heading h1,
+		p {
+			color: #502C1E;
+			margin: 0;
+			font-family: 'HermanoAlto Round';
+		}
+
+		.email-heading h1 {
+			font-size: 45px;
+		}
+
+		.email-heading p {
+			font-size: 24px;
+			font-weight: 600;
+		}
+
+		.email-heading {
+			background-image: url(main.png);
+			height: 275px;
+			background-repeat: no-repeat;
+			background-position: bottom;
+			background-size: contain;
+		}
+
+		.email-content h1 {
+			margin: 0;
+			padding: 10px 0 16px 0;
+			color: #502C1E;
+			font-family: "BalooTamma-Regular";
+		}
+
+		.email-content p {
+			text-align: justify;
+			font-size: 15px;
+			/*font-weight: 600;*/
+			line-height: 23px;
+			color: #502C1E;
+			font-family: "BalooTamma-Regular";
+		}
+
+		.email-content p:nth-child(2) {
+			padding: 16px 0 16px 0;
+		}
+		.email-content p:nth-child(4) {
+			padding: 16px 0 16px 0;
+		}
+
+		.order-details h3 {
+
+			color: #502C1E;
+		}
+
+		.order-details-view {
+			background-color: #F4EFDB;
+			min-height: 174px;
+			border-radius: 12px;
+		}
+
+		.regards p:nth-child(1) {
+			padding: 18px 0 14px 0;
+		}
+		.regards p:nth-child(2) {
+			font-family: "BalooTamma-Regular";
+		}
+		.regards p{
+			font-family: "Signatra Demo";;
+		}
+		.footer-image {
+			background-image: url("https://scube-assets.s3.ap-south-1.amazonaws.com/footer.png");
+			min-height: 275px;
+			background-repeat: no-repeat;
+			position: relative;
+			top: -67px;
+		}
+
+		.footer-image p {
+			position: absolute;
+			top: 39%;
+			left: 23px;
+			font-size: 13px;
+			color: #fff;
+			 font-family: "DINPro-Medium";
+		}
+
+		.padding-view {
+			padding: 0 30px 0 30px;
+		}
+
+		@media screen and (max-width: 540px) {
+			.templateView {
+				max-height: 881px;
+			}
+
+			.email-heading {
+				height: 124px;
+			}
+
+			.email-heading h1 {
+				font-size: 31px;
+			}
+
+			.email-heading p {
+				font-size: 12px;
+				font-weight: 600;
+			}
+		}
+
+		@media only screen and (device-aspect-ratio: 360/640) {
+			.templateView {
+				max-height: 881px;
+			}
+
+			.email-heading {
+				height: 124px;
+			}
+
+			.email-heading h1 {
+				font-size: 31px;
+			}
+
+			.email-heading p {
+				font-size: 12px;
+				font-weight: 600;
+			}
+		}
+
+		@media only screen and (device-aspect-ratio: 360/640) {
+			.templateView {
+				max-height: 881px;
+			}
+
+			.email-heading {
+				height: 124px;
+			}
+
+			.email-heading h1 {
+				font-size: 31px;
+			}
+
+			.email-heading p {
+				font-size: 12px;
+				font-weight: 600;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<section class="templateView">
+		<div class="padding-view">
+			<header class="logo">
+				<img src="https://scube-assets.s3.ap-south-1.amazonaws.com/logo.png">
+			</header>
+			<div class="email-heading">
+				<h1>Oops!</h1>
+				<p>There seems to be a problem</p>
+				<p>with your payment.</p>
+			</div>
+			<div class="email-content">
+				<h1>Hey (First Name),</h1>
+				<p>
+					We could not confirm your order since the payment has failed. Please try placing the order again. If the problem persists, we recommend using a different payment method. Any amount debited from the source will be credited back. We regret the inconvenience caused. Please do not be worried as such things tend to happen sometimes.
+				</p>
+				<p>
+					We hope to see you successfully place your order in the next attempt.
+				</p>
+			</div>
+			<div class="regards">
+				<p><i>Don’t just be amazing, #BeGumazing.</i></p>
+				<p><b> Thanks and Regards,</b></p>
+				<p><i> Mr. Gumazing</i></p>
+			</div>
+		</div>
+		<footer class="footer-image">
+			<p>For any queries regarding your order, please contact us at <br>&lt;email ID&gt; or, <br>call us on
+				&lt;phone no.&gt;</p>
+		</footer>
+
+
+	</section>
+
+</body>
+
+</html>

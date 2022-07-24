@@ -1,0 +1,15 @@
+<div class="common-head">
+    <div class="common-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <p>Home Banner Event</p>
+            </div>
+            <div class="col-lg-6">
+                <div class="data-font">
+                <i class="fa fa-plus" aria-hidden="true"  (click)="eventadd()"></i>
+            </div>
+        </div>
+        </div>
+    </div>
+    <app-customtable [homeTable]="popularevent" (rowselected)="edit($event)"></app-customtable>
+</div>

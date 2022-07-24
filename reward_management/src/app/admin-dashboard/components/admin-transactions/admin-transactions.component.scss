@@ -1,0 +1,83 @@
+.transactions-container {
+    padding: 30px;
+    .box {
+        background-color: #f3f3f3;
+        padding: 30px;
+        border-radius: 3%;
+    }
+
+    th,
+    td {
+        padding: 30px;
+    }
+
+    tr {
+        vertical-align: middle !important;
+        text-align: center !important;
+    }
+    .btn-secondary {
+        background-color: #ec4242 !important;
+        border: none;
+        border-radius: 5px;
+        color: #ffffff;
+        font-size: 12px;
+    }
+
+    .btn-success {
+        border: none;
+        border-radius: 5px;
+        color: #ffffff;
+        font-size: 12px;
+    }
+
+    .btn-dark {
+        border: none;
+        border-radius: 5px;
+        color: #ffffff;
+        font-size: 12px;
+    }
+
+    td {
+        letter-spacing: 0.01em;
+        color: #000000;
+        font-weight: 300;
+        font-size: 12px;
+        line-height: 23px;
+    }
+    th {
+        font-size: 14px;
+        line-height: 23px;
+        letter-spacing: 0.02em;
+        color: #000000;
+    }
+    thead {
+        color: white;
+        position: sticky;
+        top: 0;
+    }
+    
+    .tableHeader {
+        background-color: #f3f3f3;
+        border-radius: 7px 7px 0px 0px;
+    }
+    
+    tr:nth-child(even) {
+        background-color: #f8f8f8;
+    }
+}
+
+
+.btn:focus {
+    outline: none !important;
+    box-shadow: none;
+}
+
+.btn {
+    width: 90%;
+}
+
+tr {
+    vertical-align: middle !important;
+    text-align: center !important;
+}
+

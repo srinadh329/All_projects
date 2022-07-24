@@ -1,0 +1,226 @@
+<div class="common-transform">
+  <ng-container>
+    <span class="material-icons arrow-back" (click)="back()">arrow_back</span> <span class="pl-3">Instant
+      Cash</span>
+    <form [formGroup]="instantcashForm" #formDirective="ngForm"
+      (ngSubmit)="icformSubmit(instantcashForm);">
+      <div class="row pt-3">
+        <!-- GoldCard Number -->
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="form-group m-0">
+            <label class="col-lg-6  common-label">Gold Card Number* :</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline col-lg-6  w-100">
+              <input matInput placeholder="Enter Goldcard Number" formControlName="gcnumber" #goldcardnumber
+                (keyup)="goldcardDetails(goldcardnumber.value)" minlength="16" maxlength="16" pattern="\d{16}">
+              <mat-error *ngIf="instantcashForm.get('gcnumber').hasError('required')">
+                Goldcard Number is required
+              </mat-error>
+              <mat-error *ngIf="instantcashForm.get('gcnumber').hasError('pattern')">
+                Enter 16 Numbers only 
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- Account Number -->
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="form-group  m-0">
+            <label class="col-sm-4 common-label1">Account Number :</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+              <input matInput placeholder="Enter Account Number" formControlName="accountno" #accountnumber
+                (keyup)="accountNumber(accountnumber.value)" minlength="20" maxlength="20" pattern="^[a-zA-Z0-9]{20}$">
+              <mat-error *ngIf="instantcashForm.get('accountno').hasError('required')">
+                Account Number is required
+              </mat-error>
+              <mat-error *ngIf="instantcashForm.get('accountno').hasError('pattern')">
+                Enter combination of 20 characters & Numbers
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- Bank Name -->
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="form-group  m-0" *ngIf="!bankname">
+            <label class="col-sm-4 common-label1">Bank Name:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline col-sm-6">
+              <mat-select matInput formControlName="bankname" placeholder="Select Bankname">
+                <mat-option *ngFor="let bankname of banknames" [value]="bankname.bnknam">{{bankname.bnknam}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="form-group  m-0" *ngIf="bankname">
+            <label class="col-sm-4 common-label1">Bank Name:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline col-sm-6">
+              <input matInput placeholder="Enter Number" formControlName="bankname" readonly>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <!------------------------------------------------------- Remitter Details ------------------------------------------------------->
+      <mat-card class="common-header mt-3">
+        <h6 class="p-2 no-space">Remitter Details</h6>
+      </mat-card>
+      <mat-card class="creation-form">
+        <div class="row pt-3">
+          <!-- Name -->
+          <div class="col-lg-3 col-md-3 col-sm-12">
+            <div class="form-group m-0">
+              <label class="col-lg-6  common-label1">Name :</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline col-lg-6  w-100">
+                <input matInput formControlName="applicantname" readonly>
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- Mobile Number -->
+          <div class="col-lg-3 col-md-3 col-sm-12">
+            <div class="form-group m-0">
+              <label class="col-lg-6 common-label1">Mobile Number :</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline w-100 col-lg-6">
+                <input matInput formControlName="applicantmobileno" readonly>
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- Address -->
+          <div class="col-lg-3 col-md-3 col-sm-12">
+            <div class="form-group m-0">
+              <label class="col-lg-6 common-label1">Address :</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-lg-6  w-100">
+                <input matInput formControlName="applicationaddress" readonly>
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- Country -->
+          <div class="col-lg-3 col-md-3 col-sm-12">
+            <div class="form-group m-0">
+              <label class="col-lg-6 common-label1">Country :</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-lg-6  w-100">
+                <input matInput formControlName="applicantcountry" readonly>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+      <!--------------------------------------------------- Benificiary Details ----------------------------------------------------->
+      <mat-card class="common-header">
+        <h6 class="p-2 no-space">Beneficiary Details</h6>
+      </mat-card>
+      <mat-card class="creation-form registerHeight" id="style-4">
+        <div class="row pt-3">
+          <div class="col-lg-6">
+            <!-- Benificiary Name -->
+            <div class="form-group m-0">
+              <label class="col-sm-4 common-label1">Name :</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                <input matInput placeholder="Enter Name" formControlName="benefname" minlength="2" maxlength="55"
+                  pattern="^[ A-Za-z_@./#&+-,%''()]*$">
+                <mat-error *ngIf="instantcashForm.get('benefname').hasError('required')">
+                  Name is required
+                </mat-error>
+                <mat-error *ngIf="instantcashForm.get('benefname').hasError('pattern')">
+                  Enter Characters Only
+                </mat-error>
+                <mat-error *ngIf="instantcashForm.get('benefname').hasError('minlength')">
+                  Enter minimum 2 Characters 
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <!-- Benificiary Mobile Number -->
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">Mobile Number :</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline   col-sm-6">
+                <input matInput placeholder="Enter Mobile Number" formControlName="benfmobileno"
+                onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" minlength="8" maxlength="15">
+                <mat-error *ngIf="instantcashForm.get('benfmobileno').hasError('required')">
+                  Mobile Number is required
+                </mat-error>
+                <mat-error *ngIf="instantcashForm.get('benfmobileno').hasError('minlength')">
+                  Enter minimum 8 Numbers
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <!-- Benificiary Address -->
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">Address :</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                <input matInput placeholder="Enter Address" formControlName="benfaddress" minlength="10" maxlength="125">
+                <!-- pattern="[A-Za-z0-9._/()+-]+,[A-Za-z0-9._/+()-]+,[A-Za-z0-9._/()+-]{0,40}$" maxlength="120" -->
+                <mat-error *ngIf="instantcashForm.get('benfaddress').hasError('required')">
+                  Address is required
+                </mat-error>
+                <mat-error *ngIf="instantcashForm.get('benfaddress').hasError('minlength')">
+                  Enter minimum 10 characters
+                </mat-error>
+                <!-- <mat-error *ngIf="instantcashForm.get('benfaddress').hasError('pattern')">
+                  Apartment No,Building Name,Street Name
+                </mat-error> -->
+              </mat-form-field>
+            </div>
+            <!-- Benificiary Currency -->
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">Currency:</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                <input matInput formControlName="currencyid" readonly>
+              </mat-form-field>
+            </div>
+
+            <!-- Rate -->
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">Rate:</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                <input matInput formControlName="rate" readonly>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <!-- FC Amount -->
+            <div class="form-group  m-0" *ngIf="products.cntcurrency !== 'AED'">
+              <label class="col-sm-4 common-label1">FC Amount:</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                <input matInput formControlName="amount" readonly (keyup)="getcharges()">
+              </mat-form-field>
+            </div>
+
+            <!-- LC Amount -->
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">LC Amount :</label>
+              <mat-form-field appearance="outline" *ngIf="products.cntcurrency === 'AED'" class="custom-branch-select-outline   col-sm-6">
+                <input matInput placeholder="Enter Number" formControlName="lcamount" readonly (keyup)="getcharges()">
+              </mat-form-field>
+              <mat-form-field appearance="outline" *ngIf="products.cntcurrency !== 'AED' " class="custom-branch-select-outline   col-sm-6">
+                <input matInput placeholder="Enter Number" formControlName="lcamount" [value]="calculations.lcamount"
+                  readonly (keyup)="getcharges()">
+              </mat-form-field>
+            </div>
+            <!-- Charges -->
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">Charges:</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                <input matInput formControlName="charges" readonly>
+              </mat-form-field>
+            </div>
+            <!-- VAT -->
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">VAT :</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                <input matInput placeholder="Enter Number" formControlName="vat" [value]="calculations.vat" readonly>
+              </mat-form-field>
+            </div>
+            <!-- Total Amount -->
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">Total :</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                <input matInput formControlName="totalamount" [(value)]="calculations.totalamount" readonly>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 d-flex flex-row justify-content-center pt-4">
+          <button type="button" class="cancel-button" (click)="reset(formDirective)">Reset</button>
+          <button type="submit" class="label-button">Save</button>
+        </div>
+
+      </mat-card>
+    </form>
+  </ng-container>
+</div>

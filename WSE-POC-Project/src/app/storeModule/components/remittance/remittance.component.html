@@ -1,0 +1,246 @@
+<div class="common-transform" *ngIf="!showremittancedata">
+  <div *ngIf="tabledata">
+  <mat-card class="common-header">
+    <div class="row">
+      <div class="col-lg-3 col-md-3 col-4 d-flex flex-column">
+        <h6 class="pt-2 no-space">Remittance Details</h6>
+      </div>
+      <div class="col-lg-7 col-md-7 col-6">
+        <div class="text-center common-search">
+          <input type="text" placeholder="search" [(ngModel)]="name" (keyup)="search(name)">
+          <span class="material-icons search-icon">search</span>
+        </div>
+      </div>
+      <div *ngIf="action" class="col-lg-2 col-md-2 col-2 d-flex flex-row-reverse justify-content-center">
+        <div class="pr-3 pt-2" matTooltip="Create Application"  matTooltipClass="example-tooltip-red">
+          <span class="material-icons cursor" (click)="createForm()">add</span>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+  <app-storetable [Header]='remittanceheader' [remittancelist]='remittancedata' (remittanceview)="editForm($event)"></app-storetable>
+</div>
+
+  <mat-card style="text-align: center;"  *ngIf="!tabledata">
+    <form [formGroup]="remittanceForm" #formDirective="ngForm" (ngSubmit)="remittanceformSubmit(remittanceForm);">
+      <div class="row">
+        <!-- Country -->
+        <div class="col">
+          <label>Country:</label>
+          <mat-form-field appearance="outline" class="custom-branch-select-outline col-sm-6">
+            <mat-select matInput formControlName="countryid" placeholder="Select Country" (selectionChange)="countrychange($event);">
+              <mat-option *ngFor="let country of countries" [value]="country.cntid">{{country.cntnam}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="remittanceForm.get('countryid').hasError('required')">
+              Select Country
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+<!-- Currency -->
+      <div class="row">
+        <div class="col">
+          <label>Currency:</label>
+          <mat-form-field appearance="outline" class="custom-branch-select-outline col-sm-6">
+            <input matInput formControlName="currency" placeholder="Enter Amount">
+          </mat-form-field>
+        </div>
+      </div>
+<!-- Amount -->
+      <div class="row">
+        <div class="col">
+          <label>Amount:</label>
+          <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+            <input matInput formControlName="amount" placeholder="Enter Amount"  pattern="^([5-9]\d{2,}|[1-9]\d{3,})">
+            <mat-error *ngIf="remittanceForm.get('amount').hasError('required')">
+              Enter Amount
+            </mat-error>
+            <mat-error *ngIf="remittanceForm.get('amount').hasError('pattern')">
+              Enter Amount Greater than 500
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button type="submit" class="label-button">Submit</button>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+</div>
+
+<!-- ------------------------------------------------- View Remittance Details ---------------------------------------------------->
+<div class="common-transform" *ngIf="showremittancedata">
+<ng-container>
+  <span class="material-icons arrow-back" (click)="back()">arrow_back</span> <span class="pl-3">Remittance</span>
+  <form [formGroup]="remittanceviewForm">
+    <div class="row pt-3">
+      <!-- Goldcard Number -->
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="form-group m-0">
+          <label class="col-lg-6  common-label">Gold Card Number* :</label>
+          <mat-form-field appearance="outline" class="custom-branch-select-outline col-lg-6  w-100">
+            <input matInput formControlName="gcnumber" readonly>
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- Account Number -->
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="form-group  m-0">
+          <label class="col-sm-4 common-label1">Account Number :</label>
+          <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+            <input matInput formControlName="accountno"  readonly>
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- Bank Name -->
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="form-group  m-0">
+          <label class="col-sm-4 common-label1">Bank Name:</label>
+          <mat-form-field appearance="outline" class="custom-branch-select-outline col-sm-6">
+            <input matInput placeholder="Enter Number" formControlName="bankname" readonly>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <!------------------------------------------------------- Remitter Details --------------------------------------------------->
+    <mat-card class="common-header mt-3">
+      <h6 class="p-2 no-space">Remitter Details</h6>
+    </mat-card>
+    <mat-card class="creation-form">
+      <div class="row pt-3">
+        <!-- Name -->
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <div class="form-group m-0">
+            <label class="col-lg-6  common-label1">Name :</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline col-lg-6  w-100">
+              <input matInput formControlName="applicantname" readonly>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- Mobile Number -->
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <div class="form-group m-0">
+            <label class="col-lg-6 common-label1">Mobile Number :</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100 col-lg-6">
+              <input matInput formControlName="applicantmobileno" readonly>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- Address -->
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <div class="form-group m-0">
+            <label class="col-lg-6 common-label1">Address :</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline  col-lg-6  w-100">
+              <input matInput formControlName="applicationaddress" readonly>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- Country -->
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <div class="form-group m-0">
+            <label class="col-lg-6 common-label1">Country :</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline  col-lg-6  w-100">
+              <input matInput formControlName="applicantcountry" readonly>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+    <!--------------------------------------------------- Benificiary Details ---------------------------------------------------->
+    <mat-card class="common-header">
+      <h6 class="p-2 no-space">Beneficiary Details</h6>
+    </mat-card>
+    <mat-card class="creation-form registerHeight" id="style-4">
+      <div class="row pt-3">
+        <div class="col-lg-6">
+          <!-- Benificiary Name -->
+          <div class="form-group m-0">
+            <label class="col-sm-4 common-label1">Name :</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+              <input matInput  formControlName="benefname"readonly>
+            </mat-form-field>
+          </div>
+          <!-- Benificiary Mobile Number -->
+          <div class="form-group  m-0">
+            <label class="col-sm-4 common-label1">Mobile Number :</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline   col-sm-6">
+              <input matInput  formControlName="benfmobileno" readonly>
+            </mat-form-field>
+          </div>
+          <!-- Benificiary Address -->
+          <div class="form-group  m-0">
+            <label class="col-sm-4 common-label1">Address :</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+              <input matInput  formControlName="benfaddress"readonly>
+            </mat-form-field>
+          </div>
+          <!-- Currency -->
+          <div class="form-group  m-0">
+            <label class="col-sm-4 common-label1">Currency:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                <input matInput formControlName="currencyid" readonly>
+            </mat-form-field>
+          </div>
+          <!-- FC Amount -->
+          <div class="form-group  m-0">
+            <label class="col-sm-4 common-label1">FC Amount:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+              <input matInput formControlName="amount" readonly [(value)]="calculations.amount">
+            </mat-form-field>
+          </div>
+
+        </div>
+        <div class="col-lg-6">
+          <!-- Rate -->
+          <div class="form-group  m-0">
+            <label class="col-sm-4 common-label1">Rate:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+              <input matInput formControlName="rate" readonly>
+            </mat-form-field>
+          </div>
+          <!-- LC Amount -->
+          <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">LC Amount :</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline   col-sm-6">
+                <input matInput placeholder="Enter Number" formControlName="lcamount" [(value)]="calculations.lcamount" readonly>
+              </mat-form-field>
+            </div>
+            <!-- Charges -->
+          <div class="form-group  m-0">
+            <label class="col-sm-4 common-label1">Charges:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+              <input matInput formControlName="charges" readonly>
+            </mat-form-field>
+          </div>
+          <!-- VAT -->
+          <div class="form-group  m-0">
+            <label class="col-sm-4 common-label1">VAT :</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+              <input matInput placeholder="Enter Number" formControlName="vat" readonly>
+            </mat-form-field>
+          </div>
+          <!-- TOTAL -->
+          <div class="form-group  m-0">
+            <label class="col-sm-4 common-label1">Total :</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+              <input matInput formControlName="totalamount" [(value)]="calculations.totalamount" readonly>
+            </mat-form-field>
+          </div>
+
+        </div>
+      </div>
+      <div *ngIf="action===true" class="col-12 d-flex flex-row justify-content-center pt-4">
+        <button type="button" class="label-button" (click)="authorizeremittanceApplication('A')">Authorize</button>
+        <button type="button" class="label-button" (click)="authorizeremittanceApplication('R')">Reject</button>
+      </div>
+
+      <div *ngIf="rejectedapplication" class="col-12 d-flex flex-row justify-content-center pt-4">
+        <button type="button" class="label-button" (click)="authorizeRejectedApplication('S')">Authorize</button>
+      </div>
+    </mat-card>
+  </form>
+</ng-container>
+</div>
+ 

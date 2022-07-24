@@ -1,0 +1,36 @@
+.section-color{
+    background-color: #000;
+        padding: 0 0 0 185px;
+}
+.section-point{
+    background-image: url("../images/popint.png");
+        min-height: 500px;
+        background-size: contain;
+    background-repeat: no-repeat;
+    color: #fff;
+    position: relative;
+}
+.first-row{
+    position: absolute;
+    left: 19%;
+}
+.second-row{
+   position: absolute;
+    left: 46%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.third-row{
+    position: absolute;
+    left: 71%;
+}
+.fourth-row{
+    position: absolute;
+    right: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

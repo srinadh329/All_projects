@@ -1,0 +1,29 @@
+
+.client-testi .client-image {
+    margin-right: 16px;
+}
+.avatar.avatar-small {
+    height: 65px;
+    width: 65px;
+}
+.shadow {
+    -webkit-box-shadow: 0 0 3px rgb(60 72 88 / 15%) !important;
+    box-shadow: 0 0 3px rgb(60 72 88 / 15%) !important;
+}
+.client-testi .content:before {
+    content: "";
+    position: absolute;
+    top: 30px;
+    left: 0;
+    margin-left: 13px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 8px solid #3c4858;
+    border-color: transparent #fff #fff transparent;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+    -webkit-box-shadow: 2px 2px 2px -1px rgb(60 72 88 / 15%);
+    box-shadow: 2px 2px 2px -1px rgb(60 72 88 / 15%);
+}

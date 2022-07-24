@@ -1,0 +1,25 @@
+<div class="common-transform" >
+  <span class="material-icons arrow-back" (click)="branch()">arrow_back</span> <span class="pl-3">Back to Branches</span>
+  <mat-card class="common-header mt-3">
+    <div class="row">
+      <div class="col-lg-3 col-md-3 col-4 d-flex flex-column">
+        <h6 class="pt-2 no-space"> List of Branch Users:</h6>
+      </div>
+      <div class="col-lg-7 col-md-7 col-6">
+        <div class="text-center common-search">
+          <input type="search" placeholder="search" [(ngModel)]="name" (keyup)="search(name)">
+          <span class="material-icons search-icon">search</span>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-2 col-2 d-flex flex-row-reverse justify-content-center">
+        <div class="pr-3 pt-2">
+          <span class="material-icons cursor" (click)="addBranchusers()">add</span>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+<div>
+  <app-table [tableHeaders]="tableheader" [allbranchusers]="allbranchusers" (editbranchuserdata)="editBranchusers($event)"></app-table>
+</div>
+</div>

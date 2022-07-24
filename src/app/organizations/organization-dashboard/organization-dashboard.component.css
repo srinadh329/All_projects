@@ -1,0 +1,253 @@
+.logo{
+    text-align: center;
+    padding: 12px;
+ }
+ .tabrow{
+   text-align: center;
+   padding-top: 30px;
+ }
+ .tabbutn1{
+    color: #232323;
+    font-size: 20px;
+    opacity: 100%;
+ }
+ .tabtxt{
+    color: #232323;
+    opacity: 100%;
+    font-family: poppins,semibold;
+   font-size: 20px;
+   font-weight: 600;
+ }
+ .tabtxt a{
+    color: #232323;
+  
+ }
+ .tabtxt a:hover{
+  text-decoration: none;
+   
+ }
+ .box{
+    width: 70px;
+    height: 70px;
+    border-radius: 8px;
+  
+    text-align: center;
+    margin: 0 auto;
+ }
+ .adnew{
+   font-size: 58px;
+    color: #696DE9;
+    border: 1px dashed #696DE9;
+    background-color: #fff;
+   
+    box-shadow: 0px 18px 20px #6966E929;
+    line-height: 1;
+  
+ }
+ .adnewpep{
+    background-color: #AB3B61;
+    box-shadow: 0px 18px 20px #AB3B6129;
+  }
+ .cntcts{
+    background-color: #F38605;
+    box-shadow: 0px 18px 20px #F3860529;
+ }
+ .cal{
+    background-color: #F6CA07;
+    box-shadow: 0px 18px 20px #F6CA0729;
+ }
+ .chat{
+    background-color: #DEEF59;
+    box-shadow: 0px 18px 20px #DEEF5929;
+ }
+ .img-1{
+    margin-left: 4px;
+    margin-top: 17px;
+ }
+ .img-2{
+    margin-left: 0;
+    margin-top: 19px;
+ }
+ .img-3{
+    margin-top: 25px;
+ }
+ .img-5{
+    margin-top: 15px;
+ }
+ .img-6{
+    margin-top: 25px;
+ }
+ .boxtxt1{
+    text-align: center;
+    line-height: 4;
+    color: #232323;
+    opacity: 1;
+    font-size: 16px;
+    font-family: poppins,medium;
+ }
+ .invite{
+    background-color: #BC8A45;
+    box-shadow: 0px 18px 20px #6966E929;
+ }
+ .incog{
+    background-color: #03060F;
+    box-shadow: 0px 18px 20px #03060F29;
+ }
+ .newg{
+    background-color: #13599F;
+    box-shadow: 0px 18px 20px #13599F29;
+ }
+ .Video{
+    background-color: #0293A4;
+    box-shadow: 0px 18px 20px #0293A429;
+ }
+ .notific{
+    background-color: #D75B66;
+    box-shadow: 0px 18px 20px #D75B6629;
+ }
+ .ourprodsec{
+    font-size: 24px;
+    color: #232323;
+    font-family: poppins,semibold;
+    font-weight: 600;
+ }
+ .backclr{
+    background-color: #FAFAFA;
+    height: 100%;
+ }
+  
+ .devide{
+    border-top: 1px solid #696de94a;
+    margin-left: 15px;
+    margin-top: 0;
+ }
+ .devide1{
+    border-top: 1px solid #696de94a;
+    margin-left: 0px;
+    margin-top: 0;
+ }
+ .txtlft{
+    text-align: left;
+ }
+ .bot{
+    background-color: #fff;
+    box-shadow: 0px 18px 20px #6966E929;
+ }
+ .kyc{
+    background-color: #21335B;
+    box-shadow: 0px 18px 20px #21335B29;
+ }
+ .smart{
+    background-color: #7A58FC;
+    box-shadow: 0px 18px 20px #7A58FC29;
+ }
+ .scm{
+    background-color: #7377B1;
+    box-shadow: 0px 18px 20px #7377B129;
+ }
+ .hractive{
+    margin: 0;
+    border: 2px solid #696DE9;
+    width: 20%;
+    background-color: #696DE9;
+    margin-left: -15px;
+    position: relative;
+ }
+ .img-4{
+    margin-top: 10px;
+ }
+ .img-7{
+    margin-top: 5px;
+ }
+ .logoimg{
+    margin-right: 145px;
+ }
+ .logobox{
+    background-color: #fff;
+ }
+ .fade.in {
+    opacity: 1;
+ }
+ .nav-tabs{
+    border-bottom: 0px solid #dee2e6;
+ }
+ 
+
+ .addempbtn{
+   border: 1px dashed #aca8a8;
+   background-color: #fff;
+   padding: 0px;
+   box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+ }
+
+ .addempbtn i{
+   background-color: #AB3B61;
+   padding: 11px;
+   color:#fff;
+ }
+
+ .bg-emp{
+   background-color: #fff;
+   border: 1px dashed #aea6a6;
+ }
+
+ .iconbox{
+    width:46px;
+    height:44px;
+  
+    box-shadow: 0px 18px 20px #6966E929;
+    border-radius: 4px;
+ }
+
+ .bg1{
+   background-color: #BC8A45;
+ }
+
+ .bg2{
+   background-color: #03060F;
+ }
+
+ .bg3{
+   background-color: #F38605;
+ }
+
+ .bg4{
+   background-color: #e0ee59;
+ }
+
+
+ .bg5{
+   background-color: #0293A4;
+ }
+
+ .bg6{
+   background-color: #13599F;
+ }
+
+ .bg7{
+   background-color: #D75B66;
+ }
+ .iconbox img{
+    padding:12px;
+ }
+
+ .bgchat{
+   background-color: #e6fbec;
+   border-radius: 8px;
+ }
+
+.bgvideo{
+   background-color: #ffdeb8;
+   border-radius: 8px;
+}
+
+
+.bggroup{
+   background-color: #ffdce0;
+   border-radius: 8px;
+}
+
+.bgnotify{
+   background-color: #bbf7ff;
+   border-radius: 8px;
+}

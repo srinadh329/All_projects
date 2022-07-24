@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-color: #F9FBFF !important;
+ }
+
+ .custom-form.mat-form-field-appearance-outline .mat-select-arrow-wrapper {
+    transform: translateY(0%);
+}
+.custom-form.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+    // color: rgba(235, 235, 235, 0.87);
+    color:#0075FF;
+}
+.custom-form.mat-form-field-appearance-outline .mat-form-field-infix{
+    padding: 12px 0 10px 0;
+  }
+.common-transform{
+    position: relative;
+    top: 8em;
+    padding: 0 10px 0 10px;
+}  
+.cursor{
+    cursor: pointer;
+}

@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  <p>{{data.content}}</p>
+  <mat-form-field *ngIf=data.otpflag>
+  
+    <input matInput type="text" [(ngModel)]="data.otp" pattern="[0-9]{6}" #pwd6="ngModel" name="otp" required>
+    <mat-error class="text-danger" *ngIf="pwd6.invalid && pwd6.dirty && pwd6.touched">Enter the OTP 6 digits</mat-error>
+
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No</button>
+  <button mat-button [mat-dialog-close]="data.otp" *ngIf=data.otpflag  cdkFocusInitial>Yes</button>
+  <button mat-button [mat-dialog-close]=true *ngIf=!data.otpflag cdkFocusInitial>Yes</button>
+</div>

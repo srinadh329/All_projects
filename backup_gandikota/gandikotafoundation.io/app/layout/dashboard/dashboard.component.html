@@ -1,0 +1,45 @@
+<div class="header-wrapper">
+    <div class="container cont-header">
+        <div class="row header-row">
+            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                <div class="row hide-mrgn">
+                    <div class="col-lg logo-class"><a routerLink="/"><img src="assets/images/download.jpg" alt=""
+                                style="border-radius: 15%;"></a></div>
+                </div>
+                <div class="col-lg-1 header-css">
+                    <h6 class="header-text">GANDIKOTA FOUNDATION</h6>
+                </div>
+            </div>
+            <div class="col-lg-9 logout">
+                <div class="logout-top">
+                    Logout <i class="fa fa-power-off" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="viewport">
+<div id="sidebar">
+    <ul class="navbar-top">
+        <li  routerLinkActive="active-link" class="dropdown">
+            <a routerLink="/dashboard/home">Home</a>
+            <ul class="dropdown-content">
+                <li routerLink="/dashboard/home/homebannerevent">Home Banner Events</li>
+                <li>What We Are</li>
+                <li>About Foundation</li>
+                <li>Latest News</li>
+            </ul>
+        </li>
+        <li routerLink="/dashboard/about" routerLinkActive="active-link">About</li>
+        <li routerLink="/dashboard/service" routerLinkActive="active-link">Services</li>
+        <li routerLink="/dashboard/education" routerLinkActive="active-link">Education</li>
+        <li routerLink="/dashboard/gallery" routerLinkActive="active-link">Gallery</li>
+    </ul>
+</div>
+
+<div class="container-fluid">
+    <div class="col-sm-12">
+    <router-outlet></router-outlet>
+  </div>
+  </div>
+</div>

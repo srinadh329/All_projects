@@ -1,0 +1,76 @@
+/* You can add global styles to this file, and also import other style files */
+/* .form-control{
+    width: 60%;
+} */
+
+.pointer {
+    cursor: pointer;
+}
+
+@font-face {
+  font-family: Sofia Pro;
+  src: url('assets/fonts/sofia_reg.woff');
+}
+
+.theme-color {
+  color: #FF6F3D;
+}
+
+.btn_theme {
+  color:#FFFFFF;
+  background-color:#EE5D2F;
+  width:100%;
+  border: none;
+  height: 46px;
+  letter-spacing: 0.04em;
+  border-radius: 50px;
+}
+
+body {
+  font-family: Sofia Pro;
+  height: 100%;
+}
+
+.bg-theme {
+    background-color: #EF5E2F;
+}
+
+.tableHeader{
+    background-color: #F3F3F3;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #F8F8F8;
+  }
+
+  .main {
+    margin-left: 300px; /* Same as the width of the sidenav */
+  }
+
+
+  th, td {
+    padding: 25px;
+  }
+
+th {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 14px;
+  letter-spacing: 0.03em;
+  color: black;
+}
+
+td {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 14px;
+  letter-spacing: 0.03em;
+  color: #626262;
+  text-align: center;
+}
+
+tr {
+  vertical-align: middle !important;
+}

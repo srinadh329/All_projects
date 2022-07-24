@@ -1,0 +1,100 @@
+@import "common";
+
+
+.custom-filter{
+    position: relative;
+    top: 5px;
+    cursor: pointer;
+}
+.common-table-head{
+    background-color: $th-color;
+    color: #273142;
+    th{
+        white-space: nowrap;
+        width: 170px;
+    }
+}
+tbody 
+{
+    tr
+    {
+    border: 1px solid $tr-color;
+    margin: 12px 0 0px 0;
+    &:hover{
+    border: 1px solid $primer-color;
+    cursor: pointer;
+    
+    }
+    }
+}
+.table td, .table th{
+    border: none;
+}
+td {
+    padding:10px 0 10px 30px;
+    letter-spacing: 0;
+    color: $black-color;
+    opacity: 1;
+    line-height: 34px;
+    width: 60px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+}
+
+
+tbody {
+    display: block;
+    // height: 200px;
+    overflow: auto;
+}
+
+thead,
+tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table-active{
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 500;
+    width: 88px;
+    text-align: center;
+}
+.list-icon{
+    padding: 0 12px 0px 0px;
+    cursor: pointer;
+    span{
+        margin-top: 4px;
+        &:hover{
+            color: $primer-color;
+        }
+    }
+}
+
+#style-4::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	// background-color: #F5F5F5;
+}
+
+#style-4::-webkit-scrollbar
+{
+	width: 6px;
+	height: 6px;
+}
+
+#style-4::-webkit-scrollbar-thumb
+{
+	background-color: $scroll-color;
+    outline: 1px solid $scroll-outline;
+}
+
+.action-active{
+    background: transparent linear-gradient(0deg, #082871 0%, #00A9EC 100%) 0% 0% no-repeat padding-box;
+    color: #fff;
+    border: 1px solid #fff;
+}

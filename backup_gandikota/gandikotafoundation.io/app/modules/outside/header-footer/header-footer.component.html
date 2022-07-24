@@ -1,0 +1,156 @@
+<section>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <a class="navbar-brand" href="#">
+                            <img src="assets/images/logo.png" width="100%">
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mr-auto custom-list">
+                                <li class="nav-item active">
+                                    <a class="nav-link" routerLink="/">Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" routerLink="/aboutus">About Us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" routerLink="/services">Services</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" routerLink="/education">Education</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" routerLink="/gallery" >Gallery</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" routerLink="/contactus" >Contact us</a>
+                                </li>
+                            </ul>
+                            <div class="my-2 my-lg-0">
+                                <a class="search">Search</a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+</section>
+
+<!-- <div class="header-wrapper">
+    <div class="container cont-header">
+        <div class="row header-row">
+            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" >
+                <div class="row hide-mrgn">
+               <div class="col-lg logo-class"><a  routerLink="/"><img src="assets/images/download.jpg" alt="" style="border-radius: 15%;"></a></div>
+                </div>
+               <div class="col-lg-1 header-css"><h6 class="header-text">GANDIKOTA FOUNDATION</h6></div>
+                
+            </div>
+            <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 hides">
+                <div class="navigation">
+                    <div id="navigation">
+                        <ul>
+                            <li class="active"><a routerLink="/" >Home</a></li>
+                            <li class="active"><a  routerLink="/aboutus" >About us</a></li>
+                            <li class="active"><a  routerLink="/services" >Services</a></li>
+                            <li class="active"><a  routerLink="/education">Education</a></li>
+                            <li class="active"><a  routerLink="/gallery" >Gallery</a></li>
+                            <li class="active"><a  routerLink="/contactus" >Contact us</a></li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 hidden-md hidden-sm hidden-xs">
+                <div class="header-btn"><a href="#" class="btn btn-default">Donation</a></div>
+            </div>
+        </div>
+    </div>
+  </div> -->
+<router-outlet></router-outlet>
+
+<!-- footer start -->
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <!-- footer-about-start -->
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 ">
+                <div class="footer-widget">
+                    <h3 class="footer-title">Contact Infomation</h3>
+                    <div class="">
+                        <ul>
+                            <li style="font-size: 14px;"> <i class="icon-placeholder"></i>Lane. Opp Appolo Hospital ,
+                                Secundrabad-25</li>
+                            <li><i class="icon-phone-call"></i>+919246501686</li>
+                            <li><i class="icon-envelope"></i>info@gandikotafoundation.org</li>
+                        </ul>
+                    </div>
+                    <div class="footer-social"> <a href="#"><span><i class="fa fa-facebook-square"></i></span></a> <a
+                            href="#"><span><i class="fa fa-google-plus-square"></i></span> </a> <a href="#"><span
+                                class="active"><i class="fa fa-twitter-square"></i> </span></a> <a href="#"><span><i
+                                    class=" fa fa-pinterest-square"></i> </span></a> <a href="#"><span><i
+                                    class="fa fa-linkedin-square"></i></span></a> </div>
+                </div>
+            </div>
+            <!-- footer-useful links-start -->
+            <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="footer-widget">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="angle angle-right">
+                        <li><a routerLink="/">Home </a></li>
+                        <li><a routerLink="/services">Service </a></li>
+                        <li><a routerLink="/aboutus">About me</a></li>
+                        <li><a routerLink="/education">Education </a></li>
+                        <li> <a routerLink="/contactus">Contact</a></li>
+                        <li> <a routerLink="/gallery">Gallery</a></li>
+                        <li> <a routerLink="/login">Login</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- footer-useful links-close -->
+            <!-- footer-form-start -->
+            <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="footer-widget">
+                    <h3 class="footer-title">contact us</h3>
+                    <form>
+                        <div class="form-group">
+                            <label class="control-label sr-only" for="name"></label>
+                            <input id="name" type="text" class="form-control" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label sr-only" for="Email"></label>
+                            <input id="email" type="text" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label sr-only" for="Phone"></label>
+                            <input id="phone" type="text" class="form-control" placeholder="Phone">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label sr-only" for="textarea"></label>
+                            <textarea class="form-control" id="textarea" name="textarea" rows="3"
+                                placeholder="textarea"></textarea>
+                        </div>
+                        <button class="btn btn-primary btn-sm">submit</button>
+                    </form>
+                </div>
+            </div>
+            <!-- footer-tiny-text-start -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="tiny-footer">
+                    <p>© 2020 - Gandikota Foundation . All Rights Reserved.</p>
+                </div>
+            </div>
+            <!-- footer-tiny-text-start -->
+            <!-- footer-form-close -->
+        </div>
+    </div>
+</div>

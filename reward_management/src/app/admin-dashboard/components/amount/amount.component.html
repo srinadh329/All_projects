@@ -1,0 +1,20 @@
+<div class="amount-container">
+    <div class="card">
+        <div class="card-body">
+            <div class="row text-center align-items-center p-3">
+                <div class="col border-end">
+                    <h4 class="fw-bold m-1">${{(totalAmount && totalAmount.totalAmountLoaded) ? totalAmount.totalAmountLoaded : 0}}</h4>
+                    <p class="title-font m-0">Amount Loaded</p>
+                </div>
+                <div class="col border-end">
+                    <h4 class="fw-bold m-1">${{(totalAmount && totalAmount.totalRewardsRedeemed) ? totalAmount.totalRewardsRedeemed : 0}}</h4>
+                    <p class="title-font m-0">Rewards Redeemed</p>
+                </div>
+                <div class="col">
+                    <h4 class="fw-bold m-1">${{(totalAmount && totalAmount.totalAvailableBalance) ? totalAmount.totalAvailableBalance : 0}}</h4>
+                    <p class="title-font m-0">Available Balance</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<div >
+    <i style="z-index: 1;" (click)="onNoClick()"></i>
+   <div>
+    <emoji-mart (emojiSelect)="select($event)" class="arrowup"></emoji-mart>  
+     </div>
+
+     <div>
+       <span *ngFor="let Emoji of EmojisArray">
+        <ngx-emoji [emoji]="Emoji" size="16"></ngx-emoji>
+       </span>
+     </div>
+   </div>
+

@@ -1,0 +1,77 @@
+<div class="cash-container">
+    <div class="card text-center">
+        <div class="card-body">
+            <div class="row">
+                <div class="col border-end">
+                    <p class="title-font">Amount Loaded</p>
+                    <h5 class="fw-bold">${{(buildingAmountDetails && buildingAmountDetails?.loadedAmount) ? buildingAmountDetails?.loadedAmount : ' 0'}}</h5>
+                </div>
+                <div class="col border-end">
+                    <p class="title-font">Date</p>
+                    <h5 class="fw-bold" *ngIf ="buildingAmountDetails && buildingAmountDetails?.updatedDatetime">{{buildingAmountDetails?.updatedDatetime | date:'longDate'}}</h5>
+                    <h5 class="fw-bold" *ngIf ="!buildingAmountDetails && !buildingAmountDetails?.updatedDatetime">-</h5>
+                </div>
+                <div class="d-flex flex-row align-items-center justify-content-around" [ngClass]="{'col-7':showRewards == true,'col-5':showRewards == false}" >
+                    <section>
+                        <p class="title-font">Available Balance</p>
+                        <h5 class="fw-bold">${{(buildingAmountDetails && buildingAmountDetails?.balanceAmount) ? buildingAmountDetails?.balanceAmount : ' 0'}}</h5>
+                    </section>
+                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#loadCash">LOAD CASH</button>
+                    <button class="btn btn-dark" (click)="promoList()" *ngIf ="showRewards">RECENTLY CREATED REWARDS</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="loadCash" tabindex="-1" aria-labelledby="loadCashLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content p-4 header-style">
+            <div class="modal-header border-0 ">
+                <!-- <h5 class="modal-title" id="addCardLabel">ADD A NEW CARD OR BANK</h5> -->
+                <button type="button" (click)="amount.reset();amountBlock = true" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <ng-container *ngIf ="amountBlock">
+                <div class="modal-body text-left">
+                    <h4 class=" pb-2">ENTER AMOUNT </h4>
+                    <p class="mt-3">Enter the cash amount you would like to load on your account</p>
+                    <div class="form-group">
+                        <input type="number" [formControl]="amount" class="pass_recovery form-control p-4"
+                            placeholder="$ Enter dollar amount">
+                        <div class="mt-2" *ngIf="amount.touched && amount?.errors?.required">
+                            Amount is required
+                        </div>
+                        <div class="mt-2" *ngIf="amount.touched && amount?.errors?.positiveNumber">
+                            Enter a valid amount
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between border-0 payment">
+                    <button type="button" class="btn  btn_theme" (click)="submitAmount()">CONFIRM</button>
+                </div>
+            </ng-container>
+            <ng-container *ngIf ="!amountBlock">
+                <div class="modal-body text-left">
+                    <section class=" ">
+                        <h5 class=" pointer pb-2" (click)="amountBlock = !amountBlock"><i class="fas fa-arrow-left theme-color "></i> AMOUNT BEING LOADED</h5>
+                        <p class="mt-3">We will be charging the following amount to your card or bank account:</p>
+                        <h1 class="pb-5 fw-bold border-bottom">${{amount.value}}</h1>
+                    </section>
+                    <section class="mb-3 mt-5">
+                        <h5 class=" pb-2">SELECT PAYMENT</h5>
+                        <p class="mt-3">Select a form of payment and proceed to add cash to your CA account</p>
+                    </section>
+                </div>
+                <div class="modal-footer justify-content-between align-items-center border-0 payment">
+                    <select class=" ml-unpaid" placeholder="Select a Payment Option" (change)="setMode($event)">
+                        <option [value]="paymentModeCredit">Credit Card/Debit Card</option>
+                        <option [value]="paymentModeBank">Bank Account</option>
+                    </select>
+                    <button type="button" class="btn btn-primary " (click)="payNow();amountBlock = true" data-bs-dismiss="modal">PAY & LOAD CASH</button>
+                </div>
+            </ng-container>
+
+        </div>
+    </div>
+</div>

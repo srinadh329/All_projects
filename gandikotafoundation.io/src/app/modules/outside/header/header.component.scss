@@ -1,0 +1,48 @@
+.about-banner{   
+    background-image: url("/assets/images/aboutus.png");
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    // margin: 74px 0 0 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: inherit;
+}
+.bg-overlay{
+    background-color: rgba(60,72,88,0.7);
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 400px;
+}
+.page-next{
+    position: relative;
+    top: 178px;
+    z-index: 99;
+}
+.heading{
+    text-transform: uppercase;
+}
+.shape {
+    position: absolute;
+    pointer-events: none;
+    right: 0;
+    bottom: -2px;
+    left: 0;
+}
+.shape>svg {
+    -webkit-transform: scale(2);
+    transform: scale(2);
+    width: 100%;
+    height: auto;
+    -webkit-transform-origin: top center;
+    transform-origin: top center;
+}

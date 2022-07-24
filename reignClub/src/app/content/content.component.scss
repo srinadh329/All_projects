@@ -1,0 +1,89 @@
+// home banner start
+.home-banner{
+    background-image: url('/assets/images/homebanner.jpg');
+    height: 560px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.banner-text{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 18%;
+    height: 30%;
+    margin: auto;
+    color: #fff;
+    h1{
+        font-size: 40px;
+    }
+    .book-now{
+        text-align: center;
+    }
+}
+
+// home banner end
+
+// whats on start
+.whaton-section{
+    padding: 60px 0 60px 0;
+    background-color: #d2d2d2;
+}
+.example-card {
+    max-width: 200px;
+    margin: 43px 8px 21px 7px;
+    max-height: 100%;
+  }
+  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+.custom-footer{
+    border-top: 1px dashed;
+    padding: 8px 8px 0px 6px;
+    margin-left: -16px;
+    margin-right: -14px;
+}
+.button-calender{
+    background: none;
+    border: none;
+}
+.ticket{
+    background-color: #333399;
+    color: #fff;
+    /* background: none; */
+    border: none;
+    border-radius: 6px;
+    padding: 5px;
+}
+.whaton{
+    margin: 0;
+}
+// whats on end
+
+
+// Upcoming section start
+.upcomming-section{
+    background-image: url('/assets/images/pic4.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px 0 50px 0;
+}
+.view-all{
+    border: 1px solid #fff;
+    padding: 0px 14px 0 14px;
+    border-radius: 4px;
+}
+.upcoming-card {
+    max-width: 300px;
+    margin: 43px 8px 21px 7px;
+    max-height: 100%;
+  }
+
+// upcoming section end

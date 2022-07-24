@@ -1,0 +1,145 @@
+<div class="manager-container">
+    <h4 class="fw-bold mb-4">ADD A CA-REWARDS USER</h4>
+    <div class="card">
+        <form [formGroup]="userForm"  autocomplete="off">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-8 border-end">
+                        <div class="row w-90">
+                            <div class="col-6">
+                                <div class="p-2">
+                                    <label for="firstName" class="form-label">FIRST NAME</label>
+                                    <input  type="text" formControlName="firstName" id="firstName"
+                                        placeholder="Enter your First Name" class="form-control" autocomplete="off">
+                                    <div class="p-1"
+                                        *ngIf="getFormControls['firstName']?.touched && getFormControls['firstName']?.errors?.required">
+                                        First Name is required
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="p-2">
+                                    <label for="lastName" class="form-label">LAST NAME</label>
+                                    <input  type="text" formControlName="lastName" placeholder="Enter your Last Name" id="lastName"
+                                    autocomplete="off" class="form-control">
+                                    <div class="p-1" *ngIf="getFormControls['lastName']?.touched && getFormControls['lastName']?.errors?.required">
+                                        Last Name is required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row w-90">
+                            <div class="col-6">
+                                <div class="p-2">
+                                    <label for="email" class="form-label">EMAIL</label>
+                                    <input type="text" formControlName="loginEmail" placeholder="Enter your Email" id="email" class="form-control"
+                                    autocomplete="off">
+                                    <div class="p-1" *ngIf="getFormControls['loginEmail']?.touched && getFormControls['loginEmail']?.errors?.required">
+                                        Email is required
+                                    </div>
+                                    <div class="p-1" *ngIf="getFormControls['loginEmail']?.touched && getFormControls['loginEmail']?.errors?.email">
+                                        Enter Valid Email
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="p-2">
+                                    <label for="inputPassword5" class="form-label">BUILDING NAME</label>
+                                    <select formControlName="building" placeholder="Select a Building Name"
+                                        class="form-control">
+                                        <option  [value]="null" disabled>Select a Building Name</option>
+                                        <option [value]="property.id" *ngFor="let property of buildingList">{{property?.name}}
+                                        </option>
+                                    </select>
+                                    <div class="p-1" *ngIf="getFormControls['building']?.touched && getFormControls['building']?.errors?.required">
+                                        Building Name is required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 m-auto text-center">
+                        <div>
+                            <button type="button" class="btn btn-primary" (click)="submitUserForm()">CREATE A NEW
+                                USER</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="mt-5">
+        <app-admin-table-filter [isReconciliation]="false" (selectedFilter)="appliedFilter($event)"></app-admin-table-filter>
+    </div>
+    <div class="mt-5">
+        <div class="table-height" infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="50"
+            [scrollWindow]="false" (scrolled)="onScroll()">
+            <table class="table table-responsive table-bordered">
+                <thead class="tableHeader">
+                    <tr>
+                        <th>Building Name</th>
+                        <th>Property Manager</th>
+                        <th>Email</th>
+                        <th>Amount Loaded</th>
+                        <th>Date Loaded</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of userList;let i= index">
+                        <td>{{user?.propertyDataList[0]?.name}}</td>
+                        <td>
+                            <p>{{user?.firstName}} {{user?.lastName}}</p>
+                            <button class="btn btn-secondary" *ngIf="user.disabled == 0" (click)="removeUser(user)">DISABLE USER</button>
+                            <button class="btn btn-dark" *ngIf="user.disabled == 1" (click)="enableUser(user)">ENABLE USER</button>
+                        </td>
+                        <td>{{user?.loginEmail}}</td>
+                        <td>${{user?.totalAmountLoaded ? user?.totalAmountLoaded : '0'}}</td>
+                        <td>{{user?.updatedDate ? (user?.updatedDate | date:'longDate') : '-'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="removeUser" tabindex="-1" aria-labelledby="removeUserLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content p-4 header-style">
+            <div class="modal-header border-0 ">
+                <!-- <h5 class="modal-title" id="addCardLabel">ADD A NEW CARD OR BANK</h5> -->
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-left">
+                <h4 class=" pb-2 fw-bold">DISABLE A PROPERTY MANAGER</h4>
+                <p class="mt-3 modal-text ">Are you sure you would like to disable this property
+                    manager from the CA-rewards management system?</p>
+            </div>
+            <div class="modal-footer justify-content-between border-0 payment">
+                <button type="button" class="btn btn-success fw-bold" data-bs-dismiss="modal" (click)="deleteUser()">YES</button>
+                <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">NO</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="activateUser" tabindex="-1" aria-labelledby="removeUserLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content p-4 header-style">
+            <div class="modal-header border-0 ">
+                <!-- <h5 class="modal-title" id="addCardLabel">ADD A NEW CARD OR BANK</h5> -->
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-left">
+                <h4 class=" pb-2 fw-bold">ENABLE A PROPERTY MANAGER</h4>
+                <p class="mt-3 modal-text ">Are you sure you would like to enable this property
+                    manager in CA-rewards management system?</p>
+            </div>
+            <div class="modal-footer justify-content-between border-0 payment">
+                <button type="button" class="btn btn-success fw-bold" data-bs-dismiss="modal" (click)="addUser()">YES</button>
+                <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">NO</button>
+            </div>
+
+        </div>
+    </div>
+</div>

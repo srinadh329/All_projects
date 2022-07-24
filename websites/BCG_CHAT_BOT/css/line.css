@@ -1,0 +1,30 @@
+ .linexy{
+    height:0px;
+    width:1px;
+    border-left:3px solid blue;
+    
+    margin-left:10px;
+    -webkit-animation: increase 3s;
+    -moz-animation:    increase 3s; 
+    -o-animation:      increase 3s; 
+    animation:         increase 3s; 
+    animation-fill-mode: forwards;
+ 
+  }
+  
+  @keyframes increase {
+      100% {
+         height: 500px;
+        
+      }
+  }
+  .im_col{
+      background-color: rgb(17, 117, 204);
+  }
+  <script>
+$(document).ready(function(){
+    $("p").click(function(){
+        alert("The paragraph was clicked.");
+    });
+});
+</script>

@@ -1,0 +1,103 @@
+<div class="transactions-container">
+    <div class="row">
+        <div class="col-7">
+            <div class="row">
+                <div class="col-1 mt-1">
+                    <i class="fas fa-arrow-left fa-2x theme-color pointer"
+                        [routerLink]="['/superadmin/dashboard/transactions']"></i>
+                </div>
+                <div class="col-8">
+                    <h4 class="text-uppercase fw-bold">{{rewardDetails?.firstName}} {{rewardDetails?.lastName}}</h4>
+                    <p >{{rewardDetails?.email}}</p>
+                </div>
+            </div>
+            <div class="row fs-5">
+                <div class="col-1"></div>
+                <div class="col-7">
+                    <p>{{rewardDetails?.propertyData?.name}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-7 mt-4 box">
+                    <h5 class="fw-bold">CURRENT BALANCE: <span>${{rewardDetails.totalRewardBalance ? rewardDetails?.totalRewardBalance : 0}}</span></h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <p class="fs-5">Total Rewards Given : <span>${{totalRewards}}</span></p>
+            <button class="btn btn_theme add-card font10" data-bs-toggle="modal" data-bs-target="#rewards" style="width: 60%;">View History</button>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <table class="table table-bordered">
+            <thead class="tableHeader">
+                <tr>
+                    <th>Order Number</th>
+                    <th>Date</th>
+                    <th>Cart  Amount</th>
+                    <th>Reward Amount</th>
+                    <th>Balance</th>
+                    <th>Cancel/Refund</th>
+                </tr>
+            </thead>
+            <tbody *ngIf = "rewardTransactions && rewardTransactions.length>0;else noitems">
+                <tr *ngFor="let item of rewardTransactions;let i = index">
+                    <td>{{item?.orderId ? item?.orderId : '-'}}</td>
+                    <td>{{item?.updatedDatetime | date:'longDate'}}</td>
+                    <td>${{item?.totalCartAmount}}</td>
+                    <td>${{item?.rewardAmount ? item?.rewardAmount : 0}}</td>
+                    <td>${{item?.rewardBalance ? item?.rewardBalance : 0}}</td>
+                    <td>
+                        <button class="btn btn-secondary" (click)="goToRefund(item?.orderId)"
+                         *ngIf="item.transactionStatus && item.transactionStatus == 'RETURN_INITIATED' && item.rewardAmount">REFUND</button>
+                        <!-- <p *ngIf="item.transactionStatus != 'RETURN_INITIATED' && item.transactionStatus != 'RETURN_COMPLETED'">-</p> -->
+                        <button class="btn btn-dark"  style="cursor: context-menu;" *ngIf="item.transactionStatus != 'RETURN_INITIATED' && item.transactionStatus != 'RETURN_COMPLETED'" >NOT INITIATED</button>
+                        <button class="btn btn-success" style="cursor: context-menu;"
+                        *ngIf="item.transactionStatus && item.transactionStatus == 'RETURN_COMPLETED' && item.rewardAmount" (click)="goToRefund(item?.orderId)">REFUNDED</button>
+                    </td>
+                    <!-- (click)="goToRefund()" -->
+                </tr>
+            </tbody>
+            <ng-template #noitems>
+                <tbody>
+                  <tr ><td colspan="6">No Transactions Founds</td></tr>
+                </tbody>
+              </ng-template>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="rewards" tabindex="-1" aria-labelledby="rewardsLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content p-3">
+            <div class="modal-header border-0 pb-1">
+                
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body text-left pt-0 pb-1">
+                <h5 class="pt-0 text-left" id="addCardLabel">Reward History</h5>
+                <table class="table table-bordered">
+                    <thead class="tableHeader">
+                      <tr>
+                        <th scope="col">Reward Amount</th>
+                        <th scope="col">Issued Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of history">
+                            <td>${{item?.rewardAmount}}</td>
+                            <td>{{item?.updatedDatetime | date: 'longDate'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <div  *ngFor="let item of history">
+                    <p class="m-0 " style="font-size:18px">${{item?.rewardAmount}} <span>on</span> {{item?.updatedDatetime | date: 'longDate'}}</p>
+                </div> -->
+            </div>
+
+        </div>
+    </div>
+</div>

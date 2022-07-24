@@ -1,0 +1,297 @@
+<div class="common-transform">
+  <mat-card class="common-header" *ngIf="!foreignCreative && !finedetails">
+    <div class="row">
+      <div class="col-lg-3 col-md-3 col-4 d-flex flex-column">
+        <h6 class="pt-2 no-space">Dubai Police</h6>
+      </div>
+      <div class="col-lg-7 col-md-7 col-6">
+        <div class="text-center common-search">
+          <input type="text" placeholder="search" [(ngModel)]="name" (keyup)="search(name)">
+          <span class="material-icons search-icon">search</span>
+        </div>
+      </div>
+      <div *ngIf="action" class="col-lg-2 col-md-2 col-2 d-flex flex-row-reverse justify-content-center">
+        <div class="pr-3 pt-2">
+          <span class="material-icons cursor" (click)="createForm()" >add</span>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+<ng-container *ngIf="foreignCreative">
+  <span class="material-icons arrow-back"  (click)="back()">arrow_back</span> <span class="pl-3">Dubai Police</span>
+  <div class="col-12 pt-3">
+    <mat-tab-group [color]="'green'" class="custom-tab">
+      <mat-tab label="By Licence">
+        <form [formGroup]="licenseForm" (ngSubmit)="dubailicenceFields(licenseForm,1);">
+          <mat-card class="creation-form registerHeight mt-2"  id="style-4">
+          <div class="row pt-3">
+            <div class="col-lg-6">
+              <div class="form-group m-0">
+                <label class="col-sm-4 common-label1">Licence Number :</label>
+                <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                  <input matInput placeholder="Enter Number" formControlName="licensenumber">
+                  <mat-error *ngIf="licenseForm.get('licensenumber').hasError('required')">
+                    Enter Licence Number
+                </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="form-group  m-0">
+                <label class="col-sm-4 common-label1">Fine source:</label>
+                <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                  <mat-select matInput placeholder="Select Fine Source" formControlName="finesource">
+                    <mat-option value="Sarjah">Sarjah</mat-option>
+                    <mat-option value="Bahrain">Bahrain</mat-option>
+                    <mat-option value="Dubai Police">Dubai Police</mat-option>
+                  </mat-select>                
+                </mat-form-field>
+              </div>
+              <div class="form-group  m-0">
+                <label class="col-sm-4 common-label1">Licence Source :</label>
+                <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                  <mat-select matInput placeholder="Select Licence Source" formControlName="licensesource">
+                    <mat-option value="Bahrain">Bahrain</mat-option>
+                    <mat-option value="Abu Dhabi">Abu Dhabi</mat-option>
+                    <mat-option value="Dubai">Dubai</mat-option>
+                  </mat-select>                
+                  <mat-error *ngIf="licenseForm.get('licensesource').hasError('required')">
+                    Enter Licence Source
+                </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 d-flex flex-row justify-content-center pt-4">
+            <button type="submit" class="label-button">Search</button>
+          </div>
+          </mat-card>
+        </form>
+      </mat-tab>
+      <mat-tab label="By Plate">
+        <form [formGroup]="byplateForm" (ngSubmit)="dubailicenceFields(byplateForm,2);">
+          <mat-card class="creation-form registerHeight mt-2"  id="style-4">
+          <div class="row pt-3">
+            <div class="col-lg-6">
+              <div class="form-group m-0">
+                <label class="col-sm-4 common-label1">Plate Number :</label>
+                  <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                    <input matInput placeholder="Enter Number" formControlName="platenumber">
+                    <mat-error *ngIf="byplateForm.get('platenumber').hasError('required')">
+                      Enter Plate Number
+                  </mat-error>
+                  </mat-form-field>
+              </div>
+           
+              <div class="form-group  m-0">
+                <label class="col-sm-4 common-label1">Fine source:</label>
+                  <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                    <!-- <input matInput placeholder="Enter Fine Source" formControlName="finesource"> -->
+                    <mat-select matInput placeholder="Select Fine Source" formControlName="finesource">
+                      <mat-option value="Sarjah">Sarjah</mat-option>
+                      <mat-option value="Bahrain">Bahrain</mat-option>
+                      <mat-option value="Dubai Police">Dubai Police</mat-option>
+                    </mat-select>   
+                    <mat-error *ngIf="byplateForm.get('finesource').hasError('required')">
+                      Enter Fine Source
+                  </mat-error>
+                  </mat-form-field>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group  m-0">
+                <label class="col-sm-4 common-label1">Plate Source :</label>
+                  <mat-form-field appearance="outline" class="custom-branch-select-outline   col-sm-6">
+                    <input matInput placeholder="Enter Plate Source" formControlName="platesource"> 
+                    <mat-error *ngIf="byplateForm.get('platesource').hasError('required')">
+                      Enter Plate Source
+                  </mat-error>
+                  </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 d-flex flex-row justify-content-center pt-4">
+            <button type="submit" class="label-button" >Search</button>
+          </div>
+          </mat-card>
+        </form>
+      </mat-tab>
+      <mat-tab label="By Traffic Details">
+        <form [formGroup]="dubailicenceForm" (ngSubmit)="dubailicenceFields(dubailicenceForm,3);">
+          <mat-card class="creation-form registerHeight mt-2"  id="style-4">
+          <div class="row pt-3">
+            <div class="col-lg-6">
+              <div class="form-group m-0">
+                <label class="col-sm-4 common-label1">Traffic File Number :</label>
+                <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                  <input matInput placeholder="Enter Number" formControlName="trafficfilenumber">
+                  <mat-error *ngIf="dubailicenceForm.get('trafficfilenumber').hasError('required')">
+                    Enter Traffic File Number
+                </mat-error>
+                  </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 d-flex flex-row justify-content-center pt-4">
+            <button type="submit" class="label-button">Search</button>
+          </div>
+          </mat-card>
+        </form>
+      </mat-tab>
+      <!-- <mat-tab label="By FIne">
+        <form [formGroup]="dubailicenceForm" (ngSubmit)="dubailicenceFields();">
+          <mat-card class="creation-form registerHeight mt-2"  id="style-4">
+          <div class="row pt-3">
+            <div class="col-lg-6">
+              <div class="form-group m-0">
+                <label class="col-sm-4 common-label1">Plate Number :</label>
+                  <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                    <input matInput placeholder="Enter Number" formControlName="platenumber">
+                    <mat-error *ngIf="dubailicenceForm.get('platenumber').hasError('required')">
+                      Enter Branch Id
+                  </mat-error>
+                  </mat-form-field>
+              </div>
+              <div class="form-group  m-0">
+                <label class="col-sm-4 common-label1">Plate Category :</label>
+                  <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                    <input matInput placeholder="Enter Number" formControlName="platecategory">
+                    <mat-error *ngIf="dubailicenceForm.get('platecategory').hasError('required')">
+                      Enter Branch Id
+                  </mat-error>
+                  </mat-form-field>
+              </div>
+              <div class="form-group  m-0">
+                <label class="col-sm-4 common-label1">Fine source:</label>
+                  <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                    <input matInput placeholder="Enter Number" formControlName="finesource">
+                    <mat-error *ngIf="dubailicenceForm.get('finesource').hasError('required')">
+                      Enter Branch Id
+                  </mat-error>
+                  </mat-form-field>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group  m-0">
+                <label class="col-sm-4 common-label1">Plate Source :</label>
+                  <mat-form-field appearance="outline" class="custom-branch-select-outline   col-sm-6">
+                    <input matInput placeholder="Enter Number" formControlName="platesource">
+                    <mat-error *ngIf="dubailicenceForm.get('platesource').hasError('required')">
+                      Enter Branch Id
+                  </mat-error>
+                  </mat-form-field>
+              </div>
+              <div class="form-group  m-0">
+                <label class="col-sm-4 common-label1">Plate Code :</label>
+                  <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                    <input matInput placeholder="Enter Number" formControlName="platecode">
+                    <mat-error *ngIf="dubailicenceForm.get('platecode').hasError('required')">
+                      Enter Branch Id
+                  </mat-error>
+                  </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 d-flex flex-row justify-content-center pt-4">
+            <button type="submit" class="label-button">Search</button>
+          </div>
+          </mat-card>
+        </form>
+      </mat-tab> -->
+    </mat-tab-group>
+  </div>
+</ng-container>
+<ng-container *ngIf="finedetails">
+
+  <span class="material-icons arrow-back"  (click)="back()">arrow_back</span> <span class="pl-3">Dubai Police</span>
+
+
+  <app-storetable [Header]='fineHeader' [finelist]='fineData'  ></app-storetable>
+  <form [formGroup]="fineForm" (ngSubmit)="fineFields(fineForm)" >
+    <div class="row m-0">
+      <div class="col-lg-6">
+        <div class="form-group m-0">
+          <label class="col-sm-4 common-label1">No of fees :</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+              <input matInput  formControlName="nooffees" readonly>
+            </mat-form-field>
+        </div>
+        <div class="form-group  m-0">
+          <label class="col-sm-4 common-label1">Fine amount:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+              <input matInput placeholder="Enter Number" formControlName="fineamount" readonly>
+          
+            </mat-form-field>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group m-0">
+          <label class="col-sm-4 common-label1">Penalty Ammount :</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+              <input matInput  formControlName="Penalty" readonly>
+            </mat-form-field>
+        </div>
+        <div class="form-group  m-0">
+          <label class="col-sm-4 common-label1">Vat:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+              <input matInput placeholder="Enter Number" formControlName="productvat" readonly>
+          
+            </mat-form-field>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group m-0">
+          <label class="col-sm-4 common-label1">Knowledge fee :</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+              <input matInput placeholder="Enter Number" formControlName="knowledgefee" readonly>
+            </mat-form-field>
+        </div>
+        <div class="form-group  m-0">
+          <label class="col-sm-4 common-label1">Total:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+              <input matInput placeholder="Enter Number" formControlName="total" readonly>
+  
+            </mat-form-field>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group m-0">
+          <label class="col-sm-4 common-label1">Customer Name :</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+              <input matInput placeholder="Enter Customer Name" formControlName="applicantname" 
+              pattern="^[ A-Za-z_@./#&+-,%''()]*$" minlength="2" maxlength="55" [readonly]="!view">
+              <mat-error *ngIf="fineForm.get('applicantname').hasError('required')">
+                Customer Name is required
+              </mat-error>
+              <mat-error *ngIf="fineForm.get('applicantname').hasError('pattern')">
+              Enter Characters Only
+              </mat-error>
+              <mat-error *ngIf="fineForm.get('applicantname').hasError('minlength')">
+                Enter minimum 2 Characters
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="form-group  m-0">
+          <label class="col-sm-4 common-label1">Customer Mobile No</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+              <input matInput placeholder="Enter Mobile Number" formControlName="applicantmobile"
+              onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" minlength="8" maxlength="15" [readonly]="!view">
+              <mat-error *ngIf="fineForm.get('applicantmobile').hasError('required')">
+                Mobile Number is required
+              </mat-error>
+              <mat-error *ngIf="fineForm.get('applicantmobile').hasError('minlength')">
+                Enter Minimum 8 Numbers
+              </mat-error>
+            </mat-form-field>
+        </div>
+      </div>
+      </div>
+      <div *ngIf="view" class="col-12 d-flex flex-row justify-content-center pt-4">
+        <button type="submit" class="label-button" >Pay</button>
+      </div>
+  </form>
+</ng-container>
+
+
+  <app-storetable [Header]='dubai' [dubailist]='dubaidata' (dubailistedit)="editForm($event)" *ngIf="!foreignCreative && !finedetails"></app-storetable>
+  
+</div>

@@ -1,0 +1,143 @@
+<div class="common-transform">
+  <mat-card class="common-header">
+    <div class="row">
+      <div class="d-flex flex-column">
+        <h6 class="pt-2 no-space">Dashboard</h6>
+      </div>
+    </div>
+  </mat-card>
+  <mat-card class="creation-form mt-4">
+    <div class="row">
+      <div class="col-lg-5 col-md-6 col-sm-6">
+        <mat-card class="matcard-width">
+          <div class="row mat-row">
+            <div class="col-lg-8 col-md-8 col-8">
+              <p class="m-0">Total Gold Cards</p>
+              <p class="count">{{totalGoldcards}}</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-4 text-center">
+              <img src="././assets/images/glodcard.png">
+            </div>
+          </div>
+        </mat-card>
+      </div>
+      <div class="col-lg-5 col-md-6 col-sm-6">
+        <mat-card class="matcard-width2">
+          <div class="row mat-row">
+            <div class="col-lg-8 col-md-8 col-8">
+              <p class="m-0">Total Branches</p>
+              <p class="count2">{{totalBranches}}</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-4 text-center">
+              <img src="././assets/images/store.png">
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+    <div class="row pt-5">
+      <div class="col-lg-5 col-md-6 col-sm-6">
+        <mat-card class="matcard-width4">
+          <div class="row mat-row">
+            <div class="col-lg-8 col-md-8 col-8">
+              <p class="m-0">Total Transactions</p>
+              <p class="count4">{{totalTransations}}</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-4 text-center">
+              <img src="././assets/images/transaction.png">
+            </div>
+          </div>
+        </mat-card>
+      </div>
+      <div class="col-lg-5 col-md-6 col-sm-6">
+        <mat-card class="matcard-width">
+          <div class="row mat-row">
+            <div class="col-lg-8 col-md-8 col-8">
+              <p class="m-0">Total Branch users</p>
+              <p class="count">{{branchUserCount}}</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-4 text-center">
+              <img src="././assets/images/customer.png">
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+    <div class="row pt-5">
+      <div class="col-lg-5 col-md-6 col-sm-6">
+        <mat-card class="matcard-width">
+          <div class="row mat-row">
+            <div class="col-lg-8 col-md-8 col-8">
+              <p class="m-0">Total Online users</p>
+              <p class="count">{{onlineUserCount}}</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-4 text-center">
+              <img src="././assets/images/customer.png">
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </mat-card>
+  <mat-card class="common-header mt-5">
+    <div class="row">
+      <div class="d-flex flex-column">
+        <h6 class="pt-2 no-space">Graphs</h6>
+      </div>
+    </div>
+  </mat-card>
+  <mat-card class="creation-form mt-4">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="piechart-color">
+        <div class="card-title">
+          <h6 class="text-center">Products Transactions</h6>
+        </div>
+        <div class="card-body">
+          <div class="chart-container" style="position: relative;">
+            <canvas id="pieChart"></canvas>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="piechart-color">
+        <div class="card-title">
+          <h6 class="text-center">Customers Transactions</h6>
+        </div>
+        <div class="card-body">
+          <div class="chart-container" style="position: relative;">
+            <canvas id="barChart"></canvas>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="row pt-5">
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="piechart-color">
+        <div class="card-title">
+          <h6 class="text-center">Branch Wise Transactions</h6>
+        </div>
+        <div class="card-body">
+          <div class="chart-container" style="position: relative;">
+            <canvas id="mylinechart"></canvas>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="piechart-color">
+        <div class="card-title">
+          <h6 class="text-center">Branch User Wise Transactions</h6>
+        </div>
+        <div class="card-body">
+          <div class="chart-container" style="position: relative;">
+            <canvas id="myuserlinechart"></canvas>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

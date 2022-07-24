@@ -1,0 +1,375 @@
+$nav-color:#170a44;
+$white-color:#fff;
+$list-style:none;
+$padding:0;
+$margin:0;
+$display:flex;
+$flex-wrap:wrap;
+$justify-content:space-between;
+$span-color:#d19e42;
+$font:20px;
+$second-font:15px;
+body{
+	padding: $padding;
+	margin: $margin;
+	font-family: "Segoe UI",Tahoma,Geneva,Verdana,sans-serif;
+}
+// navbar css start
+.nav-header{
+	background-color: $nav-color;
+	display: $display;
+    flex-wrap: $flex-wrap;
+    justify-content: $justify-content;
+    padding: 16px 20px 16px 20px;
+	.navbar-left{
+		display: $display;
+	}
+	.nav-list{
+		color: $white-color;
+		display: $display;
+		padding: 0 0px 0 26px;
+		text-transform: uppercase;
+		div{
+			img{
+				padding: 0 12px 0 0px;
+			}
+		}
+	}
+	.nav-list-paragraph{
+		p{
+			padding: $padding;
+			margin: $margin;
+			font-size: $font;
+			span{
+				color: $span-color;
+			}
+		}
+		.list-second{
+			font-size: $second-font;
+		}
+	}
+}
+
+// navbar css end
+
+
+// Home banner start
+@keyframes slidy {
+	0% { left: 0%; }
+	20% { left: 0%; }
+	25% { left: -100%; }
+	45% { left: -100%; }
+	50% { left: -200%; }
+	70% { left: -200%; }
+	75% { left: -300%; }
+	95% { left: -300%; }
+	100% { left: -400%; }
+	}
+#slider { 
+	overflow: hidden; 
+	margin: 24px 0 0 0;
+}
+#slider{
+	figure{
+		img { 
+			width: 20%; 
+			float: left; 
+		}
+	}
+}  
+#slider{
+	figure { 
+		position: relative;
+		width: 500%;
+		margin: 0;
+		left: 0;
+		text-align: left;
+		font-size: 0;
+		animation: 30s slidy infinite; 
+	  }
+} 
+.left-side{
+	top: 140px;
+    position: absolute !important;
+    right: 30px !important;
+    background-color: rgb(255, 255, 255) !important;
+    width: 425px !important;
+    height: auto !important;
+    border-radius: 12px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+	padding: 20px 0 40px 0;
+	div{
+		padding: 6px 0px 6px 21px;
+	}
+	.button{
+		text-align: center;
+		input{
+			color: rgb(33, 37, 41);
+    background-color: rgb(255, 193, 7);
+    border-color: rgb(255, 193, 7);
+	font-size: 14px;
+    min-width: 77px;
+    text-transform: uppercase;
+    border-radius: 30px;
+	line-height: 1.5;
+    outline: none;
+    box-shadow: none;
+    border: none;
+    padding: 6px 12px 6px 12px;
+    font-weight: 500;
+		}
+	}
+}
+.custom-inout{
+	width: 350px;
+	padding: 0 0 0 20px;
+    border-radius: 5px;
+	height: 40px;
+    font-size: 12px;
+    border-radius: 10px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(228, 228, 228);
+    border-image: initial;
+    background: rgb(255, 255, 255);
+    outline: unset;
+}
+
+// Home banner end
+
+// PLAY ONLINE POKER NOW start
+.title{
+	font-size: 20px;
+    text-align: center;
+    position: relative;
+    display: block;
+    letter-spacing: 2px;
+    color: #170a44;
+	h4{
+		&:after{
+			content: "";
+    width: 7%;
+    background: #eb0752;
+    height: 4px;
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+		}
+	}
+}
+.steps{
+	display: flex;
+    justify-content: space-around;
+	margin-top: 50px;
+}
+.step-content{
+	background: #e4e4e4;
+    padding: 10px;
+    height: 100px;
+    transform: skewX(-10deg);
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+	&:before{
+		content: "";
+		background-size: contain;
+		background-repeat: no-repeat;
+		position: absolute;
+		left: -30px;
+		width: 70px;
+		height: 140px;
+		top: -18px;
+		z-index: 1;
+		background-image: url("images/step-1.svg");
+	}
+	&:after{
+		content: "";
+    background: url("images/arrow.svg") no-repeat;
+    position: absolute;
+	width: 60px;
+    height: 60px;
+    right: -124px;
+    bottom: 22px;
+	}
+	
+}
+.steps2{
+	.step-content2{
+		background: #e4e4e4;
+		padding: 10px;
+		height: 100px;
+		transform: skewX(-10deg);
+		display: flex;
+    flex-direction: column;
+    justify-content: center;
+		&:before{
+			content: "";
+			background-size: contain;
+			background-repeat: no-repeat;
+			position: absolute;
+			left: -30px;
+			width: 100px;
+			height: 140px;
+			top: -18px;
+			z-index: 1;
+			background-image: url("images/step-2.svg");
+		}
+		&:after{
+			content: "";
+		background: url("images/arrow.svg") no-repeat;
+		position: absolute;
+		width: 60px;
+		height: 60px;
+		right: -124px;
+    bottom: 22px;
+		}
+		
+	}
+}
+.steps3{
+	.step-content3{
+		background: #e4e4e4;
+		padding: 10px;
+		height: 100px;
+		transform: skewX(-10deg);
+		display: flex;
+    flex-direction: column;
+    justify-content: center;
+		&:before{
+			content: "";
+			background-size: contain;
+			background-repeat: no-repeat;
+			position: absolute;
+			left: -30px;
+			width: 100px;
+			height: 140px;
+			top: -18px;
+			z-index: 1;
+			background-image: url("images/step-3.svg");
+		}
+		
+	}
+}
+.step-title{
+	font-size: 36px;
+    margin: 0 0 0 40px;
+    font-weight: 700;
+}
+.step-details{
+font-size: 12px;
+    margin-left: 40px;
+    font-weight: 700;
+    margin: 0 0 0 40px;
+}
+.step-title2{
+	font-size: 36px;
+    margin: 0 0 0 70px;
+    font-weight: 700;
+}
+.step-details2{
+font-size: 12px;
+    font-weight: 700;
+    margin: 0 0 0 70px;
+}
+.sec-pad{
+	padding: 60px 0 60px 0;
+}
+// PLAY ONLINE POKER NOW end
+
+
+@keyframes slidy {
+	0% { left: 0%; }
+	20% { left: 0%; }
+	25% { left: -100%; }
+	45% { left: -100%; }
+	50% { left: -200%; }
+	70% { left: -200%; }
+	75% { left: -300%; }
+	95% { left: -300%; }
+	100% { left: -400%; }
+	}
+.testominal{
+	display: flex;
+} 
+// #slider1{
+// 	.carousel { 
+// 		position: relative;
+// 		width: 500%;
+// 		margin: 0;
+// 		left: 0;
+// 		text-align: left;
+// 		font-size: 0;
+// 		animation: 30s slidy infinite; 
+// 	  }
+// } 
+
+.offer-images{
+	display: flex;
+	flex-direction: row;
+    justify-content: space-between;
+}
+
+.tabs {
+	position: relative;
+    min-height: 200px;
+    width: 100%;
+    margin: 25px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .tab {
+	float: left;
+  }
+  .tab label {
+	// background: #ddd; 
+	padding: 10px; 
+	// border: 1px solid #ccc;
+	cursor: pointer;
+	margin-left: -1px; 
+  }
+  .tab:first-child label {
+	margin-left: 0;
+  }
+  .tab input[type=radio] {
+	display: none;   
+  }
+  .tab-content {
+	position: absolute;
+	top: 40px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	// background: white;
+	padding: 20px;
+	border-top: 1px solid #ccc;
+	padding: 20px;
+    height: 223px;
+    overflow-y: scroll;
+	display: none;
+
+  }
+  input[type=radio]:checked ~ label {
+	background: white;
+	color: black;
+    font-weight: 500;
+	border-bottom: 1px solid red;
+  }
+  input[type=radio]:checked ~ label ~ .tab-content {
+	display: block;
+  }
+  .footer-background{
+	background-color: #170a44;
+    width: 100%;
+    height: 175px;
+    margin-top: 20px;
+    font-family: "SegoeUI-Semibold";
+	color: #fff;
+	text-align: center;
+    padding: 6px 0 0 0;
+  }

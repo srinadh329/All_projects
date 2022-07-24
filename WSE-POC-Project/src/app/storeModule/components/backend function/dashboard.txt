@@ -1,0 +1,25 @@
+-- FUNCTION: store.dashboard_stats(numeric, character varying)
+
+-- DROP FUNCTION store.dashboard_stats(numeric, character varying);
+
+CREATE OR REPLACE FUNCTION store.dashboard_stats(
+	branchid numeric,
+	currentdate character varying)
+    RETURNS TABLE(trans bigint) 
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+    ROWS 1000
+AS $BODY$
+DECLARE
+			BEGIN
+ RETURN QUERY select count(*) as totaltrans from store.prdtxn t join admin.brnmas b on b.brnid = t.brnid  where t.brnid=branchid AND T.STATUS='A';
+ RETURN QUERY select count(*) as remtrans from store.prdtxn t join admin.brnmas b on b.brnid = t.brnid  where (t.prdid='TT' OR t.prdid='ID' OR t.prdid='IC') and t.brnid=branchid AND T.STATUS='A' ; 
+ RETURN QUERY select count(*) as todaytrans from store.prdtxn t join admin.brnmas b on b.brnid = t.brnid  where t.crtdat=currentdate and t.brnid=branchid AND T.STATUS='A';
+
+	END;
+$BODY$;
+
+ALTER FUNCTION store.dashboard_stats(numeric, character varying)
+    OWNER TO postgres;

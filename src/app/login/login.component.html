@@ -1,0 +1,1883 @@
+<!-- *************************************Group Video Call Modal************************************************ -->
+<div *ngIf="data.type == 'GroupVideoCall'">
+  <h3 *ngIf='VideoCallusers.length>0'>Select upto 7 friends to call.</h3><br>
+  <span *ngIf='VideoCallusers.length>0'>
+    <ul style="list-style:none">
+
+      <li *ngFor="let calluser of VideoCallusers">
+        <mat-checkbox [value]='calluser._id' [checked]=" groupcallObj.receiverIDs.includes(calluser._id)"
+                      (change)="adduser($event,calluser)">
+          {{calluser.Name}}
+        </mat-checkbox>
+      </li>
+    </ul>
+  </span>
+  <span *ngIf='VideoCallusers.length>0'>
+    <button mat-dialog-close>
+      Cancel
+    </button>
+    <button class="example-20-width"  [disabled]="groupcallObj.receiverIDs.length==0" (click)='groupVideoCallinit()' mat-raised-button disabled>Start Call</button>
+  </span>
+</div>
+
+<!-- *************************************Create User Status************************************************* -->
+<div *ngIf="data.type == 'CreateStatus'">
+
+  <mat-vertical-stepper [linear]="true" #stepper>
+    <mat-step [stepControl]="firstformgroup" *ngIf="status_FirstStage">
+      <div class="row poppins-font">
+        <div class="col-lg-3">
+          <p>Create Status</p>
+        </div>
+        <div class="col-lg-9">
+          <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group groupradio"
+            [(ngModel)]="StatusType">
+            <mat-radio-button [value]="'text'" checked="true">
+              Text
+            </mat-radio-button>
+            <mat-radio-button [value]="'media'" class="ml-4">
+              Media
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+
+      <div *ngIf="StatusType=='text'">
+
+        <div class="row pl-3 pr-3">
+          <textarea #OnetoOneTextArea autocomplete="off" spellcheck="true" (click)="getCursorPosition(OnetoOneTextArea)"
+            (keyup)="getCursorPosition(OnetoOneTextArea)" class="form-control" placeholder="Enter Text here..."
+            [(ngModel)]="TextStatus" style="width:100%; height: 200px;">
+
+       </textarea>
+
+          <!-- <img (click)="openEmoji()" src="assets/images/happiness.svg"> -->
+
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-lg-8">
+            <div class="row">
+              <div class="col-lg-5">
+                <div class="d-flex textcolormode bg-br-a5 pt-1 focuscolor">
+                  <div>
+                    <i class="fas fa-poll-h pointer pl-2" style="font-size:22px"></i>
+                  </div>
+                  <div (click)="TextStatusColor('lightgreen')">
+                    <i class="fas fa-circle pl-2 pointer"></i>
+                  </div>
+                  <div (click)="TextStatusColor('lightblue')">
+                    <i class="fas fa-circle pl-2 pointer"></i>
+                  </div>
+                  <div (click)="TextStatusColor('lightpink')">
+                    <i class="fas fa-circle pl-2 pointer"></i>
+                  </div>
+                  <div (click)="TextStatusColor('white')">
+                    <i class="far fa-circle pl-2"></i>
+                  </div>
+                  <div (click)="TextStatusColor('wheat')">
+                    <i class="fas fa-circle pl-2 pointer"></i>
+                  </div>
+                  <div (click)="TextStatusColor('lightsalmon')">
+                    <i class="fas fa-circle pl-2 pointer"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-5">
+                <div class="d-flex bgcolormode bg-br-a5 pt-1 focuscolor">
+                  <div>
+                    <i class="fas fa-fill-drip pointer pl-2" style="font-size:22px"></i>
+                  </div>
+                  <div (click)="TextStatusBackground('darkgreen')">
+                    <i class="fas fa-circle pl-2 pointer"></i>
+                  </div>
+                  <div (click)="TextStatusBackground('darkblue')">
+                    <i class="fas fa-circle pl-2 pointer"></i>
+                  </div>
+                  <div (click)="TextStatusBackground('maroon')">
+                    <i class="fas fa-circle pl-2 pointer"></i>
+                  </div>
+                  <div (click)="TextStatusBackground('black')">
+                    <i class="fas fa-circle pl-2"></i>
+                  </div>
+                  <div (click)="TextStatusBackground('darkgray')">
+                    <i class="fas fa-circle pl-2 pointer"></i>
+                  </div>
+                  <div (click)="TextStatusBackground('purple')">
+                    <i class="fas fa-circle pl-2 pointer"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-2">
+                <div class="d-flex bg-br-a5 ">
+
+                  <button *ngIf="StatusBold" class="p-03" style="background-color: darkgray; border: black;"
+                    (click)="enableDisableBold()">
+                    <b>B</b>
+                  </button>
+                  <button *ngIf="!StatusBold" class="bg-trans p-03" style=" border: black; border-width: 1px;"
+                    (click)="enableDisableBold()">
+                    <b>B</b>
+                  </button>
+                  <button *ngIf="StatusItalic" class="p-03" style="background-color: darkgray; border: black;"
+                    (click)="enableDisableItalic()">
+                    <b><i>I</i></b>
+                  </button>
+                  <button *ngIf="!StatusItalic" class="bg-trans p-03" style="border: black; border-width: 1px;"
+                    (click)="enableDisableItalic()">
+                    <b><i>I</i></b>
+                  </button>
+                  <button *ngIf="StatusUnderline" class="p-03" style="background-color: darkgray; border: black;"
+                    (click)="enableDisableUnderline()">
+                    <b><u>U</u></b>
+                  </button>
+                  <button *ngIf="!StatusUnderline" class="bg-trans p-03" style=" border: black; border-width: 1px;"
+                    (click)="enableDisableUnderline()">
+                    <b><u>U</u></b>
+                  </button>
+
+                  <div>
+                    <img (click)="openEmoji()" class="p-03" src="assets/images/happiness.svg">
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-lg-4 text-right">
+            <button class="btn btn-invite" [disabled]="!(highlightxt && hightlightbg)" (click)="InitStatusSecondStage()">Next</button>
+          </div>
+        </div>
+        <!-- <div>
+          Text Color:<br><br>
+          <button mat-raised-button style="background-color: lightgreen; color: black; margin: 10px;"
+            (click)="TextStatusColor('lightgreen')"><b>Light Green</b></button>
+          <button mat-raised-button style="background-color: lightblue; color: black; margin: 10px;"
+            (click)="TextStatusColor('lightblue')"><b>Light Blue</b></button>
+          <button mat-raised-button style="background-color: lightpink; color: black; margin: 10px;"
+            (click)="TextStatusColor('lightpink')"><b>Light Pink</b></button>
+          <button mat-raised-button style="background-color: white; color: black; margin: 10px;"
+            (click)="TextStatusColor('white')"><b>White</b></button>
+          <button mat-raised-button style="background-color: wheat; color: black; margin: 10px;"
+            (click)="TextStatusColor('wheat')"><b>Wheat</b></button>
+          <button mat-raised-button style="background-color: lightsalmon; color: black; margin: 10px;"
+            (click)="TextStatusColor('lightsalmon')"><b>Light Salmon</b></button>
+          <br>
+          Selected Text Color: {{TextColor}}<br><br>
+        </div> -->
+        <!-- <div>
+          Background:<br><br>
+          <button mat-raised-button style="background-color: darkgreen; color: white; margin: 10px;"
+            (click)="TextStatusBackground('darkgreen')"><b>Dark Green</b></button>
+          <button mat-raised-button style="background-color: darkblue; color: white; margin: 10px;"
+            (click)="TextStatusBackground('darkblue')"><b>Dark Blue</b></button>
+          <button mat-raised-button style="background-color: maroon; color: white; margin: 10px;"
+            (click)="TextStatusBackground('maroon')"><b>Maroon</b></button>
+          <button mat-raised-button style="background-color: black; color: white; margin: 10px;"
+            (click)="TextStatusBackground('black')"><b>Black</b></button>
+          <button mat-raised-button style="background-color: darkgray; color: white; margin: 10px;"
+            (click)="TextStatusBackground('darkgray')"><b>Dark Grey</b></button>
+          <button mat-raised-button style="background-color: purple; color: white; margin: 10px;"
+            (click)="TextStatusBackground('purple')"><b>Purple</b></button>
+          <br>
+          Selected Text Background: {{TextBackground}}<br><br>
+        </div> -->
+
+      </div>
+      <div *ngIf="StatusType=='media'">
+        <div class="row" *ngIf="!(fileuploadlist.length>0)">
+          <div class="col-lg-12">
+            <div class="border-a5 p-3 position-relative">
+              <p class="font-italic color70 mb-0">Upload Media File</p>
+              <div *ngIf="fileuploadlist.length == 0" class="mb-2">
+                <div class="col-2 m-auto">
+                  <img src="assets/images/fileupload.png" width="100%">
+                </div>
+                
+                <ngx-file-drop class="dropmedia" dropZoneLabel="Drag and Drop Your Media Files" (onFileDrop)="dropped($event)"
+                  (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+               </ngx-file-drop>
+             </div>
+            </div>
+            <div class="statusmediabtn">
+              <button class=" btn btn-invite pointer font-14">
+                 Add Media From Your Device   </button>
+          
+                <div style="opacity:0;width:140px;position: absolute;z-index:0;top:0;">
+                  <button *ngIf="fileuploadlist.length == 0" >
+                    <input #fileInput  type="file" onclick="this.value = null" (change)="fileProgress($event)" multiple />
+                  </button>
+                </div>
+              <!-- <p>{{showtttt}}</p> -->
+            </div>
+          </div>
+        </div>
+ 
+     
+      
+        <div *ngIf="fileuploadlist.length>0" class="row images-area">
+          <div class='col-lg-12 poppins-font'>
+             <div class="row align-items-flex-end" *ngIf="urlss[0]?.type=='image'">
+               <div class="col-lg-2">
+                <img src={{urlss[0]?.url}} width="100%">
+               </div>
+               <div class="col-lg-10">
+                <mat-form-field class="example-full-width full-width">
+                 
+                  <input #caption1 autocomplete="off" spellcheck="true" (click)="getCursorPosition(caption1)"
+                  (keyup)="getCursorPosition(caption1)" matInput placeholder="Enter Caption here..."
+                  [(ngModel)]="caption[0]" >
+                </mat-form-field>
+           
+               </div>
+             </div>
+      
+
+            <div *ngIf="urlss[1]?.type=='image'" class="row align-items-flex-end">
+              <div class="col-lg-2">  <img src={{urlss[1]?.url}} width="100%"></div>
+             
+              <div class="col-lg-10"> 
+                <mat-form-field class="example-full-width full-width">
+                 
+                  <input #caption2 autocomplete="off" matInput spellcheck="true" (click)="getCursorPosition(caption2)"
+                  (keyup)="getCursorPosition(caption2)" placeholder="Enter Caption here..."
+                  [(ngModel)]="caption[1]" style="width:100%;">
+                </mat-form-field>
+              </div>
+             
+            </div>
+
+            <div *ngIf="urlss[2]?.type=='image'" class="row">
+              <div class="col-lg-2"> 
+              <img src={{urlss[2]?.url}}  width="100%">
+              </div>
+              <div class="col-lg-10">
+                <mat-form-field class="example-full-width full-width">
+              <input #caption3 autocomplete="off" spellcheck="true" (click)="getCursorPosition(caption3)"
+                (keyup)="getCursorPosition(caption3)" matInput  placeholder="Enter Caption here..."
+                [(ngModel)]="caption[2]" style="width:100%;">
+                </mat-form-field>
+                </div>
+            </div>
+
+            <div *ngIf="urlss[3]?.type=='image'" class="row">
+              <div class="col-lg-2"> 
+              <img src={{urlss[3]?.url}} width="100%">
+             </div>
+             <div class="col-lg-10">
+              <mat-form-field class="example-full-width full-width">
+              <input #caption4 autocomplete="off" matInput spellcheck="true" (click)="getCursorPosition(caption4)"
+                (keyup)="getCursorPosition(caption4)"  placeholder="Enter Caption here..."
+                [(ngModel)]="caption[3]" style="width:100%;">
+                </mat-form-field>
+                </div>
+            </div>
+
+            <div *ngIf="urlss[4]?.type=='image'"  class="row">
+              <div class="col-lg-2"> 
+              <img src={{urlss[4]?.url}} width="100%">
+              </div>
+              <div class="col-lg-10">
+                <mat-form-field class="example-full-width full-width">
+              <input #caption5 autocomplete="off" spellcheck="true" (click)="getCursorPosition(caption5)"
+                (keyup)="getCursorPosition(caption5)" matInput placeholder="Enter Caption here..."
+                [(ngModel)]="caption[4]" style="width:100%;">
+                </mat-form-field>
+                </div>
+            </div>
+
+
+            <div *ngIf="urlss[0]?.type=='video'" class="row">
+              <div class="col-lg-2"> 
+              <video src="{{urlss[0]?.url}}" preload="auto" width="100%" controls
+                controlsList="nodownload" class="htmlvideo">
+                Your browser does not support video playback. Kindly upgrade your browser!!!
+              </video>
+              </div>
+              <div class="col-lg-10">
+                <mat-form-field class="example-full-width full-width">
+              <input #caption1 autocomplete="off" spellcheck="true" (click)="getCursorPosition(caption1)"
+                (keyup)="getCursorPosition(caption1)" matInput placeholder="Enter Caption here..."
+                [(ngModel)]="caption[0]" style="width:100%;">
+                </mat-form-field>
+                </div>
+            </div>
+
+            <div *ngIf="urlss[1]?.type=='video'" class="row">
+              <div class="col-lg-2"> 
+                
+              <video src="{{urlss[1]?.url}}" preload="auto" width="100%" controls
+                controlsList="nodownload" class="htmlvideo">
+                Your browser does not support video playback. Kindly upgrade your browser!!!
+              </video>
+            </div>
+
+            <div class="col-lg-10"> 
+              <mat-form-field class="example-full-width full-width">
+              <input #caption2 autocomplete="off" spellcheck="true" (click)="getCursorPosition(caption2)"
+                (keyup)="getCursorPosition(caption2)" matInput placeholder="Enter Caption here..."
+                [(ngModel)]="caption[1]" style="width:100%;">
+                </mat-form-field>
+                </div>
+            </div>
+
+            <div *ngIf="urlss[2]?.type=='video'" class="row">
+              <div class="col-lg-2"> 
+              <video src="{{urlss[2]?.url}}" preload="auto" width="100%" controls
+                controlsList="nodownload" class="htmlvideo">
+                Your browser does not support video playback. Kindly upgrade your browser!!!
+              </video>
+              </div>
+              <div class="col-lg-10"> 
+                <mat-form-field class="example-full-width full-width">
+              <input #caption3 autocomplete="off" spellcheck="true" (click)="getCursorPosition(caption3)"
+                (keyup)="getCursorPosition(caption3)" matInput placeholder="Enter Caption here..."
+                [(ngModel)]="caption[2]" style="width:100%;">
+                </mat-form-field>
+                </div>
+            </div>
+
+            <div *ngIf="urlss[3]?.type=='video'" class="row">
+              <div class="col-lg-2"> 
+              <video src="{{urlss[3]?.url}}" preload="auto" width="100%" controls
+                controlsList="nodownload" class="htmlvideo">
+                Your browser does not support video playback. Kindly upgrade your browser!!!
+              </video>
+              </div>
+              <div class="col-lg-10"> 
+                <mat-form-field class="example-full-width full-width">
+              <input #caption4 autocomplete="off" spellcheck="true" (click)="getCursorPosition(caption4)"
+                (keyup)="getCursorPosition(caption4)" matInput placeholder="Enter Caption here..."
+                [(ngModel)]="caption[3]" style="width:100%;">
+                </mat-form-field>
+                </div>
+            </div>
+
+            <div *ngIf="urlss[4]?.type=='video'" class="row">
+              <div class="col-lg-2"> 
+              <video src="{{urlss[4]?.url}}" preload="auto" width="100%" controls
+                controlsList="nodownload" class="htmlvideo">
+                Your browser does not support video playback. Kindly upgrade your browser!!!
+              </video>
+              </div>
+              <div class="col-lg-10"> 
+                <mat-form-field class="example-full-width full-width">
+              <input #caption5 autocomplete="off" spellcheck="true" (click)="getCursorPosition(caption5)"
+                (keyup)="getCursorPosition(caption5)" matInput placeholder="Enter Caption here..."
+                [(ngModel)]="caption[4]" style="width:100%;">
+                </mat-form-field>
+                </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row nextbtnmedia">
+          <button *ngIf="StatusType=='media' && fileuploadlist.length>0" class="btn btn-invite"
+            (click)="InitStatusSecondStage()">Next</button>
+        </div>
+      </div>
+      <!-- <button *ngIf="StatusType=='text' && TextStatus && TextColor && TextBackground" mat-button matStepperNext
+        (click)="InitStatusSecondStage()">Check Status Preview</button> -->
+    
+<!--      
+      <button *ngIf="StatusType=='media' && fileuploadlist.length>0" style="align-self: flex-end;"
+        (click)=resetMedia()>Back</button> -->
+    </mat-step>
+    <mat-step [stepControl]="secondformgroup" *ngIf="status_SecondStage">
+      <div *ngIf="StatusType=='text'" [ngStyle]="{'background-color': TextBackground,'color':TextColor}"
+        class="text-center" style="height:220px">
+
+        <span class="font-48" *ngIf="StatusBold && StatusItalic && StatusUnderline">
+          <b><i><u>{{TextStatus}}</u></i></b>
+        </span>
+        <span class="font-48" *ngIf="StatusBold && StatusItalic && !StatusUnderline">
+          <b><i>{{TextStatus}}</i></b>
+        </span>
+        <span class="font-48" *ngIf="StatusBold && !StatusItalic && StatusUnderline">
+          <b><u>{{TextStatus}}</u></b>
+        </span>
+        <span class="font-48" *ngIf="!StatusBold && StatusItalic && StatusUnderline">
+          <i><u>{{TextStatus}}</u></i>
+        </span>
+        <span class="font-48" *ngIf="StatusBold && !StatusItalic && !StatusUnderline">
+          <b>{{TextStatus}}</b>
+        </span>
+        <span class="font-48" *ngIf="!StatusBold && StatusItalic && !StatusUnderline">
+          <i>{{TextStatus}}</i>
+        </span>
+        <span class="font-48" *ngIf="!StatusBold && !StatusItalic && StatusUnderline">
+          <u>{{TextStatus}}</u>
+        </span>
+        <span class="font-48" *ngIf="!StatusBold && !StatusItalic && !StatusUnderline">
+          {{TextStatus}}
+        </span>
+
+      </div>
+      <div *ngIf="StatusType=='media' && urlss[mediaStatusObj]?.type=='image'" style="height: 230px;">
+        <img src={{urlss[mediaStatusObj].url}} style="width: 100%; height: 100%;">
+        <p>{{caption[mediaStatusObj]}}</p>
+      </div>
+      <div *ngIf="StatusType=='media' && urlss[mediaStatusObj]?.type=='video'">
+        <video src="{{urlss[mediaStatusObj].url}}" preload="auto" style="height:230px; width:100%; border: none;"
+          controls controlsList="nodownload" class="htmlvideo">
+          Your browser does not support video playback. Kindly upgrade your browser!!!
+        </video>
+        <p>{{caption[mediaStatusObj]}}</p>
+      </div>
+      <div class="row mt-4 pl-3 pr-3 justify-content-spacebetween">
+        
+        <button class="btn btn-invite" matStepperPrevious (click)="InitStatusFirstStage()">Back</button>
+        <button *ngIf="showback==true && StatusType=='media'" (click)=previousMediaPreview()>
+          <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+        <button *ngIf="shownext==true && StatusType=='media'" (click)=nextMediaPreview()>
+          <mat-icon>arrow_forward_ios</mat-icon>
+        </button>
+        <button class="btn btn-invite" *ngIf="StatusType=='text'" matStepperNext
+          (click)="InitStatusThirdStage()">Confirm & Create</button>
+        <button class="btn btn-invite" *ngIf="StatusType=='media'" matStepperNext
+          (click)="InitStatusThirdStage()">Confirm & Create</button>
+      </div>
+      <!-- </form> -->
+    </mat-step>
+    <mat-step *ngIf="status_ThirdStage">
+      <!-- <ng-template matStepLabel>Done</ng-template> -->
+      <div class="mt-5  text-center">
+        <img src="assets/images/Text-status-success.png" max-width="100%">
+        <p *ngIf="submitstatus==null" class="color70 font-italic"><b>Please wait!! Status is being Created.</b></p>
+        <p *ngIf="submitstatus=='success'" class="color70 font-italic"><b>Status Created Successfully.</b></p>
+        <div class="mt-3">
+          <button class="btn btn-invite" mat-dialog-close>Close</button>
+        </div>
+      </div>
+
+    </mat-step>
+  </mat-vertical-stepper>
+
+</div>
+
+<!-- *************************************Show User Status************************************************* -->
+<div *ngIf="data.type == 'ShowStatus'">
+  <div class="row">
+
+    <div *ngIf="showstatusObj?.StatusType=='text'" class="col-lg-12">
+      <div class="status-txt-pos"
+        [ngStyle]="{'background-color': showstatusObj.TextBackground,'color':showstatusObj.TextColor}">
+
+        <div class="text-center font-span pt-3">
+
+
+          <span *ngIf="showstatusObj.isBold && showstatusObj.isItalic && showstatusObj.isUnderlined">
+            <b><i><u> {{showstatusObj.TextStatus}}</u></i></b>
+          </span>
+
+          <span *ngIf="!showstatusObj.isBold && showstatusObj.isItalic && showstatusObj.isUnderlined">
+            <i><u> {{showstatusObj.TextStatus}}</u></i>
+          </span>
+
+          <span *ngIf="showstatusObj.isBold && !showstatusObj.isItalic && showstatusObj.isUnderlined">
+            <b><u> {{showstatusObj.TextStatus}}</u></b>
+          </span>
+
+          <span *ngIf="showstatusObj.isBold && showstatusObj.isItalic && !showstatusObj.isUnderlined">
+            <b><i> {{showstatusObj.TextStatus}}</i></b>
+          </span>
+
+          <span *ngIf="!showstatusObj.isBold && !showstatusObj.isItalic && !showstatusObj.isUnderlined">
+            {{showstatusObj.TextStatus}}
+          </span>
+
+          <span *ngIf="showstatusObj.isBold && !showstatusObj.isItalic && !showstatusObj.isUnderlined">
+            <b>{{showstatusObj.TextStatus}}</b>
+          </span>
+
+          <span *ngIf="!showstatusObj.isBold && showstatusObj.isItalic && !showstatusObj.isUnderlined">
+            <i>{{showstatusObj.TextStatus}}</i>
+          </span>
+
+          <span *ngIf="!showstatusObj.isBold && !showstatusObj.isItalic && showstatusObj.isUnderlined">
+            <u>{{showstatusObj.TextStatus}}</u>
+          </span>
+
+
+        </div>
+      </div>
+    </div>
+
+
+    <div *ngIf="showstatusObj?.StatusType=='media'" class="col-lg-12">
+      <p class="mb-0 font-14" *ngIf="showstatusObj.caption!='' && showstatusObj.caption!=null && showstatusObj.caption!=undefined">
+        {{showstatusObj.caption}}
+      </p>
+
+      <div class="text-center font-span pt-3" style="height:230px;overflow: hidden;">
+
+     
+        <div *ngFor="let type of imgmimetype" >
+          <div *ngIf="showstatusObj.media.type == type" style="height:230px">
+            <img src="{{showstatusObj.media.path}}" class="imagebr1" alt="User pic" width="100%" height="100%" />
+          </div>
+        </div>
+
+        <div *ngFor="let type of videomimetype">
+          <div *ngIf="showstatusObj.media.type == type" class="documentview " style="height:230px">
+     
+              <video src="{{showstatusObj.media.path}}" preload="auto" alt="User video"
+                width="100%" height="100%" controls class="htmlvideo">
+                Your browser does not support video playback. Kindly upgrade
+                your browser!!!
+              </video>
+         
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div> 
+
+    <div class="m-auto pt-3 col-lg-12">
+      <div class="row">
+        <div class="col-lg-2 col-2">
+          <i class="far fa-heart likeicon pointer" *ngIf="!showstatusObj?.isLiked" (click)="ShowLiked()"></i>&nbsp;
+          <i class="fas fa-heart likeicon pointer" *ngIf="showstatusObj?.isLiked" (click)="ShowLiked()"></i>&nbsp;
+
+          <span (click)="showlikeview()"><label>{{showstatusObj?.likedBy.length}}</label></span>
+        </div>
+    
+        <div class="col-lg-8 col-8">
+          <div class="d-flex justify-content-center">
+            <button type="button" *ngIf="showback" class="bg-trans" (click)="UpdateID('back')">
+              <mat-icon>arrow_back_ios</mat-icon>
+            </button>
+          
+            <button type="button" class="ml-2 bg-trans" *ngIf="shownext" (click)="UpdateID('next')">
+              <mat-icon>arrow_forward_ios</mat-icon>
+            </button>
+          </div>
+        </div>
+        <div class="col-lg-2 col-2 text-right">
+         <span class="material-icons  pointer" (click)="showcomments()" [ngClass]="{'commenticon' :showusercomments}">
+          add_comment
+          </span>
+        </div>
+      </div>
+    <div class="row" *ngIf="showlikes" class="poppins-font">
+      <div class="col-lg-12">
+        <div class="row bg-a5">
+          <div class="col-lg-10">
+            <p class="mb-0 font-12 pt-1 font-italic font-weight-bold">Status Liked By</p>
+          </div>
+          <div class="col-lg-2 text-right">
+            <i class="fas fa-times-circle pointer" style="color: #656565;" (click)="showlikes=false"></i>
+          </div>
+        </div>
+    
+        <div *ngFor="let user of showstatusObj?.likedBy" class="row poppins-font mt-2">
+          <div class="col-lg-9">
+            <div class="d-flex align-items-center">
+              <div>
+                <div class="imgbox">
+                  <img src="assets/images/prof.png" width="100%">
+                </div>
+    
+              </div>
+              <div class="ml-2">
+                <p class="color33 mb-0 font-weight-bold">{{user?.Name}} </p>
+              </div>
+    
+            </div>
+          </div>
+    
+          <div *ngIf="user?.isFriend == false" class="col-lg-3 text-right">
+            <button class="btn btn-invite font-12" (click)="addFriend(user)">Add Friend</button>
+          </div>
+        </div>
+      </div>
+    
+    </div>
+     <div class="row" *ngIf="showusercomments">
+      <div class="col-lg-12">
+        <div class="d-flex">
+          <div>
+            <div class="imgbox">
+              <img src="assets/images/prof.png" width="100%">
+            </div>
+           
+          </div>
+         <div class="flex-grow-1">
+            <textarea #StatusComment autocomplete="off" spellcheck="true" (click)="getPositionStatusComment(StatusComment)"
+            (keydown)="getPositionStatusComment($event,StatusComment)" class="form-control" placeholder="Add a comment..."
+            [(ngModel)]="statuscomment">
+             </textarea>
+         </div>
+        
+        </div>
+      </div>
+    
+      <div *ngIf="showstatusObj.comments.length>0" class="col-lg-12 comment-area">
+        <div *ngFor="let comment of showstatusObj.comments" class="row font-italic font-12 poppins-font">
+          <div class="col-lg-2">
+            <p class="font-weight-bold font-color text-hide-name">{{comment.userid.Name}}</p>
+          </div>
+          <div class="col-lg-1">
+            <p class="font-weight-bold color70">says:</p>
+          </div>
+          <div class="col-lg-9">
+            <p  class="font-weight-bold font-color">{{comment.text}}</p>
+          </div>
+        </div>
+      </div>
+    
+     </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- <button type="button" mat-dialog-close style="margin: 10px;">
+      Close
+    </button> -->
+
+<!-- *************************************Login************************************************* -->
+<div
+  *ngIf="data.type !='group' && data.type!='GroupVideoCall' && data.type!='ShowStatus' && data.type!='CreateStatus' && data.type!='group2' && data.type !='leave' && data.type !='rename' && data.type != 'view' && data.type!='InviteUser' && data.type!='MediaDownload'">
+  <div class="modal-body p-modal poppins-font">
+    <div (click)="onNoClick()" class="closelogin">
+      <img src="assets/images/close.svg">
+    </div>
+    <div class="row" style="margin: 0%;">
+      <div class="col-lg-6 col-xs-12 col-sm-12 col-md-12 login-sec-pad">
+        <!-- <div *ngIf="org == 'first'"> -->
+        <div class="mt-sm-14" *ngIf="loginEvent">
+
+
+          <div class="clear-pos pointer-icon" (click)="onNoClick()">
+            <!-- <mat-icon class="mat-icons-color clear-but-bol">clear</mat-icon> -->
+          </div>
+          <!-- <div *ngIf="data.type=='login'"> -->
+          <!-- <div *ngIf="loginEvent"> -->
+
+          <div class="text-center">
+            <img src="assets/images/logo.svg">
+            <!-- <h1>Login</h1> -->
+          </div>
+
+          <form #loginForm="ngForm" (ngSubmit)="onLog(loginForm.value)" class="poppins-font formcss">
+            <h4 class="mt-04">Sign In</h4>
+            <div class="form-group mt-5">
+
+              <img class="faicons" height="25px" src="assets/images/mail.svg" width="18px">
+              <input [(ngModel)]="username" type="email" name="username" class="form-control" #email1="ngModel"
+                placeholder="Enter Email" required>
+              <div *ngIf="email1.errors && (email1.touched || email1.valid || loginClick )">
+                <small class="text-danger pl-2" *ngIf="email1.errors.required ">Email is requried</small>
+                <small class="text-danger pl-2" *ngIf="email1.errors.pattern">Please enter valid email</small>
+              </div>
+              <small class="text-danger pl-2" *ngIf="wrongEmail && !email1.errors">Email Id does not exist </small>
+            </div>
+
+
+            <!-- Password form information -->
+            <div class="form-group position-relative">
+              <mat-icon (click)="hide = !hide" class="pwdshow">
+                {{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+              <img class="faicons" height="25px" src="assets/images/lock.svg" width="18px">
+              <input name="password" #pwd="ngModel" [(ngModel)]="password" class="form-control"
+                placeholder="Enter password" [type]="hide ? 'text' : 'password'" minlength="1" required>
+              <div *ngIf="pwd.errors && (pwd.dirty || pwd.touched || loginClick)">
+                <small *ngIf="pwd.errors.required && !password " class="text-danger">Password is requried</small>
+              </div>
+              <small class="text-danger" *ngIf="wrongPassword && !pwd.errors">Incorrect Password</small>
+              <!-- <span matPrefix>
+              <mat-icon class="mat-icons-color"> https</mat-icon>&nbsp;
+            </span> -->
+              <!--  -->
+            </div>
+
+
+            <!-- password ends -->
+            <div class="row font-12  color70">
+              <!-- <div class="col-6">
+                <mat-checkbox class="grey-color fon-14 checkboxmat">Remember Me</mat-checkbox>
+              </div> -->
+              <div class="col-12 text-right">
+                <a (click)="showforgotpassword()" class="txtpro fon-14 forgot-password pointer font-italic ">
+                  Forgot password?</a>
+              </div>
+
+            </div>
+
+            <div class="mt-5">
+              <!-- <button mat-raised-button type="button" color="warn" class="red"
+                        (click)="onNoClick()">Close</button> -->
+
+              <button mat-raised-button type="submit" class="login-button">Log In</button>
+            </div>
+
+            <div class="mt-4">
+              <p class="color70 font-14">Don’t have an account? <span style="color:#000;font-weight: 500;"
+                  (click)="showsignup();">Sign up here</span></p>
+              <!-- <button mat-button mat-dialog-close color="warn">close</button> -->
+              <!-- <span class="fon-14 new-user-col" >New User?</span>
+                <span (click)="register()" class="fon-14 forgot-password pointer-icon" style="cursor: pointer">Sign up Now</span> -->
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+      <div class="col-lg-6 col-xs-12 col-sm-12 col-md-12  signup-pad">
+
+
+        <div *ngIf="!loginEvent" class="mt-sm-14">
+          <div class="clear-pos pointer-icon" (click)="onNoClick()">
+          </div>
+          <div class="text-center">
+            <img src="assets/images/logo.svg">
+            <!-- <h1>Login</h1> -->
+          </div>
+          <div class="mt-04" *ngIf="selectionform">
+            <h4>Please select your option</h4>
+            <div class="mt-03 m-radio">
+              <mat-radio-group aria-label="Select an option" (click)="homeClient();selectionform=false;">
+                <mat-radio-button value="1">Free User</mat-radio-button>
+                <!-- <mat-radio-button value="2">Option 2</mat-radio-button> -->
+              </mat-radio-group>
+
+
+            </div>
+            <div class="mt-03 m-radio">
+              <mat-radio-group aria-label="Select an option" (click)="homePremiumUser()">
+                <mat-radio-button value="1">Premium User</mat-radio-button>
+                <!-- <mat-radio-button value="2">Option 2</mat-radio-button> -->
+              </mat-radio-group>
+
+
+            </div>
+            <!-- <mat-button-toggle-group class="vendor-but-active bor-for-vend" #colorToggle="matButtonToggleGroup"
+               value="primary" aria-label="Change color">
+               <mat-button-toggle value="primary" class="pad-for-client" (click)="homeClient()"> User </mat-button-toggle>
+                 <mat-button-toggle value="accent" class="pad-for-client" (click)="premium1 = true;client1 = false"> Premium User
+                 </mat-button-toggle>
+                  </mat-button-toggle-group> -->
+          </div>
+          <div>
+
+
+            <div *ngIf="premiumUserForm && client1">
+              <h4 class="mt-04">Sign Up</h4>
+              <form #clients="ngForm" class=" mt-3">
+                <!-- step 1 -->
+                <div *ngIf="clientsform" class="formcss">
+                  <div class="form-group">
+                    <img class="faicons" height="25px" src="assets/images/username.svg">
+                    <input class="form-control" type="text" [(ngModel)]="client.Name" name="Name" pattern="[a-zA-Z\s]+$"
+                      #clientname="ngModel" [ngModelOptions]="{updateOn: 'change'}" placeholder="Client name" required>
+                    <div *ngIf="clientname.errors && (clientname.dirty || clientname.touched || validclick)">
+                      <small *ngIf="clientname.errors.required" class="text-danger pl-3">Client
+                        name is requried</small>
+                      <small *ngIf="clientname.errors.pattern" class="text-danger pl-3">Please give only
+                        characters</small>
+                    </div>
+
+                  </div>
+
+                  <div class="form-group">
+                    <img class="faicons" height="25px" src="assets/images/mail.svg" width="18px">
+                    <input class="form-control" type="text" placeholder="Email Address"
+                      (keyup)="onBlurEmail(client.EmailId)" [(ngModel)]="client.EmailId" name="EmailId"
+                      oninput="this.value = this.value.toLowerCase()"
+                      pattern="([A-Za-z]|[0-9])[A-Za-z0-9.]+[A-Za-z0-9]@((?:[-a-z0-9]+\.)+[a-z]{2,})"
+                      #emailaddr="ngModel" [ngModelOptions]="{ updateOn: 'change' }" required>
+                    <small *ngIf="emailvalidation" class="text-danger pl-3">{{alert}} </small>
+                    <div *ngIf="emailaddr.errors && (emailaddr.dirty || emailaddr.touched || validclick)">
+                      <small *ngIf="emailaddr.errors.required" class="text-danger pl-3">Email
+                        is requried</small>
+                      <small *ngIf="emailaddr.errors.pattern" class="text-danger pl-3">Email
+                        is invalid</small>
+                      <!-- <small *ngIg="emailvalidation" class="text-danger pl-3">Email
+                        is already Exists</small> -->
+                    </div>
+                  </div>
+
+                  <div class="form-group position-relative">
+                    <mat-icon class="pwdshow" (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}
+                    </mat-icon>
+
+                    <img class="faicons" height="25px" src="assets/images/lock.svg" width="18px">
+                    <input class="form-control" type="password" placeholder="Password" [(ngModel)]="client.password"
+                      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@*#$%^&()])[A-Za-z0-9!@#$*%^&()]{8,15}"
+                      #mobilenumber1="ngModel" name="password" [ngModelOptions]="{ updateOn: 'change' }" required
+                      [type]="hide ? 'text' : 'password'">
+                    <div *ngIf="mobilenumber1.errors && (mobilenumber1.dirty || mobilenumber1.touched || validclick)">
+                      <small *ngIf="mobilenumber1.errors.required" class="text-danger pl-3">Please enter your
+                        password</small>
+                      <small *ngIf="mobilenumber1.errors.pattern" class="text-danger pl-3">password must be 1 uppercase,
+                        1 lowercase, 1 digit and 1 special character with range 8 to 15</small>
+                    </div>
+
+                  </div>
+
+                  <div class="form-group position-relative">
+                    <mat-icon class="pwdshow" (click)="hide1 = !hide1">{{hide1 ? 'visibility' : 'visibility_off'}}
+                    </mat-icon>
+                    <img class="faicons" height="25px" src="assets/images/cf.svg" width="20px">
+                    <input class="form-control" type="password" [(ngModel)]="vpwd" name="vpwd2" #vpwd2="ngModel"
+                      [type]="hide1 ? 'text' : 'password'" placeholder="Confirm Password" required>
+
+                    <div>
+                      <small class="text-danger pl-3"
+                        *ngIf="!(clients.value.password==clients.value.vpwd2) && vpwd2.dirty && vpwd2.touched">Password
+                        Mismatch</small>
+                      <div *ngIf="vpwd2.errors && (vpwd2.dirty || vpwd2.touched || validclick)">
+                        <small *ngIf="vpwd2.errors.required" class="text-danger pl-3">Please enter confirm
+                          password</small>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="d-flex just-btw mt-4">
+                    <div>
+                      <p class="color33" (click)="selectionform=true;premium1=false;client1=false;"><span><i
+                            class="fas fa-arrow-left pr-2"></i></span>Back</p>
+                    </div>
+                    <button mat-raised-button ng-disabled="isDisabled" *ngIf="clientsform" type="submit"
+                      class="login-button"
+                      (click)="(clients.value.password==clients.value.vpwd2) && clientform1(clients,client,roleid)">Next</button>
+                  </div>
+                </div>
+
+                <!-- otp verification-->
+
+                <div *ngIf="!clientsform">
+                  <!-- <small class="color8 center"><strong>Email:&nbsp;</strong>{{client.EmailId}}&nbsp; -->
+
+                  <!-- <span class="change" (click)="ChangeForm('clientsform')" style="color:blue">Change</span> -->
+
+                  <p *ngIf="timecount>0" class="color8 center"> Check your email-id {{client.EmailId}} and enter your
+                    OTP
+                  </p>
+                  <p *ngIf="timeCount>0">The OTP will Expire in <span class="timer">{{timeCount}} </span> seconds.</p>
+                  <p *ngIf="timeCount==0">The OTP has expired. Click Resend below to get a new OTP.</p>
+                  <div class="mt-4">
+                    <ul class="otp-num-box otp-box p-0 mt-4">
+                      <li>
+                        <input matInput class="otp-input" id="otpfield" #otp1 name="otp0" required
+                          (paste)="pasteotp($event)" maxlength="1" [(ngModel)]="num1" (keydown)="next($event,otp2,'')"
+                          (keyup)="next2($event,otp2,'')" (click)="onClickMethod($event)" autofocus
+                          (keypress)="Restrictcharacter($event)">
+                      </li>
+                      <li>
+                        <input matInput class="otp-input" #otp2 name="otp1" required (paste)="pasteotp($event)"
+                          [(ngModel)]="num2" (keydown)="next($event,otp3,otp1)" (keyup)="next2($event,otp3,otp1)"
+                          maxlength="1" autofocus (keypress)="Restrictcharacter($event)"
+                          (click)="onClickMethod($event)">
+                      </li>
+
+                      <li>
+
+                        <input matInput class="otp-input" #otp3 name="otp2" required (paste)="pasteotp($event)"
+                          [(ngModel)]="num3" (keydown)="next($event,otp4,otp2)" (keyup)="next2($event,otp4,otp2)"
+                          maxlength="1" autofocus (keypress)="Restrictcharacter($event)"
+                          (click)="onClickMethod($event)">
+                      </li>
+                      <li>
+
+                        <input matInput class="otp-input" #otp4 name="otp3" required (paste)="pasteotp($event)"
+                          [(ngModel)]="num4" (keydown)="next($event,otp5,otp3)" (keyup)="next2($event,otp5,otp3)"
+                          maxlength="1" autofocus (keypress)="Restrictcharacter($event)"
+                          (click)="onClickMethod($event)">
+                      </li>
+                      <li>
+
+                        <input matInput class="otp-input" #otp5 name="otp4" required (paste)="pasteotp($event)"
+                          [(ngModel)]="num5" (keydown)="next($event,otp6,otp4)" (keyup)="next2($event,otp6,otp4)"
+                          maxlength="1" autofocus (keypress)="Restrictcharacter($event)"
+                          (click)="onClickMethod($event)">
+                      </li>
+                      <li>
+
+                        <input matInput class="otp-input" #otp6 name="otp5" required (paste)="pasteotp($event)"
+                          [(ngModel)]="num6" (keydown)="next($event,'',otp5)" (keyup)="next2($event,'',otp5)"
+                          maxlength="1" autofocus (keypress)="Restrictcharacter($event)"
+                          (click)="onClickMethod($event)">
+                      </li>
+                    </ul>
+                    <p *ngIf="timeCount == 0" class="text-center">Didn't receive the code?
+                      <span (click)="resendOTP('clientdata',client)"><b>Resend</b></span></p>
+                  </div>
+                  <div class="mt-4">
+                    <button mat-raised-button type="submit" class="login-button"
+                      (click)=clientform2(clients)>Verify</button>
+                  </div>
+                  <!-- <mat-form-field class="matfield">
+                      <input matInput placeholder="Please enter your OTP here" [(ngModel)]="otp" name="otp" pattern="[0-9]{6}"
+                        #otp2="ngModel" required>
+                    </mat-form-field> -->
+                  <div *ngIf="otp2.errors && (otp2.dirty || otp2.touched || validclick)">
+                    <small *ngIf="otp2.errors.required" class="text-danger">Please enter your OTP here</small>
+                    <small *ngIf="otp2.errors.pattern" class="text-danger">Your OTP consists of only 6 digits of
+                      numbers</small>
+                  </div>
+
+                  <strong *ngIf="displayerror" class="text-danger">{{errorres}}<br></strong>
+
+                  <!-- <button mat-raised-button color="primary" type="button" (click)="resendOTP('clientdata',client)"
+                class="float-left" [disabled]="disableresendOtpButton">
+                Resend OTP &nbsp;<i *ngIf="!spin" class="fa fa-circle-o-notch fa-spin"></i></button> -->
+                  <!--   
+              <button mat-raised-button *ngIf="clientsform == false" color="primary" type="submit"
+                (click)=clientform2(clients) class="float-right">Submit</button> -->
+                  <!--   
+              <button mat-raised-button color="primary" type="button" class="float-right"
+                (click)="onNoClick()">Cancel</button>&nbsp; -->
+
+
+                </div>
+              </form>
+            </div>
+
+            <!-- premium registration -->
+            <!-- <div *ngIf="(data.premium == true || clientsform) && premium1"> -->
+            <!-- Premium Users Registration -->
+            <div *ngIf="(data.premium == true || clientsform) && premium1">
+              <form #premiumUsers="ngForm">
+                <h4 class="mt-04">Sign Up</h4>
+                <div *ngIf="premiumUserForm" class="formcss">
+                  <div class="form-group">
+                    <input class="form-control" [(ngModel)]="premium.companyname" name="companyname"
+                      pattern="[A-za-z ]{0,}" #cmpname2="ngModel" [ngModelOptions]="{updateOn: 'change'}"
+                      placeholder="Company name" required>
+                    <div *ngIf="cmpname2.errors && (cmpname2.dirty || cmpname2.touched || validclick)">
+                      <small *ngIf="cmpname2.errors.required" class="text-danger pl-3">Company
+                        name is requried
+                      </small>
+                      <small *ngIf="cmpname2.errors.pattern" class="text-danger pl-3">Please give only
+                        characters</small>
+                    </div>
+                  </div>
+                  <!-- <mat-form-field class="matfield">
+                <input matInput [(ngModel)]="premium.companyname" name="companyname" pattern="[A-za-z ]{0,}"
+                  #cmpname2="ngModel" [ngModelOptions]="{updateOn: 'change'}" placeholder="Company name" required>
+                <span matPrefix>
+                  <mat-icon class="mat-icons-color"> domain</mat-icon>&nbsp;
+                </span>
+              </mat-form-field> -->
+
+                  <div class="form-group">
+
+                    <input class="form-control" [(ngModel)]="premium.Name" name="Name" pattern="[a-zA-Z\s]+$"
+                      #premiumUserName="ngModel" [ngModelOptions]="{updateOn: 'change'}" placeholder="premium name"
+                      required>
+                    <!-- <span matPrefix>
+                    <mat-icon class="mat-icons-color"> person</mat-icon>&nbsp;
+                  </span> -->
+
+                    <div
+                      *ngIf="premiumUserName.errors && (premiumUserName.dirty || premiumUserName.touched || validclick)">
+                      <small *ngIf="premiumUserName.errors.required" class="text-danger pl-3">Premium
+                        name is requried</small>
+                      <small *ngIf="premiumUserName.errors.pattern" class="text-danger pl-3">Please give only
+                        characters</small>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+
+                    <img class="faicons" height="25px" src="assets/images/mail.svg" width="18px">
+                    <input class="form-control" placeholder="Email Address" (keyup)="onBlurEmail(premium.EmailId)"
+                      [(ngModel)]="premium.EmailId" name="EmailId" oninput="this.value = this.value.toLowerCase()"
+                      pattern="([A-Za-z]|[0-9])[A-Za-z0-9.]+[A-Za-z0-9]@((?:[-a-z0-9]+\.)+[a-z]{2,})"
+                      #emailaddr1="ngModel" [ngModelOptions]="{ updateOn: 'change' }" required>
+                    <!-- <span matPrefix>
+                  <mat-icon class="mat-icons-color"> email</mat-icon>&nbsp;
+                </span> -->
+
+                    <div *ngIf="emailaddr1.errors && (emailaddr1.dirty || emailaddr1.touched || validclick)">
+                      <small *ngIf="emailaddr1.errors.required" class="text-danger pl-3">Email
+                        is requried</small>
+                      <small *ngIf="emailaddr1.errors.pattern" class="text-danger pl-3">Email
+                        is invalid</small>
+                      <small *ngIf="emailvalidation" class="text-danger pl-3">Email
+                        already
+                        exist</small>
+                    </div>
+
+                  </div>
+
+                  <div class="form-group position-relative">
+                    <mat-icon class="pwdshow">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                    <img class="faicons" height="25px" src="assets/images/lock.svg" width="18px">
+                    <input class="form-control" placeholder="Password" [(ngModel)]="premium.password"
+                      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@*#$%^&()])[A-Za-z0-9!@#$*%^&()]{8,15}"
+                      #mobilenumber2="ngModel" name="password" [ngModelOptions]="{ updateOn: 'change' }" required
+                      [type]="hide ? 'text' : 'password'">
+                    <!-- <span matPrefix>
+                        <mat-icon class="mat-icons-color"> https</mat-icon>&nbsp;
+                      </span> -->
+                    <!-- <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon> -->
+
+                    <div *ngIf="mobilenumber2.errors && (mobilenumber2.dirty || mobilenumber2.touched || validclick)">
+                      <small *ngIf="mobilenumber2.errors.required" class="text-danger pl-3">Please enter your
+                        password</small>
+                      <small *ngIf="mobilenumber2.errors.pattern" class="text-danger  pl-3">password must be 1
+                        uppercase, 1 lowercase, 1 digit and 1 special character with range 8 to 15</small>
+                    </div>
+
+                  </div>
+                  <div class="form-group position-relative">
+                    <mat-icon class="pwdshow">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                    <img class="faicons" height="25px" src="assets/images/cf.svg" width="18px">
+                    <input class="form-control" [(ngModel)]="premium.vpwd" name="vpwd" #vpwd3="ngModel"
+                      placeholder="Confirm Password" type="password" required>
+                    <!-- <span matPrefix>
+                          <mat-icon class="mat-icons-color"> https</mat-icon>&nbsp;
+                        </span> -->
+
+                    <small class="text-danger pl-3"
+                      *ngIf="!(premiumUsers.value.password==premiumUsers.value.vpwd) && vpwd3.dirty && vpwd3.touched">Password
+                      Mismatch</small>
+                    <div *ngIf="vpwd3.errors && (vpwd3.dirty || vpwd3.touched || validclick)">
+                      <small *ngIf="vpwd3.errors.required" class="text-danger pl-3">Please enter confirm
+                        password</small>
+                    </div>
+                  </div>
+
+                  <div class="d-flex just-btw mt-4">
+                    <div>
+                      <p class="color33" (click)="selectionform=true;premium1=false;client1=false;"><span><i
+                            class="fas fa-arrow-left pr-2"></i></span>Back</p>
+                    </div>
+                    <button mat-raised-button *ngIf="premiumUserForm" type="submit"
+                      (click)="(premiumUsers.value.password==premiumUsers.value.vpwd) && premiumUserForm1(premiumUsers,premium)"
+                      class="login-button">Next</button>
+                  </div>
+                  <!-- <div >
+                <button mat-raised-button *ngIf="premiumUserForm" type="submit"
+                  (click)="(premiumUsers.value.password==premiumUsers.value.vpwd) && premiumUserForm1(premiumUsers,premium)"
+                  class="login-button">Next</button>
+              </div> -->
+                </div>
+
+                <div *ngIf="!premiumUserForm">
+                  <p class="color8 center"> Check your email-id {{premium.EmailId}} and enter your OTP
+                  </p>
+                  <p *ngIf="timeCount>0">The Otp will expire in <span class="timer">{{timeCount}} </span> seconds.</p>
+                  <p *ngIf="timeCount==0">The Otp has expired. Click Resend below to get a new OTP.</p>
+                  <div class="mt-4">
+                    <ul class="d-flex otpboxes pl-0">
+                      <li><input class="form-control" placeholder="*" type="text"></li>
+                      <li><input class="form-control" placeholder="*" type="text"></li>
+                      <li><input class="form-control" placeholder="*" type="text"></li>
+                      <li><input class="form-control" placeholder="*" type="text"></li>
+                      <li><input class="form-control" placeholder="*" type="text"></li>
+                      <li><input class="form-control" placeholder="*" type="text"></li>
+                    </ul>
+                    <p *ngIf="timeCount==0" class="text-center">Dint receive the code? <span
+                        (click)="resendOTP('premiumData',premium)">Resend</span></p>
+                  </div>
+
+                  <div class="mt-4">
+                    <button mat-raised-button type="submit" class="login-button"
+                      (click)="premiumUserForm2(premiumUsers)">Verify</button>
+                  </div>
+                  <!-- <small class="color8 center"><strong>Email:&nbsp;</strong>{{premium.EmailId}}&nbsp;<span class="change"
+                  (click)="ChangeForm('premiumUserForm')" style="color:blue">Change</span></small><br>
+              <small class="color8 center"> Check your mail and enter your OTP here </small>
+              &nbsp;&nbsp; <span class="text-danger ">{{timeCount}} Seconds </span>
+              <br><br> -->
+                  <mat-form-field class="matfield">
+                    <input matInput placeholder="Please enter your OTP here" [(ngModel)]="otp" name="otp"
+                      pattern="[0-9]{6}" #premiumotp="ngModel" required>
+                  </mat-form-field>
+                  <div *ngIf="premiumotp.errors && (premiumotp.dirty || premiumotp.touched || validclick)">
+                    <small *ngIf="premiumotp.errors.required" class="text-danger ">Please enter your OTP here</small>
+                    <small *ngIf="premiumotp.errors.pattern" class="text-danger ">Your OTP consists of only 6 digits
+                      of numbers</small>
+                  </div>
+
+                  <strong *ngIf="displayerror" class="text-danger ">{{errorres}}<br></strong>
+                  <!-- <button mat-raised-button color="primary" type="button" class="float-left"
+                [disabled]="disableresendOtpButton" (click)="resendOTP('premiumData',premium)">Resend OTP
+                &nbsp;<i *ngIf="!spin" class="fa fa-circle-o-notch fa-spin"></i></button>
+  
+              <button mat-raised-button color="primary" type="button" class="float-right"
+                (click)="onNoClick()">Cancel</button>&nbsp;
+  
+              <button mat-raised-button *ngIf="premiumUserForm == false" color="primary" type="submit"
+                (click)="premiumUserForm2(premiumUsers)" class="float-right">Submit</button> -->
+
+                </div>
+              </form>
+            </div>
+          </div>
+
+
+        </div>
+        <!-- *************************************New Forget Password************************************************* -->
+        <div *ngIf="resetEvent">
+          <div>
+            <div *ngIf="step=='first'">
+              <h4 class="mt-04">Forgot Password</h4>
+              <div>
+                <p>
+                  Please enter your email address to receive a verification code
+                </p>
+              </div>
+              <form #fogotForm="ngForm" (ngSubmit)="fpEmailCheck(fogotForm)" name="myForm" class="formcss">
+                <div class="form-group mt-4 pt-4">
+                  <img class="faicons" height="25px" src="assets/images/mail.svg" width="18px">
+                  <input class="form-control" placeholder="Enter Email" type="email" [(ngModel)]="EmailId"
+                    name="EmailId" oninput="this.value = this.value.toLowerCase()"
+                    pattern="([A-Za-z]|[0-9])[A-Za-z0-9.]+[A-Za-z0-9]@((?:[-a-z0-9]+\.)+[a-z]{2,})" required
+                    #email1="ngModel">
+                  <div *ngIf="email1.invalid&&(email1.dirty||email1.touched)||req && email1.errors">
+                    <small class="text-danger pl-2" *ngIf="email1.errors.required">Email
+                      is requried
+                    </small>
+                    <small class="text-danger pl-2" *ngIf="email1.errors.pattern">Email is invalid
+                    </small>
+                  </div>
+                  <small class="text-danger pl-2"
+                    *ngIf="(check1 && email1.dirty && email1.touched&&email1.valid) && fogotForm.value.EmailId">
+                    Email
+                    does not exist</small>
+                  <small *ngIf="displayerror" class="text-danger pl-2"> {{errorres}}</small>
+
+                </div>
+
+
+                <!-- error msg -->
+
+                <!-- email Id -->
+
+
+
+                <!-- buttons -->
+                <div class="mt-4">
+                  <!-- <button mat-raised-button color="warn" class="red" (click)="onNoClick()">Cancel</button>   [disabled]="forgetDisableButton"-->
+                  <button mat-raised-button ng-disabled="getotp" class="login-button " type="submit">Send
+                    OTP</button>&nbsp;<span><i *ngIf="show" class="fa fa-circle-o-notch fa-spin"></i></span>
+
+                  <!-- <p *ngIf="emailresponse" class="text-danger">{{emailresponse}}</p> -->
+                  <!-- <div class="col-6 text-right">
+             <a class="grey-color fon-14 forgot-password pointer-icon" (click)="loginPage()" style="cursor: pointer;">Back to Sign In</a>
+           </div> -->
+                </div>
+                <!-- <button mat-button mat-dialog-close color="warn">close</button> -->
+              </form>
+            </div>
+
+            <div *ngIf="step=='second'" class="mt-lg-5">
+              <strong *ngIf="displayerror" class="text-danger"> {{errorres}}</strong>
+              <p *ngIf="!data.errorMsg && timeCount>0" class="color8 center font-14">Please Check Your Email Id
+                "{{EmailId}}" and Enter
+                OTP. </p>
+              <small *ngIf="data.errorMsg" class="text-danger">{{data.errorMsg}}</small>
+              <form #otpform="ngForm">
+                <p *ngIf="timeCount>0" class="color8 center font-14">The Otp will expire in <span class="timer">
+                    {{timeCount}}
+                  </span> seconds</p>
+
+                <p *ngIf="timeCount==0" class="color8 center font-14">The OTP has expired. Click Resend below to get a
+                  new OTP. </p>
+
+                <div class="mt-4">
+                  <ul class="otp-num-box otp-box p-0 mt-4">
+                    <li>
+                      <input matInput class="otp-input" id="otpfield" #otp1 name="otp0" required
+                        (paste)="pasteotp($event)" maxlength="1" [(ngModel)]="num1" (keydown)="next($event,otp2,'')"
+                        (keyup)="next2($event,otp2,'')" (click)="onClickMethod($event)" autofocus
+                        (keypress)="Restrictcharacter($event)">
+                    </li>
+                    <li>
+                      <input matInput class="otp-input" #otp2 name="otp1" required (paste)="pasteotp($event)"
+                        [(ngModel)]="num2" (keydown)="next($event,otp3,otp1)" (keyup)="next2($event,otp3,otp1)"
+                        maxlength="1" autofocus (keypress)="Restrictcharacter($event)" (click)="onClickMethod($event)">
+                    </li>
+
+                    <li>
+
+                      <input matInput class="otp-input" #otp3 name="otp2" required (paste)="pasteotp($event)"
+                        [(ngModel)]="num3" (keydown)="next($event,otp4,otp2)" (keyup)="next2($event,otp4,otp2)"
+                        maxlength="1" autofocus (keypress)="Restrictcharacter($event)" (click)="onClickMethod($event)">
+                    </li>
+                    <li>
+
+                      <input matInput class="otp-input" #otp4 name="otp3" required (paste)="pasteotp($event)"
+                        [(ngModel)]="num4" (keydown)="next($event,otp5,otp3)" (keyup)="next2($event,otp5,otp3)"
+                        maxlength="1" autofocus (keypress)="Restrictcharacter($event)" (click)="onClickMethod($event)">
+                    </li>
+                    <li>
+
+                      <input matInput class="otp-input" #otp5 name="otp4" required (paste)="pasteotp($event)"
+                        [(ngModel)]="num5" (keydown)="next($event,otp6,otp4)" (keyup)="next2($event,otp6,otp4)"
+                        maxlength="1" autofocus (keypress)="Restrictcharacter($event)" (click)="onClickMethod($event)">
+                    </li>
+                    <li>
+
+                      <input matInput class="otp-input" #otp6 name="otp5" required (paste)="pasteotp($event)"
+                        [(ngModel)]="num6" (keydown)="next($event,'',otp5)" (keyup)="next2($event,'',otp5)"
+                        maxlength="1" autofocus (keypress)="Restrictcharacter($event)" (click)="onClickMethod($event)">
+                    </li>
+                  </ul>
+
+                  <!-- <p class="text-center">Dint receive the code? <a class="txt-underline">Resend</a></p> -->
+                  <p *ngIf="timeCount==0" class="text-center">Didn't receive the code? <span
+                      (click)="resendOTPfgpswd(resendotpfgpswd)"><b>Resend</b></span></p>
+                </div>
+
+                <div class="mt-5">
+                  <button mat-raised-button type="submit" class="login-button"
+                    (click)="otpVerification(otpform)">Verify</button>
+                </div>
+                <div *ngIf=errorres>
+                  <p>{{errorres}}</p>
+                </div>
+                <!-- <mat-form-field appearance="outline" class="otp-popup">
+           <input matInput type="text" [(ngModel)]="otp" #otpnumber="ngModel" name="otp" pattern="[0-9]{6}"
+             [class.has-error]="otpnumber.invalid && otpnumber.touched" [class.has-success]="otpnumber.valid" required
+             style="margin: 0;padding: 0;">
+         </mat-form-field>
+
+         <div *ngIf="otpnumber.invalid && (otpnumber.dirty || otpnumber.touched)|| formSubmitted && otpnumber.errors">
+           <small class="text-danger text-center" *ngIf="otpnumber.errors.required"> OTP
+             is requried </small>
+           <small *ngIf="(otpnumber.errors.pattern)" class="text-center text-danger">Enter
+             OTP of 6 digits</small>
+         </div> -->
+
+                <!-- <div>
+           <button mat-raised-button color="warn" type="button" class="red" (click)="onNoClick()">Cancel</button>&nbsp;
+           <button mat-raised-button (click)="otpVerification(otpform)"
+             class="green float-right">Submit</button>&nbsp;&nbsp;&nbsp;<span><i *ngIf="show"
+               class="fa fa-circle-o-notch fa-spin"></i></span>
+         </div> -->
+                <!-- <button mat-button mat-dialog-close color="warn">close</button> -->
+              </form>
+            </div>
+
+            <div *ngIf="step=='third'">
+
+              <h4 class="mt-04">Set New Password</h4>
+
+              <form #changeForm="ngForm" (ngSubmit)="changePass(changeForm)" name="my1Form" class="formcss">
+
+                <!-- <div class="form-group">
+          <img  class="faicons" height="25px" src="assets/images/lock.svg" width="18px">
+          <input class="form-control"  placeholder="Existing password" >
+        </div> -->
+                <div class="form-group">
+                </div>
+                <div class="form-group position-relative">
+                  <mat-icon class="pwdshow" (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                  <img class="faicons" height="25px" src="assets/images/cf.svg" width="18px">
+                  <input class="form-control" placeholder="Enter new password" [type]="hide ? 'text' : 'password'"
+                    [(ngModel)]="password" name="password"
+                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,14}" required
+                    #pwd1="ngModel"
+                    [ngClass]="{'is-invalid':pwd1.invalid&&(pwd1.dirty||pwd1.touched)||req&&pwd1.errors}">
+                  <div *ngIf="pwd1.invalid&&(pwd1.dirty||pwd1.touched)||req&&pwd1.errors">
+                    <small class="text-danger " *ngIf="pwd1.errors.required"> Password
+                      is requried</small>
+                    <small class="text-danger " *ngIf="pwd1.errors.pattern">
+                      password must be 1 uppercase, 1 lowercase, 1 digit and 1 special character with range 8 to 15
+                    </small>
+                  </div>
+                  <!-- <span matPrefix>
+             <mat-icon class="mat-icons-color"> https</mat-icon>&nbsp;
+           </span> -->
+                  <!-- <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon> -->
+                </div>
+
+                <!--  -->
+                <div class="form-group position-relative">
+                  <!-- added ngclass to display error msg with icon -->
+                  <mat-icon class="pwdshow" (click)="hide1 = !hide1">{{hide1 ? 'visibility' : 'visibility_off'}}
+                  </mat-icon>
+                  <img class="faicons" height="25px" src="assets/images/cf.svg" width="18px">
+                  <input class="form-control" placeholder="Confirm new password" appConfirmEqualValidator="password"
+                    type="password" [(ngModel)]="confirmPassword" name="confirmPassword"
+                    [type]="hide1 ? 'text' : 'password'" #vpwd1="ngModel" required
+                    [ngClass]="{'is-invalid':vpwd1.errors && (vpwd1.dirty || vpwd1.touched || validclick)}">
+                  <!-- <span matPrefix>
+             <mat-icon class="mat-icons-color"> https</mat-icon>&nbsp;
+           </span> -->
+                  <div *ngIf="vpwd1.errors && (vpwd1.dirty || vpwd1.touched || validclick)">
+                    <small class="text-danger " *ngIf="vpwd1.errors.required">Confirm Password
+                      is requried</small>
+                  </div>
+
+
+                </div>
+
+                <small class="text-danger "
+                  *ngIf="(changeForm.value.pwd1!=changeForm.value.vpwd1) && vpwd1.dirty && vpwd1.touched">Password
+                  Mismatch</small>
+
+                <div class="password_policy mt-5 mb-5" *ngIf="(pwd1?.errors?.pattern)">
+                  <small class="font-color">Password Must Contain </small>
+                  <p class="mt-3">At Least 8 Characters</p>
+                  <p>At Least 1 upper case Letter ( A...Z )</p>
+                  <p>At Least 1 lower case Letter ( a...z )</p>
+                  <p>At Least 1 Number ( 0...9 )</p>
+                </div>
+
+                <div class="password_policy mt-5 mb-5" *ngIf="!pwd1?.errors?.pattern">
+                  <small class="font-color">Password Must Contain </small>
+                  <p class="mt-3"><i class="fas fa-check"></i>At Least 8 Characters</p>
+                  <p><i class="fas fa-check"></i>At Least 1 upper case Letter ( A...Z )</p>
+                  <p><i class="fas fa-check"></i>At Least 1 lower case Letter ( a...z )</p>
+                  <p><i class="fas fa-check"></i>At Least 1 Number ( 0...9 )</p>
+                </div>
+
+                <div>
+                  <button mat-raised-button class="login-button">Save</button>
+                </div>
+                <!-- <button mat-button mat-dialog-close color="warn">close</button> -->
+              </form>
+
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row ralewayfont signupsection">
+
+      <div class="img col-lg-5 col-md-12" [ngClass]="{'move_left trasn': loginEvent}">
+
+        <div class="showelements p-05 colorff">
+          <div *ngIf="!loginEvent && !forgetpage">
+            <h2>Thank you !</h2>
+            <p class=" mt-3  fw-reg p103">Enter your personal details and start journey with us</p>
+            <img src="assets/images/signup.svg" class="mt-5 mb-4 show_img">
+
+          </div>
+          <div *ngIf="loginEvent">
+            <h2>Hello !</h2>
+            <p class="mt-3  fw-reg colorff p103">Enter your details and start your journey with us</p>
+            <img src="assets/images/login1.svg" class="mt-5 mb-5 show_img">
+          </div>
+          <div *ngIf="forgetpage">
+            <h2>Forgot Password ? </h2>
+            <p class=" mt-3 fw-reg p p103">You can use this form to recover your password</p>
+            <img src="assets/images/forgotpwd.svg" class="mt-5 mb-4 show_img">
+          </div>
+          <div class="mt-lg-5 mt-sm-2">
+            <p *ngIf="forgetpage">Already have an account ?</p>
+            <button (click)="showsignup()" class="btn btnhome" *ngIf="loginEvent">Sign Up</button>
+            <button (click)="showlogin()" class="btn btnhome" *ngIf="!loginEvent">Sign In</button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Add member to any group -->
+<div *ngIf="data.type=='group2' || data.type=='group'">
+  <div class="text-right">
+    <i (click)="onNoClick()" class="fas fa-close  color70 cursor"></i>
+  </div>
+  <h4 class="text-center" *ngIf="data.source=='CreateGroup' && FirstStage">Create Group</h4>
+  <h4 class="text-center" *ngIf="FirstStage && data.source =='AddMember'">
+    <div class="text-center col-lg-12 mb-3">
+      <img src="assets/images/addmem.png">
+    </div>
+    Add members to a Group
+  </h4>
+  <h4 class="text-center" *ngIf="SecondStage">
+    <div class="text-center col-lg-12 mb-3">
+      <img src="assets/images/invite.svg ">
+    </div>
+    Add members to {{selectedGroup1.GroupId.GroupName}}
+  </h4>
+  <div class="text-center" *ngIf="ThirdStage">
+
+  </div>
+  <mat-vertical-stepper linear #stepper>
+    <mat-step [stepControl]="firstFormGroup" *ngIf="FirstStage">
+      <form [formGroup]="firstFormGroup">
+
+        <ng-template matStepLabel>Select a Group</ng-template>
+
+        <!-- <mat-form-field> -->
+        <div class="row" *ngIf="data.source!='CreateGroup'">
+
+          <mat-radio-group *ngIf="!(selectedGroup1 && GroupChoice=='2')" formControlName="firstCtrl"
+            aria-labelledby="example-radio-group-label" class="groupradio mt-4" name="GroupChoice">
+            <mat-radio-button [value]="1" matInput class="ml-5" (click)="showExisting()" checked="true">Select Existing
+              Group</mat-radio-button>
+            <mat-radio-button [value]="2" class="ml-5" (click)="createNew()">Create New Group</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12" *ngIf="GroupChoice=='1'">
+          <!-- Existing Groups Code -->
+
+
+          <mat-form-field panelClass="grpclass" class="col-sm-12 col-md-12 col-lg-12 groupselect poppins-font mt-5 mb-5"
+            *ngIf="Groups" appearance="outline">
+            <mat-label>--Select a Group--</mat-label>
+            <mat-select panelClass="selectclass" #groupselect [formControl]="groupControl" [(ngModel)]="selectedGroup1"
+              (openedChange)="groupInput.focus()">
+              <input class="groupInput" #groupInput matInput focused="'true'" type="text" appearance="outline"
+                [autoActiveFirstOption]="true" (keyup)="searchGroup($event.target.value,$event)" autocomplete="true"
+                placeholder="Select a Group">
+              <mat-option *ngFor="let group of filteredgroups" [value]="group" class="group-mat-option">
+                {{group.GroupId.GroupName}}
+              </mat-option>
+              <mat-option *ngIf="nogroupsearch" [value]="null" class="group-mat-option"> No Matching Groups Found
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button *ngIf="selectedGroup1" mat-button matStepperNext (click)="InitSecondStage()">Next </button>
+        </div>
+        <!-- New Groups Code -->
+        <div class *ngIf="GroupChoice=='2' && selectedGroup1==null"><br>
+          <div class="text-center" *ngIf="!(FirstStage && data.source =='AddMember')">
+            <img src="assets/images/groupadd.png">
+            <h5 class="modal-title color6 font26 mb-4">Create Group</h5>
+          </div>
+          <mat-radio-group formControlName="secondCtrl" aria-labelledby="example-radio-group-label" class="groupradio"
+            name="GroupTypeChoice">
+            <mat-radio-button [value]="1" matInput class="ml-5" checked="true" (click)="showpublic()">Public Group
+            </mat-radio-button>
+            <mat-radio-button [value]="2" class="ml-5" (click)="showprivate()">Private Group</mat-radio-button>
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-12" *ngIf="GroupTypeChoice == '1'">
+                <form #GroupCreationForm="ngForm" (ngSubmit)="onGroupCreate(GroupCreationForm)" class="groupform">
+                  <div class="form-group mt-3">
+                    <div *ngIf="gname.invalid && (gname.dirty||gname.touched)|| nogdata && gname.errors">
+                      <small class="text-danger" *ngIf="gname.errors.required">Group Name is required </small>
+                    </div>
+                    <input class="form-control" autocomplete="off" placeholder="Group Name" type="text"
+                      [(ngModel)]="GroupName" name="GroupName" required #gname="ngModel" required>
+
+
+                  </div>
+                  <div class="form-group mt-4">
+                    <div *ngIf="Info.errors && (Info.dirty || Info.touched) || nogdata">
+                      <small *ngIf="Info.errors?.required" class="text-danger">Info
+                        required</small>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Group Bio" [(ngModel)]="info" #Info="ngModel"
+                      name="info" autocomplete="off" [ngModelOptions]="{updateOn: 'change'}" required>
+                    <small>
+                      What's this group about?
+                    </small>
+
+                  </div>
+
+                  <!-- Image -->
+                  <div class="form-group position-relative mt-4">
+                    <input class="form-control" type="text" [placeholder]="showfilename" style="pointer-events: none;">
+                    <div style="position:absolute;top:0;right:0;">
+                      <button class=" btn uploadbtn pointer">
+                        <i class="fas fa-plus pr-1"></i> Upload Image
+
+                      </button>
+                      <input type="file" #bginput accept=".png, .jpeg , .jpg" class="form-control "
+                        style="opacity:0;width:140px;position: absolute;top:0;right:0;" placeholder="Group Image"
+                        (change)="onFileSelected($event, null);" />
+
+                      <!-- <p>{{showtttt}}</p> -->
+                    </div>
+
+                    <span>
+                      <img style="width: 10px; height: 10px;" class="image-preview" [src]="imagePreview"
+                        *ngIf="imagePreview">
+                      Group Photo ID: {{groupphotoid}}
+                    </span>
+                  </div>
+
+                  <div mat-dialog-actions>
+                    <button mat-raised-button class="btn-invite poppins-font" type="submit"
+                      *ngIf="alreadyreg != true && selectedGroup1==null">Create Group</button>
+                  </div><br>
+                </form>
+              </div>
+              <div class="col-sm-12 col-md-12 col-lg-12" *ngIf="GroupTypeChoice == '2'">
+                <form #GroupCreationForm="ngForm" (ngSubmit)="onGroupCreate(GroupCreationForm)" class="groupform">
+                  <div class="form-group mt-3">
+                    <div *ngIf="gname.invalid && (gname.dirty||gname.touched)|| nogdata && gname.errors">
+                      <small class="text-danger" *ngIf="gname.errors.required">Group Name is required </small>
+                    </div>
+                    <input class="form-control" autocomplete="off" placeholder="Group Name" type="text"
+                      [(ngModel)]="GroupName" name="GroupName" required #gname="ngModel">
+
+                  </div>
+
+                  <div class="form-group mt-4">
+                    <div *ngIf="Info.errors && (Info.dirty || Info.touched) || nogdata">
+                      <small *ngIf="Info.errors?.required" class="text-danger">Info
+                        required</small>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Group Bio" [(ngModel)]="info" #Info="ngModel"
+                      name="info" autocomplete="off" [ngModelOptions]="{updateOn: 'change'}" required>
+                    <small>
+                      What's this group about?
+                    </small>
+                  </div>
+
+                  <!-- Image -->
+                  <div class="form-group position-relative mt-4">
+                    <input class="form-control" type="text" placeholder="Group Image">
+                    <div style="position:absolute;top:0;right:0;">
+                      <button class=" btn uploadbtn">
+                        <i class="fas fa-plus pr-1"></i> Upload Image
+
+                      </button>
+                      <input type="file" accept=".png, .jpeg , .jpg" class="form-control "
+                        style="opacity:0;width:140px;position: absolute;top:0;right:0;" placeholder="Group Image"
+                        (change)="onFileSelected($event, null);" />
+                    </div>
+
+                    <!-- <span>
+                      <img class="image-preview" [src]="imagePreview" *ngIf="imagePreview">
+                    </span> -->
+                  </div>
+
+                  <div mat-dialog-actions>
+                    <button mat-raised-button matStepperNext class="btn-invite poppins-font" type="submit"
+                      *ngIf="alreadyreg != true && selectedGroup1==null">Create Group</button>
+                  </div><br>
+                </form>
+              </div>
+            </div>
+
+          </mat-radio-group>
+        </div>
+        <div *ngIf="selectedGroup1 && GroupChoice=='2'">
+          <h5 style="text-align: center;"> Group: {{selectedGroup1.GroupId.GroupName}} has been created. Click Next to
+            add members to the group. </h5>
+          <button mat-button matStepperNext (click)="InitSecondStage()">Next </button>
+        </div>
+        <!-- </mat-form-field> -->
+        <!-- <div *ngIf="selectedGroup1!=null && selectedGroup1!=undefined && FirstStage">
+          <button mat-button matStepperNext (click)="">Next </button>
+        </div> -->
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup" *ngIf="SecondStage">
+
+
+
+      <form [formGroup]="secondFormGroup">
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <mat-form-field class="member-chip-list chipch" style="width: 100%;margin-top:2rem;" appearance="outline">
+              <mat-chip-list #chipList>
+                <mat-chip *ngFor="let selectuser of this.selectedUsers;let index=index;" [selectable]="selectable"
+                  [removable]="removable" (removed)="remove(selectuser,index)">
+                  {{selectuser?.name}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input style="width: 100%;margin: 0px 0px 40px 0px;" id="input" placeholder="Enter Email ID..."
+                  #memberInput [formControl]="memberCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList"
+                  [autoActiveFirstOption]="true" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  [matChipInputAddOnBlur]="addOnBlur" (keyup)="keylog(memberInput.value, $event)">
+              </mat-chip-list>
+              <mat-autocomplete autoActiveFirstOption="true" #auto="matAutocomplete" (optionSelected)="selected($event)"
+                class="max-70">
+                <mat-option *ngFor="let selectuser of filteredMembers | async" [value]="selectuser"
+                  class="matoption-email">
+                  <!-- {{selectuser?.name}} -->
+                  <div class="poppins-font" *ngIf="selectuser">
+                    <p class="font-color font-14">{{selectuser?.name}}</p>
+                    <p class="font-12  fw-400 txt-hide color36">{{selectuser?.emailid}}</p>
+                  </div>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <!-- <button mat-dialog-close mat-raised-button color="warn">Close</button>
+            <button mat-dialog-close mat-raised-button type="button" (click)="groupInfo(data.Groupinfo)">Send</button> -->
+          </div>
+        </div>
+        <div *ngIf="emailerror" class="text-danger">
+          {{emailerror}}
+        </div>
+        <div class="row m-0 justify-content-spacebetween mt-3">
+          <button *ngIf="data.type!='group'" mat-button matStepperPrevious (click)="InitFirstStage()">Back</button>
+          <button class="btn btn-invite" matStepperNext *ngIf="selectedUsers.length>0 || EmailList1.length>0"
+            (click)="InitThirdStage()">Send Invitation</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step *ngIf="ThirdStage">
+      <div style="padding: 0rem 6rem;">
+        <div class="text-center">
+          <img src="assets/images/successinv.svg">
+          <h5 class="modal-title mt-2">Invitation has been sent Sucessfully</h5>
+        </div>
+
+        <p class="font-14 mt-3 color6">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s book.</p>
+        <div class="text-center">
+          <button mat-dialog-close type="submit" class="btn btn-invite  font-14 pd218">OK</button>
+        </div>
+
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+</div>
+
+<!-- <div *ngIf="data.type=='group2'" style="width: 100%">
+  <h4>Add members to Group</h4>
+  <div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6">
+
+      <mat-form-field class="member-chip-list">
+        <mat-chip-list #chipList>
+          <mat-chip *ngFor="let selectuser of selectedUsers;let index=index;" [selectable]="selectable"
+            [removable]="removable" (removed)="remove(selectuser,index)">
+            {{selectuser?.name}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input id="input" placeholder="New Member..." #memberInput [formControl]="memberCtrl" [matAutocomplete]="auto"
+            [matChipInputFor]="chipList" [autoActiveFirstOption]="true"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+            (keyup)="keylog(memberInput.value)">
+        </mat-chip-list>
+        <mat-autocomplete autoActiveFirstOption="true" #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let selectuser of filteredMembers | async" [value]="selectuser">
+            {{selectuser?.name}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Select Group" [(ngModel)]='selectedGroup' [(value)]="selectedGroup" required>
+          <mat-option *ngFor="let group of Groups" [value]="group.GroupId._id">
+            {{ group.GroupId.GroupName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-dialog-close mat-raised-button color="warn">Close</button>
+      <button mat-raised-button type="button" *ngIf="selectedGroup && selectedUsers.length>0" (click)="groupInfo2()">
+        Send</button>
+    </div>
+    <div class="col-sm-6 col-md-6 col-lg-6">
+
+    </div>
+  </div>
+</div> -->
+<!-- *************************************Registration************************************************* -->
+<!-- Leave the group -->
+<div *ngIf="(data.type == 'leave')" class="poppins-font text-center position-relative">
+  <i (click)="onNoClick()" class="fas fa-close closeleave color70 cursor"></i>
+  <img src="assets/images/groupleave.png">
+  <h4 class="font-color mt-3">Leave "{{data.Groupinfo.GroupId.GroupName}}"</h4>
+  <p class="color70 text-left mt-3">You won't receive updates for this group or be able to post messages unless you
+    rejoin the group. You can rejoin at
+    any time</p>
+  <div class="mt-4">
+
+    <button mat-dialog-close mat-raised-button type="button" class="btn-invite"
+      (click)="leaveGroup(data.Groupinfo)">Leave
+      Group</button>
+  </div>
+</div>
+<!-- Rename the group -->
+<div *ngIf="(data.type =='rename')" class="poppins-font position-relative">
+  <i (click)="onNoClick()" class="fas fa-close closeleave color70 cursor"></i>
+  <h5 class="font-color">Rename the group</h5>
+  <form #loginForm="ngForm" (ngSubmit)="onRename(loginForm.value)" class="poppins-font mt-4 groupform">
+    <div class="form-group">
+      <label class="font-12 font-color">Group name cannot be empty</label>
+      <input type="text" [(ngModel)]="data.Groupinfo.GroupId.GroupName" class="form-control" #name="ngModel" name="name"
+        placeholder="Enter group name" required>
+
+    </div>
+
+    <div class="text-center mt-5 mb-2">
+      <button mat-dialog-close mat-raised-button class="btn-invite poppins-font" type="submit">Update Name</button>
+    </div>
+  </form>
+</div>
+<!-- View nenbers of the group -->
+<div *ngIf="(data.type == 'view')" class="poppins-font">
+  <h5 class="font-color mb-2">All Members ({{groupMembers.length}})</h5>
+  <div *ngFor="let member of groupMembers" style="border-bottom: 1px solid #D2D2DC;">
+
+
+
+    <div class="row">
+      <div class="col-12">
+        <!-- Groups ui -->
+        <div class="d-flex align-items-center pt-3 pb-3">
+          <div>
+            <mat-checkbox class="grey-color fon-14 checkboxmat"></mat-checkbox>
+          </div>
+          <div class="ml-3">
+            <ngx-avatar [name]="member.memberId.Name" value="28%" size="40" [round]="true">
+            </ngx-avatar>
+          </div>
+          <div class="ml-2">
+            <span class="list_name pointer color36 font-14">
+              {{member.memberId.Name}}
+            </span>
+          </div>
+          <div class="ml-auto">
+            <span class="font-italic font-12 color70 font-weight-600">(Admin)</span>
+            <span>
+              <mat-icon
+                class="menu-mat font-18 pt-3  pointer ml-2 mat-icon notranslate mat-menu-trigger material-icons mat-icon-no-color">
+                more_vert </mat-icon>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+<div *ngIf="data.type =='InviteUser'">
+  <div class="row" style="margin: 0%;">
+    <div class="col-sm-12 col-md-12 col-lg-12 " *ngIf="!invitationview">
+      <div class="text-center">
+        <img src="assets/images/invite.svg">
+        <h5 class="modal-title mt-2">Invite Your Friends by Email</h5>
+      </div>
+
+      <mat-form-field style="width:100%;" appearance="outline">
+        <mat-chip-list #chipList1 aria-label="UserEmailInvite">
+          <mat-chip *ngFor="let email of EmailList1" [selectable]="selectable" [removable]="removable"
+            (removed)="remove1(email)">
+            {{email}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input placeholder="Enter Email ID. Press Enter to add a new Email Address" [matChipInputFor]="chipList1"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)" (click)="reseterror($event)">
+        </mat-chip-list>
+      </mat-form-field>
+
+
+      <div *ngIf="emailerror1" class="text-danger">{{emailerror1}} </div>
+      <div class="footerbtn mt-4">
+
+        <button type="button" class="btn btn-labeled" (click)="showgmail()">
+          <span class="btn-label pr-2"><img src="assets/images/gmail.svg"></span>Import Contacts</button>
+
+
+
+        <button (click)="SendInvite(EmailList1)" class="btn btn-invite">Send Invitation</button></div>
+
+
+    </div>
+
+    <div style="padding: 0rem 6rem;" *ngIf="invitationview">
+      <div class="text-center">
+        <img src="assets/images/successinv.svg">
+        <h5 class="modal-title mt-2">Invitation has been sent Sucessfully</h5>
+      </div>
+
+      <p class="font-14 mt-3 color6">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s book.</p>
+      <div class="text-center">
+        <button mat-dialog-close type="submit" class="btn btn-invite  font-14 pd218">OK</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div *ngIf="data.type == 'MediaDownload' && (data.source.length>0 || data.audiorecord)"
+  style="width: 100%; overflow-y: scroll; max-height: 700px;">
+  <div *ngFor="let media of data.source">
+    <div class="row" style="margin: 0%;">
+      <!-- For Image Download -->
+      <div class="col-sm-5 col-md-5 col-lg-5"
+        *ngIf="media.type=='image/apng' || media.type=='image/bmp' || media.type=='image/gif' || media.type=='image/jpg' || media.type =='image/jpeg' || media.type=='image/png' || media.type=='image/tiff' || media.type=='image/webp'">
+        <img src="{{media.path}}" style="width: 200px; height: 200px">
+      </div>
+      <!-- For Audio Download -->
+      <div class="col-sm-5 col-md-5 col-lg-5" style="vertical-align: top;"
+        *ngIf="media.type=='audio/mpeg' || media.type=='audio/ogg' || media.type=='audio/wav' || media.type=='audio/mp3'">
+        <audio src="{{media.path}}" preload="auto" controls controlsList="nodownload" style="width: 200px;"></audio>
+      </div>
+      <!-- For Video Download -->
+      <div class="col-sm-5 col-md-5 col-lg-5"
+        *ngIf="media.type=='video/mp4' || media.type=='video/ogg' || media.type=='video/webm'">
+        <video src="{{media.path}}" preload="auto" controls controlsList="nodownload"
+          style="width: 200px; height: 150px"></video>
+      </div>
+      <!-- For Documents Download -->
+      <div class="col-sm-5 col-md-5 col-lg-5" *ngIf="media.type=='application/msword'">
+        <img src="../../assets/images/doc.png" style="width: 200px; height: 200px">
+      </div>
+
+      <div class="col-sm-5 col-md-5 col-lg-5" *ngIf="media.type=='text/csv'">
+        <img src="../../assets/images/csv.png" style="width: 200px; height: 200px">
+      </div>
+
+      <div class="col-sm-5 col-md-5 col-lg-5"
+        *ngIf="media.type=='application/vnd.openxmlformats-officedocument.wordprocessingml.document'">
+        <img src="../../assets/images/word.png" style="width: 200px; height: 200px">
+      </div>
+
+      <div class="col-sm-5 col-md-5 col-lg-5" *ngIf="media.type=='text/plain'">
+        <img src="../../assets/images/txt.png" style="width: 200px; height: 200px">
+      </div>
+
+      <div class="col-sm-5 col-md-5 col-lg-5" *ngIf="media.type=='application/pdf'">
+        <img src="../../assets/images/pdfnew.png" style="width: 200px; height: 200px">
+      </div>
+
+      <div class="col-sm-5 col-md-5 col-lg-5" *ngIf="media.type=='application/vnd.ms-powerpoint'">
+        <img src="../../assets/images/pptnew.png" style="width: 200px; height: 200px">
+      </div>
+
+      <div class="col-sm-5 col-md-5 col-lg-5"
+        *ngIf="media.type=='application/vnd.openxmlformats-officedocument.presentationml.presentation'">
+        <img src="../../assets/images/pptx.png" style="width: 200px; height: 200px">
+      </div>
+
+      <div class="col-sm-5 col-md-5 col-lg-5" *ngIf="media.type=='application/vnd.ms-excel'">
+        <img src="../../assets/images/xls.png" style="width: 200px; height: 200px">
+      </div>
+
+      <div class="col-sm-5 col-md-5 col-lg-5"
+        *ngIf="media.type=='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'">
+        <img src="../../assets/images/xlsx.png" style="width: 200px; height: 200px">
+      </div>
+
+      <div class="col-sm-5 col-md-5 col-lg-5" style="vertical-align: middle;">{{media.originalFilename}} </div>
+
+      <div class="col-sm-2 col-md-2 col-lg-2" fileSaver [method]="'GET'" fileName="{{media.name}}" url="{{media.path}}"
+        (success)="DownloadSuccess($event)" (error)="DownloadError($event)">
+        <img src="../../assets/images/download.png">
+      </div>
+    </div>
+
+  </div>
+  <div class="row" style="margin: 0%;" *ngIf="data.audiorecord">
+    <div class="col-sm-5 col-md-5 col-lg-5" style="vertical-align: top;">
+      <audio src="{{data.audiorecord.path}}" preload="auto" controls controlsList="nodownload"
+        style="width: 200px;"></audio>
+    </div>
+    <div class="col-sm-5 col-md-5 col-lg-5" style="vertical-align: middle;">{{data.audiorecord.originalFilename}} </div>
+
+    <div class="col-sm-2 col-md-2 col-lg-2" fileSaver [method]="'GET'" fileName="{{data.audiorecord.name}}"
+      url="{{data.audiorecord.path}}" (success)="DownloadSuccess($event)" (error)="DownloadError($event)">
+      <img src="../../assets/images/download.png">
+    </div>
+  </div>
+</div>

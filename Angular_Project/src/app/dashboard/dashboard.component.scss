@@ -1,0 +1,61 @@
+.custom-table{
+    width: 100%;
+    text-align: center;
+}
+.custom-table th{
+    position: relative;
+}
+.custom-table .arrow1{
+    position: absolute;
+    top: -7px;
+    cursor: pointer;
+}
+.custom-table .arrow2{
+    position: absolute;
+}
+.add{
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 28px 14px 0px;
+    a{
+        background-color: #014479;
+        color: #fff;
+        padding: 7px 11px 7px 6px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .mat-icon{
+        vertical-align: bottom;
+    }
+}
+.salepriceView{
+    box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
+    padding: 26px 20px 10px 20px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+.borderLine{
+    border-bottom: 1px solid #000;
+    padding: 20px 0 20px 0;
+}
+.catergorieList{
+    list-style: none;
+    padding: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+.priceFilter a{
+    border: 1px solid #9d9d9d;
+    padding: 0 20px 0 20px;
+    margin: 0 5px 0 5px;
+    background-color: #e2e2e2;
+}
+.dash{
+    border: none !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+    font-size: 16px;
+    font-weight: 700;
+    color: black;
+    text-decoration: none;
+}

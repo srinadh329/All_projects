@@ -1,0 +1,23 @@
+<app-header></app-header>
+
+<section class="sec-pad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 pt-4" *ngFor="let gallery of galleryList">
+                <div class="gallery-view card">
+                    <div class="gallery-image">
+                        <img [src]="gallery?.image" width="100%">
+                    </div>
+                    <div class="gallery-content bg-white p-3">
+                        <h5 class="mb-0"><a href="#" class="text-dark title">{{gallery?.title}}</a></h5>
+                        <h6 class="text-muted tag mb-0">{{gallery?.location}}</h6>
+                        <p>{{gallery?.description}}</p>
+                        <p>{{gallery?.date_at | date:'mediumDate'}}</p>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </div>
+</section>
+
+<app-testimonial></app-testimonial>

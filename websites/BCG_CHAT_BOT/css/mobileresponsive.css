@@ -1,0 +1,41 @@
+@media  (max-width:800px){
+    .home-banner{
+           background: linear-gradient(to right, rgb(0, 0, 70), rgb(28, 181, 224));
+    margin-top: 10%;
+    /* height: 100vh; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 800px;
+    /* height: 100%; */
+    }
+    .home-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+.home-title h1{
+    color: #fff;
+    font-size: 34px;
+}
+.home-title p{
+    color: #fff;
+    
+}
+.panel-bottom ul li a h6{
+    display: none;
+}
+.work_place {
+    padding: 0px;
+}
+
+}
+
+@media  (max-width:768px){
+    .module-flex{
+    display: block;
+}
+}

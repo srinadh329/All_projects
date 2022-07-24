@@ -1,0 +1,170 @@
+body {
+    background: url(../images/bg.jpg);
+    background-size: cover;
+}
+
+/*navbar css start*/
+/*.top-header{
+	background: #fff;
+    padding: 15px 0px;
+    border-top: 3px double #AE1300;
+     border-bottom: 3px double #AE1300;
+}*/
+.header-column{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+.navbar-list{
+	list-style: none;
+    margin: 0;
+    border-radius: 2px;
+    box-shadow: 0 0 2px #333;
+    color: #333;
+    padding: 6px 16px 6px 16px;
+}
+.navbar-list li{
+    padding: 2px 0 2px 0;
+}
+.navbar-list li a i{
+	    font-size: 24px;
+	    color: #155780;
+	    padding: 0 6px 0 0px;
+}
+.navbar-list li a i:hover{
+	    color: #ff6a07;
+}
+.issn-online{
+	    font-weight: 500;
+    font-size: 14px;
+    text-align: left;
+}
+.custom-links{
+	width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.custom-links li a{
+	color: #fff;
+    font-size: 15px;
+	font-weight: 600 !important;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: capitalize;
+}
+.second-navbar{
+	    background: #4bb200;
+    margin-bottom: 5px;
+}
+.dropdown:hover>.dropdown-menu {
+  display: block;
+}
+.custom-toggle::after{
+	content:'\f101';
+	font-family: 'FontAwesome';
+}
+.custom-dropdown{
+	color: #fff;
+    background-color: rgba(47, 56, 61, 0.9);
+}
+.custom-dropdown .dropdown-item:hover{
+	color: #fff;
+    background: #8EC641;
+}
+.contact {
+    font-size: 20px;
+    font-family: 'open sans', arial, sans-serif;
+    font-weight: 300;
+    margin-top: 10px;
+}
+.contact h4{
+    font-size: 18px;
+}
+.header-icons{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+.header-icons li{
+        color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 0 4px 0 2px;
+}
+.header-icons li a{
+    color: #fff;
+}
+.header-icons li i {
+    color: #019fe0;
+    margin-right: 8px;
+    font-size: 18px;
+    position: relative;
+    top: 1px;
+}
+.latest-news{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+       padding: 10px;
+    background-color:#eee;
+    font-size: 14px;
+    margin: 0 0 5px 0;
+}
+/*navbar css end*/
+
+
+.events{
+        background: #f5f5f5;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+.line {
+    border-top: 5px solid #032a91;
+    display: inline-block;
+    padding: 0 15px;
+    padding-top: 5px;
+}
+.event-items{
+    min-height: 100px;
+    padding: 17px;
+}
+.thumbnail {
+    display: block;
+  width: 100%;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+.course{
+        background: #f5f5f5;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+.course h1 {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 2;
+    margin-top: 0;
+    color: #2f506c;
+}
+.section-content {
+    padding: 15px;
+    padding-top: 0;
+    text-align: justify;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px !important;
+    line-height: 1.42857143;
+    color: #000;
+}
+.footer-color{
+    background: #2b2b2b;
+    padding: 10px 0;
+    color: #fff;
+    text-align: center;
+}

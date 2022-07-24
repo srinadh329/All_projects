@@ -1,0 +1,259 @@
+https://backendelectric.herokuapp.com/api-docs/#/
+
+1.What is Angular?
+Angular is Front End Frame work used to design web applications 
+also if familir with develop SPA 
+angular is developed in typeScript (Superset of javascript)
+
+2. what is SPA
+only one index.html is loaded all commponents to <app-root> </app-root>
+
+3. how angular works
+ first load main.ts in that appmodule bootstaping by platform browser
+ on appmodule conists delcations, imports, providers
+  in declarations we define component classes
+  in imports we define Module (like material modules)
+  in providers we define service clases
+4.angular all data is configure with angular.json
+
+5. all npm packages are scripts maintained in package.json
+
+6.Component : Compent is buiding Block of UI elemnets
+          (its render to  and it can resuable)
+ng g c componentname
+  
+
+7.module:module is logic our application , divide the entrite application to smaller modules to perform lazy render
+ng g m module name
+
+8.servives are used to maintain backend  API functions
+its can be resuable
+ng g s servicename
+
+9. Dependency Injection
+We can create one service it can used to overall application instead of recreating all functions
+
+10.data binding
+i.{{}} source to view
+ii. (click)="test()" view to source
+iii. ([ngModel])="modelname" two way binding
+iv. property binding
+ [value]='job'
+12.Directive 
+ Directive is Us ed to change the behaviour of DOM Elemnet
+ ng g d directivename
+  i. component add selecter name of directive in required place
+  ii. Structural Directive 
+      *ngIf  *ngFor , *ngSwitch (multile cases)
+   iii.Attribute Directives 
+   [ngClass] , [ngStyle]
+
+13.routing ( navigation from one view to another view)
+
+wild card routers are used to redirect if invalid routernames given by user{path:'**',Error}
+
+
+//////////
+CRUD;
+
+endponts (api) applcation progrm interface
+create , read update , delete
+ HTTP verbs or methods
+
+create POST 
+read GET
+update PUT ,PATCH 
+delete DELETE
+
+POST (body) json formdata,xml
+
+GET paramas(test/?id='test)
+
+PUT OR PATCH (body with paramas) 
+
+DELETE params
+
+
+
+forms are used to capute the userdata in browser
+
+groups of inputs validation and submition 
+ which are come under form.value
+
+angular forms two Template Driven Forms , Reactive Forms
+
+TEmplateDriven Forms:
+its similar to Normal HTML forms in order to Maintain ngModel for twoway binding We cannot Initialize forms with ts
+erorr Handinging Bit complicate when compare to rective Forms
+
+
+
+Reactive Forms:
+No need to NgModels in it
+
+we can Initialise forms with valadtions in souce or ts or ngoninit
+Form group
+FromBuilder
+FormController
+FormArray
+Validaotors
+SetValue
+patchValue
+
+how many type  angular life cycles
+1.constructor
+2.ngOnChanage
+3.ngOninit
+4.ngDocheck
+5.ngAfterviewinit
+6.ngAfterContentinit
+7.ngAfterContentChecked
+8.ngAfterViewChecked
+9.ngOnDestroy
+
+
+
+14. passing data from one compone to another componets
+from parent to child @Input (in child) 
+form child to parent @output (in child) with EventEmmiter
+
+using observalbles , using ViewChild  (get the template element)
+
+observables are used to make asynochtonous api calls 
+also used to broadcast the data its send data to all subscribed methods
+we can unscribethe observable at any time
+we can set deboounce time to api calls
+it will return no of events 
+
+17.promise (resolve or reject)
+
+promise is used to call asynchronous api or function calls it will return either reject or reslove 
+reslove mean ssuccess data, reject means error 
+it cannot be cannceled after calling
+
+
+
+16.pipes pipes are used to transform the values 
+it will take input and transform it and return it
+there are two types predefined pipes and custom pipes
+
+
+
+
+
+
+18. jwt Intercepters are middle ware its calling before and  after api calls or error call backs
+
+
+20. viewEncasulation Provide scopes to styles
+  emulate, none 
+
+ 1st <h1 clas=djd> </h1>
+2ns <h1> </h1>
+
+<h1>test></h1>
+<app-child> <app-child>
+view:nono
+
+ 
+21. localStorage, sessionStorage, cookieStorage (web Storage apis)
+
+22.angular js is java script frame work 
+it work on mvc model
+
+angualr is typescript frame work 
+its wotk on mvvm model
+its have component, 
+
+rxjs is popular libraby used for observables , maps 
+
+
+IVY enale ( decrese bundle size )
+
+lasy loading 
+inorder to load entire application we can load the child routes based on parent route
+
+module is logic of our application we can divide the entire application into smaller applications 
+
+
+JIT  just in time  ng serve
+ code is compile in run time (complie in browser)
+ AOT code is compiled in comile time
+it will genetaed complied javascript bundle under dist folder
+ng build --prod or ng build --aot
+
+
+
+
+///
+
+auth gaurds
+gaurds are used to proved security to router navigation
+
+ng g g authgaurd
+
+CanActivate : its call before navigation
+CanActivateChild: its call when child loads
+CanDeactivate: its call router closed
+CanLoad:its call when module load
+
+Hostlisternst simmar lo event lisiterns
+
+
+web apis
+storage apis
+
+localstorage is used to store key, value pair data in client browser 
+it will access over entire browser
+it will not clear automatically
+localStorage.setItem('name','srinadh') for store
+name = key , srinadh is data
+
+localStorage.getItem('name') get value from storage
+
+localStorage.removeItem('name') remove element from storage
+
+localStorage.clear() clear all storage data
+
+sessionstorage is used to storage data by key value pair
+in client browser
+it will accessable in single browser tab
+
+it will clear when browser tab close
+sessionStorage.setItem('name','srinadh');
+sessionStorage.getItem('age');
+sessionStorage.removeItem('age');
+sessionStorage.clear();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

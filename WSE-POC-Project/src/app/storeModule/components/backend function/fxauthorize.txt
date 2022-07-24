@@ -1,0 +1,66 @@
+-- FUNCTION: store.fx_transaction_authorreject(numeric, numeric, character varying, character varying, character varying, character varying)
+
+-- DROP FUNCTION store.fx_transaction_authorreject(numeric, numeric, character varying, character varying, character varying, character varying);
+
+CREATE OR REPLACE FUNCTION store.fx_transaction_authorreject(
+	applicationnumber numeric,
+	branchid numeric,
+	authuser character varying,
+	authtime character varying,
+	authdate character varying,
+	authstatus character varying)
+    RETURNS character varying
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+AS $BODY$
+     Declare voucher character varying;
+	         voucherno character varying; 
+	         incrementno numeric;
+         begin
+           if exists(select trnno from store.fxdtl where appno = applicationnumber
+					 and brnid = branchid and status = 'C') then
+					 
+				if exists(select a.loginid,a.usrole,a.brnid,b.roltyp from admin.usrmas a 
+				          inner join admin.roles b on a.usrole = b.roleid 
+					       where b.roltyp = 'SUPERVISOR' and a.brnid = branchid
+					       and a.loginid = authuser) then
+						   
+					  if(authstatus = 'A') then
+					     --Generate Permanent Voucher
+						 
+                         select trnno into voucher from store.fxdtl
+						 where brnid = branchid and trnno ilike 'FX%'
+						 order by trnno desc limit 1;
+							  
+							  if(voucher <> '') then
+							     incrementno = (RIGHT(voucher,1)::numeric)+1;
+								 voucher = concat(LEFT(voucher,2),incrementno);						 
+						
+								else voucher = 'FX1';								 					  
+							  end if;
+							   update store.fxdtl set modusr = authuser,trnno = voucher,
+					             moddat = authdate,modtim = authtime,status = authstatus
+					             where appno = applicationnumber and brnid = branchid;
+								 return voucher;	
+							  
+					  else 
+					  update store.fxdtl set modusr = authuser,
+					       moddat = authdate,modtim = authtime,status = authstatus
+					       where appno = applicationnumber and brnid = branchid;
+						 
+						 return 'Application Cancelled cashier will refund money';
+						 
+					end if;
+						   
+				    else raise exception 'Invalid User to Authorize';
+				end if;		   
+					 
+			  else raise exception 'Invalid Transaction Number';	 
+		   end if;				  
+		 end
+  $BODY$;
+
+ALTER FUNCTION store.fx_transaction_authorreject(numeric, numeric, character varying, character varying, character varying, character varying)
+    OWNER TO postgres;

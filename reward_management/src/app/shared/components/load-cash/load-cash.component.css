@@ -1,0 +1,68 @@
+.card {
+    background-color: #f3f3f3 !important;
+    padding: 5px;
+}
+.btn-dark {
+    padding:10px;
+}
+.btn {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.03em;
+    color: #ffffff;
+    /* padding: 10px 20px; */
+}
+
+.btn-success {
+    background-color: #42A4EC;
+    border: none !important;
+    box-shadow: none !important;
+    padding:10px;
+}
+
+.btn-primary {
+    background-color: #2CBA65;
+    border: none !important;
+    box-shadow: none !important;
+    padding:15px;
+}
+
+.pass_recovery {
+    background-color: #f2f2f2 !important;
+    box-shadow: none;
+    border-radius: 5px;
+    border:none;
+    color: black !important;
+}
+
+.btn_theme {
+    width:60% !important;
+    border-radius: 5px;
+}
+
+.modal-dialog {
+    max-width: 700px !important;
+}
+
+.invalid-feedback {
+    color:black;
+}
+
+select {
+    width: 60% !important;
+    height: 47px;
+    background: url(../../../../assets/dropicon-payment.png) no-repeat 99% !important;
+    background-size: 35px 35px !important;
+    -webkit-appearance: none;
+    border-color: snow;
+    padding: 10px;
+    border-radius: 10px !important;
+    background-color: #F3F3F3 !important;
+}
+
+.title-font {
+    font-size: 15px;
+}
+

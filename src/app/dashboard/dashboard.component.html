@@ -1,0 +1,258 @@
+<div class="container-fluid backclr">
+  <div class="row">
+    <div class="col-md-12 mt-2">
+      <div class="logo"> <img src="../assets/images/logo.svg" width="10%" class="logoimg"></div>
+    </div>
+  </div>
+  
+
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-11 mt-2">
+      <ul class="row tabrow nav nav-tabs">
+        <li class="col-md-2 tabbutn1 tabtxt txtlft active" >
+          <a data-toggle="tab" href="#home">All</a>
+          <hr class="hractive">
+        </li>
+        <li class="col-md-2 tabbutn2 tabtxt" (click)="showproducts()" >
+          <a data-toggle="tab" href="#menu1" >Our Products</a>
+        </li>
+        <li class="col-md-2 tabbutn2 tabtxt" >
+          <a data-toggle="tab" href="#blogs">Blogs</a>
+        </li>
+        <li class="col-md-2 tabbutn2 tabtxt">
+          <a data-toggle="tab" href="#">Recommended Apps</a>
+        </li>
+        <li class="col-md-2 tabbutn2 tabtxt">
+          <a data-toggle="tab" href="#">Settings</a>
+        </li>
+        <hr class="devide col-md-10">
+      </ul>
+
+
+      <div class="tab-content">
+        <!-- ****************************TAB1*********************** -->
+        <div class="tab1 tab-pane fade in active" id="home">
+          <div class="row mt-5">
+            <div class="col-md-2">
+              <div class="adnew box">
+                +
+              </div>
+              <div class="boxtxt1">Add New</div>
+            </div>
+            <div class="col-md-2">
+              <div class="adnewpep box">
+                <img src="../assets/images/icon1.svg" width="50%" class="img-1">
+              </div>
+              <div class="boxtxt1">Add New People</div>
+            </div>
+            <div class="col-md-2">
+              <div class="cntcts box" style="cursor: pointer;">
+                <img src="../assets/images/icon2.svg" width="40%" class="img-2">
+              </div>
+              <div class="boxtxt1">Contacts</div>
+            </div>
+
+            <div class="col-md-2">
+              <div class="cal box">
+                <img src="../assets/images/icon3.svg" width="40%" class="img-2">
+              </div>
+              <div class="boxtxt1">Calls</div>
+            </div>
+            <div class="col-md-2">
+              <div class="chat box" (click)="chatpage()" style="cursor: pointer;">
+                <img src="../assets/images/icon4.svg" width="40%" class="img-2">
+              </div>
+              <div class="boxtxt1">Chat</div>
+            </div>
+
+
+
+          </div>
+          <div class="row mt-5">
+            <div class="col-md-2">
+              <div class="invite box">
+                <img src="../assets/images/icon2.svg" width="40%" class="img-2">
+              </div>
+              <div class="boxtxt1">Invite People</div>
+            </div>
+            <div class="col-md-2">
+              <div class="incog box">
+                <img src="../assets/images/icon11.svg" width="40%" class="img-2">
+              </div>
+              <div class="boxtxt1">Incognitive Chat</div>
+            </div>
+            <div class="col-md-2">
+              <div class="newg box">
+                <img src="../assets/images/icon12.svg" width="60%" class="img-2">
+              </div>
+              <div class="boxtxt1">New Group</div>
+            </div>
+            <div class="col-md-2">
+              <div class="notific box">
+                <img src="../assets/images/icon13.svg" width="30%" class="img-2">
+              </div>
+              <div class="boxtxt1">Notifications</div>
+            </div>
+            <div  (click)="GroupVideoCall()" class="col-md-2">
+              <div class="Video box">
+                <img src="../assets/images/icon5.svg" width="40%" class="img-3">
+              </div>
+              <div class="boxtxt1">Video Call</div>
+            </div>
+          </div>
+
+          <!-- our products section -->
+          <div class="row">
+            <div class="col-md-12 pl-0">
+              <div class="ourprodsec mt-5">Our Products</div>
+
+            </div>
+            <hr class="devide1 col-md-10">
+          </div>
+          <div class="row mt-5">
+            <div class="col-md-2">
+              <div class="bot box">
+                <img src="../assets/images/icon10.svg" width="70%" class="img-4">
+              </div>
+              <div class="boxtxt1">Chat Bot</div>
+            </div>
+            <div class="col-md-2">
+              <div class="box logobox">
+                <img src="../assets/images/icon6.svg" width="100%" class="img-7">
+              </div>
+              <div class="boxtxt1">Doc Intact</div>
+            </div>
+            <div class="col-md-2">
+              <div class="kyc box">
+                <img src="../assets/images/icon9.svg" width="40%" class="img-2">
+              </div>
+              <div class="boxtxt1">KYC</div>
+            </div>
+
+            <div class="col-md-2">
+              <div class="smart box">
+                <img src="../assets/images/icon7.svg" width="30%" class="img-5">
+              </div>
+              <div class="boxtxt1">Smart Upload</div>
+            </div>
+            <div class="col-md-2">
+              <div class="scm box">
+                <img src="../assets/images/icon8.svg" width="60%" class="img-6">
+              </div>
+              <div class="boxtxt1">Supply Chain <div style="line-height: 0;">Management</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--******************************* tab2 ******************************-->
+
+
+
+        <div id="menu1" class="tab-pane fade">
+          <div class="row mt-5">
+            <div class="col-md-2">
+              <div class="bot box">
+                <img src="../assets/images/icon10.svg" width="70%" class="img-4">
+              </div>
+              <div class="boxtxt1">Chat Bot</div>
+            </div>
+            <div class="col-md-2">
+              <div class="box logobox">
+                <img src="../assets/images/icon6.svg" width="100%" class="img-7">
+              </div>
+              <div class="boxtxt1">Doc Intact</div>
+            </div>
+            <div class="col-md-2">
+              <div class="kyc box">
+                <img src="../assets/images/icon9.svg" width="40%" class="img-2">
+              </div>
+              <div class="boxtxt1">KYC</div>
+            </div>
+
+            <div class="col-md-2">
+              <div class="smart box">
+                <img src="../assets/images/icon7.svg" width="30%" class="img-5">
+              </div>
+              <div class="boxtxt1">Smart Upload</div>
+            </div>
+            <div class="col-md-2">
+              <div class="scm box">
+                <img src="../assets/images/icon8.svg" width="60%" class="img-6">
+              </div>
+              <div class="boxtxt1">Supply Chain <div style="line-height: 0;">Management</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <!-- ****************************TAB2*********************** -->
+
+        <div id="blogs" class="tab-pane fade">
+          <!-- <div class="row mt-5">
+            <div class="col-md-2">
+              <div class="bot box">
+                <img src="../assets/images/icon10.svg" width="70%" class="img-4" (click)="createBlog()" style="cursor: pointer;">
+              </div>
+              <div class="boxtxt1"> Create Blog</div>
+            </div>
+                </div> -->
+
+                
+                  <div class="row mt-5">
+                    <div class="col-md-2">
+                      <div class="bot box">
+                        <img src="../assets/images/icon10.svg" width="70%"  (click)="showBlog()" style="cursor: pointer;"  class="img-7">
+                      </div>
+                      <div class="boxtxt1">View Blog</div>
+                    </div>
+                        </div>
+
+         
+
+                <!-- <button class="btn btn-primary" (click)="createBlog()">Create Blog</button> -->
+        <!-- ****************************TAB3*********************** -->
+
+        <!-- <div id="tab03">
+                    <div class="tab1">
+  
+                        TAB3
+                    </div>
+                </div> -->
+        <!-- ****************************TAB4*********************** -->
+
+        <!-- <div id="tab04">
+                    <div class="tab1">
+                        TAB4
+  
+                    </div>
+                </div> -->
+
+        <!-- ****************************TAB5*********************** -->
+
+        <!-- <div id="tab05">
+                    <div class="tab1">
+                        TAB5
+  
+                    </div>
+                </div> -->
+      </div>
+
+  </div>
+
+  </div>
+
+</div>

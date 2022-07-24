@@ -1,0 +1,227 @@
+@import 'common';
+
+// home banner start
+
+.home-overlay{
+background-color: $overlay-color;
+position: absolute;
+top: 0;
+right: 0;
+left: 0;
+bottom: 0;
+width: 100%;
+
+}
+.home-content{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+}
+.custom-swiper{
+    height: 100vh;
+}
+.input-bar{
+    position: relative;
+    top: -23px;
+    z-index: 9;
+}
+
+.custom-next:after{
+    content: 'next';
+    font-size: 11px;
+    border: 1px solid $white-color;
+    border-radius: 50%;
+    width: 26px;
+    height: 27px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    color: $white-color;
+
+}
+.custom-prev:after{
+    content: 'prev';
+    font-size: 11px;
+    border: 1px solid $white-color;
+    border-radius: 50%;
+    width: 26px;
+    height: 27px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    color: $white-color;
+}
+.para-desc{
+    font-size: 18px;
+}
+.home-button{
+    @include button();
+    border: none;
+    &:active{
+        background-color: $primer-color !important; 
+        border: none;
+    }
+}
+// home banner end
+
+.section-two{
+    background-color: $primer-color;
+    padding: 80px 0;
+    position: relative;
+}
+.section-two.section-spacing {
+    padding-bottom: 150px;
+}
+.donate-button{
+    @include button();
+    background-color: $donate-color;
+    &:hover{
+        background-color: $donate-color;
+    }
+}
+.avatar.avatar-small {
+    height: 60px;
+    width: 60px;
+}
+.shadow {
+    -webkit-box-shadow: 0 0 3px rgb(47 60 78 / 15%) !important;
+    box-shadow: 0 0 3px rgb(47 60 78 / 15%) !important;
+}
+.features {
+    position: relative;
+    z-index: 2;
+    margin: -60px 0 0;
+}
+// about us start
+.about-content p{
+    color: $p-color !important;
+    line-height: 1.7;
+}
+.about-button{
+    @include button();
+    border: none;
+}
+// about us end
+
+// popular event start
+.post-button{
+    @include button();
+}
+.popular-readmore{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8px 6px 8px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.popular-content{
+    font-size: 14px;
+    line-height: 34px;
+}
+.popular-readmore a{
+    font-size: 15px;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    color: $p-color !important;
+}
+.custom-card{
+    box-shadow: 0 0 3px rgb(60 72 88 / 15%) !important;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+.custom-card:hover{
+    transform: translateY(-10px);
+}
+.custom-card:hover .overlay{
+    opacity: 0.4;
+}
+.custom-card:hover .author{
+    opacity: 1;
+}
+.img-card{
+    position: relative;
+    border-radius: 6px;
+}
+.overlay{
+    position: absolute;
+    top: -15px;
+    right: -16px;
+    bottom: 17px;
+    left: -15px;
+    opacity: 0;
+    transition: all 0.5s ease;
+    background-color: $overlay-color !important;
+    border-radius: 6px 6px 0 0;
+}
+.sec-pad{
+    padding: 60px 0;
+}
+.author{
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    top: 5%;
+    left: 5%;
+}
+.title{
+    padding: 0 12px 0 0;
+}
+.post-content{
+    font-size: 16px;
+    line-height: 1.6;
+}
+.custom-flex{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+// popular event end
+
+
+// banner section start
+
+.banner-section{
+    background-image: url('/assets/images/04.jpg');
+    box-shadow: 0 5px 13px rgb(60 72 88 / 20%) !important;
+    border-radius: 10px !important;
+    min-height: 360px;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    margin: 0 15px 0 15px;
+}
+.bg-overlay{
+
+background-color: rgba(60,72,88,0.7);
+    position: absolute;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+// banner section end
+

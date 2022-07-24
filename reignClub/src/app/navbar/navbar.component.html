@@ -1,0 +1,73 @@
+<header  class="navbar-header">
+    <div fxLayoutAlign="space-around center" fxLayout="row">
+    <div>Logo</div>
+    <div fxShow fxHide.lg="false" fxHide.md="false" fxHide.sm="true" fxHide.xs="true" fxLayout="row" fxLayoutGap="25px" class="navbar-list">
+        <a class="active" routerLink="/">Hub</a>
+        <a routerLink="/">Whats On</a>
+        <a routerLink="/">About the web</a>
+        <a routerLink="/">contact us</a>
+        <a routerLink="/">Your Alias <span fxLayoutGap="10px"><i class="fa fa-lock"
+            aria-hidden="true"></i></span></a>
+        </div>
+    <div fxShow fxHide.lg="true" fxHide.md="true" fxHide.sm="false" fxHide.xs="false">
+        <div>
+            <span (click)="button('toggle')"><i class="fa fa-bars" aria-hidden="true"></i></span>
+        </div>
+    </div>
+</div>
+    <div fxLayout="column" *ngIf="mobilemenu=='toggle'">
+        <a class="active" routerLink="/">Hub</a>
+    <a routerLink="/">Whats On</a>
+    <a routerLink="/">About the web</a>
+    <a routerLink="/">contact us</a>
+    <a routerLink="/">Your Alias <span fxLayoutGap="10px"><i class="fa fa-lock"
+        aria-hidden="true"></i></span></a>
+    </div>
+</header>
+
+
+<router-outlet></router-outlet>
+
+<footer>
+    <section class="first-footer">
+        <div fxLayoutAlign="center center" fxLayout="column">
+            <h2 class="whaton">HOST YOUR EVENT AND TURN YOUR PASSION INTO BUSINESS</h2>
+            <h3>Get In Touch</h3>
+        </div>
+    </section>
+    <section class="second-footer">
+        <div fxLayoutAlign="space-around center" fxLayout="row" fxLayout fxLayout.xs="column"   fxLayoutGap.xs="0">
+        <div>
+            <img src="assets/images/logo.jpg" width="100%">
+        </div>
+        <div>
+           <div fxLayout="column" class="links">
+               <a>Hub</a>
+               <a>What on</a>
+               <a>About the Mob</a>
+           </div>
+        </div>
+        <div>
+            <div fxLayout="column" class="links">
+                <a>Blog</a>
+                <a>News</a>
+                <a>Sitemap</a>
+            </div>
+        </div>
+        <div>
+            <div fxLayout="column" class="links">
+                <a>Terms</a>
+                <a>Privacy Policy</a>
+                <a>Help</a>
+            </div>
+        </div>
+        <div>
+            <div fxLayout="row" class="links">
+                <a>Hub</a>
+                <a>Hub</a>
+                <a>Hub</a>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>

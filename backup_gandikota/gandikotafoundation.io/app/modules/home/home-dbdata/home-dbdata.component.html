@@ -1,0 +1,60 @@
+<div class="row">
+        <div class="col-md-12">
+          <form [formGroup]='homecontentForm' (ngSubmit)="homecontentsubmit()">
+            <div>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Title</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="title">
+                <mat-error *ngIf="homecontentForm.get('title').hasError('required')">
+                  Please Enter title
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="outline">
+                <mat-label>Tages</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="tags">
+                <mat-error *ngIf="homecontentForm.get('tags').hasError('required')">
+                  Please Enter tag
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field appearance="outline">
+                  <mat-label>description</mat-label>
+                  <input matInput placeholder="Placeholder" formControlName="description">
+                  <mat-error *ngIf="homecontentForm.get('description').hasError('required')">
+                    Please Enter description
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div>
+                <mat-form-field appearance="outline">
+                  <mat-label>Button Label</mat-label>
+                  <input matInput placeholder="Placeholder" formControlName="button_label">
+                  <mat-error *ngIf="homecontentForm.get('button_label').hasError('required')">
+                    Please Enter Button Lable
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div>
+                <mat-form-field appearance="outline">
+                  <mat-label>Button Action</mat-label>
+                  <input matInput placeholder="Placeholder" formControlName="button_action">
+                  <mat-error *ngIf="homecontentForm.get('button_action').hasError('required')">
+                    Please Enter Button Action
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div>
+               
+                 <label>Images</label>
+                  <input  placeholder="Placeholder" #image (change)="fileSelected(image.files)"  type="file" accept="image/*">
+              
+              </div>
+            <div>
+              <button class="login-button btn" type="submit">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>

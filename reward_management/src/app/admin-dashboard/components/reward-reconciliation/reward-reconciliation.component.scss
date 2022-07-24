@@ -1,0 +1,67 @@
+@import "../../../../assets/variables/variables.scss";
+
+.reconciliation-container {
+    padding: 30px;
+    th,
+    td {
+        padding: 20px;
+    }
+
+    tr {
+        vertical-align: middle !important;
+        text-align: center !important;
+    }
+
+    td {
+        letter-spacing: 0.01em;
+        color: #000000;
+        font-weight: 300;
+        font-size: 12px;
+        line-height: 23px;
+    }
+    th {
+        font-size: 14px;
+        line-height: 23px;
+        letter-spacing: 0.02em;
+        color: #000000;
+    }
+    
+}
+
+.filter-amount {
+    background: #f8f8f8;
+    .border-end {
+        border-right: 1px solid #969696 !important;
+    }
+}
+
+.title-font {
+    font-size: 16px;
+}
+
+.table-height {
+    height: 500px;
+    overflow-y: scroll;
+  }
+
+  thead {
+    position:sticky;
+    top:0;
+  }
+
+  .html2canvas-container { width: 3000px !important; height: 3000px !important; }
+
+  .btn-primary {
+    background: #42a4ec !important;
+    border-radius: 5px;
+    font-size: 15px;
+    line-height: 23px;
+    letter-spacing: 0.02em;
+    color: #fcfcfc;
+    border: none;
+}
+
+.btn:focus {
+    outline: none !important;
+    box-shadow: none;
+}

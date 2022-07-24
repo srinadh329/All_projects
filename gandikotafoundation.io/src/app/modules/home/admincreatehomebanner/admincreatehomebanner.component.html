@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-md-12 d-flex align-items-center">
+    <span class="pointer" (click)="navigateBack()"><i class="fa fa-arrow-left" aria-hidden="true"></i></span>
+    <h1 class="mb-0 ml-2">Create Home Banner</h1>
+  </div>
+      <form [formGroup]='homecontentForm' (ngSubmit)="homecontentsubmit()" class="w-100">
+          <mat-form-field appearance="outline" class="w-100 col-md-6 col-sm-12 pt-3">
+            <mat-label>Title</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="title">
+            <mat-error *ngIf="homecontentForm.get('title').hasError('required')">
+              Please Enter title
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-100 col-md-6 col-sm-12 pt-3">
+            <mat-label>Tages</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="tags">
+            <mat-error *ngIf="homecontentForm.get('tags').hasError('required')">
+              Please Enter tag
+            </mat-error>
+          </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100 col-md-6 col-sm-12 pt-3">
+              <mat-label>description</mat-label>
+              <input matInput placeholder="Placeholder" formControlName="description">
+              <mat-error *ngIf="homecontentForm.get('description').hasError('required')">
+                Please Enter description
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100 col-md-6 col-sm-12 pt-3">
+              <mat-label>Button Label</mat-label>
+              <input matInput placeholder="Placeholder" formControlName="button_label">
+              <mat-error *ngIf="homecontentForm.get('button_label').hasError('required')">
+                Please Enter Button Lable
+              </mat-error>
+            </mat-form-field>
+            <div class="d-flex">
+            <mat-form-field appearance="outline" class="w-100 col-md-6 col-sm-12 pt-3">
+              <mat-label>Button Action</mat-label>
+              <input matInput placeholder="Placeholder" formControlName="button_action">
+              <mat-error *ngIf="homecontentForm.get('button_action').hasError('required')">
+                Please Enter Button Action
+              </mat-error>
+            </mat-form-field>
+          <div class="col-md-6 col-sm-12 pt-3">  
+             <div class="border-upload" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
+              <img *ngIf="homecontentForm?.value?.image" [src]="homecontentForm?.value?.image" width="8%" />
+              <input  placeholder="Placeholder" #image (change)="fileSelected(image.files)"  
+              type="file" accept="image/*" class="custom-control-input d-none" id="image">
+              <span class="list-browse"> Drag Your Images Here or</span>
+                    <span (click)="openimage();$event.stopPropagation()" class="blue pointer pl-2">Browse</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 text-center mt-4">
+          <button class="submit-button " type="submit">Create this Details</button>
+      </div>
+      </form>
+  </div>

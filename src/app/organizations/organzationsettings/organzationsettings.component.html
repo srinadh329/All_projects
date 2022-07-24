@@ -1,0 +1,149 @@
+
+  
+    <div *ngIf="settings == 'changepassword'">
+    <h6 class="p-2 font-color">Change Password</h6>
+    <div class="row m-3">
+      <div class="col-lg-5">
+        <form #orgChange="ngForm" class="formcss" (ngSubmit)="orgchangePassword(orgChange)">
+          <div class="form-group position-relative">
+              <mat-icon class="pwdshow" (click)="hides = !hides">{{hides ? 'visibility' : 'visibility_off'}}
+              </mat-icon>
+              <!-- <i class="fas fa-check color-green font-12 pwdshow" *ngIf="(current.valid && ((current.touched || current.dirty) || orgChange.submitted) && !current.errors?.required)"></i> -->
+              <img class="faicons" height="25px" src="assets/images/lock.svg" width="14px">
+              <input class="form-control" type="password" placeholder="Enter Current Password" ngModel
+                
+                #current="ngModel" name="oldpassword" [ngModelOptions]="{ updateOn: 'change' }" required
+                [type]="hides ? 'text' : 'password'" (keyup)="password(current)">
+        <small *ngIf="current.invalid && ((current.touched || current.dirty) || orgChange.submitted) && current.errors?.required" class="text-danger">Enter current Password</small>
+        <small *ngIf="changepass" class="text-danger pl-3">{{alert}} </small>
+        <!-- <small *ngIf="current.errors?.pattern" class="text-danger ">Password must be 1 uppercase,
+          1 lowercase, 1 digit and 1 special character with range 8 to 15</small> -->
+      </div>
+      
+      <div class="form-group position-relative">
+          <mat-icon class="pwdshow" (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}
+          </mat-icon>
+          <!-- <i class="fas fa-check color-green font-12 pwdshow" *ngIf="(newpwd.valid && ((newpwd.touched || newpwd.dirty) || orgChange.submitted) && !newpwd.errors?.required)"></i> -->
+          <img class="faicons" height="25px" src="assets/images/lock.svg" width="14px">
+  
+          <input class="form-control" type="password" placeholder="Enter New Password" ngModel
+        
+            #newpwd="ngModel" name="newpassword" [ngModelOptions]="{ updateOn: 'change' }" required
+            [type]="hide ? 'text' : 'password'">
+            <small *ngIf="newpwd.invalid && ((newpwd.touched || newpwd.dirty) || orgChange.submitted) && newpwd.errors?.required" class="text-danger">Enter New Password</small>
+            <!-- <small *ngIf="newpwd.errors?.pattern" class="text-danger ">Password must be 1 uppercase,
+              1 lowercase, 1 digit and 1 special character with range 8 to 15</small> -->
+          </div>
+      
+        
+        <div class="form-group position-relative">
+          <mat-icon class="pwdshow" (click)="hide1 = !hide1">{{hide1 ? 'visibility' : 'visibility_off'}}
+          </mat-icon>
+          <!-- <i class="fas fa-check color-green font-12 pwdshow" *ngIf="(cpwd.valid && ((cpwd.touched || cpwd.dirty) || orgChange.submitted) && !cpwd.errors?.required && (orgChange.value.newpassword == orgChange.value.confirmpassword)) "></i> -->
+          <img class="faicons" height="25px" src="assets/images/lock.svg" width="14px">
+  
+          <input class="form-control" type="password" ngModel name="confirmpassword" #cpwd="ngModel"
+            [type]="hide1 ? 'text' : 'password'" placeholder="Confirm Password" required>
+      
+            <div>
+              <small class="text-danger pl-3"
+                *ngIf="!(orgChange.value.newpassword == orgChange.value.confirmpassword) && cpwd.dirty && cpwd.touched ">Password
+                Mismatch</small>
+               <small *ngIf="cpwd.invalid && ((cpwd.touched || cpwd.dirty) || orgChange.submitted) && cpwd.errors?.required" class="text-danger">Please enter confirm
+                  password</small>
+              </div>
+            </div>
+            <input name="id" [(ngModel)]="Userid" hidden>
+            <!-- <div>
+              <small>Password must contain:</small>
+              <div>
+                <span><i class="fas fa-check color-green font-12"></i></span>
+                <span class="font-12 ml-2">Atleast 8 characters</span>
+                  </div>
+                  <div>
+                    <span><i class="fas fa-check color-green font-12"></i></span>
+                    <span class="font-12 ml-2">Atleast one Uppercase letters</span>
+            
+                  </div>
+                  <div>
+                    <span><i class="fas fa-check color-green font-12"></i></span>
+                    <span class="font-12 ml-2">Atleast one Lowercase letters</span>
+                  
+                  </div>
+                  <div>
+                    <span><i class="fas fa-check color-green font-12"></i></span>
+                    <span class="font-12 ml-2">Atleast one number (0-9)</span>
+                  </div>
+            </div> -->
+          <button type="submit" class="btn btn-invite mt-3">Change Password</button>
+      </form>
+      </div>
+    </div>
+  </div> 
+    <div *ngIf="settings == 'Organisation'">
+      <h2 class="text-center">Organization Profile</h2>
+     
+    <form  #ref="ngForm"  (ngSubmit)="createProfile(ref)">
+      <div class="form-group form">
+        <label for="profile">Organization Name:</label>
+        <input type="text" name="orgname" autocomplete="off" class="form-control" #orgname="ngModel" id="profile" ngModel required>
+        <small *ngIf="orgname.invalid && ((orgname.touched || orgname.dirty) || ref.submitted) && orgname.errors?.required" class="text-danger">Name is required</small>
+    </div>
+    <button type="submit" class="btn btn-success button" >Create</button> 
+    </form>
+    <h3 class="text-center text-secondary" style="margin-top: 10px; margin-bottom: 5px;">Organization Logo:</h3>
+    <!-- <div class="profpic">
+      <div *ngIf="(imagePreview && !imagedata) || profileresponse == null">
+      <img src={{imagePreview}} width="100%" height="100%" class="rounded-circle">
+      </div>
+      <img src="{{organiztionDetails?.photo.path}}" *ngIf="organiztionDetails?.photo"  width="100%" height="100%" class="rounded-circle"> -->
+   
+      <div *ngIf="(imagePreview)" >
+        <img class="rounded-circle" width="100%" height="100%" class="profpic"[src]="imagePreview">
+        <span style="cursor: pointer;" (click)="closePreview()">close</span>
+          </div>
+            <div class="profpic" *ngIf="organiztionDetails?.photo && imagePreview==null && profileresponse==null">
+            <img src="{{organiztionDetails?.photo.path}}" alt="User pic"width="100%" height="100%" >
+  
+    </div>
+    <div class="profpic" *ngIf="profileresponse">
+         <img src="{{profileresponse?.path}}" alt="User pic"width="100%" height="100%" >
+  
+  </div>
+  <div class="profpic" *ngIf="!organiztionDetails?.photo && imagePreview==null && profileresponse==null ">
+    <img src="assets/images/profilepic.jpeg" class="rounded-circle" width="100px" height="100px" class="image-preview">
+
+</div>
+    <button class="btn btn-primary button"  (click)="selectedimg ? profileresponse || closeImagePreview ? profile.click() : dataclick() : profile.click()">{{selectedimg ? profileresponse || closeImagePreview ? 'Select Logo' : 'Upload' : 'Select Logo'}}</button>
+  
+  
+  
+    <!-- </div> -->
+    <input type="file" accept=".png, .jpeg , .jpg" hidden placeholder="Photo"
+    (change)="orgProfile($event)" #profile/>
+  
+      <form class="example-form" #sendemail="ngForm" (ngSubmit)="SendInvite(EmailList1)">
+        <label>Send Email:</label>
+      <mat-form-field style="width:100%;"  class="example-full-width">
+        <mat-chip-list #chipList aria-label="UserEmailInvite">
+          <mat-chip *ngFor="let email of EmailList1" [selectable]="selectable" [removable]="removable"
+            (removed)="remove1(email)">
+            {{email}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          
+          <input placeholder="Enter Email ID. Press Enter to add a new Email Address" [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"   [matChipInputAddOnBlur]="addOnBlur" name="emaillist" required #email="ngModel" ngModel
+            (matChipInputTokenEnd)="add($event)" (click)="reseterror($event)"  appearance="fill">
+            
+        </mat-chip-list>
+      </mat-form-field>
+      <small *ngIf="email.invalid && ((email.touched || email.dirty) || sendemail.submitted) && email.errors?.required" class="text-danger">Enter EmailId</small>
+  
+           <button type="submit" class="btn btn-secondary button">Send Email</button>
+    </form>
+      <div *ngIf="emailerror1" class="text-danger">{{emailerror1}} </div>
+  
+    </div>
+   
+  

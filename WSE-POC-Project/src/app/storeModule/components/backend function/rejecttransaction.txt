@@ -1,0 +1,64 @@
+-- FUNCTION: store.reject_transaction(numeric, character varying, numeric, character varying, character varying, character varying)
+
+-- DROP FUNCTION store.reject_transaction(numeric, character varying, numeric, character varying, character varying, character varying);
+
+CREATE OR REPLACE FUNCTION store.reject_transaction(
+	branchid numeric,
+	authorizeduser character varying,
+	applicationnumber numeric,
+	updateddate character varying,
+	updatedtime character varying,
+	authstatus character varying)
+    RETURNS character varying
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+AS $BODY$
+           begin
+				if exists(select appno from store.prdtxn where appno = applicationnumber
+						  and brnid = branchid
+						  and (status = 'C' OR status = 'R' ))then
+						  
+						  if(authstatus = 'R') then	  
+					         -- verify whelther this user have rights to authorize or not	  
+				             if exists(select a.loginid,a.usrole,a.brnid,b.roltyp
+									   from admin.usrmas a inner join admin.roles b
+									   on a.usrole = b.roleid where b.roltyp = 'SUPERVISOR'
+									   and a.brnid = branchid and a.loginid = authorizeduser) then
+
+					                   update store.prdtxn set moddat=updateddate,
+								       modtim = updatedtime,status=authstatus,
+								       modusr=authorizeduser where appno=applicationnumber;
+						   
+						               return '1st level Rejection completed waiting for 2nd level Authorization...';	   
+					 
+                                  else raise exception 'Invalid User to Authorize';
+				  
+				                end if;
+							 end if;
+							
+						if(authstatus = 'S') then
+				           if exists(select a.loginid,a.usrole,a.brnid,b.roltyp
+							         from admin.usrmas a inner join admin.roles b
+							         on a.usrole = b.roleid where b.roltyp = 'CASHIER'
+							         and a.brnid = branchid and a.loginid = authorizeduser)then
+							   
+							         update store.prdtxn set moddat=updateddate,
+							         modtim = updatedtime,status=authstatus,
+							         modusr=authorizeduser where appno=applicationnumber;
+							   
+							         return 'IInd Level Rejection is completed';
+						         else raise exception 'Invalid USer to Authorize this Transaction';
+					        end if;
+					      else raise exception 'Invalid Transaction Number';
+					     end if;
+						 
+				  
+			       else raise exception 'Invalid Transaction Number';
+			     end if;		  					
+		   end
+  $BODY$;
+
+ALTER FUNCTION store.reject_transaction(numeric, character varying, numeric, character varying, character varying, character varying)
+    OWNER TO postgres;

@@ -1,0 +1,66 @@
+<!-- <table class="table table-bordered">
+    <thead>
+        <th>Blog Type</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>From_Date</th>
+        <th>To_Date</th>
+    </thead>
+    <tr *ngFor="let Blogs of UserBlogs">
+        <td>{{Blogs.BlogType}}</td>
+        <td>{{Blogs.title}}</td>
+        <td>{{Blogs.description}}</td>
+        <td>{{Blogs.status}}</td>
+        <td>{{Blogs.from_date}}</td>
+        <td>{{Blogs.to_date}}</td>
+    </tr>
+</table> -->
+
+
+<div class="row m-0">
+    <div class="col-lg-12 mt-3">
+      <h6>Blogs List</h6>
+      <div [ngStyle]="{'max-height.px': divheight}" class="tablestyle mt-3">
+        <table  class="table table-striped emp-table poppins-font text-left"  >
+          <thead>
+            <tr>
+                <th>Blog Type</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>From_Date</th>
+                <th>To_Date</th>
+                <th>Action</th>
+            </tr>
+          </thead>
+          <tbody class="font-color font-14 fw-500" >
+           
+              <tr *ngFor="let Blogs of UserBlogs">
+             
+                <td>{{Blogs.BlogType}}</td>
+        <td>{{Blogs.title}}</td>
+        <td>{{Blogs.description}}</td>
+        <td>{{Blogs.status}}</td>
+        <td>{{Blogs.from_date}}</td>
+        <td>{{Blogs.to_date}}</td>
+        
+             <td><button class="btn btn-invite" (click)="blogData(Blogs._id)">Manage</button></td>
+            </tr>
+        
+        
+          </tbody>
+        </table>
+      </div>
+  
+    </div>
+  
+  </div>
+  <ng-template #showBlog>
+    <div *ngFor="let blog of UserBlogs">
+    <div *ngIf="selectedBlog == blog._id">
+      <h4 class="text-center font-color">{{blog?.title}}</h4>
+      <p class=" blog" [innerHtml]='blog.content | safeHtml'></p>
+    </div>
+    </div>
+    </ng-template>

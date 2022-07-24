@@ -1,0 +1,29 @@
+<div class="section-start">
+
+    <div class="title justify-content-between">
+        <div>
+            <h4 class="h4 heading-title">
+                <span class="ml-2"> Contact Requests ({{_totalPage}})</span>
+            </h4>
+            <hr>
+        </div>
+    </div>
+    <div class="filters fliter-modify">
+
+        <div class="d-flex justify-content-between">
+            <div class="search-wrapper">
+                <form class="search d-flex justify-content-between">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Search</mat-label>
+                        <input matInput type="text">
+                        <mat-icon matSuffix>search</mat-icon>
+                    </mat-form-field>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <app-customtable [homeTable]="contactRequestList" (rowselected)="edit($event)" (rowsdeleted)="delete($event)" *ngIf="contactRequestList?.length">
+    </app-customtable>
+</div>

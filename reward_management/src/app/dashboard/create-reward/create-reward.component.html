@@ -1,0 +1,259 @@
+<app-sidebar></app-sidebar>
+
+<div class="main">
+    <app-header></app-header>
+    <div class="body">
+        <ng-container *ngIf="!isRewardGenerated">
+            <div class="row mb-4">
+                <div class="col-lg-12 ">
+                    <app-load-cash [showRewards]="true"></app-load-cash>
+                </div>
+            </div>
+            <div class="row">
+                <!-- <div class="col-lg-1">
+                    <img src="assets/create-reward.png" class="create-promo-code">
+                </div> -->
+                <div class="col-lg-12">
+                    <div>
+                        <div class="d-flex justify-content-between">
+                        <h3 class="welcome">CREATE A REWARD FOR RESIDENT</h3> 
+                        <!-- <a style="color: black;" [routerLink]="['/rewards']">Recently Created Rewards</a> -->
+                    </div>
+                        <p class="reward-text">Enter the residents details to generate a promo code for redemption. The code will be emailed to
+                            the
+                            resident.</p>
+                    </div>
+                    <form [formGroup]="rewardForm">
+                        <div class="row mt-4">
+                            <div class="col-lg-4 mt-2">
+                                <div class="form-group mt-4">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" placeholder="Enter resident’s first name" formControlName="firstName"
+                                        class="form-control mt-3" id="firstName">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 mt-2">
+                                <div class="form-group mt-4">
+                                    <label for="lastName">Last Name</label>
+                                    <input type="text" placeholder="Enter resident’s last name" formControlName="lastName"
+                                        class="form-control  mt-3" id="lastName">
+                                </div>
+                            </div>
+                            <!-- <div class="col-lg-4 mt-2">
+                                <div class="form-group mt-4">
+                                    <label for="resident">Resident ID</label>
+                                    <input type="text" placeholder="Enter Company Name" formControlName="residentId"
+                                        class="form-control  mt-3" id="resident">
+                                </div>
+                            </div> -->
+                            <div class="col-lg-4 mt-2">
+                                <div class="form-group mt-4">
+                                    <label for="mobile">Phone Number</label>
+                                    <input type="text" placeholder="Enter Phone Number" formControlName="mobileNo"
+                                        class="form-control  mt-3" id="mobile">
+                                    <div class="err-msg" *ngIf="formControl['mobileNo']?.touched && formControl['mobileNo']?.errors?.pattern">
+                                        Enter 10 digit Mobile Number.
+                                    </div>
+                                </div>
+                            </div>
+                    
+                            <!-- <div class="col-lg-4 mt-2">
+                                <div class="form-group mt-4">
+                                    <label for="resident">Building Name</label>
+                                    <input type="text" formControlName="buildingName" class="form-control  mt-3"
+                                        [value]="buildingDetails['name']">
+                                </div>
+                            </div> -->
+                    
+                            <div class="col-lg-4 mt-2">
+                                <div class="form-group mt-4">
+                                    <label for="reward" class="mb-2">Reward Amount</label>
+                                    <input type="number" placeholder="$" formControlName="rewardAmount" class="form-control  mt-3"
+                                        id="reward">
+                                    <div class="err-msg" *ngIf="formControl['rewardAmount']?.touched && formControl['rewardAmount']?.errors?.positiveNumber">
+                                        Enter valid reward amount
+                                    </div>
+                                    <div class="err-msg" *ngIf="formControl['rewardAmount']?.errors?.maxNumber">
+                                        *Please enter reward value lesser than the available balance
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 mt-2">
+                                <div class="form-group mt-4">
+                                    <label for="email" class="mb-2">Email ID</label>
+                                    <input type="text" placeholder="Enter the residents email" formControlName="email"
+                                        class="form-control  mt-3" id="email">
+                                    <div *ngIf="formControl['email']?.touched && formControl['email']?.errors?.email">
+                                        Enter Valid Email.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 mt-2">
+                                <div class="row">
+                                   
+                                    <!-- <div class="col-6">
+                                        <form formGroupName="dateField">
+                                        <div class="form-group mt-4 position-relative">
+                                            <label for="start" class=" mb-4">Start Date</label>
+                                            <input type="text" formControlName="startDate" class="datepicker_input form-control" ngbDatepicker
+                                                 #start="ngbDatepicker" />
+                                            <i class="fas fa-calendar-alt pointer calender" aria-hidden="true" (click)="start.toggle()"></i>
+                                        </div>
+                                        </form>
+                                    </div> -->
+                                    <div class="col-8">
+                                        <form formGroupName="dateField">
+                                        <div class="form-group mt-4 position-relative">
+
+                                            <label for="start" class="mb-4">Expiry Date</label>
+                                            <input type="text" formControlName="endDate" placeholder="yyyy-mm-dd" [minDate]="minDate" class="datepicker_input form-control" ngbDatepicker
+                                                 #end="ngbDatepicker" />
+                                            <i class="fas fa-calendar-alt pointer calender" aria-hidden="true" (click)="end.toggle()"></i>
+                                            
+                                        </div>
+                                        </form>
+                                        <div class="err-msg" *ngIf="rewardForm.get('dateField')?.get('endDate')?.touched && rewardForm.get('dateField')?.get('endDate')?.errors?.required">
+                                            Expiry date is required
+                                        </div>
+                                        <div class="err-msg" *ngIf="formControl['dateField']?.errors?.incorrectData">
+                                            Expiry date should be greater than start date
+                                        </div>
+                                    </div>
+                
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4 ">
+                            <div class="col-7 text-left">
+                                <button type="button" (click)="generateReward()" class="btn btn-primary"
+                                    [disabled]="!rewardForm.valid">GENERATE
+                                    REWARD (${{accountBalance ? accountBalance : '0'}} BALANCE)</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </ng-container>
+
+        <div class="p-5" *ngIf="isRewardGenerated">
+            <div class="row ">
+                <div class="col-lg-12">
+                    <h2 >THE REWARD WAS GENERATED!</h2>
+                    <p class="reward-text mt-4">The reward for resident <b>{{rewardPromoData?.firstName}} {{rewardPromoData?.lastName}}</b> staying at <b>{{buildingDetails['name']}}</b> has been created!</p>
+                    <p class="reward-text ">An email with the following reward amount has been sent to resident's inbox:</p>
+                </div>
+                <div class="promo-badge text-center mt-4">
+                    {{rewardPromoData?.rewardId}}
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-lg-12">
+                    <section>
+                        <div class="row align-items-baseline">
+                            <div class="col-6">
+                                <h2>Date Generated: <span class="reward-text">{{generatedDate | date:'longDate'}}</span></h2>
+                            </div>
+                            <div class="col-6">
+                                <h2 class="mt-3">Building Name: <span class="reward-text">{{buildingDetails['name']}}</span></h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <h2 class="mt-3">Reward Amount Issued Now: <span class="reward-text">${{lastGivenReward}}</span></h2>
+                            </div>
+                            <div class="col-6">
+                                <h2 class="mt-3">Total Reward Amount Issued: <span class="reward-text">${{rewardPromoData?.rewardAmount}}</span></h2>
+                            </div>
+                            <!-- <div class="col-6">
+                                <h2 class="mt-3">Resident Name:  <span class="reward-text">{{rewardPromoData?.firstName}} {{rewardPromoData?.lastName}}</span></h2>
+                            </div> -->
+                        </div>
+                        <div class="row">
+                            <!-- <div class="col-6">
+                                <h2 class="mt-3">Resident ID:  <span class="reward-text">{{rewardPromoData?.residentId}}</span></h2>
+                            </div> -->
+                            <div class="col-6">
+                                <h2 class="mt-3">Resident Name:  <span class="reward-text">{{rewardPromoData?.firstName}} {{rewardPromoData?.lastName}}</span></h2>
+                            </div>
+                            <div class="col-6">
+                                <h2 class="mt-3">Email: <span class="reward-text">{{rewardPromoData?.email}}</span></h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <h2 class="mt-3">Phone Number:  <span class="reward-text">{{rewardForm.get('mobileNo')?.value}}</span></h2>
+                            </div>
+                            <div class="col-6">
+                                <h2 class="mt-3">Expiry Date: <span class="reward-text">{{getExpiryDate(rewardForm.get('dateField')?.get('endDate')?.value) | date:'fullDate'}}</span></h2>
+                            </div>
+                        </div>
+                        <!-- <h2>Date Generated: <span class="reward-text">{{rewardPromoData?.updatedDatetime | date:'fullDate'}}</span></h2>
+                        <h2 class="mt-3">Resident ID:  <span class="reward-text">{{rewardPromoData?.residentId}}</span></h2>
+                        <h2 class="mt-3">Resident Name:  <span class="reward-text">{{rewardPromoData?.firstName}} {{rewardPromoData?.lastName}}</span></h2>
+                        <h2 class="mt-3">Building Name: <span class="reward-text">{{buildingDetails['name']}}</span></h2>
+                        <h2 class="mt-3">Email: <span class="reward-text">{{rewardPromoData?.email}}</span></h2>
+                        <h2 class="mt-3">Total Reward Amount: <span class="reward-text">${{rewardPromoData?.rewardAmount}}</span></h2> -->
+                    </section>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <button class="btn btn-success" (click)="finishRewardCreation()">
+                    FINISH
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<button type="button" #createExistingReward class="btn btn-primary" [hidden]="true" data-bs-toggle="modal" data-bs-target="#createExisting">
+    Create Reward
+  </button>
+
+  <div class="modal fade" id="createExisting" tabindex="-1" aria-labelledby="createExistingLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content p-4">
+            <div class="modal-header border-0">
+        
+            </div>
+            <div class="modal-body text-center">
+                <h5 class=" pb-2">This resident has previously been generated rewards:</h5>
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <p class="m-0 " class="reward-history">$300 on June 5th 2021  (06/05/2021)</p>
+                        <p class="m-0 " class="reward-history">$300 on June 5th 2021  (06/05/2021)</p>
+                        <p class="m-0 " class="reward-history">$300 on June 5th 2021  (06/05/2021)</p>
+                    </div>
+                </div>
+                <h5 class="mt-5 mb-2">Would you like to continue generating a reward?</h5>
+            </div>
+            <div class="modal-footer border-0 d-flex justify-content-center" style="flex-flow: row !important;">
+                <button type="button" class="btn  btn-primary btn-generate" >GENERATE</button>
+                <button type="button" class="btn  btn-dark btn-generate" data-bs-dismiss="modal">CANCEL</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deletedReward1" tabindex="-1" aria-labelledby="deletedReward1dLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content p-4 header-style">
+            <div class="modal-header border-0">
+                <button  type="button" data-bs-dismiss="modal" aria-label="Close" class="btn-close"></button>
+            </div>
+                <div class="modal-body text-center pt-0 pb-4 mt-0">
+                    <p class="mt-2 m-0 p-0">This user is registered with another CA Property</p>
+                   
+                </div>
+                <div class="modal-footer justify-content-center border-0">
+                    <button type="button" class="btn btn-shopping"  data-bs-dismiss="modal">CLOSE</button>
+                </div>
+        </div>
+    </div>
+  </div>
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-atom">
+    <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>

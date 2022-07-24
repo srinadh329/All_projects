@@ -1,0 +1,61 @@
+<app-header></app-header>
+<form [formGroup]='myform'>
+    <label>Name`:</label>
+    <div>
+        <mat-form-field appearance="outline" class="custom-mat-form">
+            <input matInput placeholder="Enter Emaial ID" formControlName="name">
+            <mat-error *ngIf="myform.get('name').hasError('required')">
+                Please Enter Name
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <label>Email:</label>
+    <div>
+        <mat-form-field appearance="outline" class="custom-mat-form">
+            <input matInput placeholder="Enter Password" formControlName="email">
+            <mat-error *ngIf="myform.get('email').hasError('required')">
+                Please Enter email
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <label>Phone:</label>
+    <div>
+        <mat-form-field appearance="outline" class="custom-mat-form">
+            <input matInput placeholder="Enter Password" formControlName="phone">
+            <mat-error *ngIf="myform.get('phone').hasError('required')">
+                Please Enter Phone Number
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <label>Address:</label>
+    <div>
+        <mat-form-field appearance="outline" class="custom-mat-form">
+            <input matInput placeholder="Enter Address" formControlName="address">
+            <mat-error *ngIf="myform.get('address').hasError('required')">
+                Please Enter Address
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div>
+        <button class="login-button btn" type="submit" (click)="datasubmit()">Submit</button>
+    </div>
+</form>
+
+
+
+<table *ngIf='userdata.length>0'>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Address</th>
+    </tr>
+    <tr *ngFor='let user of userdata'>
+      <td>{{user.name}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.phone}}</td>
+      <td>{{user.address}}</td>
+    </tr>
+  </table>
+
+ <app-footer></app-footer>

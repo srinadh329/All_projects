@@ -1,0 +1,96 @@
+.nav-menu {
+  background: #ffffff;
+  position:fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1001;
+  font-size: 18px;
+    padding-top: 16px;
+    padding-bottom: 0px;
+    box-shadow: 0px 4px 50px 0px rgba(150, 170, 187, 0.2);
+
+  
+
+   }
+   
+  .nav-menu.sticky-top {
+    -webkit-box-shadow: 0px 4px 50px 0px rgba(150, 170, 187, 0.2);
+    box-shadow: 0px 4px 50px 0px rgba(150, 170, 187, 0.2);
+    position: fixed;
+    -webkit-animation: menuSlideDown 0.3s ease;
+    animation: menuSlideDown 0.3s ease; 
+    background: #fff;
+     
+}
+
+
+  .dark-theme .nav-menu {
+    background: /*#2a2e2f*/#00000024;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+
+   /* border-bottom: 1px solid #383e40;*/ }
+
+.navbar {
+  padding: 0rem 1rem; }
+
+.navbar-nav {
+  margin-left: auto; }
+
+.navbar-light .navbar-nav .nav-link {
+  color: #0095d7;
+padding: 0;}
+  .dark-theme .navbar-light .navbar-nav .nav-link {
+    color: #ffffff; }
+
+.navbar-light .navbar-nav .active > .nav-link{
+/*
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .nav-link.open,
+.navbar-light .navbar-nav .open > .nav-link 
+*/
+/*color: #0095d7;
+    border-bottom: 2px solid #0095d7; */
+color: #F47735;
+    border-bottom: 2px solid #F47735;
+
+  }
+
+.nav-item {
+  padding: 0 0 0 32px; }
+  @media (max-width: 992px) {
+    .nav-item {
+      padding: 18px 0 0px 0; } }
+
+.navbar-light .navbar-toggler {
+  cursor: pointer; }
+
+.navbar-light .navbar-nav .nav-link:focus,
+.navbar-light .navbar-nav .nav-link:hover {
+  color: #F47735!important;
+  transition: 0.2s; }
+
+/*.nav-link.color{
+    color:#0095d7 !important;
+    
+}*/
+.nav-link.color .active {
+    border:2px solid #0095d7 !important;
+    
+}
+.alignpara{
+	text-align: justify!important;
+}
+.navbar-light .navbar-nav .active > .nav-link.change
+/*.navbar-light .navbar-nav .nav-link.active,*/
+/*.navbar-light .navbar-nav .nav-link.open,*/
+/*.navbar-light .navbar-nav .open > .nav-link*/ {
+/* color: #fff;*/
+border-bottom: 2px solid #0095d7; }
+/*navbar end*/
+
+
+
+
+

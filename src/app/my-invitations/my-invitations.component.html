@@ -1,0 +1,43 @@
+<app-navbar></app-navbar>
+<mat-tab-group mat-align-tabs="center" mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
+    <mat-tab label="Sent">
+
+        <table class="table table table-hover">
+            <thead>
+                <th>To</th>
+                <th>Status</th>
+            </thead>
+            <ng-container *ngFor="let sent of sentInvitations">
+                <tr *ngIf="emailid == sent.from">
+                    <td>{{sent.to}}</td>
+                    <td>{{sent.invitationStatus}}</td>
+                </tr>
+            </ng-container>
+        </table>
+    </mat-tab>
+   
+    <mat-tab label="Received">
+        <table class="table table table-hover">
+            <thead>
+                <th>From</th>
+                <th>Action</th>
+            </thead>
+            <ng-container *ngFor="let receive of sentInvitations">
+                <tr *ngIf="emailid == receive.to">
+                    <td>{{receive.from}}</td>
+                    <td *ngIf ="receive.invitationStatus=='Pending'" >
+                        <button class="btn btn-success" (click)="update(receive,'Accepted')">Accept</button>
+                        <button class="btn btn-danger" (click)="update(receive,'Rejected')">Reject</button>
+                    </td>
+                    <p *ngIf ="(receive.invitationStatus=='Accepted' || receive.invitationStatus=='Rejected')">{{receive.invitationStatus}}</p>
+
+                 </tr>
+                        </ng-container>
+         
+        </table>
+
+    </mat-tab>
+
+   
+
+</mat-tab-group>

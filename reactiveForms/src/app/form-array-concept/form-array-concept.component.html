@@ -1,0 +1,41 @@
+
+<form [formGroup]="nameArrayForm">
+    <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Name" formControlName="name" />
+          <mat-error *ngIf="nameArrayForm.get('name').hasError('required')">Please Enter Name</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Age</mat-label>
+          <input matInput placeholder="Name" formControlName="age" />
+          <mat-error *ngIf="nameArrayForm.get('age').hasError('required')">Please Enter Name</mat-error>
+        </mat-form-field>
+      </p>
+      <div>
+        <p>
+            <a (click)="friendAdd()">
+                <mat-icon>add</mat-icon> Add
+            </a>
+            
+        </p>
+    </div>
+      <div formArrayName="friend">
+        <div *ngFor="let friends of friend.controls; let i=index" formGroupName={{i}}>
+            <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>Name</mat-label>
+                  <input matInput placeholder="Name"  />
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>Name</mat-label>
+                  <input matInput placeholder="Name" />
+                </mat-form-field>
+              </p>
+        </div>
+      </div>
+</form>

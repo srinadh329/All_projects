@@ -1,0 +1,62 @@
+<section class="login-section">
+  <div class="container">
+    <div class="row section-row">
+      <div class="col-lg-6 col-md-6 d-none d-sm-none d-lg-block d-md-block">
+        <div class="login-background">
+          <div>
+            <h6><i>Welcome to</i></h6>
+            <h3 class="pt-2">Black Cactus Global</h3>
+            <div class="line"></div>
+            <p class="pt-3">Login to Access Your Account</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <div class="form-padding">
+          <div class="text-center">
+            <img src="././assets/images/login-logo.png" width="250px">
+          </div>
+          <div class="pt-5">
+            <h6 class="text-center">Sign In</h6>
+          </div>
+          <form [formGroup]="loginForm" (ngSubmit)="login();">
+            <div>
+              <mat-form-field appearance="fill" class="custom-fill w-100">
+                <input matInput placeholder="Please Enter ID" formControlName="usrid" autocomplete="off">
+                <mat-icon matPrefix>perm_identity</mat-icon>
+                <mat-error *ngIf="loginForm.get('usrid').hasError('required')">
+                  Please Enter Id
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="fill" class="custom-fill w-100">
+                <input matInput placeholder="Please Enter Password" type="password" formControlName="password" [type]="hide ? 'password'  : 'text'">
+                <mat-icon matPrefix> lock</mat-icon>
+                <mat-icon mat-icon-button matSuffix (click)="hide = !hide"  [attr.aria-pressed]="hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                <mat-error *ngIf="loginForm.get('password').hasError('required')">
+                  Please Enter Password
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="check-forget-box d-flex mt-3">
+              <div class="checkbox w-50">
+                <!-- <mat-checkbox class="custom-check">Remember Me</mat-checkbox> -->
+              </div>
+              <!-- <div class="w-50 text-right"><i>Forgot password ?</i></div> -->
+            </div>
+            <div class="text-center pt-4">
+              <button class="login-button" type="submit">Sign In</button>
+            </div>
+          </form>
+
+          <div class="text-center pt-5">
+            <p><span>Powered By </span><img src="././assets/images/bcgt-logo.svg" height="50px" class="pl-3"></p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

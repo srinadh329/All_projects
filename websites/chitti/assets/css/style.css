@@ -1,0 +1,270 @@
+body {
+    background: url(../images/background_image.png) repeat-x center top #fff !important;
+    color: #222;
+}
+
+/*navbar css start*/
+.top-header {
+    background: #fff;
+    padding: 15px 0px;
+    border-top: 3px double #AE1300;
+    border-bottom: 3px double #AE1300;
+}
+
+.header-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.navbar-list {
+    list-style: none;
+    margin: 0;
+    border-radius: 2px;
+    box-shadow: 0 0 2px #333;
+    color: #333;
+    padding: 6px 16px 6px 16px;
+}
+
+.navbar-list li {
+    padding: 2px 0 2px 0;
+}
+
+.navbar-list li a i {
+       font-size: 14px;
+    color: #ffffff;
+    padding: 0 6px 0 0px;
+}
+
+.navbar-list li a i:hover {
+    color: #ff6a07;
+}
+.payment-list a{
+    background-color: red;
+    /* display: flex; */
+    /* flex-direction: row; */
+    color: #fff;
+    border-radius: 4px;
+    padding: 3px;
+    padding: 1px 8px 2px 8px;
+    font-size: 13px;
+    /* vertical-align: middle; */
+    text-decoration: none;
+}
+.payment-list a:hover{
+    background-color: #104D83;
+}
+.issn-online {
+    font-weight: 500;
+    font-size: 14px;
+    text-align: left;
+}
+
+.custom-links {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.custom-links li a {
+    color: #fff;
+    font-size: 14px;
+    font-family: Arial, Tahoma, Verdana;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+
+.second-navbar {
+    background-color: #AE1300;
+}
+
+.dropdown:hover>.dropdown-menu {
+    display: block;
+}
+
+.custom-toggle::after {
+    content: '\f101';
+    font-family: 'FontAwesome';
+}
+
+.custom-dropdown {
+    color: #fff;
+    background-color: rgba(47, 56, 61, 0.9);
+}
+
+.custom-dropdown .dropdown-item:hover {
+    color: #fff;
+    background: #8EC641;
+}
+
+/*navbar css end*/
+
+
+
+.title {
+    color: #fff;
+    background: #AE1300;
+    font-size: 20px;
+    line-height: 36px;
+    font-family: 'Roboto Condensed', sans-serif;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 0 0 0 16px;
+}
+
+.section-color1 {
+    background-color: #fff;
+}
+
+.section-color {
+    background-color: #fff;
+    padding: 0 0 0 16px;
+}
+
+.home-content {
+    font-size: 14px !important;
+    text-align: justify;
+    font-family: arial;
+    line-height: 34px !important;
+    padding: 0 0 0 20px;
+}
+
+.latest-heading {
+    font-size: 18px;
+    line-height: 1.5;
+    font-weight: bold;
+}
+
+.latest-heading1 {
+    line-height: 27px !important;
+    font-size: 14px !important;
+    text-align: justify;
+    font-family: arial;
+}
+
+.latest-articles button {
+    background: #AE1300;
+    color: #fff;
+    border: none;
+    box-shadow: none;
+}
+
+.latest-articles {
+    margin: 15px 0 15px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #EEEEEE;
+}
+
+.latest-border {
+    display: block;
+    border: 1px solid #E7E9EB;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 5%);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 15px;
+}
+
+.download {
+    border: 1px solid #E7E9EB;
+    padding: 3px 10px;
+    margin: 0;
+}
+
+.button {
+    background: #AE1300;
+    color: #fff;
+    border: none;
+    box-shadow: none;
+}
+
+.read-more {
+    font-size: 18px;
+    text-align: right;
+}
+
+.footer-section {
+    background: #EEF5F5;
+    padding: 20px 0 0 0;
+    border-top: 1px solid #A9C9C9;
+}
+
+.footer-title .title {
+    background-image: linear-gradient(to bottom, #0EA8A8, #447D7D);
+    margin: 0 0 10px 0;
+    padding: 9px 10px;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    line-height: 27px !important;
+    font-size: 14px !important;
+    text-align: justify;
+    font-family: arial;
+}
+
+.footer-color {
+    color: #FFFFFF;
+    background: #104D83;
+    text-align: center;
+    padding: 20px 0;
+    border-top: 2px solid #165656;
+}
+
+.latest-news {
+    width: 100%;
+    border: 1px solid;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px 4px 10px 4px;
+    background-color: #F2F2F2;
+    font-size: 14px;
+    /*margin: 0 0 20px 0;*/
+}
+
+.left-side {
+    padding: 8px 10px 8px 10px;
+    border: 1px solid rgb(221, 221, 221);
+    width: 100%;
+}
+
+.form-background {
+    background-color: #4c4c4c;
+    padding: 16px;
+    border-radius: 7px;
+    color: #fff;
+}
+
+.sec-pad {
+    padding: 0 0 30px 0;
+}
+
+.custom-toggler {
+    color: #fff;
+
+}
+
+.custom-toggler:focus {
+    outline: none;
+}
+
+.home-flex {
+    display: flex;
+}
+
+.custom-dropdown1 {
+
+    position: absolute;
+    top: 0;
+    left: 100%;
+    color: #fff;
+    background-color: rgba(47, 56, 61, 0.9);
+}

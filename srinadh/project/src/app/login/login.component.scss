@@ -1,0 +1,182 @@
+@import "common";
+.login-background{
+    background-image: url('/assets/images/login-banner.png');
+    min-height: 100vh;
+    // background-size: contain;
+    background-repeat: no-repeat;
+    margin: -10px 0 0 -7px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.para{
+    position: absolute;
+    top: 100px;
+    left: 70px;
+    font-weight:700;
+    font-size:20px;
+    font-family:Source Sans Pro, Bold;
+    color: #ffff;
+}
+ .para .para2{
+    margin-left:103px;
+}
+.login-form-details{
+    margin-left: 55px;
+    min-height: 560px;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 41px;
+    background-color: #fff;
+    max-width: 567px;
+    padding: 10px 110px 0 110px;
+    width: 100%;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.image-transform{
+    transform: translate(103px, 74px);
+}
+.home-line::after{
+    content: '';
+    width: 110px;
+    position: absolute;
+    right: 159px;
+    top: 450px;
+    border-top: 3px solid #707070;
+}
+.home-line::before{
+    content: '';
+    content: "";
+    width: 110px;
+    /* border: 1px solid red; */
+    position: absolute;
+    left: 190px;
+    top:450px;
+    border-top: 3px solid #707070;
+}
+.sign-in{
+    @include gradient-login();
+}
+.sign-up{
+    @include gradient-login();
+    font-size:12px; 
+    height:44px;
+}
+.pointer{
+    cursor:pointer;
+}
+.custom-check,
+.text-right,
+.account{
+    color:#707070;
+}
+h2{
+    color: #231A65;
+    font-size:30px;
+}
+.account{
+    font-size:12px;
+}
+.text-center h4{
+    color: rgba(0, 169, 236, 1);
+}
+.icons{
+    text-align:center;
+}
+.fa-facebook,
+.fa-twitter,
+.fa-google-plus{
+background-color:#f7f0f0;
+border:1px solid #f7f0f0;
+font-size:14px;
+padding:7px 0;
+border-radius:50%;
+width:30px;
+height:30px;
+}
+
+.fa-facebook{
+    color:#231A65;
+  
+}
+.fa-twitter{
+    color:rgba(0, 169, 236, 1);
+}
+.fa-google-plus{
+    color:red;
+  
+}
+.icons span{
+    padding:15px;
+    display: inline-block;
+    text-align: center;
+}
+
+@media only screen and (max-width: 900px){
+    .login-form-details{
+        width:100%;
+        height:100%;
+    }
+}
+//  signup form
+.text-right{
+    float:right
+}
+.On-Boarding{
+    font-size:12px;
+}
+
+// CSS for bording process: Starts
+
+.bording-process { 
+    mat-card {
+        box-shadow: 0px 20px 24px #00246435;
+        border: 1px solid #00246407;
+        border-radius: 18px;
+    }  
+
+    .details-2 {
+        height: 850px;
+        overflow: scroll;
+        overflow-x: hidden;
+    }
+    .action-buttons {
+        .cancel-button {
+            border:none;
+            background:none;
+            color:$black-color;
+            width: 136px;
+        }
+        .next-button {
+            @include gradient-login;
+            width:136px;
+            height: 40px;   
+        }
+    }
+    .sub-text {
+        font-size: $mini-heading;
+        color:$heading-color;
+    }
+    .bitmap-image {
+        p {
+            font-size: $small-font ;
+        }
+    }
+}
+.dot {
+    height: 12px;
+    width: 12px;
+    background-color: #9F83FE;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.29;
+    margin: 0px 16px 0px 16px;
+    cursor: pointer;
+  }
+  .circleactive .dot{
+      opacity: 100%;
+  }
+
+// CSS for bording process: End

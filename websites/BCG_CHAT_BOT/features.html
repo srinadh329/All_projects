@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <!--  <div class="preloader" style="display: none;"></div> -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Web Chatbot</title>
+    <link rel="icon" type="image/png" href="icon/icon1.png" sizes="32x32">
+    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/how.css">
+    <link rel="stylesheet" type="text/css" href="css/about.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style1.css">
+    <link rel="stylesheet" type="text/css" href="css/textanimation.css">
+    <link rel="stylesheet" type="text/css" href="css/features.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+
+    <style>
+/* .element {
+  display: inline-block;
+  background-color: #0074d9;
+  height: 100px;
+  width: 100px;
+  color: white;
+  text-align: center;
+  opacity: 0.7;
+  font-family: Verdana, sans-serif;
+  border: 3px solid rgba(0, 0, 0, .3);
+  margin-bottom: 30px;
+} */
+
+
+
+.overlay:hover .three{
+
+   transform: rotateY(10deg);
+  animation: three 1s infinite;
+}
+
+
+
+@keyframes three {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(180deg);
+  }
+}
+
+
+.overlay {
+   /* border-radius: 12px;*/
+    /* padding: 70px 50px; */
+    text-align: center;
+    position: relative;
+  
+    border: none;
+    background:#000046;
+
+   /* border: 2px solid #0095d7;*/
+}
+
+.overlay {
+    transform: translateZ(0);
+    margin-bottom: 15px;
+}
+
+.overlay:hover:before {
+    transform: scale(0);
+}
+
+.overlay:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: white;
+    color:white !important;
+    transform: scale(1);
+    transition-property: transform;
+    transition-duration: .3s;
+    transition-timing-function: ease-out;
+   /* border-radius: 10px;
+    border: 1px solid #e8e9ea;*/
+}
+.overlay:hover .features h5{
+  color:white;
+}
+.overlay:hover p {
+  color:white;
+}
+
+.overlay:hover a {
+  color:white;
+}
+.feature-title a{
+  color: #0095d7;
+  text-decoration: none;
+}
+
+
+      </style>
+</head>
+
+<body>
+
+  
+    
+    <!-- NAVBAR START -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light reveal fadeInDown fixed-top ">
+                <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="images/logo/blackcactus india.png" alt="company_logo" width="100%"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="index.html">Home</a>
+                        </li>
+                       
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="about.html">About us</a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="howitwork.html">How it works</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link js-scroll-trigger" href="features.html">Features</a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="webscraping.html">Web scraping</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="modules.html">Modules</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="contact.php">Contact us</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <section class="content-header">
+        <div class="container-fluid type_bg">
+            <div>
+                <h1 class="animate three">
+        <span>F</span>
+        <span>e</span>
+        <span>a</span>
+        <span>t</span>
+        <span>u</span>
+        <span>r</span>
+        <span>e</span>
+        <span>s</span>    
+      </h1>
+            </div>
+        </div>
+    </section>
+   <section class="sec-pad">
+        <div class="section-ptb">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div>
+                            <img src="images/featuresvy (1).gif" alt="" width="100%">
+                    </div>
+                        </div>
+                        <div class="col-lg-6  col-md-6  col-sm-12 order-2 order-lg-1 about-flex">
+                            <div class="about-title">
+                                <!-- <h4>Our Story Our Strangth</h4> -->
+                            <h2>Features</h2> 
+                            </div>
+                            <div class="about-text">
+                                <p>With technology-driven advancements in communication, our chatbot stands out with it's different, unique and engaging features streamlining the way organisations work and enhance their experience. Built in with NLP, it acts more human-like and thus modernises communication with speed, precision and round the clock accessibility. </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+<section class="section-feature">
+  <!-- <h2 class="text-center">Features</h2> -->
+  <div class="container">
+    <div class="row feature-row">
+        <div class="col-lg-3 feature-flex">
+            <div class="feature-title  overlay">
+             <div class="features">
+               <img src="images/feature/Esseential features/Essential feature.png" alt="" class="three">
+               <h5>Essential Features</h5>
+                <p>Provides an automated system, built-in with innovative features that are useful for both business and customers</p>
+             </div>
+            
+             <div class="text-center feature-read">
+             <a href="essentailpopup.html" class="include-modal">Read more</a>
+             </div>
+             </div>
+           </div>
+
+      <div id="theModal" class="modal fade">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content"></div>
+        </div>
+      </div>
+
+     <div class="col-lg-3 feature-flex">
+      <div class="feature-title  overlay">
+       <div class="text-center features">
+         <img src="images/feature/included/included.png" alt="" class="three">
+         <h5>Included</h5>
+       </div>
+       <p class="text-center">It is included with dynamic features in a most efficient way ensuring 24/7 support and maintenance</p>
+       <div class="text-center feature-read">
+       <a href="includemodal.html" class="include-modal">Read more</a>
+       </div>
+       </div>
+     </div>
+      <div id="theModal1" class="modal fade">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content"></div>
+        </div>
+      </div>
+      <div class="col-lg-3 feature-flex">
+        <div class="feature-title overlay">
+         <div class="text-center features">
+           <img src="images/feature/predictions/prediciton.png" alt="" class="three">
+           <h5>Predictions</h5>
+         </div>
+        <p class="text-center">Predictions improve the operations, understand the value of the customers, predict and handle trending customer objections</p>
+        <!-- <p>Automated predictive analytics for conversational commerce will be increasing the conversions of the bots.</p> -->
+       <div class="text-center feature-read">
+       <a href="Predictionsmodal.html" class="Prediction-modal">Read more</a>
+       </div>
+       </div>
+      </div>
+      <div id="theModal2" class="modal fade">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content"></div>
+        </div>
+      </div>
+      <div class="col-lg-3 feature-flex">
+        <div class="feature-title overlay">
+         <div class="text-center features">
+           <img src="images/feature/text processing/text processing_2.png" alt="" class="three">
+           <h5>Text processing</h5>
+         </div>
+        <p class="text-center">Text processing is essential since the characters, words and sentences are the fundamental units passed to all further processing stages</p>
+        <!-- <p>To reduce indexing(or data) file size of the Text documents. To improve the efficiency and effectiveness of the IR system.</p> -->
+       <div class="text-center feature-read">
+       <a href="Textprocessing.html" class="Text-modal">Read more</a>
+       </div>
+       </div>
+      </div>
+    </div>
+    <div id="theModal3" class="modal fade">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content"></div>
+      </div>
+    </div>
+    <div class="row feature-row">
+     <div class="col-lg-3 feature-flex">
+      <div class=" feature-title overlay">
+       <div class="text-center features">
+         <img src="images/feature/Security/security.png" alt="" class="three">
+         <h5>Security</h5>
+       </div>
+       <p class="text-center">Our bot is well secured through a process called authentication and authorization to protect user information and integrate them into your business</p>
+       <div class="text-center feature-read">
+       <a href="Security.html" class="Security-modal">Read more</a>
+       </div>
+       </div>
+     </div>
+     <div id="theModal4" class="modal fade">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content"></div>
+      </div>
+    </div>
+     <div class="col-lg-3 feature-flex">
+      <div class=" feature-title overlay">
+       <div class="text-center features">
+         <img src="images/feature/Privacy/privacy.png" alt="" class="three">
+         <h5>Privacy</h5>
+       </div>
+       <p class="text-center">We provide an adequate level of security and confidentiality to your personal data, taking into account the nature of the data and the risk of processing such data</p>
+       <div class="text-center feature-read">
+       <a href="Privacy.html" class="Privacy-modal">Read more</a>
+       </div>
+       </div>
+       <div id="theModal5" class="modal fade">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content"></div>
+      </div>
+    </div>
+     </div>
+      <div class="col-lg-3 feature-flex">
+        <div class="feature-title overlay">
+         <div class="text-center features">
+           <img src="images/feature/GUI/GUI.png" alt="" class="three">
+           <h5>GUI</h5>
+         </div>
+        <p class="text-center">Built with an adaptable GUI interface for visualization of the platform to the developers</p>
+       <div class="text-center feature-read">
+       <a href="Gui.html" class="Gui-modal">Read more</a>
+       </div>
+       </div>
+       <div id="theModal6" class="modal fade">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content"></div>
+      </div>
+    </div>
+     </div>
+      <div class="col-lg-3 feature-flex">
+        <div class="feature-title overlay">
+         <div class="text-center features">
+           <img src="images/feature/Virtual assistant training/Virtual assistant training.png" alt="" class="three">
+           <h5>Virtual assistant training</h5>
+         </div>
+        <p class="text-center">Trained in a most efficient way to provide the frontline support so your customer service staff can concentrate on more complex tasks </p>
+       <div class="text-center feature-read">
+       <a href="Vat.html" class="Vat-modal">Read more</a>
+       </div>
+       </div>
+    </div>
+     <div id="theModal7" class="modal fade">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content"></div>
+      </div>
+    </div>
+     </div>
+     <div class="row feature-row">
+     <div class="col-lg-3 feature-flex">
+      <div class=" feature-title overlay">
+       <div class="text-center features">
+         <img src="images/feature/Compatabilities/compatability.png" alt="" class="three">
+         <h5>Compatibilities</h5>
+       </div>
+       <p class="text-center"><!-- compatibility is another key component when testing the bot. --> 
+Allows you to validate and review the end user’s experience across multiple channels like Facebook, Telegram, Kik, etc.</p>
+       <div class="text-center feature-read">
+       <a href="Compatibilities.html" class="Compatibilities-modal">Read more</a>
+       </div>
+       </div>
+     </div>
+     <div id="theModal8" class="modal fade">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content"></div>
+      </div>
+    </div>
+     <div class="col-lg-3 feature-flex">
+      <div class=" feature-title overlay">
+       <div class="text-center features">
+         <img src="images/feature/Hosting/hosting.png" alt="" class="three">
+         <h5>Hosting</h5>
+       </div>
+       <p class="text-center">Hosting is a service that allows you to host your bots without any devops knowledge</p>
+       <div class="text-center feature-read">
+       <a href="Hosting.html" class="Hosting-modal">Read more</a>
+       </div>
+       </div>
+     </div>
+      <div id="theModal9" class="modal fade">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content"></div>
+      </div>
+    </div>
+      <div class="col-lg-3 feature-flex">
+        <div class="feature-title overlay">
+         <div class="text-center features">
+           <img src="images/feature/Analytical tools/Analytical tools.png" alt="" class="three">
+           <h5>Analytical tools</h5>
+         </div>
+        <p class="text-center">These tools will help you gain more insight and analysis about your customers and their experience with the bot</p>
+       <div class="text-center feature-read">
+       <a href="Analytical.html" class="Analytical-modal">Read more</a>
+       </div>
+       </div>
+      </div>
+      <div id="theModal10" class="modal fade">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content"></div>
+      </div>
+    </div>
+
+      <div class="col-lg-3 feature-flex">
+        <div class="feature-title overlay">
+         <div class="text-center features">
+           <img src="images/feature/user.png" alt="" class="three">
+           <h5>Language translation</h5>
+         </div>
+        <p class="text-center"><!-- can be set up to translate incoming user requests to the language the chatbot is trained in. --> Handles phrases and matches them with intents and will be able to correctly identify the intent</p>
+       <div class="text-center feature-read">
+       <a href="language.html" class="Language-modal">Read more</a>
+       </div>
+       </div>
+      </div>
+       <div id="theModal11" class="modal fade">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content"></div>
+      </div>
+    </div>
+    </div>
+  </div>  
+</section>
+    <footer class="feature-footer">
+        <section class="footer-section">
+            <div class="footer-first">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-12">
+                            <div class="footer-logo">
+                                <!-- <img src="images/logo/footer.png"> -->
+                                <h4>Cognitive Innovations Labs</h4>
+                               <ul class="footer-address">
+                                    <li>HILL#2, PLOT#6</li>
+                                    <li>APIIC SEZ IT/ITES</li>
+                                    <li>Rushikonda, Madhurawada</li>
+                                    <li>Visakhapatnam, Andhra Pradesh 530045, IN</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <!--  <div class="col-lg-3 col-12">
+                    <div class="work-time">
+                        <h4 class="footer-title">Work Time</h4>
+                        <ul class="work-time-list">
+                            <li>Monday - Friday <span class="wtl-time">09:00 - 23:00</span></li>
+                            <li>Saturday <span class="wtl-time">Closed</span></li>
+                            <li>Sunday <span class="wtl-time">Closed</span></li>
+                        </ul>
+                    </div>
+                </div> -->
+                        <div class="col-lg-3 offset-lg-1 col-12">
+                            <div class="footer-links">
+                                <h4 class="footer-title">Useful Links</h4>
+                                <ul class="footer-nav-links">
+                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="about.html">About us</a></li>
+                                    <li><a href="howitwork.html">How it works</a></li>
+                                    <li><a href="features.html">Features</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-12">
+                            <div class="footer-address">
+                                <h4 class="footer-title">Contact Us</h4>
+                                <ul class="footer-nav-links">
+                                    <li><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:+91-891-6659999"> +91-891-6659999</a></li>
+                                <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:info@cognitiveinnovations.in"> info@cognitiveinnovations.in</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="footer-second">
+            <div class="container">
+                <div class="row  align-items-center">
+                    <div class="col-6 col-lg-6 footer-company">
+                          © Copyright <span id="year">2020</span> Cognitive Innovations Labs
+                    </div>
+                    <div class="col-6 col-lg-6 text-right order-lg-last">
+                        <div class="social footer-company">
+                            <a class="social-facebook" href="#"><i class="fa fa-facebook"></i></a>
+                            <a class="social-twitter" href="#"><i class="fa fa-twitter"></i></a>
+                            <a class="social-instagram" href="#"><i class="fa fa-linkedin"></i></a>
+                            <!-- <a class="social-dribbble" href="https://dribbble.com/thethemeio"><i class="fa fa-dribbble"></i></a> -->
+                        </div>
+                    </div>
+                    <!-- <div class="col-lg-6">
+            <div class="nav nav-bold nav-uppercase nav-trim justify-content-lg-center">
+              <a class="nav-link" href="uikit/index.html">Home</a>
+              <a class="nav-link" href="block/index.html">About us</a>
+              <a class="nav-link" href="page/about.html">How it works</a>
+              <a class="nav-link" href="blog/grid.html">Features</a>
+              <a class="nav-link" href="page/contact.html">Contact</a>
+            </div> -->
+                </div>
+            </div>
+            </div>
+        </section>
+    </footer>
+   <!--  <a href="#" id="scroll" style="display: none;"><span></span></a> -->
+    <!-- <section>
+      <div class="modal fade bd-example-modal-lg" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Essential features</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>  
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-6">
+                <div id="accordion">
+                  <div class="card">
+                    <div class="card-header">
+                      <a class="card-link" data-toggle="collapse" href="#collapseOne">User authentication</a>
+                    </div>
+                    <div id="collapseOne" class="collapse" data-parent="#accordion">
+                      <div class="card-body">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header">
+                      <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">Pre-made industry-specific modules</a>
+                    </div>
+                    <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                      <div class="card-body">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header">
+                      <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">Multilinguality</a>
+                    </div>
+                    <div id="collapseThree" class="collapse" data-parent="#accordion">
+                      <div class="card-body">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header">
+                      <a class="collapsed card-link" data-toggle="collapse" href="#collapseFour">Virtual assistant network</a>
+                    </div>
+                    <div id="collapseFour" class="collapse" data-parent="#accordion">
+                      <div class="card-body">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header">
+                      <a class="collapsed card-link" data-toggle="collapse" href="#collapseFive">Multi-agent support</a>
+                    </div>
+                    <div id="collapseFive" class="collapse" data-parent="#accordion">
+                      <div class="card-body">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+              <div id="accordion">
+                  <div class="card">
+                    <div class="card-header">
+                      <a class="card-link" data-toggle="collapse" href="#collapseSix">Proactive abilities</a>
+                    </div>
+                    <div id="collapseSix" class="collapse" data-parent="#accordion">
+                      <div class="card-body">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header">
+                      <a class="collapsed card-link" data-toggle="collapse" href="#collapseSeven">Seamless transition to a live agent</a>
+                    </div>
+                    <div id="collapseSeven" class="collapse" data-parent="#accordion">
+                      <div class="card-body">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header">
+                      <a class="collapsed card-link" data-toggle="collapse" href="#collapseEight">General intents included</a>
+                    </div>
+                    <div id="collapseEight" class="collapse" data-parent="#accordion">
+                      <div class="card-body">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header">
+                      <a class="collapsed card-link" data-toggle="collapse" href="#collapseNine">Training message templates</a>
+                    </div>
+                    <div id="collapseNine" class="collapse" data-parent="#accordion">
+                      <div class="card-body">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header">
+                      <a class="collapsed card-link" data-toggle="collapse" href="#collapseTen">Multilingual synonym package</a>
+                    </div>
+                    <div id="collapseTen" class="collapse" data-parent="#accordion">
+                      <div class="card-body">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+    </section> -->
+
+   
+    <script type="text/javascript" src="lib/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/wow.min.js"></script>
+    <script type="text/javascript" src="js/custom.js"></script>
+    <!--  <script src="js/bodymovin.min.js"></script>
+  <script src="js/body.js"></script> -->
+    <script src="js/index.js"></script>
+ <script type="text/javascript" src="js/modal.js"></script>
+</body>
+
+</html>

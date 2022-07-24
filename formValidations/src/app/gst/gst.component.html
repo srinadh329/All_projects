@@ -1,0 +1,89 @@
+
+<form [formGroup]="gstForm" width="33%">
+  <div>
+  <p>
+    <mat-form-field appearance="outline">
+      <mat-label>Final</mat-label>
+      <input readonly matInput placeholder="Name" formControlName="final" />
+      <mat-error *ngIf="gstForm.get('final')?.hasError('required')">Please Enter Name</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="outline">
+      <mat-label>Total</mat-label>
+      <input readonly matInput placeholder="Name" formControlName="total" />
+      <mat-error *ngIf="gstForm.get('total')?.hasError('required')">Please Enter Name</mat-error>
+    </mat-form-field>
+  </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Price</mat-label>
+          <input type="number" matInput placeholder="Name" formControlName="pirce" (input)="calculateResultForm()" />
+          <mat-error *ngIf="gstForm.get('pirce')?.hasError('required')">Please Enter Price</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>qty</mat-label>
+          <input type="number" matInput placeholder="Name" formControlName="qty" (input)="calculateResultForm()" />
+          <mat-error *ngIf="gstForm.get('qty')?.hasError('required')">Please Enter qty</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>GST</mat-label>
+          <input type="number" matInput placeholder="Name" formControlName="gst" (input)="calculateResultForm()" />
+          <mat-error *ngIf="gstForm.get('gst')?.hasError('required')">Please Enter gst</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>discount</mat-label>
+          <input type="number" matInput placeholder="Name" formControlName="discount" (input)="calculateResultForm()" />
+        </mat-form-field>
+      </p>
+    </div>   
+      <div formArrayName='newFields'>
+          <div *ngFor="let newfields of newFields.controls; let i=index">
+            <form [formGroupName]="i">
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>pirce</mat-label>
+                  <input type="number" matInput placeholder="Name" formControlName="pirce" (input)="calculateResultForm()" />
+                  <mat-error *ngIf="newfields.get('pirce')?.hasError('required')"
+                    >Please Enter pirce</mat-error
+                  >
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>qty</mat-label>
+                  <input type="number" matInput placeholder="Name" formControlName="qty" (input)="calculateResultForm()" />
+                  <mat-error *ngIf="newfields.get('qty')?.hasError('required')"
+                    >Please Enter qty</mat-error
+                  >
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>gst</mat-label>
+                  <input type="number" matInput placeholder="Name" formControlName="gst" (input)="calculateResultForm()" />
+                  <mat-error *ngIf="newfields.get('qty')?.hasError('required')"
+                    >Please Enter gst</mat-error
+                  >
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>discount</mat-label>
+                  <input type="number" matInput placeholder="Name" formControlName="discount" (input)="calculateResultForm()" />
+                  <mat-error *ngIf="newfields.get('discount')?.hasError('required')"
+                    >Please Enter discount</mat-error
+                  >
+                </mat-form-field>
+              </p>
+            </form>
+          </div>
+      </div>
+      <p (click)="add()" *ngIf="this.newFields.controls.length <2">add</p>
+</form>

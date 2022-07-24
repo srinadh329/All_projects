@@ -1,0 +1,67 @@
+@import 'common';
+.about-banner{   
+    background-image: url("/assets/images/aboutus.jpg");
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+.bg-overlay{
+    background-color: rgba(60,72,88,0.7);
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+.page-next{
+    position: relative;
+    top: 176px;
+    z-index: 99;
+}
+.features.feature-clean .icons i {
+    height: 65px;
+    width: 65px;
+    line-height: 65px;
+    background-color: rgba(47,85,212,0.1);
+    color: $primer-color !important;
+    font-size: 30px !important;
+    border-radius: 6px !important;
+}
+.features h5{
+    font-size: 20px;
+}
+.features p{
+color: $p-color !important;
+    font-size: 16px;
+}
+.features a{
+color: $primer-color !important;
+font-size: 16px;
+}
+.contact-section{
+    padding: 100px 0;
+    position: relative;
+}
+.shadow{
+    box-shadow: 0 0 3px rgb(60 72 88 / 15%) !important;
+}
+.email-logo{
+    position: relative;
+    top: -6px;
+    padding: 0 10px 0 3px;
+}
+.textarea-logo{
+    position: relative;
+    top: -48px;
+    padding: 0 10px 0 3px;
+}
+.login-button{
+    @include button();
+    width: 100%;
+    }

@@ -1,0 +1,60 @@
+-- FUNCTION: store.approve_transaction(numeric, character varying, numeric, character varying, character varying, character varying)
+
+-- DROP FUNCTION store.approve_transaction(numeric, character varying, numeric, character varying, character varying, character varying);
+
+CREATE OR REPLACE FUNCTION store.approve_transaction(
+	branchid numeric,
+	authorizeduser character varying,
+	applicationnumber numeric,
+	updateddate character varying,
+	updatedtime character varying,
+	authstatus character varying)
+    RETURNS character varying
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+AS $BODY$
+   Declare
+          productid character varying;
+		  transactioncount numeric;
+		  transactionnumber character varying;
+		  ICTC character varying = 'ICTC';
+		  
+          begin
+		       if exists(select appno from store.prdtxn where appno = applicationnumber
+						  and brnid = branchid and status = 'C')then
+				  -- verify whelther this user have rights to authorize or not	  
+				  if exists(select a.loginid,a.usrole,a.brnid,b.roltyp
+							from admin.usrmas a inner join admin.roles
+							b on a.usrole = b.roleid where b.roltyp = 'SUPERVISOR'
+							and a.brnid = branchid and a.loginid = authorizeduser) then
+							
+					       select prdid into productid from store.prdtxn
+					       where appno = applicationnumber;
+																								
+					       select count(*)+1 into transactioncount from store.prdtxn
+					       where prdid = productid and status = 'A';
+					
+					       if(productid = 'IC')then
+					          --Generate ICTC number
+					          transactionnumber = concat(ICTC,transactioncount);
+					         else  transactionnumber = concat('ID',transactioncount);
+					        end if;
+					
+					        update store.prdtxn set moddat=updateddate,
+					        modtim = updatedtime,status = authstatus,modusr = authorizeduser,
+					        trnno = transactionnumber where appno=applicationnumber;
+						 
+						    return transactionnumber;
+							
+					 else raise exception 'Invalid user to Authorize';
+					 
+				    end if;			
+			  else raise exception 'Invalid Transaction Number';
+			end if;
+		  end
+   $BODY$;
+
+ALTER FUNCTION store.approve_transaction(numeric, character varying, numeric, character varying, character varying, character varying)
+    OWNER TO postgres;

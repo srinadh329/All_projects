@@ -1,0 +1,113 @@
+body {
+  font-family: Arial;
+  margin: 0;
+}
+/*navbar css start*/
+
+.flex-container{
+	width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.flex-row{
+	display: flex;
+    flex-wrap: wrap;
+
+}
+.flex-column{
+	position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.flex-header{
+	position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: .5rem 1rem;
+}    
+.navbar {
+  display: flex;
+  background-color: #333;
+  padding: 20px 0 20px 0;
+  position: fixed;
+  width: 100%;
+  z-index: 9;
+}
+
+.navbar a {
+  color: white;
+  padding: 14px 20px;
+  text-decoration: none;
+  text-align: center;
+}
+/*navbar css end*/
+.banner-image{
+background-image: url(../image/background.png);
+    height: 626px;
+    background-repeat: no-repeat;
+    /* width: 100%; */
+    background-size: cover;
+    /*background-position: center;*/
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.image-padding{
+	 padding: .5rem 1rem;
+}
+.image-padding p{
+	    color: #fff;
+    font-size: 28px;
+    padding: 0px 0 0px 0;
+    line-height: 40px;
+}
+.main {
+        background-color: #FFFFFF;
+    width: 350px;
+    height: 300px;
+    margin: 0em auto;
+    border-radius: 4px;
+        box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+    }
+    .name{
+    	border: none;
+    border-bottom: 1px solid #d6d6d6;
+    margin: 0 0 20px 0;
+    width: 100%;
+        padding: 12px 0 12px 0;
+    }
+    .name:focus{
+    	outline: none;
+    }
+    .input-div{
+    	padding: 0 40px 0 40px;
+    }
+    .sign{
+    	background-color: #f5f5f5;
+    padding: 14px 0 14px 0;
+    border-radius: 4px 4px 0 0;
+    font-size: 18px;
+    text-align: center;
+    letter-spacing: 2px;
+    color: #000000;
+    font-weight: 600;
+    }
+    .getstart{
+    	    background-color: #ff9b51;
+    padding: 12px 0 12px 0;
+    margin: 8px 0 0 0;
+    border-radius: 0 0 4px 4px;
+    color: #fff;
+    }
+    .icons{
+    	display: flex;
+    	flex-direction: row;
+    	justify-content: space-between;
+    }

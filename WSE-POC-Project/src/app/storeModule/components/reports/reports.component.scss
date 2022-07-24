@@ -1,0 +1,13 @@
+.file {
+    cursor:pointer
+}
+.reports-button{
+    position: relative;
+    top: 6px;
+    .label-button{
+      padding: 6px 12px 6px 12px;
+    }
+    .cancel-button{
+      padding: 6px 12px 6px 12px;
+    }
+  }

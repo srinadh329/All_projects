@@ -1,0 +1,158 @@
+.unpaid-invoices {
+    display: inline-block;
+    width: 100%;
+    height: 45px;
+    border-radius: 20px;
+    background: #ffffff;
+    /* padding: 10px; */
+    margin-left: 10px;
+}
+
+.border-right {
+    border-right: 1px solid #BABABA;
+}
+
+.circle {
+    height: 6rem;
+    width: 6rem;
+    padding: 30px;
+    border-radius: 50%;
+    border: 1px solid #ffffff;
+    position: relative;
+    background-color: #ffffff !important;
+}
+.circle img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.bubble {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    position: absolute;
+    background-color: #ef5e2f;
+    left: 80px;
+    top: 10px;
+    text-align: center;
+    color: white;
+}
+
+.card {
+    background-color: #f3f3f3;
+    padding: 30px;
+}
+
+.bubble span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.btn-primary {
+    background-color: #42a4ec !important;
+}
+
+select {
+    width: 100% !important;
+    height: 47px;
+    border-radius: 5px !important;
+    background: url(../../../assets/orange-dropdown-icon.png) no-repeat right #ffffff !important;
+    background-size: 47px 39px !important;
+    -webkit-appearance: none;
+    border-color: snow;
+    padding: 5px;
+}
+
+.recent-payment {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 17px;
+    letter-spacing: 0.05em;
+    color: #000000;
+}
+
+th,
+td {
+    padding: 30px;
+}
+
+.ml-6 {
+    margin-left: 9rem;
+}
+
+.btn {
+    flex: auto;
+    font-size: 16px;
+    height: 49px;
+}
+
+.mode-of-payment {
+    width: 80px;
+    height: 80px;
+}
+
+.payment-paading {
+    padding: 50px 50px;
+}
+
+.ml-unpaid {
+    margin-left: -10px;
+}
+
+.ml-unpaid::after {
+    clear:left !important;
+}
+
+.badge {
+    color: #000000;
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 15px;
+    letter-spacing: 0.03em;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.btn-dark {
+    border-radius: 5px;
+    letter-spacing: 0.04em;
+}
+
+.add-card {
+    width:auto !important;
+    border-radius: 5px !important;
+    margin-right: 10px;
+    
+}
+
+.font10 {
+    font-size:10px !important;
+}
+
+.payment {
+    width: 50%;
+    align-items: center;
+    margin: auto;
+}
+
+.header-style {
+    border-top: 15px solid #FF6F3D !important;
+}
+
+.card-align {
+    padding-left: 10px;
+}
+
+.form-check-input {
+    width: 1.5em !important;
+    height: 1.5em !important;
+}
+
+.padding {
+    padding:15px !important;
+}

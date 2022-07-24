@@ -1,0 +1,43 @@
+.contact_font{
+	font-size: 15px;
+}
+.icon{
+	font-size: 20px !important;
+}
+.num_color{
+	color: white!important;
+}
+.contact_detail p {
+
+   /* color: #ffffff;
+    line-height: normal;
+    margin: 0;*/
+    color: #fff;
+    /* font-weight: 300; */
+    line-height: 22px;
+    margin: 12px 0 19px;
+    font-size: 16px;
+
+}
+.form_bg{
+	background-color:#F3F6F9;
+	line-height: 2.5rem !important;
+	border:none !important;
+}
+.contact_content{
+	padding: 30px;
+}
+.address{
+	background-color: #0095d7;
+	color:white;
+	padding: 10px 10px 10px 0px;
+/*	right:50px;*/
+	border-radius: 5px;
+	
+}
+.mt-5{
+	margin-top: 1.5rem!important;
+}
+.contact_detail a{
+	text-decoration: none;
+}

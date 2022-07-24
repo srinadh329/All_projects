@@ -1,0 +1,51 @@
+.main {
+  margin-left: 300px; /* Same as the width of the sidenav */
+}
+
+.body {
+  height: 100%;
+  overflow-x: hidden;
+  padding: 50px 50px;
+}
+
+th,
+td {
+  padding: 15px;
+}
+
+th {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 14px;
+  letter-spacing: 0.03em;
+  color: #626262;
+}
+
+td {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 14px;
+  letter-spacing: 0.03em;
+
+  color: #626262;
+  text-align: center;
+}
+
+tr {
+  vertical-align: middle !important;
+}
+
+.btn-primary {
+  width: 96px;
+  height: 32px;
+  background-color: #42a4ec !important;
+  border-radius: 5px !important;
+  font-size: 9px;
+  line-height: 16px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #ffffff;
+  padding:0px !important
+}

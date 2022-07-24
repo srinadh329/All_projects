@@ -1,0 +1,1707 @@
+<div>
+  <div class="network-header pb-4">
+    <h4 mat-dialog-title>
+      <mat-toolbar role="toolbar" class="task-header">
+        <span>{{data?.title}}</span>
+        <span class="fx-spacer"></span>
+        <span class="material-icons cursor" (click)="onNoClick()">close</span>
+      </mat-toolbar>
+    </h4>
+
+    <!--******************************* add branch dialogpop start******************************* -->
+    <mat-dialog-content class="m-0 customheight" *ngIf="data?.dialogType == 'addbranch'">
+      <form [formGroup]="branchForm" (ngSubmit)="branchGroup();">
+        <div class="row">
+          <div class="col">
+            <label>Branch Name:</label>
+            <mat-form-field appearance="outline" class="custom-branch-outline w-100">
+              <input type="text" autocomplete="off" matInput placeholder="Enter Branch Name" formControlName="branchname">
+              <mat-error *ngIf="branchForm.get('branchname').hasError('required')">
+                Enter Branch Name.
+              </mat-error>
+              <mat-error *ngIf="branchForm.controls['branchname'].hasError('minlength')">
+                Branch Name must be at least 3 characters long.
+              </mat-error>
+              <mat-error *ngIf="branchForm.controls['branchname'].hasError('maxlength')">
+                Branch Name must be at least 50 characters long.
+              </mat-error>
+              <mat-error *ngIf="branchForm.get('branchname').hasError('min')">
+                Please Enter Valid Input.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>Address:</label>
+            <mat-form-field appearance="outline" class="custom-branch-textarea-outline w-100">
+              <textarea matInput placeholder="Enter Address" formControlName="branchaddress"
+                maxlength="100"></textarea>
+              <mat-error *ngIf="branchForm.get('branchaddress').hasError('required')">
+                Enter Address
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Country:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <mat-select name="food" placeholder="Select Country" formControlName="countrycode" maxlength="3">
+                <mat-option [value]='country?.cntcod' *ngFor="let country of countrydata">
+                  {{country?.cntnam}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="branchForm.get('countrycode').hasError('required')">
+                Select Country
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>Branch Limit:</label>
+            <mat-form-field appearance="outline" class="custom-branch-outline w-100">
+              <input type="number" autocomplete="off" matInput placeholder="Enter Branch Limit" formControlName="branchlimit">
+              <mat-error *ngIf="branchForm.get('branchlimit').hasError('required')">
+                Enter Branch Limit
+              </mat-error>
+              <mat-error *ngIf="branchForm.get('branchlimit').hasError('min')">
+                Please Enter Branch Limit greater than 0
+              </mat-error>
+              <mat-error *ngIf="branchForm.get('branchlimit').hasError('pattern')">
+                Please Enter Branch Limit between 0.001 to 999999999999.999
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Product Group:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <mat-select name="productgroup" placeholder="Select Product Group" formControlName="productgroup">
+                <mat-option [value]=g.grpcod *ngFor="let g of productgroups">
+                  {{g.grpcod}} - {{g.grpnam}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="branchForm.get('productgroup').hasError('required')">
+                Select Product Group
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col d-flex flex-column justify-content-center">
+            <mat-radio-group aria-label="Select an option" formControlName="recstatus" class="pt-4">
+              <mat-radio-button value="A" class="custom-radio">Active</mat-radio-button>
+              <mat-radio-button value="D" class="custom-radio">De -active</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="cancel-button" type="button" (click)="onNoClick()">Cancel</button>
+          <button class="login-button" type="submit">Submit</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <!--******************************* add branch dialogpop end******************************* -->
+
+
+    <!--******************************* edit branch dialogpop start******************************* -->
+    <mat-dialog-content class="m-0 customheight" *ngIf="data?.dialogType == 'editbranch'">
+      <form [formGroup]="eidtbranchForm" (ngSubmit)="editbranch();">
+        <div class="row">
+          <div class="col">
+            <label><b>Branch ID:</b></label>{{data.editbrachlist.brnid}}
+          </div>
+          <div class="col">
+            <label><b>Branch Name:</b></label>{{data.editbrachlist.brnnam}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Address:</label>
+            <mat-form-field appearance="outline" class="custom-branch-textarea-outline w-100">
+              <textarea matInput placeholder="Enter Address" formControlName="branchaddress"
+                maxlength="100"></textarea>
+              <mat-error *ngIf="eidtbranchForm.get('branchaddress').hasError('required')">
+                Enter Address
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col">
+            <label>Country:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <mat-select name="food" placeholder="Select Country" formControlName="countrycode" maxlength="3">
+                <mat-option [value]='country?.cntcod' *ngFor="let country of countrydata">
+                  {{country?.cntnam}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="eidtbranchForm.get('countrycode').hasError('required')">
+                Select Country
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label>Product Group:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <mat-select name="productgroup" placeholder="Select Product Group" (ngModelChange)="productGroupChanges($event)"
+                formControlName="productgroup">
+                <mat-option [value]=g.grpcod *ngFor="let g of productgroups">
+                  {{g.grpcod}} - {{g.grpnam}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="eidtbranchForm.get('productgroup').hasError('required')">
+                Select Product Group
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>Branch Limit:</label>
+            <mat-form-field appearance="outline" class="custom-branch-outline w-100">
+              <input type="number" autocomplete="off" matInput placeholder="Enter Branch Limit" formControlName="branchlimit" >
+              <mat-error *ngIf="eidtbranchForm.get('branchlimit').hasError('required')">
+                Enter Branch Limit
+              </mat-error>
+              <mat-error *ngIf="eidtbranchForm.get('branchlimit').hasError('min')">
+                Please Enter Branch Limit greater than 0
+              </mat-error>
+              <mat-error *ngIf="eidtbranchForm.get('branchlimit').hasError('pattern')">
+                Please Enter Branch Limit between 0.001 to 999999999999.999
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col d-flex flex-column justify-content-center">
+            <mat-radio-group aria-label="Select an option" formControlName="recstatus">
+              <mat-radio-button [checked]="data.editbrachlist.status=='A'" value="A" class="custom-radio">Active</mat-radio-button>
+              <mat-radio-button [checked]="data.editbrachlist.status=='D'" value="D" class="custom-radio">De -active</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div class="col"></div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="cancel-button" type="button" (click)="onNoClick()">Cancel</button>
+          <button class="login-button" type="submit">Update</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <!--******************************* edit branch dialogpop end******************************* -->
+
+
+    <!--******************************* add branch users dialogpop start******************************* -->
+    <mat-dialog-content class="m-0 customheight" *ngIf="data?.dialogType == 'addbranchusers'">
+      <form [formGroup]="branchUserForm" (ngSubmit)="addBranchUser();">
+        <div>
+          <label><b>Branch Name:</b></label>
+          {{data.BranchDetails.name}}
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>User Name:</label>
+            <mat-form-field appearance="outline" class="custom-branch-textarea-outline w-100">
+              <input matInput placeholder="Enter User Name" formControlName="username" autocomplete="off">
+              <mat-error *ngIf="branchUserForm.get('username').hasError('required')">
+                Enter User Name
+              </mat-error>
+              <mat-error *ngIf="branchUserForm.controls['username'].hasError('minlength')">
+                User Name must be at least 3 characters long.
+              </mat-error>
+              <mat-error *ngIf="branchUserForm.controls['username'].hasError('maxlength')">
+                User Name must be at least 50 characters long.
+              </mat-error>
+              <mat-error *ngIf="branchUserForm.get('username').hasError('min')">
+                Please Enter Valid Input.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>User Login ID:</label>
+            <mat-form-field appearance="outline" class="custom-branch-textarea-outline w-100">
+              <input matInput placeholder="Enter User Login ID" formControlName="userid" [(ngModel)]="userid" (ngModelChange)="upperCase(userid)" autocomplete="off">
+              <mat-error *ngIf="branchUserForm.get('userid').hasError('required')">
+                Enter User Login ID
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Password:</label>
+            <mat-form-field appearance="outline" class="custom-branch-outline branch-fill w-100">
+              <input autocomplete="off" matInput type="password" placeholder="Enter Password" formControlName="userpassword" [type]="hide ? 'password'  : 'text'">
+              <mat-icon mat-icon-button matSuffix (click)="hide = !hide"  [attr.aria-pressed]="hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              <mat-error *ngIf="branchUserForm.get('userpassword').hasError('required')">
+                Enter Password
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>Confirm Password:</label>
+            <mat-form-field appearance="outline" class="custom-branch-outline w-100 branch-fill">
+              <input autocomplete="off" matInput type="password" placeholder="Enter Confirm Password" formControlName="confirmpassword" [type]="hide1 ? 'password'  : 'text'">
+              <mat-icon mat-icon-button matSuffix (click)="hide1 = !hide1"  [attr.aria-pressed]="hide1">{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+              <mat-error *ngIf="branchUserForm.get('confirmpassword').hasError('required')">
+                Enter Confirm Password
+              </mat-error>
+              <mat-error *ngIf="branchUserForm.get('confirmpassword').hasError('error')">
+                New password and confirm password must be same
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="col">
+            <label>Role:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <mat-select name="food" placeholder="Select Role" formControlName="userrole">
+                <mat-option [value]='roles?.roleid' *ngFor="let roles of activeRoles">
+                  {{roles?.roltyp}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="branchUserForm.get('userrole').hasError('required')">
+                Select Role
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col d-flex flex-column justify-content-center">
+            <mat-radio-group aria-label="Select an option" formControlName="recstatus" class="pt-4">
+              <mat-radio-button value="A" class="custom-radio">Active</mat-radio-button>
+              <mat-radio-button value="D" class="custom-radio">De -active</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="cancel-button" type="button" (click)="onNoClick()">Cancel</button>
+          <button class="login-button" type="submit">Submit</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <!--******************************* add branch users dialogpop end******************************* -->
+
+
+    <!--******************************* edit branch users dialogpop start******************************* -->
+    <mat-dialog-content class="m-0 customheight" *ngIf="data?.dialogType == 'editbranchusers'">
+      <form [formGroup]="changepasswordForm" (ngSubmit)="editBranchUser();">
+          <div>
+            <label><b>User Name:</b></label>{{data.branchUserList.usrnam}}
+          </div>
+        <div class="row">
+          <div class="col">
+            <label>Role:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <mat-select name="food" [compareWith]="compareNumberObjects" placeholder="Select Role" formControlName="userrole">
+                <mat-option [value]='roles?.roleid' *ngFor="let roles of userroleslist"><!--roleid-->
+                  {{roles?.roltyp}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="changepasswordForm.get('userrole').hasError('required')">
+                Select Role
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col d-flex flex-column justify-content-center">
+            <mat-radio-group aria-label="Select an option" formControlName="recstatus" class="pt-4">
+              <mat-radio-button value="A"  class="custom-radio">Active</mat-radio-button>
+              <mat-radio-button value="D"  class="custom-radio">De -active</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="cancel-button" type="button" (click)="onNoClick()">Cancel</button>
+          <button class="login-button" type="submit">Update</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <!--******************************* edit branch users dialogpop end******************************* -->
+
+    <!--********************************Change password*********************************-->
+    <mat-dialog-content class="m-0 customuserheight" *ngIf="data?.dialogType == 'changeBranchuser'">
+      <form [formGroup]="changeBranchusersettingForm" (ngSubmit)="changeBranchuserpswd();">
+        <div class="row">
+          <div class="col">
+            <label>Password:</label>
+            <mat-form-field appearance="outline" class="custom-branch-outline w-100 branch-fill">
+              <input autocomplete="off" matInput placeholder="Enter Password" formControlName="userpassword" autocomplete="off"  [type]="hide ? 'password'  : 'text'">
+              <mat-icon mat-icon-button matSuffix (click)="hide = !hide"  [attr.aria-pressed]="hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              <mat-error *ngIf="changeBranchusersettingForm.get('userpassword').hasError('required')">
+                Enter Password
+              </mat-error>
+
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>Confirm Password:</label>
+            <mat-form-field appearance="outline" class="custom-branch-textarea-outline w-100 branch-fill">
+              <input autocomplete="off" matInput placeholder="Enter User Name" formControlName="confirmpassword" autocomplete="off" [type]="hide1 ? 'password'  : 'text'">
+              <mat-icon mat-icon-button matSuffix (click)="hide1 = !hide1"  [attr.aria-pressed]="hide1">{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+              <mat-error *ngIf="changeBranchusersettingForm.get('confirmpassword').hasError('required')">
+                Enter Confirm Password
+              </mat-error>
+              <mat-error *ngIf="changeBranchusersettingForm.get('confirmpassword').hasError('error')">
+                New password and confirm password must be same
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="cancel-button" type="button" (click)="onNoClick()">Cancel</button>
+          <button class="login-button" type="submit">Update</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+
+
+    <!--******************************* add branch success dialogpop start******************************* -->
+
+    <!-- <mat-dialog-content class="m-0 customheight" *ngIf="data.dialogType == 'sucess'">
+      <div class="text-center">
+        <p class="pt-3">Branch Added Successfully.</p>
+        <div class="pt-4">
+          <button class="login-button" type="submit" mat-dialog-close>Close</button>
+        </div>
+      </div>
+    </mat-dialog-content> -->
+    <!--******************************* add branch success dialogpop end******************************* -->
+
+
+    <!--******************************* add country dialogpop start******************************* -->
+    <mat-dialog-content class="m-0 customheight" *ngIf="data?.dialogType == 'addcountry'">
+      <form [formGroup]="countryForm" (ngSubmit)="country();">
+        <div class="row">
+          <div class="col">
+            <label>Country ID:</label>
+            <mat-form-field appearance="outline" class="custom-branch-outline w-100">
+              <input autocomplete="off" matInput placeholder="Enter Country ID" formControlName="countrycode" maxlength="3" minlength="3">
+              <mat-error *ngIf="countryForm.get('countrycode').hasError('required')">
+                Enter Country ID
+              </mat-error>
+              <mat-error *ngIf="countryForm.controls['countrycode'].hasError('minlength')">
+                Country ID must be at least 3 characters long.
+              </mat-error>
+              <mat-error *ngIf="countryForm.controls['countrycode'].hasError('maxlength')">
+                Country ID only the max 3 characters can be entered.
+              </mat-error>
+              <mat-error *ngIf="countryForm.get('countrycode').hasError('min')">
+                Please Enter Valid Input.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>Country Name</label>
+            <mat-form-field appearance="outline" class="custom-branch-textarea-outline w-100">
+              <input autocomplete="off" matInput placeholder="Enter Country Name" formControlName="countryname">
+              <mat-error *ngIf="countryForm.get('countryname').hasError('required')">
+                Enter Country Name
+              </mat-error>
+              <mat-error *ngIf="countryForm.controls['countryname'].hasError('minlength')">
+                Country Name must be at least 3 characters long.
+              </mat-error>
+              <mat-error *ngIf="countryForm.controls['countryname'].hasError('maxlength')">
+                Country Name only the max 50 characters can be entered.
+              </mat-error>
+              <mat-error *ngIf="countryForm.get('countryname').hasError('min')">
+                Please Enter Valid Input.
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Country Currency:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <mat-select name="countrycurrency" placeholder="Select Country Currency" formControlName="countrycurrency"
+                maxlength="3">
+                <mat-option [value]='country?.ccyid' *ngFor="let country of data?.countryCcy">
+                  {{country?.ccylnm}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="countryForm.get('countrycurrency').hasError('required')">
+                Select Country Currency
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>Swift Code:</label>
+            <mat-form-field appearance="outline" class="custom-branch-outline w-100">
+              <input autocomplete="off" matInput placeholder="Enter Swift Code" formControlName="swiftcode">
+              <mat-error *ngIf="countryForm.get('swiftcode').hasError('required')">
+                Enter Swift Code
+              </mat-error>
+              <mat-error *ngIf="countryForm.controls['swiftcode'].hasError('maxlength')">
+                Swift Code only the max 20 characters can be entered.
+              </mat-error>
+              <mat-error *ngIf="countryForm.controls['swiftcode'].hasError('minlength')">
+                Swift Code must be at least 5 characters long.
+              </mat-error>
+              <mat-error *ngIf="countryForm.get('swiftcode').hasError('min')">
+                Please Enter Valid Input.
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Country Limit</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input type="number" autocomplete="off" matInput placeholder="Enter Country Limit" formControlName="countrylimit">
+              <mat-error *ngIf="countryForm.get('countrylimit').hasError('required')">
+                Enter Country Limit
+              </mat-error>
+              <mat-error *ngIf="countryForm.get('countrylimit').hasError('min')">
+                Please Enter Country Limit greater than 0
+              </mat-error>
+              <mat-error *ngIf="countryForm.get('countrylimit').hasError('pattern')">
+                Please Enter Country Limit between 0.001 to 999999999999.999
+              </mat-error>
+            </mat-form-field>
+          </div>
+            <div class="col d-flex flex-column justify-content-center">
+              <mat-radio-group aria-label="Select an option" formControlName="recstatus" class="pt-4">
+                <mat-radio-button value="A" class="custom-radio">Active</mat-radio-button>
+                <mat-radio-button value="D" class="custom-radio">De -active</mat-radio-button>
+              </mat-radio-group>
+            </div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="cancel-button" type="button" (click)="onNoClick()">Cancel</button>
+          <button class="login-button" type="submit">Submit</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <!--******************************* add country dialogpop end******************************* -->
+
+    <!--******************************* edit country dialogpop start******************************* -->
+    <mat-dialog-content class="m-0 customheight" *ngIf="data?.dialogType == 'editcountry'">
+      <form [formGroup]="editcountryForm" (ngSubmit)="editcountry();">
+        <div class="row">
+          <div class="col">
+            <label><b>Country Id:</b></label>{{data.formData.cntcod}}
+          </div>
+          <div class="col">
+            <label><b>Country Name:</b></label>{{data.formData.cntnam}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Country Currency:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <mat-select name="food" placeholder="Select Country Currency" formControlName="countrycurrency"
+                maxlength="3">
+                <mat-option [value]='country?.ccyid' *ngFor="let country of data?.countryCcy">
+                  {{country?.ccylnm}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="editcountryForm.get('countrycurrency').hasError('required')">
+                Select Country Currency
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>Swift Code:</label>
+            <mat-form-field appearance="outline" class="custom-branch-outline w-100">
+              <input autocomplete="off" matInput placeholder="Enter Swift Code" formControlName="swiftcode">
+              <mat-error *ngIf="editcountryForm.get('swiftcode').hasError('required')">
+                Enter Swift Code
+              </mat-error>
+              <mat-error *ngIf="editcountryForm.controls['swiftcode'].hasError('maxlength')">
+                Swift Code only the max 20 characters can be entered.
+              </mat-error>
+              <mat-error *ngIf="editcountryForm.controls['swiftcode'].hasError('minlength')">
+                Swift Code must be at least 5 characters long.
+              </mat-error>
+              <mat-error *ngIf="editcountryForm.get('swiftcode').hasError('min')">
+                Please Enter Valid Input.
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Country Limit</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input type="number" autocomplete="off" matInput placeholder="Enter Country Limit" formControlName="countrylimit"
+              maxlength="16" minlength="3">
+              <mat-error *ngIf="editcountryForm.get('countrylimit').hasError('required')">
+                Enter Country Limit
+              </mat-error>
+              <mat-error *ngIf="editcountryForm.get('countrylimit').hasError('min')">
+                Please Enter Country Limit greater than 0
+              </mat-error>
+              <mat-error *ngIf="editcountryForm.get('countrylimit').hasError('pattern')">
+                Please Enter Country Limit between 0.001 to 999999999999.999
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col d-flex flex-column justify-content-center">
+            <mat-radio-group aria-label="Select an option" formControlName="recstatus" class="pt-4">
+              <mat-radio-button [checked]="data.formData.status=='A'" value="A" class="custom-radio">Active</mat-radio-button>
+              <mat-radio-button [checked]="data.formData.status=='D'" value="D" class="custom-radio">De -active</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="cancel-button" type="button" (click)="onNoClick()">Cancel</button>
+          <button class="login-button" type="submit">Update</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <!--******************************* edit country dialogpop end******************************* -->
+
+    <!--******************************* add country product dialogpop start******************************* -->
+    <mat-dialog-content class="m-0 custom-addcurrencyheight" *ngIf="data?.dialogType == 'addcountryproduct'">
+      <form [formGroup]="countryProductForm" (ngSubmit)="countryProduct();">
+        <div class="row">
+          <div class="col">
+            <label>Country:</label>
+            <mat-form-field appearance="outline" class="custom-branch-outline w-100">
+              <mat-select placeholder="Select Country" formControlName="countryid" maxlength="3">
+                <mat-option [value]='country?.cntid' *ngFor="let country of countrydata">
+                  {{country?.cntnam}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="countryProductForm.get('countryid').hasError('required')">
+                Select Country
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>Product Group:</label>
+            <mat-form-field appearance="outline" class="custom-branch-outline w-100">
+              <mat-select placeholder="Select Product Group" formControlName="productgroup"  (ngModelChange)="productGroupChanges($event)">
+                <mat-option [value]='p?.grpcod' *ngFor="let p of productgroups">
+                  {{p?.grpnam}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="countryProductForm.get('productgroup').hasError('required')">
+                Select Product Group
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Product:</label>
+            <mat-form-field appearance="outline" class="custom-branch-outline w-100">
+              <mat-select placeholder="Select Product" formControlName="productid">
+                <mat-option [value]='prodcuid?.prdid' *ngFor="let prodcuid of productList">
+                  {{prodcuid?.prdlnm}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="countryProductForm.get('productid').hasError('required')">
+                Select Product
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col d-flex flex-column justify-content-center">
+            <mat-radio-group aria-label="Select an option" formControlName="recstatus" class="pt-4">
+              <mat-radio-button value="A" class="custom-radio">Active</mat-radio-button>
+              <mat-radio-button value="D" class="custom-radio">De -active</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="cancel-button" type="button" (click)="onNoClick()">Cancel</button>
+          <button class="login-button" type="submit">Submit</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <!--******************************* add country product dialogpop end******************************* -->
+
+    <!--******************************* edit country product dialogpop start******************************* -->
+    <mat-dialog-content class="m-0 custom-currencyheight" *ngIf="data?.dialogType == 'editcountryProduct'">
+      <form [formGroup]="editcountryProductForm" (ngSubmit)="editcountryProduct();">
+        <div class="row">
+          <div class="col">
+            <label><b>Country :</b></label>{{data.editcntryprod.cntnam}}
+          </div>
+          <div class="col">
+            <label><b>Product Group :</b></label>{{data.editcntryprod.grpnam}}
+          </div>
+        </div>
+        <div class="row pt-3">
+          <div class="col">
+            <label><b>Product :</b></label>{{data.editcntryprod.prdlnm}}
+          </div>
+          <div class="col d-flex flex-column justify-content-center">
+            <mat-radio-group aria-label="Select an option" formControlName="recstatus">
+              <mat-radio-button value="A" class="custom-radio">Active</mat-radio-button>
+              <mat-radio-button value="D" class="custom-radio">De -active</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="cancel-button" type="button" (click)="onNoClick()">Cancel</button>
+          <button class="login-button" type="submit">Update</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <!--******************************* edit country product dialogpop end******************************* -->
+
+    <!--******************************* gold card dialogpop start******************************* -->
+    <mat-dialog-content class="m-0 customheight" *ngIf="data?.dialogType == 'addgold'">
+      <form [formGroup]="goldForm" (ngSubmit)="addGoldCard();">
+        <div class="row">
+          <div class="col">
+            <label>Card Type:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <mat-select name="food" placeholder="Select Card Type" formControlName="cardtype" maxlength="10">
+                <mat-option value='EDD'>
+                  EDD
+                </mat-option>
+                <mat-option value='CDD'>
+                  CDD
+                </mat-option>
+                <mat-option value='LITE'>
+                  LITE
+                </mat-option>
+                <mat-option value='ID'>
+                  ID
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="goldForm.get('cardtype').hasError('required')">
+                Select Card Type
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>Customer Name:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input autocomplete="off" matInput placeholder="Enter Customer Name" formControlName="customername">
+              <mat-error *ngIf="goldForm.get('customername').hasError('required')">
+                Enter Customer Name
+              </mat-error>
+              <mat-error *ngIf="goldForm.controls['customername'].hasError('maxlength')">
+                Customer Name only the max 50 characters can be entered.
+              </mat-error>
+              <mat-error *ngIf="goldForm.get('customername').hasError('min')">
+                Please Enter Valid Input.
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Id Type:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <mat-select name="food" placeholder="Select Id Type" formControlName="idtype" maxlength="15">
+                <mat-option value='Emirates'>
+                  Emirates Id
+                </mat-option>
+                <mat-option value='Passport'>
+                  Passport
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="goldForm.get('idtype').hasError('required')">
+                Select Id Type
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>Id Number:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input autocomplete="off" matInput placeholder="Enter Id Number" formControlName="idnumber">
+              <mat-error *ngIf="goldForm.get('idnumber').hasError('required')">
+                Enter Id Number
+              </mat-error>
+              <mat-error *ngIf="goldForm.controls['idnumber'].hasError('maxlength')">
+                Customer Name only the max 30 characters can be entered.
+              </mat-error>
+              <mat-error *ngIf="goldForm.get('idnumber').hasError('min')">
+                Please Enter Valid Input.
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Country:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <mat-select name="food" placeholder="Select Country" formControlName="countrycode" maxlength="10">
+                <mat-option [value]='country?.cntid' *ngFor="let country of countrydata">
+                  {{country?.cntnam}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="branchForm.get('countrycode').hasError('required')">
+                Select Country
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>Branch</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <mat-select name="food" placeholder="Select Branch" formControlName="branchcode" maxlenght="2">
+                <mat-option [value]='branch?.brnid' *ngFor="let branch of branchdata">
+                  {{branch?.brnnam}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="goldForm.get('branchcode').hasError('required')">
+                Select Branch
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Address:</label>
+            <mat-form-field appearance="outline" class="custom-branch-textarea-outline w-100">
+              <textarea matInput placeholder="Enter Address" formControlName="address"></textarea>
+              <mat-error *ngIf="goldForm.get('address').hasError('required')">
+                Enter Address
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>Mobile Number:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input autocomplete="off" matInput placeholder="Enter Mobile Number" formControlName="phonenumber"
+               (keypress)="numberOnly($event)">
+              <mat-error *ngIf="goldForm.get('phonenumber').hasError('required')">
+                Enter Mobile Number
+              </mat-error>
+              <mat-error *ngIf="countryForm.controls['countryname'].hasError('minlength')">
+                Mobile Number must be at least 10 Numbers long.
+              </mat-error>
+              <mat-error *ngIf="countryForm.controls['countryname'].hasError('maxlength')">
+                Mobile Number only the max 15 Numbers can be entered.
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Validity:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input matInput placeholder="Select Validity Date" [matDatepicker]="picker" formControlName="idexpdate" maxlength="8" [min]="date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-error *ngIf="goldForm.get('idexpdate').hasError('required')">
+                Select Validity Date
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col d-flex flex-column justify-content-center">
+            <mat-radio-group aria-label="Select an option" formControlName="cardstatus" class="pt-4">
+              <mat-radio-button value="A" class="custom-radio">Active</mat-radio-button>
+              <mat-radio-button value="D" class="custom-radio">De -active</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="cancel-button" type="button" (click)="onNoClick()">Cancel</button>
+          <button class="login-button" type="submit">Submit</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <!--******************************* gold card dialogpop end******************************* -->
+
+    <!--******************************* gold card dialogpop start******************************* -->
+    <mat-dialog-content class="m-0 editgold-height" *ngIf="data?.dialogType == 'updategold'">
+      <form [formGroup]="editGoldForm" (ngSubmit)="updategold11();">
+        <div class="row">
+          <div>
+            <label><b>Gold Card Number :</b> </label>&nbsp;&nbsp;{{data.updateGoldCard.gcmnumber}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Id Type:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <mat-select name="food" placeholder="Select Id Type" formControlName="idtype" maxlength="20">
+                <mat-option [value]="i.value" *ngFor="let i of idtypes">
+                  {{i.name}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="editGoldForm.get('idtype').hasError('required')">
+                Select Id Type
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>Id Number:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input autocomplete="off" matInput placeholder="Enter Id Number" formControlName="idnumber" maxlength="30">
+              <mat-error *ngIf="editGoldForm.get('idnumber').hasError('required')">
+                Enter Id Number
+              </mat-error>
+              <mat-error *ngIf="editGoldForm.controls['idnumber'].hasError('maxlength')">
+                Customer Name only the max 30 characters can be entered.
+              </mat-error>
+              <mat-error *ngIf="editGoldForm.get('idnumber').hasError('min')">
+                Please Enter Valid Input.
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Customer Name:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input autocomplete="off" matInput placeholder="Enter Customer Name" formControlName="customername" maxlength="50">
+              <mat-error *ngIf="editGoldForm.get('customername').hasError('required')">
+                Enter Customer Name
+              </mat-error>
+              <mat-error *ngIf="goldForm.controls['customername'].hasError('maxlength')">
+                Customer Name only the max 50 characters can be entered.
+              </mat-error>
+              <mat-error *ngIf="goldForm.get('customername').hasError('min')">
+                Please Enter Valid Input.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>Validity:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100" disabled>
+              <input matInput placeholder="Select Validity Date" [matDatepicker]="picker1" formControlName="idexpdate" [min]="date">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle >
+              <mat-datepicker #picker1></mat-datepicker>
+              <mat-error *ngIf="editGoldForm.get('idexpdate').hasError('required')">
+                Select Validity Date
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Card Type:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <mat-select name="food" placeholder="Select Card Type" formControlName="cardtype">
+                <mat-option [value]="i.value" *ngFor="let i of cardtype">
+                  {{i.name}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="editGoldForm.get('cardtype').hasError('required')">
+                Select Card Type
+              </mat-error>
+            </mat-form-field>
+          </div>
+            <div class="col d-flex flex-column justify-content-center">
+              <mat-radio-group aria-label="Select an option" formControlName="cardstatus" class="pt-3">
+                <mat-radio-button [checked]="data.updateGoldCard.gcmgcstat =='A'" value="A" class="custom-radio">Active</mat-radio-button>
+                <mat-radio-button [checked]="data.updateGoldCard.gcmgcstat =='D'" value="D" class="custom-radio">De -active</mat-radio-button>
+              </mat-radio-group>
+            </div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="cancel-button" type="button" (click)="onNoClick()">Cancel</button>
+          <button class="login-button" type="submit">Update</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <!--******************************* gold card dialogpop end******************************* -->
+
+
+    <!--******************************* Rates card dialogpop start******************************* -->
+    <mat-dialog-content class="m-0 rateheight" *ngIf="data?.dialogType == 'addrates'">
+      <form [formGroup]="rateForm" (ngSubmit)="rate();">
+        <div class="row">
+          <div class="col">
+            <label>Currency Group:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <mat-select name="currency group" placeholder=" Select Currency Group" formControlName="currencygroup"
+                (ngModelChange)="getCurrencyList($event)">
+                <mat-option [value]='c.ccygid' *ngFor="let c of currencylist">
+                  {{c.ccygid}} - {{c.grpnam}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="rateForm.get('currencygroup').hasError('required')">
+                Select Currency Group
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col">
+            <label>Currency:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <mat-select name="cuurencyname" placeholder=" Select Currency" formControlName="currencyid">
+                <mat-option [value]='d.ccyid' *ngFor='let d of currencyList'>
+                  {{d.ccylnm}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="rateForm.get('currencyid').hasError('required')">
+                Select Currency
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Currency Rate:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input type="number" autocomplete="off" matInput placeholder="Enter Currency Rate" formControlName="exchangerate" (blur)="checkingRates(rateForm)">
+              <mat-error *ngIf="rateForm.get('exchangerate').hasError('required')">
+                Enter Currency Rate
+              </mat-error>
+              <mat-error *ngIf="rateForm.get('exchangerate').hasError('min')">
+                Please Enter Rate greater than 0
+              </mat-error>
+              <mat-error *ngIf="rateForm.get('exchangerate').hasError('pattern')">
+                Please Enter Rate between 0.001 to 9999999.999
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>Lower Rate:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input type="number" autocomplete="off" matInput placeholder=" Enter Lower Rate" formControlName="lowerrate" (blur)="checkingRates(rateForm)">
+              <mat-error *ngIf="rateForm.get('lowerrate').hasError('required')">
+                Enter Lower Rate
+              </mat-error>
+              <mat-error *ngIf="rateForm.get('lowerrate').hasError('min')">
+                Please Enter Lower Rate greater than 0
+              </mat-error>
+              <mat-error *ngIf="rateForm.get('lowerrate').hasError('pattern')">
+                Please Enter Lower Rate between 0.001 to 9999999.999
+              </mat-error>
+            </mat-form-field>
+            <small class="text-danger" *ngIf="checking?.lower">{{checking?.lower}}</small>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Higher Rate:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input type="number" autocomplete="off" matInput placeholder=" Enter Higher Rate"  formControlName="higherrate" (blur)="checkingRates(rateForm)">
+              <mat-error *ngIf="rateForm.get('higherrate').hasError('required')">
+                Enter Higher Rate
+              </mat-error>
+              <mat-error *ngIf="rateForm.get('higherrate').hasError('min')">
+                Please Enter Higher Rate greater than 0
+              </mat-error>
+              <mat-error *ngIf="rateForm.get('higherrate').hasError('pattern')">
+                Please Enter Higher Rate between 0.001 to 9999999.999
+              </mat-error>
+            </mat-form-field>
+            <small class="text-danger" *ngIf="checking?.higher">{{checking?.higher}}</small>
+          </div>
+          <div class="col d-flex flex-column justify-content-center">
+            <mat-radio-group aria-label="Select an option" formControlName="recstatus" class="pt-4">
+              <mat-radio-button value="A" class="custom-radio">Active</mat-radio-button>
+              <mat-radio-button value="U" class="custom-radio">De -active</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="cancel-button" type="button" (click)="onNoClick()">Cancel</button>
+          <button class="login-button" type="submit">Submit</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <!--******************************* Rate dialogpop end******************************* -->
+
+    <!--*******************************Edit Rates card dialogpop start******************************* -->
+    <mat-dialog-content class="m-0 rateheight" *ngIf="data?.dialogType == 'editrates'">
+      <form [formGroup]="editrateForm" (ngSubmit)="editrate();">
+        <div class="row pt-3">
+          <div class="col">
+            <label><b>Currency Group:</b></label>{{data.formdata.grpnam}}
+          </div>
+          <div class="col">
+            <label><b>Currency :</b></label>{{data.formdata.ccylnm}}
+          </div>
+        </div>
+        <div class="row pt-3">
+          <div class="col">
+            <label>Currency Rate:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input type="number" autocomplete="off" matInput placeholder="Enter Currency Rate" formControlName="exchangerate" (blur)="checkingRates(editrateForm)">
+              <mat-error *ngIf="editrateForm.get('exchangerate').hasError('required')">
+                Enter Currency Rate
+              </mat-error>
+              <mat-error *ngIf="editrateForm.get('exchangerate').hasError('min')">
+                Please Enter Rate greater than 0
+              </mat-error>
+              <mat-error *ngIf="editrateForm.get('exchangerate').hasError('pattern')">
+                Please Enter Rate between 0.001 to 9999999.999
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>Lower Rate:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input type="number" autocomplete="off" matInput placeholder=" Enter Lower Rate" formControlName="lowerrate" (blur)="checkingRates(editrateForm)">
+              <mat-error *ngIf="editrateForm.get('lowerrate').hasError('required')">
+                Enter Lower Rate
+              </mat-error>
+              <mat-error *ngIf="editrateForm.get('lowerrate').hasError('min')">
+                Please Enter Lower Rate greater than 0
+              </mat-error>
+              <mat-error *ngIf="editrateForm.get('lowerrate').hasError('pattern')">
+                Please Enter Lower Rate between 0.001 to 9999999.999
+              </mat-error>
+            </mat-form-field>
+            <small class="text-danger" *ngIf="checking?.lower">{{checking?.lower}}</small>
+          </div>
+        </div>
+        <div class="row pt-3">
+          <div class="col">
+            <label>Higher Rate:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input type="number" autocomplete="off" matInput placeholder=" Enter Higher Rate" formControlName="higherrate" (blur)="checkingRates(editrateForm)">
+              <mat-error *ngIf="editrateForm.get('higherrate').hasError('required')">
+                Enter Higher Rate
+              </mat-error>
+              <mat-error *ngIf="editrateForm.get('higherrate').hasError('min')">
+                Please Enter Higher Rate greater than 0
+              </mat-error>
+              <mat-error *ngIf="editrateForm.get('higherrate').hasError('pattern')">
+                Please Enter Higher Rate between 0.001 to 9999999.999
+              </mat-error>
+            </mat-form-field>
+            <small class="text-danger" *ngIf="checking?.higher">{{checking?.higher}}</small>
+          </div>
+          <div class="col d-flex flex-column justify-content-center">
+            <mat-radio-group aria-label="Select an option" formControlName="recstatus" class="pt-4">
+              <mat-radio-button value="A" class="custom-radio">Active</mat-radio-button>
+              <mat-radio-button value="U" class="custom-radio">De-active</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="cancel-button" type="button" (click)="onNoClick()">Cancel</button>
+          <button class="login-button" type="submit">Update</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <!--*******************************Edit Rate dialogpop end******************************* -->
+
+
+    <!--******************************* addcharges dialogpop start******************************* -->
+    <mat-dialog-content class="m-0 editgold-height" *ngIf="data?.dialogType == 'addcharges'">
+      <form [formGroup]="chargesForm" (ngSubmit)="addCharges();">
+        <div class="row">
+          <div class="col">
+            <label>Product Group:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <mat-select name="productgroup" placeholder="Select Product Group" (ngModelChange)="productGroupChanges($event)"
+                formControlName="productgroup">
+                <mat-option [value]=g.grpcod *ngFor="let g of productgroups">
+                  {{g.grpcod}} - {{g.grpnam}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="chargesForm.get('productgroup').hasError('required')">
+                Select Product Group
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>Product :</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <mat-select name="productid" placeholder="Select Product" formControlName="productid">
+                <mat-option [value]=h.prdid *ngFor="let h of productList">
+                  {{h.prdlnm}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="chargesForm.get('productid').hasError('required')">
+                Select Product
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Currency Group:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <mat-select name="currencygroup" placeholder="Select Currency Group" formControlName="currencygroup" >
+                <mat-option [value]='c.ccygid' *ngFor="let c of currencylist" (onSelectionChange)="getCurrencyListFilter($event,c)">
+                  {{c.ccygid}} - {{c.grpnam}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="chargesForm.get('currencyid').hasError('required')">
+                Select Currency Group
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>Currency:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <mat-select name="Currency" placeholder="Select Currency" formControlName="currencyid">
+                <mat-option [value]=g.ccyid *ngFor="let g of currencyList">
+                  {{g.ccylnm}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="chargesForm.get('currencyid').hasError('required')">
+                Select Currency
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Transaction Amount:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input autocomplete="off" matInput placeholder="Enter Amount" formControlName="transamount">
+              <mat-error *ngIf="chargesForm.get('transamount').hasError('required')">
+                Enter Transaction Amount
+              </mat-error>
+              <mat-error *ngIf="chargesForm.get('transamount').hasError('min')">
+                Please Enter Amount greater than 0
+              </mat-error>
+              <mat-error *ngIf="chargesForm.get('transamount').hasError('pattern')">
+                Please Enter Amount between 0.001 to 99999999999.999
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>Charge Amount:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input autocomplete="off" matInput placeholder="Enter Charge Amount" formControlName="chargeamount">
+              <mat-error *ngIf="chargesForm.get('chargeamount').hasError('required')">
+                Enter Charge Amount
+              </mat-error>
+              <mat-error *ngIf="chargesForm.get('chargeamount').hasError('min')">
+                Please Enter Amount greater than 0
+              </mat-error>
+              <mat-error *ngIf="chargesForm.get('chargeamount').hasError('pattern')">
+                Please Enter Amount between 0.001 to 999.99
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col d-flex flex-column justify-content-center">
+            <mat-radio-group aria-label="Select an option" formControlName="recstatus" class="pt-2">
+              <mat-radio-button value="A" class="custom-radio">Active</mat-radio-button>
+              <mat-radio-button value="U" class="custom-radio">De-active</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="cancel-button" type="button" (click)="onNoClick()">Cancel</button>
+          <button class="login-button" type="submit">Submit</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <!--******************************* addcharges dialogpop end******************************* -->
+
+    <!--******************************* update charges dialogpop start******************************* -->
+    <mat-dialog-content class="m-0 rateheight" *ngIf="data?.dialogType == 'updatecharges'">
+      <form [formGroup]="updateChargesForm" (ngSubmit)="updateCharges();">
+        <div class="row pt-3">
+          <div class="col">
+            <label><b>Product Group:</b></label>{{data.formdata.prdgrp}}
+          </div>
+          <div class="col">
+            <label><b>Product :</b></label>{{data.formdata.prdlnm}}
+          </div>
+        </div>
+        <div class="row pt-3">
+          <div class="col">
+            <label><b>Currency Group:</b></label>{{data.formdata.ccygrp}}
+          </div>
+          <div class="col">
+            <label><b>Currency :</b></label>{{data.formdata.ccylnm}}
+          </div>
+        </div>
+        <div class="row pt-3">
+          <div class="col">
+            <label>Transaction Amount:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input type="number" autocomplete="off" matInput placeholder="Enter Amount" formControlName="transamount" readonly>
+              <mat-error *ngIf="updateChargesForm.get('transamount').hasError('required')">
+                Enter Amount
+              </mat-error>
+              <mat-error *ngIf="updateChargesForm.get('transamount').hasError('min')">
+                Please Enter Amount greater than 0
+              </mat-error>
+              <mat-error *ngIf="updateChargesForm.get('transamount').hasError('pattern')">
+                Please Enter Amount between 0.001 to 99999999999.999
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>Charge Amount:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input autocomplete="off" matInput placeholder="Enter Amount" formControlName="chargeamount">
+              <mat-error *ngIf="updateChargesForm.get('chargeamount').hasError('required')">
+                Enter Charge Amount
+              </mat-error>
+              <mat-error *ngIf="updateChargesForm.get('chargeamount').hasError('min')">
+                Please Enter Amount greater than 0
+              </mat-error>
+              <mat-error *ngIf="updateChargesForm.get('chargeamount').hasError('pattern')">
+                Please Enter Amount between 0.001 to 999.99
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col d-flex flex-column justify-content-center">
+            <mat-radio-group aria-label="Select an option" formControlName="recstatus" class="pt-4">
+              <mat-radio-button value="A" class="custom-radio">Active</mat-radio-button>
+              <mat-radio-button value="U" class="custom-radio">De -active</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="cancel-button" type="button" (click)="onNoClick()">Cancel</button>
+          <button class="login-button" type="submit">Update</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <!--******************************* update charges dialogpop end******************************* -->
+
+    <!--******************************* addcharges dialogpop start******************************* -->
+    <mat-dialog-content class="m-0 custom-roleheight" *ngIf="data?.dialogType == 'addroles'">
+      <form [formGroup]="rolesForm" (ngSubmit)="addRoles();">
+
+        <div class="row">
+
+          <div class="col">
+            <label>Role:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input autocomplete="off" type="text" matInput placeholder="Enter Role" formControlName="userrole" maxlength="10">
+              <mat-error *ngIf="rolesForm.get('userrole').hasError('required')">
+                Enter Role
+              </mat-error>
+              <mat-error *ngIf="rolesForm.get('userrole').hasError('pattern')">
+                Please Enter Only Charachers
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col d-flex flex-column justify-content-center">
+            <mat-radio-group aria-label="Select an option" formControlName="rolestatus" class=" pt-4">
+              <mat-radio-button value="A" class="custom-radio">Active</mat-radio-button>
+              <mat-radio-button value="D" class="custom-radio">De -active</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="cancel-button" type="button" (click)="onNoClick()">Cancel</button>
+          <button class="login-button" type="submit">Submit</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <!--******************************* addcharges dialogpop end******************************* -->
+
+    <!--******************************* addcharges dialogpop start******************************* -->
+    <mat-dialog-content class="m-0 custom-roleheight" *ngIf="data?.dialogType == 'editroles'">
+      <form [formGroup]="editrolesForm" (ngSubmit)="editRoles();">
+        <div>
+          <label><b>Role Id:</b> </label>{{data?.formdata.roleid}}
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Role:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input autocomplete="off" matInput placeholder="Enter Role" formControlName="userrole" pattern="^[a-zA-Z0-9]{0-10}">
+              <mat-error *ngIf="editrolesForm.get('userrole').hasError('required')">
+                Enter Role
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col d-flex flex-column justify-content-center">
+            <mat-radio-group aria-label="Select an option" formControlName="rolestatus" class="pt-4">
+              <mat-radio-button value="A" class="custom-radio">Active</mat-radio-button>
+              <mat-radio-button value="D" class="custom-radio">De -active</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="cancel-button" type="button" (click)="onNoClick()">Cancel</button>
+          <button class="login-button" type="submit">Update</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <!--******************************* addcharges dialogpop end******************************* -->
+
+    <!--******************************* add currency group dialogpop start******************************* -->
+    <mat-dialog-content class="m-0 custom-currencyheight" *ngIf="data?.dialogType == 'addcurrencygroup'">
+      <form [formGroup]="addCurrencyGroup" (ngSubmit)="addCurrencyGroup1();">
+        <div class="row">
+          <div class="col">
+            <label>Group Code</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input autocomplete="off" matInput placeholder="Enter Group Code" formControlName="groupcode">
+              <mat-error *ngIf="addCurrencyGroup.get('groupcode').hasError('required')">
+                Enter Group Code
+              </mat-error>
+              <mat-error *ngIf="addCurrencyGroup.controls['groupcode'].hasError('minlength')">
+                Group Code must be at least 3 characters long.
+              </mat-error>
+              <mat-error *ngIf="addCurrencyGroup.controls['groupcode'].hasError('maxlength')">
+                Group Code only the max 10 characters can be entered.
+              </mat-error>
+              <mat-error *ngIf="addCurrencyGroup.get('groupcode').hasError('min')">
+                Please Enter Valid Input.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>Group Name:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input autocomplete="off" matInput placeholder="Enter Group Name" formControlName="groupname">
+              <mat-error *ngIf="addCurrencyGroup.get('groupname').hasError('required')">
+                Enter Group Name
+              </mat-error>
+              <mat-error *ngIf="addCurrencyGroup.controls['groupname'].hasError('minlength')">
+                Group Name must be at least 3 characters long.
+              </mat-error>
+              <mat-error *ngIf="addCurrencyGroup.controls['groupname'].hasError('maxlength')">
+                Group Name only the max 50 characters can be entered.
+              </mat-error>
+              <mat-error *ngIf="addCurrencyGroup.get('groupname').hasError('min')">
+                Please Enter Valid Input.
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col d-flex flex-column justify-content-center">
+            <mat-radio-group aria-label="Select an option" formControlName="recstatus">
+              <mat-radio-button checked value="A" class="custom-radio">Active</mat-radio-button>
+              <mat-radio-button value="D" class="custom-radio">De-active</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="cancel-button" type="button" (click)="onNoClick()">Cancel</button>
+          <button class="login-button" type="submit">Submit</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+
+    <!--********************************edit currency group dialogpop start***************************-->
+    <mat-dialog-content class="m-0 custom-currencyheight" *ngIf="data?.dialogType == 'editCurrencyGroup1'">
+      <form [formGroup]="editCurrencyGroupForm" (ngSubmit)="editCurrencyGroup();">
+        <div class="row">
+        <div class="col">
+          <label><b>Group Code:</b></label>{{data.editGroupData.ccygid}}
+        </div>
+      </div>
+        <div class="row">
+          <div class="col">
+            <label>Group Name:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input autocomplete="off" matInput placeholder="Enter Group Name" formControlName="groupname">
+              <mat-error *ngIf="editCurrencyGroupForm.get('groupname').hasError('required')">
+                Enter Group Name
+              </mat-error>
+              <mat-error *ngIf="editCurrencyGroupForm.controls['groupname'].hasError('minlength')">
+                Group Name must be at least 3 characters long.
+              </mat-error>
+              <mat-error *ngIf="editCurrencyGroupForm.controls['groupname'].hasError('maxlength')">
+                Group Name only the max 50 characters can be entered.
+              </mat-error>
+              <mat-error *ngIf="editCurrencyGroupForm.get('groupname').hasError('min')">
+                Please Enter Valid Input.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col d-flex flex-column justify-content-center">
+            <mat-radio-group aria-label="Select an option" formControlName="recstatus" class="pt-3">
+              <mat-radio-button [checked]="data.editGroupData.status=='A'" value="A" class="custom-radio">Active</mat-radio-button>
+              <mat-radio-button [checked]="data.editGroupData.status=='D'" value="D" class="custom-radio">De -active</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="cancel-button" type="button" (click)="onNoClick()">Cancel</button>
+          <button class="login-button" type="submit">Update</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <!--******************************* edit currency group dialogpop end******************************* -->
+
+    <!--******************************* add currency list dialog pop start******************************* -->
+    <mat-dialog-content class="m-0 custom-addcurrencyheight" *ngIf="data?.dialogType == 'addCurrencylist'">
+      <form [formGroup]="CurrencylistForm" (ngSubmit)="currencylistGroup();">
+        <div>
+          <label><b>Group Code:</b></label>&nbsp;{{data.groupid}}
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Currency ID:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input autocomplete="off" matInput placeholder="Enter Currency Id" formControlName="currencycode">
+              <mat-error *ngIf="CurrencylistForm.get('currencycode').hasError('required')">
+                Enter Currency Id
+              </mat-error>
+              <mat-error *ngIf="CurrencylistForm.controls['currencycode'].hasError('maxlength')">
+                Currency Id only the max 3 characters can be entered.
+              </mat-error>
+              <mat-error *ngIf="CurrencylistForm.get('currencycode').hasError('min')">
+                Please Enter Valid Input.
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col">
+            <label>Currency Name:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input autocomplete="off" matInput placeholder="Enter Currency Name" formControlName="currencylname">
+              <mat-error *ngIf="CurrencylistForm.get('currencylname').hasError('required')">
+                Enter Currency Name
+              </mat-error>
+              <mat-error *ngIf="CurrencylistForm.controls['currencylname'].hasError('minlength')">
+                Currency Name must be at least 3 characters long.
+              </mat-error>
+              <mat-error *ngIf="CurrencylistForm.controls['currencylname'].hasError('maxlength')">
+                Currency Name only the max 50 characters can be entered.
+              </mat-error>
+              <mat-error *ngIf="CurrencylistForm.get('currencylname').hasError('min')">
+                Please Enter Valid Input.
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col d-flex flex-column justify-content-center">
+            <mat-radio-group aria-label="Select an option" formControlName="recstatus">
+              <mat-radio-button value="A" class="custom-radio">Active</mat-radio-button>
+              <mat-radio-button value="D" class="custom-radio">De -active</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="cancel-button" type="button" (click)="onNoClick()">Cancel</button>
+          <button class="login-button" type="submit">Submit</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <!--******************************* add currency list dialog pop end******************************* -->
+
+    <!--******************************* edit currency list dialog pop start******************************* -->
+    <mat-dialog-content class="m-0 custom-addcurrencyheight" *ngIf="data?.dialogType == 'editCurrencylist'">
+      <form [formGroup]="editCurrencylistForm" (ngSubmit)="editcurrencylistGroup();">
+        <div class="row">
+          <div class="col">
+            <label><b>Group Code:</b></label>{{data.editData.ccygid}}
+          </div>
+          <div class="col">
+            <label><b>Currency ID:</b></label>{{data.editData.ccyid}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Currency Name:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input autocomplete="off" matInput placeholder="Enter Currency Name" formControlName="currencylname">
+              <mat-error *ngIf="editCurrencylistForm.get('currencylname').hasError('required')">
+                Enter Currency Name
+              </mat-error>
+              <mat-error *ngIf="editCurrencylistForm.controls['currencylname'].hasError('minlength')">
+                Currency Name must be at least 3 characters long.
+              </mat-error>
+              <mat-error *ngIf="editCurrencylistForm.controls['currencylname'].hasError('maxlength')">
+                Currency Name only the max 50 characters can be entered.
+              </mat-error>
+              <mat-error *ngIf="editCurrencylistForm.get('currencylname').hasError('min')">
+                Please Enter Valid Input.
+              </mat-error>
+            </mat-form-field>
+          </div>
+            <div class="col d-flex flex-column justify-content-center">
+              <mat-radio-group aria-label="Select an option" formControlName="recstatus"  class="pt-4">
+                <mat-radio-button [checked]="data.editData.status =='A'" value="A" class="custom-radio">Active</mat-radio-button>
+                <mat-radio-button [checked]="data.editData.status =='D'" value="D" class="custom-radio">De -active</mat-radio-button>
+              </mat-radio-group>
+            </div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="cancel-button" type="button" (click)="onNoClick()">Cancel</button>
+          <button class="login-button" type="submit">Update</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <!--******************************* edit currency list dialog pop end******************************* -->
+
+    <!--******************************* add product group dialogpop start******************************* -->
+    <mat-dialog-content class="m-0 custom-currencyheight" *ngIf="data?.dialogType == 'addproductgroup'">
+      <form [formGroup]="addProduct" (ngSubmit)="addGroupProduct();">
+        <div class="row">
+          <div class="col">
+            <label>Group Code:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input autocomplete="off" matInput placeholder="Enter Group Code" formControlName="groupcode">
+              <mat-error *ngIf="addProduct.get('groupcode').hasError('required')">
+                Enter Group Code
+              </mat-error>
+              <mat-error *ngIf="addProduct.controls['groupcode'].hasError('maxlength')">
+                Group Code only the max 3 characters can be entered.
+              </mat-error>
+              <mat-error *ngIf="addProduct.get('groupcode').hasError('min')">
+                Please Enter Valid Input.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>Group Name:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input autocomplete="off" matInput placeholder="Enter Group Name" formControlName="groupname">
+              <mat-error *ngIf="addProduct.get('groupname').hasError('required')">
+                Enter Group Name
+              </mat-error>
+              <mat-error *ngIf="addProduct.controls['groupname'].hasError('minlength')">
+                Group Name must be at least 3 characters long.
+              </mat-error>
+              <mat-error *ngIf="addProduct.controls['groupname'].hasError('maxlength')">
+                Group Name only the max 50 characters can be entered.
+              </mat-error>
+              <mat-error *ngIf="addProduct.get('groupname').hasError('min')">
+                Please Enter Valid Input.
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col d-flex flex-column justify-content-center">
+            <mat-radio-group aria-label="Select an option" formControlName="recstatus">
+              <mat-radio-button value="A" class="custom-radio">Active</mat-radio-button>
+              <mat-radio-button value="D" class="custom-radio">De -active</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="cancel-button" type="button" (click)="onNoClick()">Cancel</button>
+          <button class="login-button" type="submit">Submit</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <!--******************************* add product group dialogpop end******************************* -->
+
+    <!--****************************edit product group *********************************-->
+    <mat-dialog-content class="m-0 custom-currencyheight" *ngIf="data?.dialogType == 'editProductStatus'">
+      <form [formGroup]="editProduct" (ngSubmit)="editGroupProduct();">
+        <div class="row">
+          <div class="col">
+            <label><b>Group Code:</b></label>{{data.editProductSts.grpcod}}
+          </div>
+          <div class="col">
+            <label>Group Name:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <input autocomplete="off" matInput placeholder="Enter Group Name" formControlName="groupname">
+              <mat-error *ngIf="editProduct.get('groupname').hasError('required')">
+                Enter Group Name
+              </mat-error>
+              <mat-error *ngIf="editProduct.controls['groupname'].hasError('minlength')">
+                Group Name must be at least 3 characters long.
+              </mat-error>
+              <mat-error *ngIf="editProduct.controls['groupname'].hasError('maxlength')">
+                Group Name only the max 50 characters can be entered.
+              </mat-error>
+              <mat-error *ngIf="editProduct.get('groupname').hasError('min')">
+                Please Enter Valid Input.
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col d-flex flex-column justify-content-center">
+            <mat-radio-group aria-label="Select an option" formControlName="recstatus">
+              <mat-radio-button [checked]="data.editProductSts.status =='A'" value="A" class="custom-radio">Active</mat-radio-button>
+              <mat-radio-button [checked]="data.editProductSts.status =='D'" value="D" class="custom-radio">De -active</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="cancel-button" type="button" (click)="onNoClick()">Cancel</button>
+          <button class="login-button" type="submit">Update</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+
+    <!--******************************* add product list dialog pop start******************************* -->
+    <mat-dialog-content class="m-0 group-currencyheight" *ngIf="data?.dialogType == 'addproduct'">
+      <form [formGroup]="addproductForm" (ngSubmit)="addproductSubmit();">
+        <div>
+          <label><b>Group Name:</b></label>{{data.productList.name}}
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Currency Group:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <mat-select name="food" placeholder="Select Currency Group" formControlName="currencygroup" maxlength="10">
+                <mat-option [value]='currecy.ccygid' *ngFor="let currecy of currencylist">
+                  {{currecy?.ccygid}} - {{currecy?.grpnam}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="addproductForm.get('currencygroup').hasError('required')">
+                Select Currency Group
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>Product :</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <mat-select name="food" placeholder="Select Product List" formControlName="productid" maxlength="10">
+                <mat-option [value]='product' *ngFor="let product of list" (onSelectionChange)="selectproduct($event,product)">
+                  {{product?.prdlnm}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="addproductForm.get('productid').hasError('required')">
+                Select Product List
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col d-flex flex-column justify-content-center">
+            <mat-radio-group aria-label="Select an option" formControlName="recstatus">
+              <mat-radio-button value="A" class="custom-radio">Active</mat-radio-button>
+              <mat-radio-button value="D" class="custom-radio">De -active</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="cancel-button" type="button" (click)="onNoClick()">Cancel</button>
+          <button class="login-button" type="submit">Submit</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <!--******************************* add product list dialog pop end******************************* -->
+
+    <!--******************************* edit product dialog pop start******************************* -->
+    <mat-dialog-content class="m-0 editproduct-customheight" *ngIf="data?.dialogType == 'editproduct'">
+      <form [formGroup]="editproductForm" (ngSubmit)="editproductSubmit();">
+        <div>
+          <label>Group Name:</label><b>{{data.productData.name}}</b>
+        </div>
+        <div class="row pt-3">
+          <div class="col">
+            <label>Currency Group:</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <mat-select name="food" placeholder="Select Currency Group" formControlName="currencygroup" maxlength="10">
+                <mat-option [value]='currecy.ccygid' *ngFor="let currecy of currencylist">
+                  {{currecy?.ccygid}} - {{currecy?.grpnam}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="editproductForm.get('currencygroup').hasError('required')">
+                Select Currency Group
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <label>Product :</label>
+            <mat-form-field appearance="outline" class="custom-branch-select-outline w-100">
+              <mat-select name="food" placeholder="Select Product List" formControlName="productid" maxlength="10">
+                <mat-option [value]='product.prdid' *ngFor="let product of list" (onSelectionChange)="selectproduct($event,product)">
+                  {{product?.prdlnm}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="editproductForm.get('productid').hasError('required')">
+                Select Product List
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col d-flex flex-column justify-content-center">
+            <mat-radio-group aria-label="Select an option" formControlName="recstatus">
+              <mat-radio-button [checked]="data.editProductLitst.status =='A'" value="A" class="custom-radio">Active</mat-radio-button>
+              <mat-radio-button [checked]="data.editProductLitst.status =='D'" value="D" class="custom-radio">De -active</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="text-center pt-4">
+          <button class="cancel-button" type="button" (click)="onNoClick()">Cancel</button>
+          <button class="login-button" type="submit">Update</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <!--******************************* edit product dialog pop end******************************* -->
+  </div>
+</div>

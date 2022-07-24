@@ -1,0 +1,123 @@
+<div class="common-transform">
+  <mat-card class="common-header" *ngIf="!foreignCreative">
+    <div class="row">
+      <div class="col-lg-3 col-md-3 col-4 d-flex flex-column">
+        <h6 class="pt-2 no-space">National Bond</h6>
+      </div>
+      <div class="col-lg-7 col-md-7 col-6">
+        <div class="text-center common-search">
+          <input type="text" placeholder="search" [(ngModel)]="email" (keyup)="search(email)">
+          <span class="material-icons search-icon">search</span>
+        </div>
+      </div>
+      <div *ngIf="!action" class="col-lg-2 col-md-2 col-2 d-flex flex-row-reverse justify-content-center">
+        <div class="pr-3 pt-2" matTooltip="Create Application"  matTooltipClass="example-tooltip-red">
+          <span class="material-icons cursor" (click)="createForm()">add</span>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+  <ng-container *ngIf="foreignCreative">
+    <span class="material-icons arrow-back" (click)="back()">arrow_back</span> <span class="pl-3">National Bond</span>
+    <form [formGroup]="nationalForm" #formDirective="ngForm" (ngSubmit)="onNationalBondSubmit(nationalForm);" class="mt-3"> 
+      <mat-card class="common-header">
+        <h6 class="p-2 no-space">Payment Information</h6>
+      </mat-card>
+      <mat-card class="creation-form registerHeight" id="style-4">
+        <div class="row pt-3">
+          <div class="col-lg-6">
+            <div class="form-group m-0" *ngIf="appno">
+              <label class="col-sm-4 common-label1">Application Number :</label>
+              <div appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                {{appno}}
+              </div>
+            </div>
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">Applicant Name :</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                <input matInput placeholder="Enter Applicant Name" formControlName="applicantname" maxlength="55"
+                  minlength="2" pattern="^[\sa-zA-Z]+$" [readonly]="update">
+                <mat-error *ngIf="nationalForm.get('applicantname').hasError('required')">
+                  Applicant Name is required
+                </mat-error>
+                <mat-error *ngIf="nationalForm.get('applicantname').hasError('pattern')">
+                  Enter Characters Only
+                </mat-error>
+                <mat-error *ngIf="nationalForm.get('applicantname').hasError('minlength')">
+                  Enter minimum 2 Characters
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">Mobile Number :</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                <input matInput placeholder="Enter Mobile Number" formControlName="applicantmobno" 
+                onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" minlength="8" maxlength="15" [readonly]="update">
+                <mat-error *ngIf="nationalForm.get('applicantmobno').hasError('required')">
+                  Mobile No is required
+                </mat-error>
+                <mat-error *ngIf="nationalForm.get('applicantmobno').hasError('minlength')">
+                  Enter minimum 8 Numbers
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">Number of units:</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline col-sm-6">
+                <input matInput placeholder="Enter Number of units" formControlName="applicationdetail"
+                  [(value)]="calculations.applicationdetail" pattern="^(?!(0))([0-9])+" [readonly]="update">
+                <mat-error *ngIf="nationalForm.get('applicationdetail').hasError('required')">
+                  Number Of units required
+                </mat-error>
+                <mat-error *ngIf="nationalForm.get('applicationdetail').hasError('pattern')">
+                  Only Numbers allowed doesn't start with 0
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">Amount :</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline   col-sm-6">
+                <input matInput formControlName="ticketamount" pattern="^([5-9]\d{2,}|[1-9]\d{2,})" readonly>
+                <mat-error *ngIf="nationalForm.get('ticketamount').hasError('pattern')">
+                  Amount must be greater than 100
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">Charges :</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                <input matInput formControlName="productcharges" readonly>
+              </mat-form-field>
+            </div>
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">Vat :</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                <input matInput formControlName="productvat"  readonly>
+              </mat-form-field>
+            </div>
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">Total :</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                <input matInput formControlName="total" [value]="calculations.total" readonly>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 d-flex flex-row justify-content-center pt-4">
+          <button type="button" class="cancel-button" *ngIf="!update" (click)="reset(formDirective)">Reset</button>
+          <button type="submit" class="label-button" *ngIf="!update">Save</button>
+          <!-- <button type="button" class="label-button" *ngIf="update">Update</button> -->
+        </div>
+        <div *ngIf="action===true" class="col-12 d-flex flex-row justify-content-center pt-4">
+          <button type="button" class="label-button" (click)="updateNbForm('A')">Authorize</button>
+          <button type="button" class="label-button" (click)="updateNbForm('R')">Reject</button>
+        </div>
+      </mat-card>
+    </form>
+  </ng-container>
+  <app-storetable [Header]='national' [nationallist]='nationaldata' (nationallistedit)="editForm($event)"
+    *ngIf="!foreignCreative"></app-storetable>
+</div>

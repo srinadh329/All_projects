@@ -1,0 +1,45 @@
+
+<form [formGroup]="CalForm">
+    <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Total</mat-label>
+          <input readonly matInput placeholder="Total" formControlName="total"  />
+          <mat-error *ngIf="CalForm.get('total')?.hasError('required')">Please Enter Name</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>gross_salary</mat-label>
+          <input type="number" matInput placeholder="Name" formControlName="gross_salary" (input)="calculateResultForm()" />
+          <mat-error *ngIf="CalForm.get('gross_salary')?.hasError('required')">Please Enter Name</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>hra</mat-label>
+          <input type="number" matInput placeholder="Name" formControlName="hra" (input)="calculateResultForm()" />
+          <mat-error *ngIf="CalForm.get('hra')?.hasError('required')">Please Enter hra</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>incentives</mat-label>
+          <input type="number" matInput placeholder="Name" formControlName="incentives" (input)="calculateResultForm()" />
+          <mat-error *ngIf="CalForm.get('incentives')?.hasError('required')">Please Enter incentives</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>pf</mat-label>
+          <input type="number" matInput placeholder="Name" formControlName="pf" (input)="calculateResultForm()" />
+          <mat-error *ngIf="CalForm.get('pf')?.hasError('required')">Please Enter pf</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>tax</mat-label>
+          <input type="number" matInput placeholder="Name" formControlName="tax" (input)="calculateResultForm()" />
+          <mat-error *ngIf="CalForm.get('tax')?.hasError('required')">Please Enter tax</mat-error>
+        </mat-form-field>
+      </p>
+</form>

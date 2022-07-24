@@ -1,0 +1,446 @@
+<div class="row">
+  <div class="col-lg-10 col-sm-12 col-md-12">
+    <section>
+      <div class="content-nav row fileselection ietop1 pt-3">
+        <div class="col-lg-12">
+          <!-- <div class="row ">
+            
+            <hr class="mt-0 hr-w hr1_bg">
+          </div> -->
+
+          <div class="row place-nav-c link-quick  headfont fon-16 fw-5">
+            <div class="col-lg-3 col-md-3 col-8 p-0 headfont fon-16 fw-4 col1-f pt-3 bc-icons-2 pl-1 ietop">
+
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 p-0 bg-none1">
+                      <!-- <li class="breadcrumb-item"><a class="bc-ic-tx homclr" href="#" routerLink="/home/">Home</a><i
+                          class="fas fa-angle-double-right mx-2 i_col fon-12" aria-hidden="true"></i></li> -->
+                      <li class="breadcrumb-item active"><a class="bc-ic-tx homclrt"
+                          (click)="navigateUp('root')">Favourites</a>
+                        <i class="fas fa-angle-double-right mx-2 i_col fon-12" aria-hidden="true"></i> </li>
+                      <li class="breadcrumb-item" *ngFor="let p of currentPath"><a class="bc-ic-tx"
+                          (click)="navigateUp(p)">{{p.name}}</a><i class="fas fa-angle-double-right mx-2 i_col fon-12"
+                          aria-hidden="true"></i></li>
+                    </ol>
+                  </nav>
+            </div>
+            <div class="col-lg-9 col-md-9 col-4 p-0" id="filesList">
+              <ul class="li_place1 ul-t float-right mb-0 pt-3 p-0">
+                <li *ngIf="gridicon" id="filesList">
+                  <img src="assets/images/menu.png"
+                    (click)="gridicon=false;listicon=true;listview=true;gridview=false;showactionimg1=false;filehightlight='none'"
+                    class="pb-1">
+                </li>
+                <li *ngIf="listicon" id="filesList">
+                  <img src="assets/images/Group2302.png"
+                    (click)="gridicon=true;listicon=false;listview=false;gridview=true;showactionimg1=false;filehightlight='none'"
+                    class="pb-1">
+                </li>
+              </ul>
+              <ul class="li_place ul-t float-right mb-0 pt-3 p-0 d-none d-sm-none d-md-block" *ngIf="filearr.length || folderarr.length">
+
+                <li *ngIf="!((filearr.length>1 || folderarr.length>1)||(filearr.length==1 && folderarr.length==1))" id="filesList">
+                 
+
+                 
+                      <i class="fas fa-share-alt  pl-point" (click)="shareElement(element);"  matTooltipClass="example-tooltip-red"  matTooltip="Share" aria-label="Button that displays a red tooltip when focused or hovered over"></i>
+                  
+
+
+                </li>
+                <li *ngIf="!((filearr.length>1 || folderarr.length>1)||(filearr.length==1 && folderarr.length==1)) && (element && element.isFile)" id="filesList">
+                
+
+
+                   
+                        <i  class="fas fa-download  pl-point" data-toggle="modal" data-target=".download-pdf"
+                        (click)="setDownload(element);"  matTooltipClass="example-tooltip-red"  matTooltip="Download" aria-label="Button that displays a red tooltip when focused or hovered over"></i>
+                    
+  
+
+
+
+
+                </li>
+
+                <li *ngIf="!((filearr.length>1 || folderarr.length>1)||(filearr.length==1 && folderarr.length==1))" id="foldersList">
+                
+
+
+                
+                      <i class="fas fa-trash-alt  pl-point" (click)="deleteElement(element);"  matTooltipClass="example-tooltip-red"  matTooltip="Delete" aria-label="Button that displays a red tooltip when focused or hovered over"></i>
+                
+
+
+
+                </li>
+                <li *ngIf="!((filearr.length>1 || folderarr.length>1)||(filearr.length==1 && folderarr.length==1))">
+                  <a class="" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    <i id="filesList" class="fas fa-ellipsis-h  pl-point"></i>
+                  </a>
+                  <div class="dropdown-menu dropdown-primary arrow_box arrow-txt">
+                    <a class="dropdown-item" *ngIf="element && element.isFolder">
+                      <img class="icncss" src="assets/images/Group2479.png">
+                      <span class="fon-12 pop-i" (click)="navigate(element)">Open</span></a>
+
+                    <a class="dropdown-item" *ngIf="element && !element.isFolder">
+                      <i class="fa fa-eye icncss"></i>
+                      <span class="fon-12 pop-i" (click)="getFileContent(element)">Preview</span></a>
+                    <div class="dropdown-divider"></div>
+
+                    <a class="dropdown-item" *ngIf="element && element.isfavorite">
+                      <i class="fas fa-folder-minus icncss  pl-point"></i>
+                      <span class="fon-12 pop-i" (click)="Removefavorite(element)">Removefavorite</span></a>
+
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" *ngIf='element && element.isFolder'>
+                      <i class="fa fa-folder icncss  pl-point"></i>
+                      <span class="fon-12 pop-i" (click)="move(element);">Move</span></a>
+                    <a class="dropdown-item">
+                      <i class="fa fa-pencil-square-o icncss  pl-point"></i>
+                      <span class="fon-12 pop-i" (click)="openRenameDialog(element);">Rename</span></a>
+
+                  </div>
+                </li>
+
+              </ul>
+              <ul *ngIf="((filearr.length>1 || folderarr.length>1)||(filearr.length==1 && folderarr.length==1))" class="li_place ul-t float-right mb-0 pt-3 p-0 pl-point">
+                <li>
+                  <i class="fas fa-trash-alt  pl-point" id="foldersList" (click)="deleteSlectedElement()"></i>
+                </li>
+              </ul>
+            </div>
+            <hr class="mt-0 hr-w">
+          </div>
+        </div>
+      </div>
+      <div class="row m-0" *ngIf="listview"  [ngClass]="{'main-nav-position': !iebrowser}">
+        <div class="table-responsive">
+          <table class="table table_space table-fixed cntraln w-100 d-block d-md-table table-responsive">
+            <thead class="thcolor" *ngIf="folderElements!=0|| fileData!=0">
+              <tr>
+                <th class="table_td_pad tblwdth">
+                  Name
+                  <i class="fa fa-caret-up pl-point caret-up-pos" aria-hidden="true"
+                    (click)="sortDataAsc();uparrow=true;dateSort=false;nameSort=true;"
+                    [ngClass]="{'caret-up-pos-active' :uparrow && nameSort }"></i>
+                  <i class="fa fa-caret-down caret-down-pos pl-point" aria-hidden="true"
+                    (click)="sortDataDsc();uparrow=false;dateSort=false;nameSort=true;"
+                    [ngClass]="{'caret-down-pos-active' :  !uparrow && nameSort}"></i>
+                </th>
+
+                <th scope="col" class="table_td_pad tblwdth">Members</th>
+
+                <th class="table_td_pad tblwdth">
+                  Modified
+                  <i class="fa fa-caret-up pl-point caret-up-pos" aria-hidden="true"
+                    (click)="sortByModifiedAsc();dateuparrow=true;dateSort=true;nameSort=false;"
+                    [ngClass]="{'caret-up-pos-active' :dateuparrow && dateSort }"></i>
+                  <i class="fa fa-caret-down caret-down-pos pl-point" aria-hidden="true"
+                    (click)="sortByModifiedDsc();dateuparrow=false;dateSort=true;nameSort=false;"
+                    [ngClass]="{'caret-down-pos-active' : !dateuparrow && dateSort}"></i>
+                </th>
+
+
+                <th scope="col" class="table_td_pad">
+                  File Size
+                </th>
+              </tr>
+            </thead>
+            <tbody class="tdatacol headfont fon-14 fw-4 pl-point">
+              <tr class="showbutton" *ngFor="let element of folderElements" [dndDraggable]="element"
+                dndEffectAllowed="move" dndDropzone (dndDrop)="onDrop($event,element)"
+                (contextmenu)="openMenufolder($event,element)"  (touchend)="openMenufolder1($event,element)" (dblclick)="navigate(element)"
+                (click)="multiselectpdf(element,$event);highlightRow(element)"
+                [ngClass]="{'highlight' : getHighlight(element)}" id="foldersList">
+
+                <th scope="row" class="th-left full-tab txt-ellip th-space" id="foldersList">
+                  <img src="assets/images/Group3389.png" class="pr-3" id="foldersList"> {{element.name}}
+                  <!-- <i class="far fa-star hidebutton i_col"></i> -->
+                </th>
+
+                <td class="table_td_pad full-tab table-mr pt-25" id="foldersList">me
+                </td>
+
+
+                <td class="table_td_pad full-tab pt-25" id="foldersList">{{element.updatedAt|date:'MMM d, y, h:mm a'}}
+
+                  <div id="foldersList" style="position: fixed" [style.left]="contextMenuPosition.x"
+                    [style.top]="contextMenuPosition.y"
+                    [matMenuTriggerFor]="((filearr.length>1 || folderarr.length>1)||(filearr.length==1 && folderarr.length==1)) ? contextMenu1 : contextMenu"
+                    [matMenuTriggerData]="{element: element}">
+                  </div>
+                </td>
+                <td class="table_td_pad td-right full-tab" id="foldersList">--</td>
+
+              </tr>
+              <tr class="showbutton" *ngFor="let element of fileData" [dndDraggable]="element" dndEffectAllowed="move"
+                (dblclick)="getFileContent(element)" (contextmenu)="openMenufolder($event,element);" (touchend)="openMenufolder1($event,element)"
+                (click)="multiselectpdf(element,$event);highlightRow(element)"
+                [ngClass]="{'highlight' : getHighlight(element)}" id="filesList">
+                <th scope="row" class="th-left full-tab txt-ellip th-space" id="filesList">
+
+                  <img src="assets/images/Group2332.png" class="pr-3 space12" id="filesList"> {{element.name}}
+                  <!-- <i class="far fa-star hidebutton i_col"></i> -->
+                </th>
+
+                <td class="table_td_pad  table-mr full-tab pt-25" id="filesList">me
+                  <!-- <button class="btn  btn-sm hidebutton sh-none hide-bgbt">Share</button> -->
+                  <!-- <img src="assets/images/view.png" class="hidebutton"> -->
+                </td>
+
+
+                <td class="table_td_pad full-tab pt-25" id="filesList">{{element.updatedAt|date:'MMM d, y, h:mm a'}}
+                  <div style="position: fixed" id="filesList" [style.left]="contextMenuPosition.x"
+                    [style.top]="contextMenuPosition.y"
+                    [matMenuTriggerFor]="((filearr.length>1 || folderarr.length>1)||(filearr.length==1 && folderarr.length==1)) ? contextMenu1 : contextMenu"
+                    [matMenuTriggerData]="{element: element}">
+                  </div>
+                </td>
+
+                <td class="table_td_pad td-right full-tab" id="filesList">{{element.size | filesize}}</td>
+
+              </tr>
+            </tbody>
+
+          </table>
+        </div>
+      </div>
+      <div class="row pt1-8 mrgnt0p" *ngIf=" !isloading && folderElements.length==0 && fileData.length==0">
+        <div class="col-lg-3 col-md-12 col-sm-12 m-auto"> <img src="assets/images/noitems.png" width="100%"></div>
+      </div>
+      <div class="loader1" *ngIf="isloading"></div>
+
+      <div *ngIf="gridview">
+        <div *ngIf="folderElements!=0 || fileData!=0">
+          <div class="row headfont fon-16 fw-5 col1-f link-quick mt-3  "  [ngClass]="{'main-nav-position': !iebrowser}" *ngIf="folderElements!=0">
+            <p class="mb-0 fntwgt">Folders</p>
+            <hr class="mt-0 hr-w">
+          </div>
+
+          <div class="row mt-2 folder-s headfont fon-14 fw-7 col2-f">
+            <div class="col-lg-2 col-md-6 col-6 shw-border colwdth" *ngFor="let element of folderElements">
+
+              <div class="foldrstruct bg-fff pl-point" id="foldersList" (dblclick)="navigate(element)"
+                (contextmenu)="openMenufolder($event,element); $event. preventDefault();" (touchend)="openMenufolder1($event,element); $event. preventDefault();"
+                [ngClass]="{'highlight' : getHighlight(element) , 'shw-border' : element._id == filehightlight}"
+                (click)="multiselectpdf(element,$event);highlightRow(element)">
+
+                <img src="assets/images/Group3389.png" class="folderimg noborder">
+
+                <span class="pl-3 x no-b noborder txtwdth " matTooltip="{{element.name}}"
+                  matTooltipClass="example-tooltip-red" matTooltipPosition="below" [matTooltipDisabled]="matttoltip"
+                  aria-tooltip="Button that displays and hides a tooltip triggered by other buttons"
+                  id="foldersList">{{element.name}}
+
+                </span>
+
+
+              </div>
+              <span style="position: fixed" [style.left]="contextMenuPosition.x" [style.top]="contextMenuPosition.y"
+                id="foldersList"
+                [matMenuTriggerFor]="((filearr.length>1 || folderarr.length>1)||(filearr.length==1 && folderarr.length==1)) ? contextMenu1 : contextMenu"
+                [matMenuTriggerData]="{element: element}">
+              </span>
+
+            </div>
+
+          </div>
+
+          <div class="row headfont fon-16 fw-5 col1-f link-quick" [ngClass]="{'main-nav-position': !iebrowser &&folderElements && folderElements.length==0}" *ngIf="fileData!=0">
+            <p class="mb-0 fntwgt">Files</p>
+            <hr class="mt-0 hr-w">
+          </div>
+          <div class="row mt-2 folder-s headfont fon-16 fw-5 col3-f">
+
+            <div class="col-lg-2 col-md-6 col-6 latest-blog-thum-3 colwdth"
+              *ngFor="let element of fileData" id="filesList" (dblclick)="getFileContent(element)"
+              (click)="multiselectpdf(element,$event);highlightRow(element)">
+
+
+             
+
+              <div class="bg-fff fix-h pl-point imagecss" [ngClass]="{'highlight' : getHighlight(element)}"
+                (contextmenu)="openMenufolder($event,element);"  (touchend)="openMenufolder1($event,element)"  id="filesList">
+                <img class=" convertimg" src="{{element.thumbnail}}" onerror="this.src='assets/images/pdf-image.png' "
+                  width="100%" id="filesList">
+              </div>
+              <p class="pt-2 txt-ellip1 th-space" id="filesList "  matTooltip="{{element.name}}" matTooltipClass="home-example-tooltip-red" [matTooltipDisabled]="matttoltip"
+              matTooltipPosition="above"  aria-label="Button that displays a tooltip when focused or hovered over">{{element.name}}</p>
+
+              <!-- <a  class="social-media-tooltips bor-none">
+                  <span  class="social-media-tooltipstext">{{element.name}}</span>
+              <p class="text-center pt-2 txt-ellip th-space" id="filesList">{{element.name}}</p>
+
+</a> -->
+
+            </div>
+            <div style="position: fixed" id="filesList" [style.left]="contextMenuPosition.x"
+              [style.top]="contextMenuPosition.y"
+              [matMenuTriggerFor]="((filearr.length>1 || folderarr.length>1)||(filearr.length==1 && folderarr.length==1)) ? contextMenu1 : contextMenu"
+              [matMenuTriggerData]="{element: element}">
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <mat-menu #contextMenu="matMenu" class="contx-col" style="z-index:0">
+        <ng-template matMenuContent let-element="matmenu">
+          <!-- <button mat-menu-item (click)="move(matmenu)">
+                                    <mat-icon>open_with</mat-icon>
+                                    <span>Move To</span>
+                                  </button> -->
+         <button mat-menu-item (click)="getFileContent(matmenu)" class="scrl11" *ngIf=' matmenu && !matmenu.isFolder'>
+           <mat-icon>visibility</mat-icon>
+          <span>Preview</span>
+          </button>
+          <button mat-menu-item (click)="navigate(matmenu)" class="scrl11" *ngIf=' matmenu && matmenu.isFolder'>
+              <mat-icon>visibility</mat-icon>
+             <span>Open</span>
+             </button>
+          <button mat-menu-item (click)="shareElement(matmenu);">
+            <mat-icon>share</mat-icon>
+            <span>share</span>
+          </button>
+          <button mat-menu-item (click)="openRenameDialog(matmenu)">
+            <mat-icon>edit</mat-icon>
+            <span>Rename</span>
+          </button>
+          <button mat-menu-item (click)="deleteElement(matmenu)">
+            <mat-icon>delete</mat-icon>
+            <span>Delete</span>
+          </button>
+          <button *ngIf="matmenu && !matmenu.isFolder" mat-menu-item data-toggle="modal" data-target=".download-pdf"
+            (click)="setDownload(matmenu)">
+            <mat-icon>save_alt</mat-icon>
+            <span>Download</span>
+          </button>
+
+          <div>
+            <button mat-menu-item (click)="Removefavorite(matmenu)">
+              <mat-icon>star</mat-icon>
+              <span>Remove from  favorites</span>
+            </button>
+          </div>
+        </ng-template>
+      </mat-menu>
+
+      <mat-menu #contextMenu1="matMenu" class="contx-col" style="z-index:0;">
+        <ng-template matMenuContent let-element="matmenu">
+            <button  mat-menu-item (click)="multiFavorite(false)">
+                <mat-icon>star</mat-icon>
+                <span>Remove from  favorites</span>
+              </button>
+              <button mat-menu-item (click)="multishareElement()">
+                <mat-icon>share</mat-icon>
+                <span>share</span>
+              </button>
+          <!-- <button mat-menu-item (click)="multiSelectMove()">
+                                      <mat-icon>open_with</mat-icon>
+                                      <span>Move To</span>
+                                    </button> -->
+                                    
+          <button mat-menu-item (click)="deleteSlectedElement()">
+            <mat-icon>delete</mat-icon>
+            <span>Delete</span>
+          </button>
+        </ng-template>
+      </mat-menu>
+
+    </section>
+  </div>
+</div>
+<div class="modal fade download-pdf" id="savetemp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header mod-head-bg">
+        <h4 class="modal-title w-100 add-new-emp-pop" id="myModalLabel">Download PDF</h4>
+        <button type="button" class="close " id="savetempclose" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="white-colr">&times;</span>
+        </button>
+        <!-- <button type="button" class="close " hidden id="browsermodelclose1"  (click)="uploadFileBrowser('document');"  data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="white-colr">&times;</span>
+        </button> -->
+      </div>
+      <div class="modal-body pop-height">
+        <!-- ===================field-----starts========================== -->
+        <div class="dwnload-form">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="form-group row">
+              <div class="col-md-5 col-sm-5 col-xs-12">
+                <label class="col-form-label" for="inputPassword">Download To</label>
+              </div>
+              <div class="col-md-7 col-sm-7 col-xs-12">
+                <select name="downloadType" class="form-control" [(ngModel)]="downloadType">
+                  <option selected value="computer">Computer</option>
+                  <option value="attachment" id="">Send Email Attachemnt</option>
+                  <option value="drive">Google Drive</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-5 col-sm-5 col-xs-12"> </div>
+              <div class="col-md-7 col-sm-7 col-xs-12">
+                <input type="text" class="form-control input-box" *ngIf="downloadType == 'attachment'"
+                  [(ngModel)]="email" #emailcheck="ngModel" placeholder="Enter Email"
+                  pattern="([A-Za-z]|[0-9])[A-Za-z0-9.-]+[A-Za-z0-9]@((?:[-a-z0-9]+\.)+[a-z]{2,})">
+                <!-- <div ><p class="text-danger sml-danger-txt nunito-font" *ngIf=" emailcheck.errors.pattern">Invalid
+              Email </p></div> -->
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+            <div class="form-group row">
+              <div class="col-md-5 col-sm-5 col-xs-12">
+                <label class="col-form-label" for="inputPassword">Version</label>
+              </div>
+              <div class="col-md-7 col-sm-7 col-xs-12">
+                <select name="downloadFile" class="form-control" [(ngModel)]="downloadFile">
+                  <option selected value="current">Current Version</option>
+                  <option value="withoutchanges">Orginal File with out changes</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngIf="downloadFile == 'current'">
+            <div class="form-group row">
+              <div class="col-md-5 col-sm-5 col-xs-12">
+                <label class="col-form-label" for="inputPassword">Attach with Log</label>
+              </div>
+              <div class="col-md-7 col-sm-7 col-xs-12">
+                <input type="checkbox" class="checkmark" id="inputPassword" name="withlog" [(ngModel)]="withlog">
+              </div>
+            </div>
+          </div>
+          <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="form-group row">
+              <div class="col-md-5 col-sm-5 col-xs-12">
+                <label class="col-form-label" for="inputPassword">Set PDF Password</label>
+              </div>
+              <div class="col-md-7 col-sm-7 col-xs-12">
+                <input type="checkbox" class="checkmark" id="inputPassword" name="pdfPinSet" [(ngModel)]="pdfPinSet">
+                <input type="text" *ngIf="pdfPinSet" class="form-control input-box t-pad" id="inputPassword"
+                  name="pdfPin" [(ngModel)]="pdfPin" placeholder="Set Password">
+              </div>
+            </div>
+          </div> -->
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+          <button class="sav-but-in-new-temp b0utnstyle" *ngIf="downloadType == 'computer'"
+            (click)="pdfDownload()">Download</button>
+          <button class="sav-but-in-new-temp b0utnstyle" *ngIf="downloadType == 'attachment'" (click)="pdfDownload(email)">Send
+            Attachment</button>
+          <button class="sav-but-in-new-temp b0utnstyle" *ngIf="downloadType == 'drive'" (click)="exporttodrive()">Export To
+            Drive</button>
+
+        </div>
+      </div>
+      <!-- ===================field-----ends========================== -->
+    </div>
+
+  </div>
+</div>

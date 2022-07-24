@@ -1,0 +1,97 @@
+/*navbar css*/
+.home-navbar-fixed {
+    position: absolute;
+    z-index: 9;
+    top: 0;
+    width: 100%;
+    padding: 20px 0;
+    border-bottom: 3px solid #00000021;
+}
+.custom-download{
+    background-color: #3c86ff;
+    border-radius: 7px;
+    border: none;
+}
+.learn-button{
+    background-color: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+  }  
+/*navbar css*/
+
+/*home banner css*/
+.home-banner{
+    background-image: url(images/homebanner.png);
+    height: 100%;
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center top;
+    position: relative;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+/*home banner css*/
+/*home banner section css*/
+.section1{
+    background-color: #7e57c2;
+    text-align: center;
+    padding: 46px;
+    color: #fff;
+}
+.section2{
+    background-color: #ab46bc;
+    text-align: center;
+    padding: 46px;
+    color: #fff;
+}
+.section3{
+    background-color: #26a59a;
+    text-align: center;
+    padding: 46px;
+    color: #fff;
+}
+.section4{
+    background-color: #28b6f6;
+    text-align: center;
+    padding: 46px;
+    color: #fff;
+}
+/*home banner section css*/
+
+/*why us section css*/
+.why-section{
+    background-color: #f5f5f5;
+    padding: 60px 0;
+}
+/*why us section css*/
+/*planning sections css*/
+.planning{
+  background-color: #3c86ff;
+    padding: 60px 0;
+}
+/*planning sections css*/
+/*our best project  css*/
+
+.project-section{
+      padding: 60px 0;
+      background-color: #fff;
+}
+.Porject-image img{
+width: 330px;
+}
+/*our best project  css*/
+
+.footer-section{
+        color: #fff;
+    background-color: #303e9f;
+    padding: 12px 0;
+}
+.footer-section2{
+        color: #fff;
+    background-color: #263181;
+    padding: 6px 0;
+}

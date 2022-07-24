@@ -1,0 +1,100 @@
+-- FUNCTION: store.getcurrencyrates(character varying, numeric, character varying)
+
+-- DROP FUNCTION store.getcurrencyrates(character varying, numeric, character varying);
+
+CREATE OR REPLACE FUNCTION store.getcurrencyrates(
+	createduser character varying,
+	branchid numeric,
+	prodid character varying)
+    RETURNS TABLE(loginuser character varying, branch numeric, productid character varying, currencyid character varying, currencyrate numeric, charges numeric) 
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+    ROWS 1000
+AS $BODY$
+           begin
+		         if exists(select a.loginid,b.brnid,b.prdgrp,c.prdid from admin.usrmas a 
+						   inner join admin.brnmas b on a.brnid = b.brnid
+						   inner join admin.prdmas c on b.prdgrp = c.prdgrp
+						   where a.loginid = createduser  and b.brnid = branchid and c.prdid = prodid) then
+						   
+						    return query select c.loginid,c.brnid,b.prdid,d.ccyid,e.ccyrat,f.chgamt
+							from admin.brnmas a 
+							inner join admin.prdmas b on a.prdgrp = b.prdgrp
+							inner join admin.ccymas d on b.ccygrp = d.ccygid
+							inner join admin.ratmas e on e.ccyid = d.ccyid
+							inner join admin.usrmas c on a.brnid = c.brnid
+							inner join admin.chgmas f on b.prdid =f.prdid
+						    where c.loginid = createduser and c.brnid = branchid and b.prdid = prodid;
+				     else raise exception 'Invalid User';
+					 
+			     end if;
+		   end
+  $BODY$;
+
+ALTER FUNCTION store.getcurrencyrates(character varying, numeric, character varying)
+    OWNER TO postgres;
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: store.getcurrencyrates(character varying, numeric, character varying)
+
+-- DROP FUNCTION store.getcurrencyrates(character varying, numeric, character varying);
+
+CREATE OR REPLACE FUNCTION store.getcurrencyrates(
+	createduser character varying,
+	branchid numeric,
+	prodid character varying)
+    RETURNS TABLE(productgrp character varying, productid character varying, currencygrp character varying, currencyid character varying, currencyrate numeric, chargeamount numeric) 
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+    ROWS 1000
+AS $BODY$
+   Declare productgroup character varying;
+           currencygroup character varying;
+           begin
+		   
+		         if exists(select a.loginid,b.brnid,b.prdgrp,c.prdid from admin.usrmas a 
+						   inner join admin.brnmas b on a.brnid = b.brnid
+						   inner join admin.prdmas c on b.prdgrp = c.prdgrp
+						   where a.loginid ILIKE createduser  and b.brnid = branchid and c.prdid ILIKE prodid) then
+						   
+						   select a.prdgrp,c.ccygid into productgroup,currencygroup
+						   from admin.brnmas a
+						                      inner join admin.prdmas b on a.prdgrp = b.prdgrp
+						                      inner join admin.ccymas c on b.ccygrp = c.ccygid
+						                      inner join admin.ratmas d on c.ccygid = d.ccygrp
+						   where a.brnid = branchid and b.prdid = prodid limit 1;
+						   
+						   if exists(select * from admin.prdmas a 
+									                             inner join admin.ratmas b on a.ccygrp = b.ccygrp
+                                     where a.prdgrp = productgroup and a.prdid = prodid and b.ccygrp = currencygroup) then
+
+						   
+						    return query select distinct a.prdgrp,a.prdid,b.ccygrp,b.ccyid,b.ccyrat,c.chgamt
+                                         from admin.prdmas a 
+                                                            left join admin.ratmas b on a.ccygrp = b.ccygrp
+					                                        left join admin.chgmas c on  a.prdgrp = c.prdgrp and a.prdid = c.prdid
+                                         where a.prdgrp = productgroup and a.prdid = prodid and b.ccygrp = currencygroup;
+										 
+										 
+										 
+								else raise exception 'Rates/Currency not configured for this user';
+							end if;	
+				     else raise exception 'Invalid User';
+					 
+			     end if;
+		   end
+  $BODY$;
+
+ALTER FUNCTION store.getcurrencyrates(character varying, numeric, character varying)
+    OWNER TO postgres;

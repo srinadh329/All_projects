@@ -1,0 +1,121 @@
+<section (scroll)="onWindowScroll($event);">
+    <header class="nav-header" id="navbar" [ngClass]="{ 'sticky': strickyHeader}">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <a class="navbar-brand" href="#">
+                            <img src="assets/images/logo.png"  id="logo" *ngIf="strickyHeader">
+                            <img src="assets/images/logo-light.png"  id="logo-light" *ngIf="!strickyHeader">
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mr-auto custom-list">
+                                <li class="nav-item">
+                                    <a class="nav-link" routerLink="/"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+                                </li>
+                                <li class="nav-item" routerLinkActive="active">
+                                    <a class="nav-link" routerLink="/aboutus"><i class="fa fa-info"></i> About Us</a>
+                                </li>
+                                <li class="nav-item" routerLinkActive="active">
+                                    <a class="nav-link" routerLink="/services"><i class="fa fa-wrench" aria-hidden="true"></i> Services</a>
+                                </li>
+                                <li class="nav-item" routerLinkActive="active">
+                                    <a class="nav-link" routerLink="/education"><i class="fa fa-book" aria-hidden="true"></i> Education</a>
+                                </li>
+                                <li class="nav-item" routerLinkActive="active">
+                                    <a class="nav-link" routerLink="/gallery" ><i class="fa fa-picture-o" aria-hidden="true"></i> Gallery</a>
+                                </li>
+                                <li class="nav-item" routerLinkActive="active">
+                                    <a class="nav-link" routerLink="/contact" ><i class="fa fa-location-arrow" aria-hidden="true"></i> Contact us</a>
+                                </li>
+                            </ul>
+                            <div class="my-2 my-lg-0">
+                                <a class="search">Donation</a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+</section>
+
+<router-outlet></router-outlet>
+
+    <footer class="custom-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div>
+                        <a>
+                            <img src="assets/images/logo-light.png">
+                        </a>
+                        <p class="mt-4 footer-content">
+                            Gandikota Foundation belives that all human beings are entitled to health,education 
+                            and prospreity.We Currently support in Rural village to make healthy, education and prosperity a way of life
+                        </p>
+                        <ul class="list-unstyled social-icon mb-0 mt-4">
+                            <li class="list-inline-item"><a href="#" class="rounded"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li class="list-inline-item"><a href="#" class="rounded"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li class="list-inline-item"><a href="#" class="rounded"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 footer-column">
+                    <div>
+                        <h5 class="text-light footer-head">Quick Links</h5>
+                        <ul class="list-unstyled footer-list mt-4">
+                            <li  routerLinkActive="active">
+                                <a  routerLink="/aboutus"><i class="fa fa-angle-right pl-1 mr-2" aria-hidden="true"></i> About Us</a>
+                            </li>
+                            <li  routerLinkActive="active">
+                                <a  routerLink="/services"><i class="fa fa-angle-right pl-1 mr-2" aria-hidden="true"></i> Services</a>
+                            </li>
+                            <li  routerLinkActive="active">
+                                <a  routerLink="/education"><i class="fa fa-angle-right pl-1 mr-2" aria-hidden="true"></i> Education</a>
+                            </li>
+                            <li  routerLinkActive="active">
+                                <a  routerLink="/gallery" ><i class="fa fa-angle-right pl-1 mr-2" aria-hidden="true"></i> Gallery</a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a  routerLink="/contact" ><i class="fa fa-angle-right pl-1 mr-2" aria-hidden="true"></i> Contact us</a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a  routerLink="/login" ><i class="fa fa-angle-right pl-1 mr-2" aria-hidden="true"></i>Login</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 footer-column">
+                    <div>
+                        <h5 class="text-light footer-head">Contact Information</h5>
+                        <ul class="list-unstyled footer-list mt-4">
+                            <li>
+                                <i class="fa fa-angle-right pl-1 mr-2" aria-hidden="true"></i>
+                                {{bussinesAddress?.address?.line_1}} {{bussinesAddress?.address?.line_2}},
+                                {{bussinesAddress?.address?.location}},{{bussinesAddress?.address?.pincode}},
+                                {{bussinesAddress?.address?.state}}
+                            </li>
+            
+                            <li>
+                                <i class="fa fa-angle-right pl-1 mr-2" aria-hidden="true"></i>{{bussinesAddress?.email}}
+                            </li>
+                            <li>
+                                <i class="fa fa-angle-right pl-1 mr-2" aria-hidden="true"></i>{{bussinesAddress?.phone}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a  id="back-to-top" class="btn btn-icon btn-primary back-to-top" (click)="gotoTop()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-up icons">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline></svg>
+        </a>
+    </footer>

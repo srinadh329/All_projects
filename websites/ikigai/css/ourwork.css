@@ -1,0 +1,214 @@
+
+.ourproject-gap{
+padding: 80px 20px 90px 20px;
+}
+.section-title1{
+     color: #0099FF;
+    font-family: "Montserrat", Sans-serif;
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1.3em;
+    position: relative;
+}
+.section-title1:before{
+     content: "";
+    display: block;
+    width: 130px;
+    height: 3px;
+    background: #0099FF;
+   left: -160px;
+    top: 31px;
+    position: absolute;
+}
+.our-prohect-tagline p{
+    color: #6A7680;
+    font-family: "Lato", Sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.875em;
+    margin: 0;
+}
+
+#f1_container {
+  position: relative;
+  margin: 10px auto;
+  width: 450px;
+  height: 300px;
+  z-index: 1;
+}
+#f1_card {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: all 1.0s linear;
+}
+#f1_container:hover #f1_card {
+  transform: rotateX(180deg);
+}
+.face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+.front.face{
+   background-image: url("../images/digital_transforamtion_innovation.png");
+   background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 6px;
+}
+.face.back{
+  display: block;
+  transform: rotateX(-180deg);
+  box-sizing: border-box;
+  /*padding: 10px;*/
+  color: white;
+  text-align: center;
+  background-image: url("../images/digital_transforamtion_innovation.png");
+  background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+     border-radius: 6px;
+}
+
+#f2_container {
+  position: relative;
+  margin: 10px auto;
+  width: 450px;
+  height: 300px;
+  z-index: 1;
+}
+#f2_container {
+  perspective: 1000;
+}
+#f2_card {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: all 1.0s linear;
+}
+#f2_container:hover #f2_card {
+  transform: rotateY(180deg);
+  /*box-shadow: -5px 5px 5px #aaa;*/
+}
+.front1.face1{
+   background-image: url("../images/digital_process_engineering.png");
+    background-repeat: no-repeat;
+    background-position: center;
+      border-radius: 6px;
+}
+.face1 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+.face1.back1{
+  display: block;
+  transform: rotateY(-180deg);
+  box-sizing: border-box;
+  /*padding: 10px;*/
+  color: white;
+  text-align: center;
+  background-image: url("../images/digital_process_engineering.png");
+   background-repeat: no-repeat;
+    background-position: center;
+      border-radius: 6px;
+  /*background-image: radial-gradient(at top left, rgba(136, 133, 186, 0.88) 0%, rgba(115, 200, 218, 0.88) 100%);*/
+}
+
+.color-overlay{
+      background-image: radial-gradient(at top left, rgba(136, 133, 186, 0.88) 0%, rgba(115, 200, 218, 0.88) 100%);
+      height: 100%;
+      border-radius: 6px;
+}
+.hover-content{
+    position: absolute;
+    z-index: 9999;
+    color: #fff;
+    top: 40%;
+    left: 0;
+    right: 0;
+}
+.hover-content a{
+  align-self: center;
+    background-color: #6EC1E4;
+    border-radius: 4px 4px 4px 4px;
+    padding: 15px 30px;
+    color: #fff;
+    position: relative;
+    top: 19px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1em;
+    font-family: "Lato", Sans-serif;
+}
+.hover-content a:hover{
+background: #613898;
+}
+.hover-content h1{
+    align-items: center;
+    align-self: center;
+    text-align: center;
+    color: #FFFFFF;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    line-height: 1.6em;
+    font-size: 20px;
+}
+
+.face2 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+.front2.face2{
+   background-image: url("../images/system_it_operations.png");
+  background-repeat: no-repeat;
+    background-size: cover;
+      border-radius: 6px;
+}
+.face2.back2{
+  display: block;
+  transform: rotateY(-180deg);
+  box-sizing: border-box;
+  /*padding: 10px;*/
+  color: white;
+  text-align: center;
+  background-image: url("../images/system_it_operations.png");
+  background-repeat: no-repeat;
+    background-size: cover;
+      border-radius: 6px;
+  /*background-image: radial-gradient(at top left, rgba(136, 133, 186, 0.88) 0%, rgba(115, 200, 218, 0.88) 100%);*/
+}
+
+.face3 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+.front3.face3{
+   background-image: url("../images/project_mangemnet_delivery.png");
+     border-radius: 6px;
+     background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.face3.back3{
+  display: block;
+  transform: rotateX(-180deg);
+  box-sizing: border-box;
+  /*padding: 10px;*/
+  color: white;
+  text-align: center;
+  background-image: url("../images/project_mangemnet_delivery.png");
+    border-radius: 6px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}

@@ -1,0 +1,41 @@
+<section class="sec-pad">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <form [formGroup]='loginForm' (ngSubmit)="loginsubmit()">
+          <div>
+            <h2>Login Form</h2>
+          </div>
+          <label>User Name</label>
+          <div>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Login</mat-label>
+              <input matInput placeholder="Placeholder" formControlName="email">
+              <mat-error *ngIf="loginForm.get('email').hasError('required')">
+                Please Enter Name
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <label>Password</label>
+          <div>
+            <mat-form-field appearance="outline">
+              <mat-label>Password</mat-label>
+              <input matInput placeholder="Placeholder" formControlName="password">
+              <mat-error *ngIf="loginForm.get('password').hasError('required')">
+                Please Enter Password
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="d-flex">
+            <div class="checkbox w-50">
+              <mat-checkbox class="custom-check" formControlName="rememberMe">Remember Me</mat-checkbox>
+            </div>
+          </div>
+          <div>
+            <button class="login-button btn" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

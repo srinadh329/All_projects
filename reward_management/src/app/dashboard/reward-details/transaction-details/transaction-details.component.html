@@ -1,0 +1,108 @@
+<app-sidebar></app-sidebar>
+
+<div class="main">
+    <app-header></app-header>
+    <div class="body">
+        <div class="row">
+            <div class="col-7">
+                <div class="row">
+                    <div class="col-1 mt-1">
+                        <i class="fas fa-arrow-left fa-2x theme-color pointer"
+                            [routerLink]="['/','reward-details']"></i>
+                    </div>
+                    <div class="col-8">
+                        <h4 class="text-uppercase">{{rewardDetails?.firstName}} {{rewardDetails?.lastName}}</h4>
+                        <p >{{rewardDetails?.email}}</p>
+                    </div>
+                </div>
+                <div class="row fs-5">
+                    <div class="col-1"></div>
+                    <!-- <div class="border-end col-4">
+                        <p>{{rewardDetails?.residentId}}</p>
+                    </div> -->
+                    <div class="col-7">
+                        <p>{{rewardDetails?.propertyData?.name}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-8 mt-4 box">
+                        <h4>CURRENT BALANCE: <span>${{rewardDetails.totalRewardBalance ? rewardDetails?.totalRewardBalance : 0}}</span></h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5">
+                <p class="fs-5">Total Rewards Given : <span>${{totalRewards}}</span></p>
+                <button class="btn btn_theme add-card font10" data-bs-toggle="modal" data-bs-target="#rewards" style="width: 60%;">View History</button>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <table class="table transaction table-borderless">
+                <thead class="tableHeader w-100">
+                    <tr class=" text-center">
+                        <th>Order Number</th>
+                        <th>Date</th>
+                        <th>Cart Amount</th>
+                        <th>Reward Amount</th>
+                        <th>Balance</th>
+                        <!-- <th>Invoice #</th>
+                        <th>Invoice Amount</th>
+                        <th>Invoice Status</th> -->
+                        <th>Refund</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of rewardTransactions;let i = index">
+                        <td>{{item?.orderId}}</td>
+                        <td>{{item?.updatedDatetime | date:'longDate'}}</td>
+                        <td>${{item?.totalCartAmount}}</td>
+                        <td>${{item?.rewardAmount}}</td>
+                        <td>${{item?.rewardBalance}}</td>
+                        <!-- (click)="goToRefund()" -->
+                        <!-- (click)="refund(item.orderId)" -->
+                        <td>
+                            <button class="btn btn-primary" *ngIf="item.transactionStatus && item.transactionStatus == 'RETURN_INITIATED' && item.rewardAmount"
+                                style="border-radius: 5px;"  (click)="goToRefund(item.orderId)">REFUND</button>
+                            <p *ngIf="item.transactionStatus != 'RETURN_INITIATED' && item.transactionStatus != 'RETURN_COMPLETED'" >-</p>
+                            <!-- <button class="btn btn-dark"  style="cursor: context-menu;" *ngIf="item.transactionStatus != 'RETURN_INITIATED' && item.transactionStatus != 'RETURN_COMPLETED'">NOT INITIATED</button> -->
+                            <button class="btn btn-success" *ngIf="item.transactionStatus && item.transactionStatus == 'RETURN_COMPLETED' && item.rewardAmount" style="cursor: context-menu;" (click)="goToRefund(item.orderId)">REFUNDED</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    
+</div>
+
+<div class="modal fade" id="rewards" tabindex="-1" aria-labelledby="rewardsLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content p-3">
+            <div class="modal-header border-0 pb-1">
+                
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body text-left pt-0 pb-1">
+                <h5 class="pt-0 text-left" id="addCardLabel">Reward History</h5>
+                <table class="table table-bordered">
+                    <thead class="tableHeader">
+                      <tr>
+                        <th scope="col">Reward Amount</th>
+                        <th scope="col">Issued Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of history">
+                            <td>${{item?.rewardAmount}}</td>
+                            <td>{{item?.updatedDatetime | date: 'longDate'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+            </div>
+
+        </div>
+    </div>
+</div>

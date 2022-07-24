@@ -1,0 +1,26 @@
+http://troy.labs.daum.net/
+
+**********how to check version in angular************
+npm list jquery
+
+ng update jquery 3.5.1
+
+**********how to check version in angular************
+
+https://docs.google.com/spreadsheets/d/1f4ZxPLihGd_vize8FEPwObZqmTW9XyqalLlDlxhXjiA/edit#gid=1975323555
+https://www.google.com/intl/te/inputtools/try/
+
+
+tab routing
+
+Location(dorpdown)
+image
+click link
+expere date
+
+shop add form fields(missing place)
+request edit (shop details form)
+
+
+
+http://shreethemes.in/landrick/layouts/index-blog.html#

@@ -1,0 +1,160 @@
+<div class="common-transform">
+  <mat-card class="common-header" *ngIf="!foreignCreative">
+    <div class="row">
+      <div class="col-lg-3 col-md-3 col-4 d-flex flex-column">
+        <h6 class="pt-2 no-space">Western Union</h6>
+      </div>
+      <div class="col-lg-7 col-md-7 col-6">
+        <div class="text-center common-search">
+          <input type="text" placeholder="search" [(ngModel)]="name" (keyup)="search(name)">
+          <span class="material-icons search-icon">search</span>
+        </div>
+      </div>
+      <div  *ngIf="action" class="col-lg-2 col-md-2 col-2 d-flex flex-row-reverse justify-content-center">
+        <div class="pr-3 pt-2">
+          <span class="material-icons cursor" (click)="createForm()">add</span>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+  <ng-container *ngIf="foreignCreative">
+    <span class="material-icons arrow-back" (click)="back()">arrow_back</span><span class="pl-3">Western
+      Union</span>
+    <form [formGroup]="westerForm" #formDirective="ngForm" (ngSubmit)="westerFields(westerForm);" class="pt-3">
+
+      <mat-card class="common-header mt-3">
+        <div class="row">
+          <div class="col-4 d-flex flex-column align-items-end">
+            <h6 class="pt-2 no-space">MTCN Search:</h6>
+          </div>
+          <div class="col-8">
+            <div class="common-search">
+              <input type="text" placeholder="search" formControlName="mtcnnumber" #mtcnnumber [readonly]='!view'>
+              <span class="material-icons search-icon1" (click)="mtcnsearch(mtcnnumber.value)">search</span>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+      <mat-card *ngIf='wuformdata' class="creation-form" id="style-4">
+        <div class="row pt-3">
+          <div class="col-lg-6">
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">Sender Name:</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                <input matInput placeholder="Enter Name" formControlName="sendername" [readonly]='!view'>
+                <mat-error *ngIf="westerForm.get('sendername').hasError('required')">
+                    Enter Sender Name
+                  </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">Receiver Name:</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                <input matInput placeholder="Enter Name" formControlName="receivername" readonly>
+              </mat-form-field>
+            </div>
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">Mode:</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                <input matInput placeholder="Enter Number" formControlName="mode" readonly>
+              </mat-form-field>
+            </div>
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">Sender Country:</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                <input matInput placeholder="Enter Number" formControlName="sendingcountry" readonly>
+              </mat-form-field>
+            </div>
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">Sender Currency:</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                <input matInput placeholder="Enter Number" formControlName="sendingcurrency" readonly>
+              </mat-form-field>
+            </div>
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">Amount:</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline col-sm-6">
+                <input matInput placeholder="Enter Amount" formControlName="principalamount"  readonly>
+              </mat-form-field>
+            </div>
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">VAT Charges:</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline col-sm-6">
+                <input matInput placeholder="Enter Charges" formControlName="vatcharges" readonly>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">Sender Mobile:</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                <input matInput placeholder="Enter Mobile Number" formControlName="sendermobile" 
+                onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" minlength="8" maxlength="15" [readonly]='!view'>
+                <mat-error *ngIf="westerForm.get('sendermobile').hasError('required')">
+                  Enter Sender Mobile No
+                </mat-error>
+                <mat-error *ngIf="westerForm.get('sendermobile').hasError('minlength')">
+                  Enter minimum 8 numbers
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">Receiver Mobile:</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                <input matInput placeholder="Enter Number" formControlName="receivermobile" 
+                onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" minlength="8" maxlength="15" [readonly]='!view'>
+                <mat-error *ngIf="westerForm.get('receivermobile').hasError('required')">
+                    Enter Receiver Mobile No
+                  </mat-error>
+                  <mat-error *ngIf="westerForm.get('receivermobile').hasError('minlength')">
+                    Enter minimum 8 numbers
+                  </mat-error>
+                  <mat-error *ngIf="westerForm.get('receivermobile').hasError('error')">
+                    Sender & Receiver Mobile Number must be different
+                  </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">Transaction Date:</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline   col-sm-6">
+                <input matInput placeholder="Enter Number" formControlName="transactiondate" readonly>
+              </mat-form-field>
+            </div>
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">Receiving Country:</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                <input matInput placeholder="Enter Number" formControlName="receivingcountry" readonly>
+              </mat-form-field>
+            </div>
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">Receiving Currency:</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                <input matInput placeholder="Enter Number" formControlName="receivingcurrency" readonly>
+              </mat-form-field>
+            </div>
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">Commission:</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline  col-sm-6">
+                <input matInput placeholder="Enter Number" formControlName="commission" readonly>
+              </mat-form-field>
+            </div>
+            <div class="form-group  m-0">
+              <label class="col-sm-4 common-label1">Total Amount:</label>
+              <mat-form-field appearance="outline" class="custom-branch-select-outline col-sm-6">
+                <input matInput placeholder="Enter Number" formControlName="totalamount" [(value)]="calculations.totalamount" readonly>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div  *ngIf="view" class="col-12 d-flex flex-row justify-content-center pt-4">
+          <!-- <button type="submit" class="cancel-button">Reject</button> -->
+          <button type="submit" class="label-button" >Authorize</button>
+        </div>
+  
+      </mat-card>
+    </form>
+  </ng-container>
+  <app-storetable [Header]='western' [westernlist]='westerndata' (westernlistedit)="editForm($event)" *ngIf="!foreignCreative"></app-storetable>
+
+</div>

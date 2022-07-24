@@ -1,0 +1,33 @@
+@media (min-width: 1200px) and (max-width: 1940px){
+.flex-container {
+    max-width: 1140px;
+}
+}
+@media (min-width: 992px){
+
+.flex-lg-column {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+}
+@media (min-width: 992px) and (max-width: 1199px){
+.flex-container {
+    max-width: 960px;
+}
+}
+@media (min-width: 768px) and (max-width: 990px){
+.flex-container {
+    max-width: 720px;
+}
+}
+@media (min-width: 576px) and (max-width: 765px){
+.flex-container {
+    max-width: 540px;
+}
+}
+@media (min-width: 320px) and (max-width: 576px){
+.flex-container {
+    max-width: 100%;
+    padding: 0;
+}
+}

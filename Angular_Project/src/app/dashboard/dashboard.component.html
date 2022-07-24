@@ -1,0 +1,199 @@
+<app-header></app-header>
+
+<div class="add">
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Sorting Total</mat-label>
+            <mat-select (selectionChange)="selectedValue($event)">
+                <mat-option value="high">High to Low</mat-option>
+                <mat-option value="low">Low to High</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Search Data</mat-label>
+            <input matInput placeholder="Search Data" type="text" [formControl]="searchInput" (keyup)="searchData(valueIn)"
+                placeholder="Search" />
+        </mat-form-field>
+    </div>
+    <div>
+        <a (click)="createUser()">
+            <mat-icon>add</mat-icon> Create
+        </a>
+    </div>
+</div>
+
+<table class="custom-table">
+    <thead>
+        <tr>
+            <th>
+                Id
+                <mat-icon (click)="asyn('id')">keyboard_arrow_up</mat-icon>
+                <mat-icon (click)="desyn('id')">keyboard_arrow_down</mat-icon>
+            </th>
+            <th>
+                Name
+                <mat-icon (click)="asyn('name')">keyboard_arrow_up</mat-icon>
+                <mat-icon (click)="desyn('name')">keyboard_arrow_down</mat-icon>
+            </th>
+            <th>
+                Age
+                <mat-icon (click)="asyn('age')">keyboard_arrow_up</mat-icon>
+                <mat-icon (click)="desyn('age')">keyboard_arrow_down</mat-icon>
+            </th>
+            <th>
+                subj1_marks
+                <mat-icon (click)="asyn('subj1_marks')">keyboard_arrow_up</mat-icon>
+                <mat-icon (click)="desyn('subj1_marks')">keyboard_arrow_down</mat-icon>
+            </th>
+            <th>
+                subj2_marks
+                <mat-icon (click)="asyn('subj2_marks')">keyboard_arrow_up</mat-icon>
+                <mat-icon (click)="desyn('subj2_marks')">keyboard_arrow_down</mat-icon>
+            </th>
+            <th>
+                subj3_marks
+                <mat-icon (click)="asyn('subj3_marks')">keyboard_arrow_up</mat-icon>
+                <mat-icon (click)="desyn('subj3_marks')">keyboard_arrow_down</mat-icon>
+            </th>
+            <th>
+                subj4_marks
+                <mat-icon (click)="asyn('subj4_marks')">keyboard_arrow_up</mat-icon>
+                <mat-icon (click)="desyn('subj4_marks')">keyboard_arrow_down</mat-icon>
+            </th>
+            <th>
+                Total
+                <mat-icon (click)="asyn('total')">keyboard_arrow_up</mat-icon>
+                <mat-icon (click)="desyn('total')">keyboard_arrow_down</mat-icon>
+            </th>
+            <th>
+                Status
+                <mat-icon (click)="asyn('status')">keyboard_arrow_up</mat-icon>
+                <mat-icon (click)="desyn('status')">keyboard_arrow_down</mat-icon>
+            </th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let studentDetail of studentDetails">
+            <td>{{ studentDetail?.id }}</td>
+            <td>{{ studentDetail?.name }}</td>
+            <td>{{ studentDetail?.age }}</td>
+            <td>{{ studentDetail?.subj1_marks }}</td>
+            <td>{{ studentDetail?.subj2_marks }}</td>
+            <td>{{ studentDetail?.subj3_marks }}</td>
+            <td>{{ studentDetail?.subj4_marks }}</td>
+            <td>{{ studentDetail?.total }}</td>
+            <td>{{ studentDetail?.status }}</td>
+            <td (click)="update(studentDetail)">
+                <mat-icon>edit</mat-icon>
+            </td>
+            <td (click)="delete(studentDetail)">
+                <mat-icon>delete</mat-icon>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<h1>Dynamic Form Array</h1>
+<div>
+    <p>
+        <a (click)="dynamicAdd()">
+            <mat-icon>add</mat-icon> Add
+        </a>
+        
+    </p>
+</div>
+<form [formGroup]="dynamicForm" (ngSubmit)="dynamicData()">
+    <div formArrayName="newData">
+        <div *ngFor="let newdata of newData.controls let i=index" formGroupName={{i}}>
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input matInput placeholder="Name" formControlName="fname"/>
+                    <!-- <mat-error *ngIf="dynamicForm.get('name').hasError('required')">Please Enter User Name</mat-error> -->
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput placeholder="Name" formControlName="lname"/>
+                </mat-form-field>
+            </p>
+            <a (click)="dynamicRemove(i)">
+                <mat-icon>remove</mat-icon> remove
+            </a>
+        </div>
+    </div>
+    <p>
+        <button type="submit">Submit</button>
+    </p>
+</form>
+
+
+<mat-radio-group
+  aria-labelledby="example-radio-group-label"
+  class="example-radio-group">
+  <mat-radio-button (change)="radioChange($event)" class="example-radio-button" *ngFor="let season of toppingList" [value]="season.value">
+    {{season.value}}
+  </mat-radio-button>
+</mat-radio-group>
+
+<div>
+    <ul style="list-style: none;">
+        <li *ngFor="let dates of  date">
+            {{dates.delivery_date}} 
+            <!-- <span (click)="selectDateAndTime(times,dates)" *ngFor="let times of time" [ngClass]="{'selected': !times.delivery_time}" style="padding: 0 12px 0 12px;">{{times.delivery_time}}</span> -->
+        </li>
+    </ul>
+</div>
+
+<div>
+    <ul style="list-style:none">
+        <li *ngFor="let item of itemsList">
+            <input type="radio"  name="group2"  value="item?.value" (change)="onItemChange(item)">
+            <label>{{item.value}}</label>
+        </li>
+    </ul>
+</div>
+
+<section>
+    <div class="container p-0">
+        <div class="row">
+            <div class="col-lg-3 p-0">
+                <div class="salepriceView">
+                    <div class="borderLine">
+                        <h4 class="text-uppercase">Sale Price</h4>
+                        <div>
+                            <ul style="list-style:none; padding:0">
+                                <li *ngFor="let item of itemsList">
+                                    <input type="radio"  name="group2"  value="item?.value" (change)="onItemChange(item)">
+                                    <label>{{item.value}}</label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="borderLine">
+                        <h4 class="text-uppercase">Pirce filter</h4>
+                        <div class="priceFilter">
+                           <a>Min</a>
+                           <a class="dash">-</a>
+                           <a>Max</a>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-uppercase">Categories</h4>
+                        <div>
+                          <ul class="catergorieList">
+                              <li>Living Room</li>
+                          </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9"></div>
+        </div>
+    </div>
+</section>
